@@ -793,7 +793,7 @@
 <body>
 
 <!-- Etiqueta Global de Verificación de Despliegue (visible en Acceso Privado y Pantalla Principal) -->
-<div class="build-timestamp">Actualizado: 09:12 AM - 10/27/2026</div>
+<div class="build-timestamp">Actualizado: 09:20 AM - 10/27/2026</div>
 
 <!-- Pantalla de Contraseña (Acceso Privado) con soporte completo para tecla Enter -->
 <div id="authOverlay" class="auth-overlay">
@@ -815,7 +815,7 @@
       <button type="submit" class="auth-submit-btn">Entrar</button>
     </form>
     <div style="font-size: 10px; color: #64748b; font-family: monospace; margin-top: 2px;">
-      Actualizado: 09:12 AM - 10/27/2026
+      Actualizado: 09:20 AM - 10/27/2026
     </div>
   </div>
 </div>
@@ -1437,6 +1437,22 @@ function updatePointsDisplay() {
   document.getElementById('ptsValueDisplay').textContent = `Total Worth: ${totalPts.toFixed(1)} pts (${taskPts.toFixed(1)} Task + 1.0 Spelling)`;
 }
 
+function updateSubmitButtonState() {
+  const acceptBtn = document.getElementById('acceptBtn');
+  if (!acceptBtn) return;
+  if (isQuizAnswered) {
+    acceptBtn.disabled = true;
+    return;
+  }
+  const q = activeQuestions[currentQIndex];
+  if (!q) return;
+  const isTaskReady = (q.type === 'match')
+    ? (solvedPairs.length === q.pairs.length)
+    : (selectedOption !== null);
+  const isSpellingDone = isSpellingSolved || isSpellingLocked;
+  acceptBtn.disabled = !(isTaskReady && isSpellingDone);
+}
+
 function initQuiz(questionsList) {
   activeQuestions = questionsList.map(qObj => {
     if (qObj.type === 'match') {
@@ -1622,10 +1638,7 @@ function handleMatchClick(side, id) {
     selectedRightPair = null;
     document.querySelectorAll('.match-card-btn').forEach(b => b.classList.remove('selected-side'));
 
-    const q = activeQuestions[currentQIndex];
-    if (solvedPairs.length === q.pairs.length) {
-      document.getElementById('acceptBtn').disabled = false;
-    }
+    updateSubmitButtonState();
   }
 }
 
@@ -1747,6 +1760,7 @@ function submitSpellingAttempt() {
     submitBtn.textContent = "✓ Verified (1.0 pt)";
     playCorrectSound();
     renderSpellingBench();
+    updateSubmitButtonState();
   } else {
     spellingAttemptsLeft--;
     attemptsCountEl.textContent = spellingAttemptsLeft;
@@ -1766,6 +1780,7 @@ function submitSpellingAttempt() {
       submitBtn.disabled = true;
       submitBtn.textContent = "🔒 Locked (0/1 pt)";
       renderSpellingBench();
+      updateSubmitButtonState();
     }
   }
 }
@@ -1775,7 +1790,7 @@ function selectOption(idx, btnElement) {
   selectedOption = idx;
   document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
   btnElement.classList.add('selected');
-  document.getElementById('acceptBtn').disabled = false;
+  updateSubmitButtonState();
 }
 
 function revealHint() {
@@ -1814,35 +1829,12 @@ function confirmAnswer() {
   if (isQuizAnswered) return;
   const q = activeQuestions[currentQIndex];
   if (q.type !== 'match' && selectedOption === null) return;
+  if (!isSpellingSolved && !isSpellingLocked) return;
   isQuizAnswered = true;
 
   document.getElementById('acceptBtn').disabled = true;
   document.getElementById('hintBtn').disabled = true;
   document.getElementById('rereadBtn').disabled = true;
-
-  // If the user filled all spelling slots accurately but didn't click "Verify Spelling" yet, verify automatically
-  if (!isSpellingSolved && !isSpellingLocked && currentSlots.every(s => s !== null)) {
-    const builtWord = currentSlots.map(s => s.char).join('');
-    const statusEl = document.getElementById('spellingStatus');
-    const submitBtn = document.getElementById('spellingSubmitBtn');
-    if (builtWord === currentTargetWord) {
-      isSpellingSolved = true;
-      statusEl.textContent = "✓ Solved (+1.0 pt earned!)";
-      statusEl.style.color = "#10b981";
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.textContent = "✓ Verified (1.0 pt)";
-      }
-      renderSpellingBench();
-    } else {
-      statusEl.textContent = `✗ Unsolved! Word was: ${currentTargetWord} (0/1 pt)`;
-      statusEl.style.color = "#ef4444";
-    }
-  } else if (!isSpellingSolved) {
-    const statusEl = document.getElementById('spellingStatus');
-    statusEl.textContent = `✗ Unsolved! Word was: ${currentTargetWord} (0/1 pt)`;
-    statusEl.style.color = "#ef4444";
-  }
 
   const baseTaskPts = getCurrentTaskPts();
   let isTaskCorrect = false;

@@ -466,6 +466,13 @@
     opacity: 0.9;
   }
 
+  .match-card-btn.wrong-highlight {
+    background-color: #7f1d1d !important;
+    border-color: #ef4444 !important;
+    color: #fca5a5 !important;
+    font-weight: 700;
+  }
+
   /* SPELLING DECRYPTION BENCH */
   .spelling-box {
     background: #0b1329;
@@ -890,7 +897,7 @@
 <body>
 
 <!-- Etiqueta Global de Verificación de Despliegue (visible en Acceso Privado y Pantalla Principal) -->
-<div class="build-timestamp">Actualizado: 09:55 AM - 10/27/2026</div>
+<div class="build-timestamp">Actualizado: 09:57 AM - 10/27/2026</div>
 
 <!-- Pantalla de Contraseña (Acceso Privado) con soporte completo para tecla Enter -->
 <div id="authOverlay" class="auth-overlay">
@@ -912,7 +919,7 @@
       <button type="submit" class="auth-submit-btn">Entrar</button>
     </form>
     <div style="font-size: 10px; color: #64748b; font-family: monospace; margin-top: 2px;">
-      Actualizado: 09:55 AM - 10/27/2026
+      Actualizado: 09:57 AM - 10/27/2026
     </div>
   </div>
 </div>
@@ -1588,7 +1595,25 @@ let solvedPairs = [];
 let selectedLeftPair = null;
 let selectedRightPair = null;
 let matchVariantIndices = [];
+let prevLeftOrderIds = [];
+let prevRightOrderIds = [];
 let isMatchBusy = false;
+
+function shuffleDifferentOrder(items, prevIds) {
+  if (!prevIds || prevIds.length !== items.length || items.length <= 1) {
+    return shuffleArray(items);
+  }
+  for (let attempt = 0; attempt < 15; attempt++) {
+    const candidate = shuffleArray(items);
+    // Ensure at least 2 positions changed and first item changed
+    const sameCount = candidate.filter((it, idx) => it.id === prevIds[idx]).length;
+    if (sameCount === 0 || (sameCount < items.length - 1 && candidate[0].id !== prevIds[0])) {
+      return candidate;
+    }
+  }
+  // Fallback deterministic rotation
+  return [...items.slice(1), items[0]];
+}
 
 // Spelling State
 let currentTargetWord = "";
@@ -1787,27 +1812,34 @@ function renderMatchColumns(q, isReshuffle = false) {
   const banner = document.getElementById('matchStatusBanner');
   if (!isReshuffle) {
     matchVariantIndices = q.pairs.map(() => 0);
+    prevLeftOrderIds = [];
+    prevRightOrderIds = [];
     isMatchBusy = false;
     if (banner) banner.style.display = 'none';
   } else {
-    // Advance each right-column item to a new wording variant
+    // Advance EVERY right-column item to the next wording variant (guaranteed new wording)
     matchVariantIndices = q.pairs.map((p, i) => {
       const variants = p.rightVariants || [p.right];
       if (variants.length <= 1) return 0;
       const prevIdx = matchVariantIndices[i] || 0;
-      const step = 1 + Math.floor(Math.random() * (variants.length - 1));
-      return (prevIdx + step) % variants.length;
+      return (prevIdx + 1) % variants.length;
     });
     if (banner) banner.style.display = 'inline';
   }
 
-  // Reorganize both Left and Right columns randomly
-  const leftItems = shuffleArray(q.pairs.map((p, i) => ({ id: i, text: p.left })));
-  const rightItems = shuffleArray(q.pairs.map((p, i) => {
+  // Reorganize both Left and Right columns into a guaranteed different random order
+  const rawLeft = q.pairs.map((p, i) => ({ id: i, text: p.left }));
+  const rawRight = q.pairs.map((p, i) => {
     const variants = p.rightVariants || [p.right];
     const vIdx = matchVariantIndices[i] || 0;
     return { id: i, text: variants[vIdx] };
-  }));
+  });
+
+  const leftItems = isReshuffle ? shuffleDifferentOrder(rawLeft, prevLeftOrderIds) : rawLeft;
+  const rightItems = shuffleDifferentOrder(rawRight, prevRightOrderIds);
+
+  prevLeftOrderIds = leftItems.map(it => it.id);
+  prevRightOrderIds = rightItems.map(it => it.id);
 
   leftItems.forEach(item => {
     const btn = document.createElement('button');
@@ -1874,19 +1906,21 @@ function handleMatchClick(side, id) {
       selectedRightPair = null;
       updateSubmitButtonState();
     } else {
-      // Mismatch! Flash red briefly, then reorganize columns randomly & change right-column wording
+      // Mismatch! Flash red + shake, reset pairs, reorganize both columns & change right-column wording
       isMatchBusy = true;
       playWrongSound();
       if (lBtn) {
         lBtn.classList.remove('selected-side');
-        lBtn.classList.add('wrong-highlight');
+        lBtn.classList.add('wrong-highlight', 'shake-anim');
       }
       if (rBtn) {
         rBtn.classList.remove('selected-side');
-        rBtn.classList.add('wrong-highlight');
+        rBtn.classList.add('wrong-highlight', 'shake-anim');
       }
       selectedLeftPair = null;
       selectedRightPair = null;
+      solvedPairs = [];
+      updateSubmitButtonState();
 
       setTimeout(() => {
         const q = activeQuestions[currentQIndex];
@@ -1894,7 +1928,7 @@ function handleMatchClick(side, id) {
         if (q && q.type === 'match' && !isQuizAnswered) {
           renderMatchColumns(q, true);
         }
-      }, 380);
+      }, 420);
     }
   }
 }

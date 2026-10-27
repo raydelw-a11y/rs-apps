@@ -897,7 +897,7 @@
 <body>
 
 <!-- Etiqueta Global de Verificación de Despliegue (visible en Acceso Privado y Pantalla Principal) -->
-<div class="build-timestamp">Actualizado: 10:15 AM - 10/27/2026</div>
+<div class="build-timestamp">Actualizado: 10:20 AM - 10/27/2026</div>
 
 <!-- Pantalla de Contraseña (Acceso Privado) con soporte completo para tecla Enter -->
 <div id="authOverlay" class="auth-overlay">
@@ -919,8 +919,32 @@
       <button type="submit" class="auth-submit-btn">Entrar</button>
     </form>
     <div style="font-size: 10px; color: #64748b; font-family: monospace; margin-top: 2px;">
-      Actualizado: 10:15 AM - 10/27/2026
+      Actualizado: 10:20 AM - 10/27/2026
     </div>
+  </div>
+</div>
+
+<!-- Modal de Contraseña para Reset (admin123) con soporte para tecla Enter -->
+<div id="resetAuthOverlay" class="auth-overlay" style="display: none; background: rgba(5, 11, 20, 0.88);">
+  <div class="auth-card">
+    <div class="auth-icon">🔄</div>
+    <h1 class="auth-title">Confirm Reset</h1>
+    <p class="auth-subtitle">Enter administrator password to reset quiz progress:</p>
+    <form id="resetAuthForm" class="auth-form" onsubmit="handleResetAuthSubmit(event)">
+      <input
+        type="password"
+        id="resetPasswordInput"
+        class="auth-input"
+        placeholder="Password..."
+        autocomplete="off"
+        onkeydown="handleResetAuthKeyDown(event)"
+      />
+      <div id="resetErrorMsg" class="auth-error">Incorrect password. Try again.</div>
+      <div style="display: flex; gap: 8px;">
+        <button type="button" class="secondary" style="flex: 1; padding: 10px;" onclick="closeResetModal()">Cancel</button>
+        <button type="submit" class="danger" style="flex: 1; padding: 10px;">Reset Quiz</button>
+      </div>
+    </form>
   </div>
 </div>
 
@@ -2874,10 +2898,50 @@ function startMistakesQuiz() {
 }
 
 function resetQuizData() {
-  mistakesPool = [];
-  isQuizCompleted = false;
-  updateMistakeBadge();
-  restartQuiz();
+  const modal = document.getElementById('resetAuthOverlay');
+  const input = document.getElementById('resetPasswordInput');
+  const err = document.getElementById('resetErrorMsg');
+  if (err) err.style.display = 'none';
+  if (input) input.value = '';
+  if (modal) {
+    modal.style.display = 'flex';
+    setTimeout(() => { if (input) input.focus(); }, 50);
+  }
+}
+
+function closeResetModal() {
+  const modal = document.getElementById('resetAuthOverlay');
+  if (modal) modal.style.display = 'none';
+}
+
+function executeConfirmedReset() {
+  const input = document.getElementById('resetPasswordInput');
+  const err = document.getElementById('resetErrorMsg');
+  const val = (input ? input.value : '').trim();
+  if (val === 'admin123') {
+    closeResetModal();
+    mistakesPool = [];
+    isQuizCompleted = false;
+    updateMistakeBadge();
+    restartQuiz();
+  } else {
+    if (err) err.style.display = 'block';
+    playWrongSound();
+  }
+}
+
+function handleResetAuthSubmit(e) {
+  if (e) e.preventDefault();
+  executeConfirmedReset();
+}
+
+function handleResetAuthKeyDown(e) {
+  if (e.key === 'Enter' || e.key === 'NumpadEnter' || e.keyCode === 13) {
+    e.preventDefault();
+    executeConfirmedReset();
+  } else if (e.key === 'Escape') {
+    closeResetModal();
+  }
 }
 
 function toggleReaderView() {

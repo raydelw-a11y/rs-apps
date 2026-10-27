@@ -21,5 +21,6 @@
    - Al presionar `Submit Answer`, suena uno de los 3 audios TTS para respuesta correcta o 3 para incorrecta.
    - Al terminar el quiz, suena automáticamente la canción de 30 segundos correspondiente al grado obtenido (**A**, **B**, **C** o **D y menor**) sin barra de progreso ni botones de Play/Replay.
 
-6. **Verificación de Despliegue y Acceso Privado:**
+6. **Contraseña de Reinicio (`Reset`) y Acceso Privado:**
+   - El botón `Reset` solicita la contraseña `admin123` en un modal con soporte para la tecla `Enter` antes de reiniciar el progreso del quiz.
    - Mantener siempre la pantalla de `Acceso Privado` con soporte para tecla `Enter` y la etiqueta `Actualizado: [hora] - [mes/día/año]` visible en una esquina tanto en `Acceso Privado` como en la pantalla principal.

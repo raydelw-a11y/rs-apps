@@ -890,7 +890,7 @@
 <body>
 
 <!-- Etiqueta Global de Verificación de Despliegue (visible en Acceso Privado y Pantalla Principal) -->
-<div class="build-timestamp">Actualizado: 09:36 AM - 10/27/2026</div>
+<div class="build-timestamp">Actualizado: 09:53 AM - 10/27/2026</div>
 
 <!-- Pantalla de Contraseña (Acceso Privado) con soporte completo para tecla Enter -->
 <div id="authOverlay" class="auth-overlay">
@@ -912,7 +912,7 @@
       <button type="submit" class="auth-submit-btn">Entrar</button>
     </form>
     <div style="font-size: 10px; color: #64748b; font-family: monospace; margin-top: 2px;">
-      Actualizado: 09:36 AM - 10/27/2026
+      Actualizado: 09:53 AM - 10/27/2026
     </div>
   </div>
 </div>
@@ -1008,7 +1008,10 @@
 
       <!-- Match Columns Container -->
       <div id="matchContainer" style="display: none;">
-        <div style="font-size: 0.68rem; color: #94a3b8; margin-bottom: 4px;">Tap an entity on the left, then tap its matching detail on the right:</div>
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; margin-bottom: 4px;">
+          <span style="font-size: 0.68rem; color: #94a3b8;">Tap left, then tap its match on the right:</span>
+          <span id="matchStatusBanner" style="font-size: 0.67rem; font-weight: 700; color: #f87171; display: none;">🔄 Mismatch! Columns reshuffled & reworded!</span>
+        </div>
         <div class="match-columns-grid">
           <div class="match-col" id="matchColLeft"></div>
           <div class="match-col" id="matchColRight"></div>
@@ -1090,10 +1093,10 @@
         <div class="song-progress-fill" id="songProgressFill"></div>
       </div>
       <div class="song-controls-row">
-        <span class="song-time-text" id="songTimeDisplay">0:00 / 1:00</span>
+        <span class="song-time-text" id="songTimeDisplay">0:00 / 0:30</span>
         <div style="display:flex; gap:6px;">
           <button id="songPlayPauseBtn" class="cyan" style="padding:3px 9px; font-size:0.7rem;" onclick="toggleGradeSong()">⏸️ Pause Song</button>
-          <button class="secondary" style="padding:3px 9px; font-size:0.7rem;" onclick="replayGradeSong()">🔄 Replay 1:00</button>
+          <button class="secondary" style="padding:3px 9px; font-size:0.7rem;" onclick="replayGradeSong()">🔄 Replay 0:30</button>
         </div>
       </div>
     </div>
@@ -1327,10 +1330,46 @@ const chapterOneQuestions = [
     type: 'match',
     q: "Match each character or entity from Chapter 1 to their exact book description:",
     pairs: [
-      { left: "Bart Steele", right: "Academy graduate waiting for his father's return" },
-      { left: "Tommy Kendron", right: "Capellan student departing on the outbound starship" },
-      { left: "Rupert Steele", right: "Owner of Vega Interplanet who sent ahead warning papers" },
-      { left: "Edmund Briscoe", right: "Chubby gray-haired stranger who grabs Bart and yells 'Son!'" }
+      {
+        left: "Bart Steele",
+        right: "Academy graduate waiting for his father's return",
+        rightVariants: [
+          "Academy graduate waiting for his father's return",
+          "Denebian-eyed cadet who first saw the spaceport at age twelve",
+          "Young spaceman with Mentorian eyes able to endure blinding glare",
+          "Newly graduated cadet meeting the incoming starship on Earth"
+        ]
+      },
+      {
+        left: "Tommy Kendron",
+        right: "Capellan student departing on the outbound starship",
+        rightVariants: [
+          "Capellan student departing on the outbound starship",
+          "Bart's Space Academy classmate born on the ninth planet of Capella",
+          "Graduate carrying light plastic baggage to board the Lhari vessel",
+          "Friend shielding his eyes from the spaceport's rainbow crystal glare"
+        ]
+      },
+      {
+        left: "Rupert Steele",
+        right: "Owner of Vega Interplanet who sent ahead warning papers",
+        rightVariants: [
+          "Owner of Vega Interplanet who sent ahead warning papers",
+          "Bart's father who explained why Earth needed the Lhari spaceport",
+          "Captain expected to arrive on Earth aboard the Lhari starship",
+          "Veteran space captain whose face turned bitter at the Lhari gate"
+        ]
+      },
+      {
+        left: "Edmund Briscoe",
+        right: "Chubby gray-haired stranger who grabs Bart and yells 'Son!'",
+        rightVariants: [
+          "Chubby gray-haired stranger who grabs Bart and yells 'Son!'",
+          "Unfamiliar Vegan passenger who whispers that Bart's life is in danger",
+          "Plump traveler pursued by two Lhari guards at the landing ramp",
+          "Gray-haired Vegan fugitive who pretends to be Bart's father"
+        ]
+      }
     ],
     hint: "Check the roles of the two Academy boys and the two older men.",
     pageTitle: "Chapter 1 — Pages 5 & 13 (Characters of Chapter 1)",
@@ -1441,10 +1480,46 @@ const chapterOneQuestions = [
     type: 'match',
     q: "Match each location and concept from Chapter 1 with its true detail:",
     pairs: [
-      { left: "Spaceport Floor", right: "Crystal substance reflecting millions of rainbow glare flashes" },
-      { left: "Gate Emblem", right: "Jagged lightning flash signifying the Lhari home world" },
-      { left: "Cold Sweet", right: "Refreshing synthetic Lhari beverage sampled on the upper mezzanine" },
-      { left: "Vega Interplanet", right: "Intersystem planetary transport company owned by Rupert Steele" }
+      {
+        left: "Spaceport Floor",
+        right: "Crystal substance reflecting millions of rainbow glare flashes",
+        rightVariants: [
+          "Crystal substance reflecting millions of rainbow glare flashes",
+          "Strange ground material over an old desert that feels soft underfoot",
+          "Gleaming surface that is neither glass, metal, nor concrete",
+          "Dazzling pavement that forces human visitors to wear dark glasses"
+        ]
+      },
+      {
+        left: "Gate Emblem",
+        right: "Jagged lightning flash signifying the Lhari home world",
+        rightVariants: [
+          "Jagged lightning flash signifying the Lhari home world",
+          "Symbol mounted above the high pointed clear-glass entrance",
+          "Lhari language sign marking the boundary of alien treaty law",
+          "Lightning-shaped insignia overhanging the spaceport's main archway"
+        ]
+      },
+      {
+        left: "Cold Sweet",
+        right: "Refreshing synthetic Lhari beverage sampled on the upper mezzanine",
+        rightVariants: [
+          "Refreshing synthetic Lhari beverage sampled on the upper mezzanine",
+          "Chilled alien drink Bart and Tommy share while watching the port",
+          "Sweet synthetic refreshment served inside the glass skyscraper",
+          "Iced Lhari drink enjoyed by the two graduates before the ship lands"
+        ]
+      },
+      {
+        left: "Vega Interplanet",
+        right: "Intersystem planetary transport company owned by Rupert Steele",
+        rightVariants: [
+          "Intersystem planetary transport company owned by Rupert Steele",
+          "Commercial space line operated by Bart's father in the Vega system",
+          "Family shipping enterprise whose documents were sent ahead to Bart",
+          "Vegan interplanetary freight and passenger firm run by Captain Steele"
+        ]
+      }
     ],
     hint: "Link the physical features and trade entities described in Chapter 1.",
     pageTitle: "Chapter 1 — Pages 6–11 (Spaceport Details)",
@@ -1535,6 +1610,8 @@ let mistakesPool = [];
 let solvedPairs = [];
 let selectedLeftPair = null;
 let selectedRightPair = null;
+let matchVariantIndices = [];
+let isMatchBusy = false;
 
 // Spelling State
 let currentTargetWord = "";
@@ -1724,18 +1801,40 @@ function renderQuestion() {
   document.getElementById('questionScrollArea').scrollTop = 0;
 }
 
-function renderMatchColumns(q) {
+function renderMatchColumns(q, isReshuffle = false) {
   const leftCol = document.getElementById('matchColLeft');
   const rightCol = document.getElementById('matchColRight');
   leftCol.innerHTML = '';
   rightCol.innerHTML = '';
 
-  const leftItems = q.pairs.map((p, i) => ({ id: i, text: p.left }));
-  const rightItems = shuffleArray(q.pairs.map((p, i) => ({ id: i, text: p.right })));
+  const banner = document.getElementById('matchStatusBanner');
+  if (!isReshuffle) {
+    matchVariantIndices = q.pairs.map(() => 0);
+    isMatchBusy = false;
+    if (banner) banner.style.display = 'none';
+  } else {
+    // Advance each right-column item to a new wording variant
+    matchVariantIndices = q.pairs.map((p, i) => {
+      const variants = p.rightVariants || [p.right];
+      if (variants.length <= 1) return 0;
+      const prevIdx = matchVariantIndices[i] || 0;
+      const step = 1 + Math.floor(Math.random() * (variants.length - 1));
+      return (prevIdx + step) % variants.length;
+    });
+    if (banner) banner.style.display = 'inline';
+  }
+
+  // Reorganize both Left and Right columns randomly
+  const leftItems = shuffleArray(q.pairs.map((p, i) => ({ id: i, text: p.left })));
+  const rightItems = shuffleArray(q.pairs.map((p, i) => {
+    const variants = p.rightVariants || [p.right];
+    const vIdx = matchVariantIndices[i] || 0;
+    return { id: i, text: variants[vIdx] };
+  }));
 
   leftItems.forEach(item => {
     const btn = document.createElement('button');
-    btn.className = 'match-card-btn';
+    btn.className = 'match-card-btn' + (solvedPairs.includes(item.id) ? ' paired' : '');
     btn.id = `match-left-${item.id}`;
     btn.textContent = item.text;
     btn.onclick = () => handleMatchClick('left', item.id);
@@ -1744,7 +1843,7 @@ function renderMatchColumns(q) {
 
   rightItems.forEach(item => {
     const btn = document.createElement('button');
-    btn.className = 'match-card-btn';
+    btn.className = 'match-card-btn' + (solvedPairs.includes(item.id) ? ' paired' : '');
     btn.id = `match-right-${item.id}`;
     btn.textContent = item.text;
     btn.onclick = () => handleMatchClick('right', item.id);
@@ -1753,8 +1852,11 @@ function renderMatchColumns(q) {
 }
 
 function handleMatchClick(side, id) {
-  if (isQuizAnswered || solvedPairs.includes(id)) return;
+  if (isQuizAnswered || isMatchBusy || solvedPairs.includes(id)) return;
   playSnapSound();
+
+  const banner = document.getElementById('matchStatusBanner');
+  if (banner) banner.style.display = 'none';
 
   if (side === 'left') {
     selectedLeftPair = (selectedLeftPair === id) ? null : id;
@@ -1777,21 +1879,46 @@ function handleMatchClick(side, id) {
   });
 
   if (selectedLeftPair !== null && selectedRightPair !== null) {
+    const lBtn = document.getElementById(`match-left-${selectedLeftPair}`);
+    const rBtn = document.getElementById(`match-right-${selectedRightPair}`);
+
     if (selectedLeftPair === selectedRightPair) {
       solvedPairs.push(selectedLeftPair);
-      const lBtn = document.getElementById(`match-left-${selectedLeftPair}`);
-      const rBtn = document.getElementById(`match-right-${selectedRightPair}`);
-      lBtn.classList.remove('selected-side');
-      rBtn.classList.remove('selected-side');
-      lBtn.classList.add('paired');
-      rBtn.classList.add('paired');
+      if (lBtn) {
+        lBtn.classList.remove('selected-side');
+        lBtn.classList.add('paired');
+      }
+      if (rBtn) {
+        rBtn.classList.remove('selected-side');
+        rBtn.classList.add('paired');
+      }
       playSnapSound();
-    }
-    selectedLeftPair = null;
-    selectedRightPair = null;
-    document.querySelectorAll('.match-card-btn').forEach(b => b.classList.remove('selected-side'));
+      selectedLeftPair = null;
+      selectedRightPair = null;
+      updateSubmitButtonState();
+    } else {
+      // Mismatch! Flash red briefly, then reorganize columns randomly & change right-column wording
+      isMatchBusy = true;
+      playWrongSound();
+      if (lBtn) {
+        lBtn.classList.remove('selected-side');
+        lBtn.classList.add('wrong-highlight');
+      }
+      if (rBtn) {
+        rBtn.classList.remove('selected-side');
+        rBtn.classList.add('wrong-highlight');
+      }
+      selectedLeftPair = null;
+      selectedRightPair = null;
 
-    updateSubmitButtonState();
+      setTimeout(() => {
+        const q = activeQuestions[currentQIndex];
+        isMatchBusy = false;
+        if (q && q.type === 'match' && !isQuizAnswered) {
+          renderMatchColumns(q, true);
+        }
+      }, 380);
+    }
   }
 }
 
@@ -2111,7 +2238,7 @@ let songMasterGain = null;
 
 const GRADE_SONGS = {
   A: {
-    title: "🎵 Grade A Anthem: Stellar Victory (1:00)",
+    title: "🎵 Grade A Anthem: Stellar Victory (0:30)",
     bpm: 128,
     color: "#10b981",
     // C Major / Lydian Heroic Synthwave Progression (C - G - Am - F | F - G - Em - C)
@@ -2143,7 +2270,7 @@ const GRADE_SONGS = {
     drumIntensity: 3
   },
   B: {
-    title: "🎵 Grade B Groove: Orbital Funk (1:00)",
+    title: "🎵 Grade B Groove: Orbital Funk (0:30)",
     bpm: 114,
     color: "#38bdf8",
     // G Mixolydian Upbeat Groove (G - F - C - D)
@@ -2173,7 +2300,7 @@ const GRADE_SONGS = {
     drumIntensity: 2
   },
   C: {
-    title: "🎵 Grade C Chill: Steady Cruiser (1:00)",
+    title: "🎵 Grade C Chill: Steady Cruiser (0:30)",
     bpm: 98,
     color: "#f59e0b",
     // Warm Dorian Lo-Fi Chill (Dm7 - G7 - Cmaj7 - Am7)
@@ -2203,7 +2330,7 @@ const GRADE_SONGS = {
     drumIntensity: 1
   },
   D: {
-    title: "🎵 Grade D Montage: Rise & Retry (1:00)",
+    title: "🎵 Grade D Montage: Rise & Retry (0:30)",
     bpm: 90,
     color: "#c084fc",
     // Determined Cinematic Minor -> Major Uplift (Am - F - C - G)
@@ -2363,7 +2490,7 @@ function scheduleSongStep(step, time) {
   const melNote = cfg.melody[step % cfg.melody.length];
   if (melNote > 0) {
     // Octave lift in second half of the 60-second song (seconds 30-55) for climax
-    const octaveMult = (songElapsedSeconds >= 28 && songElapsedSeconds <= 52 && step % 4 === 0) ? 2.0 : 1.0;
+    const octaveMult = (songElapsedSeconds >= 14 && songElapsedSeconds <= 27 && step % 4 === 0) ? 2.0 : 1.0;
     scheduleSynthNote(ctx, songMasterGain, melNote * octaveMult, cfg.leadWave, time, stepDur * 1.4, 0.14);
   }
 }
@@ -2386,11 +2513,11 @@ function runSongScheduler() {
 function updateSongTimerUI() {
   const mins = Math.floor(songElapsedSeconds / 60);
   const secs = songElapsedSeconds % 60;
-  const timeStr = `${mins}:${secs < 10 ? '0' + secs : secs} / 1:00`;
+  const timeStr = `${mins}:${secs < 10 ? '0' + secs : secs} / 0:30`;
   const timeEl = document.getElementById('songTimeDisplay');
   const fillEl = document.getElementById('songProgressFill');
   if (timeEl) timeEl.textContent = timeStr;
-  if (fillEl) fillEl.style.width = `${Math.min(100, (songElapsedSeconds / 60) * 100)}%`;
+  if (fillEl) fillEl.style.width = `${Math.min(100, (songElapsedSeconds / 30) * 100)}%`;
 }
 
 function startGradeSong(grade, withVoiceAnnouncement) {
@@ -2443,7 +2570,7 @@ function startGradeSong(grade, withVoiceAnnouncement) {
     if (!songIsPlaying) return;
     songElapsedSeconds++;
     updateSongTimerUI();
-    if (songElapsedSeconds >= 60) {
+    if (songElapsedSeconds >= 30) {
       stopGradeSong(true);
     }
   }, 1000);
@@ -2469,7 +2596,7 @@ function toggleGradeSong() {
   if (songIsPlaying) {
     stopGradeSong(false);
   } else {
-    if (songElapsedSeconds >= 60) {
+    if (songElapsedSeconds >= 30) {
       startGradeSong(currentSongGrade, false);
     } else {
       const ctx = getAudioContext();
@@ -2490,7 +2617,7 @@ function toggleGradeSong() {
         if (!songIsPlaying) return;
         songElapsedSeconds++;
         updateSongTimerUI();
-        if (songElapsedSeconds >= 60) {
+        if (songElapsedSeconds >= 30) {
           stopGradeSong(true);
         }
       }, 1000);

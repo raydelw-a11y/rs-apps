@@ -21,6 +21,7 @@
    - Al presionar `Submit Answer`, suena uno de los 3 audios TTS para respuesta correcta o 3 para incorrecta.
    - Al terminar el quiz, suena automáticamente la canción de 30 segundos correspondiente al grado obtenido (**A**, **B**, **C** o **D y menor**) sin barra de progreso ni botones de Play/Replay.
 
-6. **Contraseña de Reinicio (`Reset`) y Acceso Privado:**
-   - El botón `Reset` solicita la contraseña `admin123` en un modal con soporte para la tecla `Enter` antes de reiniciar el progreso del quiz.
+6. **Contraseña de Reinicio (`Reset`), `AI Quiz Studio` y Acceso Privado:**
+   - El botón `Reset` y el botón `✨ Crear / Quizzes (IA)` (`AI Quiz Studio`) solicitan la contraseña `admin123` en un modal con soporte para la tecla `Enter`.
+   - Dentro de `AI Quiz Studio`, se pueden subir **imágenes/fotos de páginas**, **documentos (`PDF`, `.docx`, `.txt`, `.md`)** o **pegar texto directo** para que Gemini IA genere automáticamente nuevos quizzes cumpliendo todas las reglas (50% MC, 25% Match con 4 `rightVariants`, 25% T/F, `Spelling`, `Hint`, `Reread chapter` y lector HTML) y los sincronice en `quizzes-library.json`.
    - Mantener siempre la pantalla de `Acceso Privado` con soporte para tecla `Enter` y la etiqueta `Actualizado: [hora] - [mes/día/año]` visible en una esquina tanto en `Acceso Privado` como en la pantalla principal.

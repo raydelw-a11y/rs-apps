@@ -1,5 +1,499 @@
 {
-  "activeQuizId": "default_ch1",
-  "updatedAt": "2026-10-27T12:32:00-04:00",
-  "quizzes": []
+  "activeQuizId": "trapped_videogame_ch3_4",
+  "updatedAt": "2026-10-27T22:45:04.754688+00:00",
+  "quizzes": [
+    {
+      "id": "trapped_videogame_ch3_4",
+      "title": "Trapped in a Video Game: Chapters 3 & 4",
+      "createdAt": "Oct 27, 2026",
+      "questions": [
+        {
+          "type": "mc",
+          "q": "At the start of Chapter 3, what finally reminds Jesse Rigsby that he has a weapon while a man-eating praying mantis is charging at him?",
+          "options": [
+            "He tries curling into a tiny ball while screaming, and the blaster strapped to his arm gets in the way.",
+            "Eric shouts instructions to him from the top of the snow-covered boulders.",
+            "The robot army sergeant appears and orders him to fire his weapon.",
+            "He trips over a floating mechanical grenade attachment in the snow."
+          ],
+          "correct": 0,
+          "hint": "Think about Jesse's 'last trick' when the praying mantis is almost on top of him.",
+          "pageTitle": "Chapter 3 — Page 15 (Blast Blast Squawk!)",
+          "pageExcerpt": "\"With the creature almost on top of me, I pulled out my last trick: screaming while curling into a tiny ball. But even that didn’t work because the stupid blaster kept getting in the... Oh. Wait. The blaster.\"",
+          "word": "BLASTER",
+          "clue": "The energy weapon strapped to Jesse's arm in the video game"
+        },
+        {
+          "type": "tf",
+          "q": "True or False: When Jesse shoots the invisible wall in the Rocky Mountains at full blast from two feet away, the wall shatters and opens an escape path.",
+          "options": [
+            "True",
+            "False"
+          ],
+          "correct": 1,
+          "hint": "Check what happens to the ball of light when it hits the invisible brick wall on page 17.",
+          "pageTitle": "Chapter 3 — Page 17 (The Invisible Wall)",
+          "pageExcerpt": "\"Owwwwww! I punched an invisible brick wall. I shook my hand, then tried blasting it. Nothing. Maybe full blast? I charged the blaster and shot the invisible wall from two feet away. The ball of light absorbed into the wall and disappeared.\"",
+          "word": "INVISIBLE",
+          "clue": "Impossible to see, like the barrier blocking Jesse from walking back"
+        },
+        {
+          "type": "match",
+          "q": "Match each person, place, or detail from Chapter 3 with its accurate description:",
+          "pairs": [
+            {
+              "left": "Jesse Rigsby",
+              "right": "Boy from Middlefield, Ohio who imagines his resistance lasted 10 seconds",
+              "rightVariants": [
+                "Boy from Middlefield, Ohio who imagines his resistance lasted 10 seconds",
+                "Kid from Middlefield, Ohio who jokes about his funeral inside a video game",
+                "Narrator who wishes he had brought his inhaler while running from aliens",
+                "Reluctant player chased through the snowy mountains by giant insects"
+              ]
+            },
+            {
+              "left": "Invisible Wall",
+              "right": "Unseen boundary in the Rocky Mountains that absorbs blaster shots",
+              "rightVariants": [
+                "Unseen boundary in the Rocky Mountains that absorbs blaster shots",
+                "Clear barrier that makes a CLUNK sound when Jesse hits his head or fist",
+                "Hidden game border that prevents Jesse from walking back the way he came",
+                "Impenetrable transparent wall that juts in without warning near the pines"
+              ]
+            },
+            {
+              "left": "T. Rex Theory",
+              "right": "Jesse's failed guess that praying mantis aliens only see things that move",
+              "rightVariants": [
+                "Jesse's failed guess that praying mantis aliens only see things that move",
+                "Mistaken idea that standing completely still would keep the aliens from spotting him",
+                "Bad theory disproven immediately when the mantis stands up and squawks",
+                "Dinosaur comparison Jesse makes right before the alien spots him anyway"
+              ]
+            },
+            {
+              "left": "Canyon Bowl",
+              "right": "Dead-end area with 50-foot walls where Jesse is cornered by the horde",
+              "rightVariants": [
+                "Dead-end area with 50-foot walls where Jesse is cornered by the horde",
+                "Enclosed mountain basin where three aliens pour in for every one vaporized",
+                "50-foot-high dead end where Eric rescues Jesse from the top of the cliff",
+                "Box canyon where praying mantises stampede until Jesse is 15 feet from doom"
+              ]
+            }
+          ],
+          "hint": "Review pages 16–19: Jesse's imagined funeral, the boundary he hits, his dinosaur comparison, and the dead end.",
+          "pageTitle": "Chapter 3 — Pages 16–19 (Mountain Chase)",
+          "pageExcerpt": "\"Here lies Jesse Rigsby of Middlefield, Ohio... After five minutes of walking along an invisible wall in the Rocky Mountains... I stayed very still because maybe praying mantis aliens are like T. rexes, where they can only see things that move... Suddenly, the canyon opened up into a big bowl with 50-foot walls. A dead end.\"",
+          "word": "CANYON",
+          "clue": "Deep gorge with high walls where Jesse gets trapped at a dead end"
+        },
+        {
+          "type": "mc",
+          "q": "While running from the six-legged praying mantises on Page 18, what item does Jesse really wish he had brought with him—and blames Eric for not mentioning in his text?",
+          "options": [
+            "His inhaler",
+            "His magnifying glass",
+            "His coonskin cap",
+            "His math homework"
+          ],
+          "correct": 0,
+          "hint": "Jesse jokes about who would ever think to bring this medical item to a video game.",
+          "pageTitle": "Chapter 3 — Pages 18–19 (Running Out of Breath)",
+          "pageExcerpt": "\"I found the path and continued running and blasting wildly behind me, really wishing I’d brought my inhaler. But who brings an inhaler to a video game? I blamed Eric. He should have texted, 'Come over. You’re not going to believe this. Maybe bring your inhaler.'\"",
+          "word": "INHALER",
+          "clue": "Breathing device Jesse wishes he had while sprinting through the mountains"
+        },
+        {
+          "type": "mc",
+          "q": "What tip does Eric Conrad shout down from the cliff that allows Jesse to vaporize a whole group of aliens with a single shot?",
+          "options": [
+            "\"Try charging up to full blast!\"",
+            "\"Aim only for their six insect legs!\"",
+            "\"Bounce your shots off the invisible wall!\"",
+            "\"Hide inside the pine trees until they pass!\""
+          ],
+          "correct": 0,
+          "hint": "Look at the top of page 21 right after Eric appears on the cliff like a superhero.",
+          "pageTitle": "Chapter 3 — Page 21 (Clearing the Canyon)",
+          "pageExcerpt": "\"'Glad you’re having fun! Try charging up to full blast!' I did what he said. It worked! I got a whole group with one blast. Eric and I worked together on clearing the entire canyon of aliens.\"",
+          "word": "VAPORIZE",
+          "clue": "To make the aliens disappear into a blinding flash of light"
+        },
+        {
+          "type": "tf",
+          "q": "True or False: At the end of Chapter 3, the creature that sneaks up behind Eric and shoots him is a regular green praying mantis.",
+          "options": [
+            "True",
+            "False"
+          ],
+          "correct": 1,
+          "hint": "Read carefully how Jesse describes the creature's color, legs, and arm on page 21.",
+          "pageTitle": "Chapter 3 — Page 21 (The Ambush on the Cliff)",
+          "pageExcerpt": "\"Sneaking up behind Eric was a jet-black creature that looked a little more alien than praying mantis with five legs and one long blaster arm. 'Eric!' He looked at me. The alien lowered its blaster... The alien pulled the trigger, and my best friend in the whole world vaporized before my eyes.\"",
+          "word": "STRAGGLER",
+          "clue": "One of the last three remaining aliens trailing behind the main group"
+        },
+        {
+          "type": "match",
+          "q": "Match each detail from Jesse's memories of Eric in Chapter 4 (Page 23) with what happened:",
+          "pairs": [
+            {
+              "left": "First Grade",
+              "right": "When Jesse first met Eric while Eric's parents unloaded a moving truck",
+              "rightVariants": [
+                "When Jesse first met Eric while Eric's parents unloaded a moving truck",
+                "The school year when Eric moved in and Jesse became his best friend",
+                "Age when Jesse believed Eric was 'getting close' to learning how to fly",
+                "Six years ago when the two boys first started their friendship"
+              ]
+            },
+            {
+              "left": "Coonskin Cap",
+              "right": "Hat whose tail Eric spun with his hand in the front yard to try to fly",
+              "rightVariants": [
+                "Hat whose tail Eric spun with his hand in the front yard to try to fly",
+                "Headgear Eric wore while running back and forth attempting to take off",
+                "Furry tailed cap Eric used like a propeller when moving into his house",
+                "The unusual hat Eric spun by the tail on the day Jesse met him"
+              ]
+            },
+            {
+              "left": "Homemade Bike Ramps",
+              "right": "Structures the boys used to jump pretty high since they never learned to fly",
+              "rightVariants": [
+                "Structures the boys used to jump pretty high since they never learned to fly",
+                "DIY wooden jumps the two best friends rode their bicycles off of",
+                "What Jesse and Eric built to launch themselves high into the air on bikes",
+                "Backyard ramps they mastered jumping off during their six years as friends"
+              ]
+            },
+            {
+              "left": "Backyard Sleepovers",
+              "right": "Nights where they scared each other until they were afraid to go inside to pee",
+              "rightVariants": [
+                "Nights where they scared each other until they were afraid to go inside to pee",
+                "Camping nights outside where spooky stories left them too scared to enter the house",
+                "Overnight hangouts where they terrified each other in the yard",
+                "Outdoor sleepovers that made both boys too frightened to walk indoors"
+              ]
+            }
+          ],
+          "hint": "Check page 23 where Jesse recalls meeting Eric in first grade and their six years of friendship.",
+          "pageTitle": "Chapter 4 — Page 23 (Reality Mode — Best Friends)",
+          "pageExcerpt": "\"Eric had been my best friend since first grade. The first time I saw him, his parents were unloading the moving truck, while Eric ran back and forth in the front yard wearing a coonskin cap and spinning the tail with his hand... We never learned how to fly, but we did learn how to jump pretty high off of homemade bike ramps and start fires with magnifying glasses and scare each other during backyard sleepovers...\"",
+          "word": "COONSKIN",
+          "clue": "Type of tailed cap Eric spun with his hand while trying to fly in first grade"
+        },
+        {
+          "type": "mc",
+          "q": "According to Eric on Page 26, how did he unlock 'Reality Mode' and get sucked into the video game?",
+          "options": [
+            "He finally beat the game earlier that afternoon, and a screen at the end of the credits asked if he wanted to try 'Reality Mode'.",
+            "He entered a secret cheat code he found printed inside the game manual.",
+            "He connected two broken blasters together to his television screen.",
+            "He downloaded an experimental update from the alien base portal."
+          ],
+          "correct": 0,
+          "hint": "Eric explains what happened at the end of the game's credits earlier that afternoon.",
+          "pageTitle": "Chapter 4 — Page 26 (Unlocking Reality Mode)",
+          "pageExcerpt": "\"Eric shrugged. 'I think so. Earlier this afternoon, I finally beat the game. At the end of the credits, a screen came up that said I’d unlocked something called \"Reality Mode\" and asked if I wanted to try it. When I said yes, I got sucked in like you did.'\"",
+          "word": "CREDITS",
+          "clue": "The ending list of names after beating a game where Reality Mode appeared"
+        },
+        {
+          "type": "mc",
+          "q": "How does Eric earn the mechanical grenade-launcher attachment on Pages 26–27?",
+          "options": [
+            "He lures 50+ aliens to a tiny cave opening they can't fit through and vaporizes the whole group in one charged shot.",
+            "He finds it inside a locked supply crate next to the HOME portal.",
+            "He takes it from the robot army sergeant after finishing the tutorial.",
+            "He shoots down the tops of two big pine trees where it was hidden."
+          ],
+          "correct": 0,
+          "hint": "Remember why Eric dragged Jesse into a small cave and fired a small blast into the snow.",
+          "pageTitle": "Chapter 4 — Pages 26–27 (The Cave Trick & Upgrade)",
+          "pageExcerpt": "\"'Wait,' Eric said as he dragged me into a small cave. 'Watch this.' He shot a small blast into the snow to get the aliens’ attention. Soon, one came over, then two, then 50 or more. They were all trying to reach us, but they were all too big to fit into the tiny opening. Finally, Eric charged his blaster and vaporized the whole group in one shot. After the blinding light, we heard a chime and saw a mechanical part float over the snow. Eric woo-hooed, ran over, and clipped it onto his blaster. 'Now I can launch grenades!'\"",
+          "word": "GRENADE",
+          "clue": "Explosive projectile launched with a THUNK THUNK sound by Eric's new upgrade"
+        },
+        {
+          "type": "tf",
+          "q": "True or False: Eric tells Jesse that they are permanently trapped inside the game until they defeat every single level in the entire world.",
+          "options": [
+            "True",
+            "False"
+          ],
+          "correct": 1,
+          "hint": "Check what Eric says on page 27 about what appears at the end of each level.",
+          "pageTitle": "Chapter 4 — Page 27 (Portals at the End of Each Level)",
+          "pageExcerpt": "\"'Oh, we’re not stuck,' Eric said as he started walking... 'At the end of each level, there’s a portal that takes you back to real life. I finished two levels, then decided to go back and tell you about it.'\"",
+          "word": "PORTAL",
+          "clue": "Glowing doorway at the end of a level that can send players back to real life"
+        },
+        {
+          "type": "match",
+          "q": "Match each game element from Chapter 4 with how Eric explains or uses it:",
+          "pairs": [
+            {
+              "left": "Reality Mode",
+              "right": "Special mode unlocked after beating the game that sucks players inside",
+              "rightVariants": [
+                "Special mode unlocked after beating the game that sucks players inside",
+                "Bonus feature offered after the credits that pulls real kids into the game world",
+                "The immersive mode Eric activated earlier that afternoon after winning",
+                "Game setting that turned the video game into a real-life alien battleground"
+              ]
+            },
+            {
+              "left": "Small Cave",
+              "right": "Shelter with a tiny opening too small for the 50+ giant aliens to fit through",
+              "rightVariants": [
+                "Shelter with a tiny opening too small for the 50+ giant aliens to fit through",
+                "Narrow rock hideout where Eric safely bunches up dozens of mantises",
+                "Tight spot Eric drags Jesse into so they can vaporize a massive group at once",
+                "Protective cavern where aliens crowd outside before Eric's charged shot"
+              ]
+            },
+            {
+              "left": "Grenade Launcher",
+              "right": "Mechanical part that floats over the snow after a chime and clips onto a blaster",
+              "rightVariants": [
+                "Mechanical part that floats over the snow after a chime and clips onto a blaster",
+                "Weapon upgrade that fires with a THUNK THUNK sound and blows off treetops",
+                "Attachment Eric unclips and puts on Jesse's arm so Jesse can try shooting it",
+                "Power-up earned after vaporizing 50+ aliens at the cave entrance"
+              ]
+            },
+            {
+              "left": "The Army Sergeant",
+              "right": "Programmed robot-like character in the tutorial who yells instructions at new players",
+              "rightVariants": [
+                "Programmed robot-like character in the tutorial who yells instructions at new players",
+                "Fake drill instructor whose only job is teaching beginners how to play",
+                "The yelling army guy Jesse complained about after getting sucked in",
+                "Non-real character in the game's opening tutorial section"
+              ]
+            }
+          ],
+          "hint": "Review pages 26–28: Reality Mode, the cave strategy, the floating mechanical part, and the yelling army guy.",
+          "pageTitle": "Chapter 4 — Pages 26–28 (Game Mechanics Explained)",
+          "pageExcerpt": "\"A screen came up that said I’d unlocked something called 'Reality Mode'... They were all too big to fit into the tiny opening... we heard a chime and saw a mechanical part float over the snow... 'The tutorial. It’s there to teach you how to play the game. That sergeant’s not real—he’s like a robot that’s only programmed to do one thing.'\"",
+          "word": "TUTORIAL",
+          "clue": "Introductory game section with the yelling sergeant that teaches how to play"
+        },
+        {
+          "type": "mc",
+          "q": "Why did Eric go back to real life after finishing two levels and trick Jesse into discovering the game for himself instead of just explaining it?",
+          "options": [
+            "He knew nothing he could say would convince Jesse to come in because Jesse is 'such a baby.'",
+            "His blaster ran out of battery and needed a second player to recharge.",
+            "The game locked him out of Level 1 unless he brought a classmate from Ohio.",
+            "He needed Jesse's help finishing their Monday math homework first."
+          ],
+          "correct": 0,
+          "hint": "Look at the top of page 28 where Eric finishes his sentence while taking out the alien that shot him earlier.",
+          "pageTitle": "Chapter 4 — Pages 27–28 (Why Eric Tricked Jesse)",
+          "pageExcerpt": "\"'I finished two levels, then decided to go back and tell you about it. I knew that nothing I could say would convince you to come in here because you’re such a baby...' THUNK THUNK. Eric took out the alien that had shot him earlier. '...so I just had to let you discover it for yourself.'\"",
+          "word": "CONVINCE",
+          "clue": "To persuade someone to believe or do something"
+        },
+        {
+          "type": "mc",
+          "q": "On Page 28, when Jesse complains about 'this army guy' who yelled at him and made him do weird stuff after he threw up, what does Eric tell him that was?",
+          "options": [
+            "The tutorial, featuring a sergeant who is like a robot programmed to teach how to play.",
+            "A secret boss battle that only triggers when a player throws up.",
+            "An online player from another school pretending to be a general.",
+            "A glitch caused by the invisible brick wall in the Rocky Mountains."
+          ],
+          "correct": 0,
+          "hint": "Eric interrupts Jesse and explains the purpose of the sergeant.",
+          "pageTitle": "Chapter 4 — Page 28 (The Tutorial Sergeant)",
+          "pageExcerpt": "\"'...And then this army guy starts yelling at me and making me do all this weird stuff...' 'That was the tutorial,' Eric interrupted... 'The tutorial. It’s there to teach you how to play the game. That sergeant’s not real—he’s like a robot that’s only programmed to do one thing.'\"",
+          "word": "SERGEANT",
+          "clue": "The robot-like military instructor who yells during the game's tutorial"
+        },
+        {
+          "type": "tf",
+          "q": "True or False: When Eric unclips his grenade launcher and puts it on Jesse's arm to try, Jesse hates shooting it and refuses to fire any more grenades.",
+          "options": [
+            "True",
+            "False"
+          ],
+          "correct": 1,
+          "hint": "Check Jesse's reaction on pages 29–30 after he vaporizes a sneaking mantis with two grenades.",
+          "pageTitle": "Chapter 4 — Pages 29–30 (Trying the Grenade Launcher)",
+          "pageExcerpt": "\"I squeezed. Two grenades THUNK THUNKed out of my arm and vaporized a praying mantis that I didn’t see sneaking up next to us. 'Wasn’t that great?!' Eric exclaimed. It was. It was very great. 'Hmf.' ... Eric blasted and whooped his way through the rest of the level, and I launched grenades willy-nilly.\"",
+          "word": "HOMEWORK",
+          "clue": "Math assignment due on Monday that Jesse yells about on page 29"
+        },
+        {
+          "type": "mc",
+          "q": "Alongside 'REAL ALIENS ARE TRYING TO EAT ME!', what real-world responsibility does Jesse shout about on Page 29?",
+          "options": [
+            "\"AND I HAVE MATH HOMEWORK THAT'S DUE ON MONDAY!\"",
+            "\"AND I HAVE TO IMPROVE MY GYM CLASS MILE TIME!\"",
+            "\"AND MY PARENTS ARE UNLOADING THE MOVING TRUCK!\"",
+            "\"AND I LEFT MY BICYCLE ON THE HOMEMADE RAMP!\""
+          ],
+          "correct": 0,
+          "hint": "Jesse yells this in all caps at the very top of page 29.",
+          "pageTitle": "Chapter 4 — Page 29 (Math Homework Due Monday)",
+          "pageExcerpt": "\"'Whatever. And now everything’s trying to kill us, AND I HAVE MATH HOMEWORK THAT’S DUE ON MONDAY!'\"",
+          "word": "MONDAY",
+          "clue": "The day of the week when Jesse's math homework is due"
+        },
+        {
+          "type": "match",
+          "q": "Match each sound effect from Chapters 3 and 4 with what causes it in the story:",
+          "pairs": [
+            {
+              "left": "CLUNK",
+              "right": "Jesse's body, fist, or head hitting the invisible wall in the mountains",
+              "rightVariants": [
+                "Jesse's body, fist, or head hitting the invisible wall in the mountains",
+                "Sound made when Jesse walks five steps back and slams into unseen air",
+                "Noise when the invisible barrier juts in and bumps Jesse's head",
+                "Impact sound of punching or running into the transparent mountain border"
+              ]
+            },
+            {
+              "left": "Clickclickclick",
+              "right": "Two praying mantises scuttling back and forth through the pine trees",
+              "rightVariants": [
+                "Two praying mantises scuttling back and forth through the pine trees",
+                "Insect noise to Jesse's left as two aliens guard the main mountain path",
+                "Chittering sound made by the patrolling mantises before Jesse clunks his head",
+                "Creepy clicking sound of alien guards moving among the pines"
+              ]
+            },
+            {
+              "left": "SQUAAAAWK!",
+              "right": "Battle cry of a praying mantis standing on its back legs to alert the horde",
+              "rightVariants": [
+                "Battle cry of a praying mantis standing on its back legs to alert the horde",
+                "Loud screech made by the alien after Jesse's T. rex theory fails",
+                "Creepy call that summons even more praying mantises to join the chase",
+                "Alien shriek heard right after Jesse's blaster shots in the mountains"
+              ]
+            },
+            {
+              "left": "THUNK THUNK",
+              "right": "Grenades launching from the blaster attachment to blow up trees or aliens",
+              "rightVariants": [
+                "Grenades launching from the blaster attachment to blow up trees or aliens",
+                "Firing sound when Eric blasts the tops off two big trees",
+                "Double launch sound when Jesse squeezes the grenade launcher on his arm",
+                "Sound of Eric's new mechanical blaster upgrade firing explosive rounds"
+              ]
+            }
+          ],
+          "hint": "Recall the sounds of the invisible wall, the patrolling insects in the pines, the alien alarm cry, and the grenade launcher.",
+          "pageTitle": "Chapters 3 & 4 — Pages 16–18 & 27–29 (Sound Effects)",
+          "pageExcerpt": "\"I got exactly five steps before... CLUNK... I heard a noise to my left. Clickclickclick. Through several pine trees, I could see two praying mantises... SQUAAAAWWWWWWWWWWWWWK!... Two grenades THUNK THUNKed out of my arm and vaporized a praying mantis.\"",
+          "word": "STAMPEDE",
+          "clue": "A sudden panicked rush of many creatures, like the 'stampede of death' in the canyon"
+        },
+        {
+          "type": "mc",
+          "q": "When Eric and Jesse enter the final door inside the alien base on Page 30, what are the exact labels on the three glowing portals?",
+          "options": [
+            "\"REPLAY,\" \"HOME,\" and \"LEVEL 2\"",
+            "\"START,\" \"PAUSE,\" and \"QUIT GAME\"",
+            "\"EARTH,\" \"ROCKY MOUNTAINS,\" and \"MARS\"",
+            "\"TUTORIAL,\" \"REALITY MODE,\" and \"CREDITS\""
+          ],
+          "correct": 0,
+          "hint": "Check the second paragraph on page 30 inside the alien base.",
+          "pageTitle": "Chapter 4 — Page 30 (The Three Glowing Portals)",
+          "pageExcerpt": "\"'This is it,' Eric said, as he led me through a final door inside the alien base. Inside, we found a room with three glowing portals. One said 'REPLAY,' another said 'HOME,' and the last said 'LEVEL 2.'\"",
+          "word": "REPLAY",
+          "clue": "The label on the first glowing portal inside the alien base room"
+        },
+        {
+          "type": "tf",
+          "q": "True or False: At the end of Chapter 4, Jesse steps through the HOME portal alone while Eric continues into LEVEL 2 by himself.",
+          "options": [
+            "True",
+            "False"
+          ],
+          "correct": 1,
+          "hint": "Look at page 31 to see what Jesse decides after Eric says 'Jet paaaaaacks.'",
+          "pageTitle": "Chapter 4 — Page 31 (The Worst Decision)",
+          "pageExcerpt": "\"We stared at each other some more, Eric nodding and me squinting. Finally, I rolled my eyes. 'One more level.' 'WOO-HOO!' We walked past the HOME portal into LEVEL 2. It was the worst decision of my life.\"",
+          "word": "DECISION",
+          "clue": "A choice made after thinking—walking into Level 2 was the worst one of Jesse's life"
+        },
+        {
+          "type": "mc",
+          "q": "What two details about Level 2 does Eric use on Pages 30–31 to finally tempt Jesse into walking past the HOME portal?",
+          "options": [
+            "It takes place in Hawaii and they have jet packs.",
+            "It takes place in Middlefield, Ohio and gives them giant robots.",
+            "It has zero praying mantises and awards automatic A+ math grades.",
+            "It lets them fly with coonskin caps and ride motorcycles."
+          ],
+          "correct": 0,
+          "hint": "First Eric mentions the tropical location, and then he mentions the flying gear.",
+          "pageTitle": "Chapter 4 — Pages 30–31 (Hawaii & Jet Packs)",
+          "pageExcerpt": "\"'One more level.' 'Nope.' 'The next one is in Hawaii.' 'Sorry.' 'They have jet packs.' I squinted at him. 'Jet paaaaaacks.' ... Finally, I rolled my eyes. 'One more level.'\"",
+          "word": "HAWAII",
+          "clue": "The island state where Level 2 takes place"
+        },
+        {
+          "type": "match",
+          "q": "Match each alien or location from Chapters 3 & 4 with its exact description in the book:",
+          "pairs": [
+            {
+              "left": "Praying Mantis Aliens",
+              "right": "Man-eating creatures with six nimble insect legs that chase Jesse",
+              "rightVariants": [
+                "Man-eating creatures with six nimble insect legs that chase Jesse",
+                "Giant green insect enemies that scuttle through pine trees and jump into canyons",
+                "Six-legged alien attackers that squawk and charge across the snow",
+                "Swarming insect monsters that vanish into balls of light when blasted"
+              ]
+            },
+            {
+              "left": "Jet-Black Creature",
+              "right": "Alien with five legs and one long blaster arm that sneaks up behind Eric",
+              "rightVariants": [
+                "Alien with five legs and one long blaster arm that sneaks up behind Eric",
+                "Dark five-legged enemy on the cliff that vaporizes Eric at the end of Chapter 3",
+                "Armed black alien thatEric later takes out with two grenades on Page 28",
+                "Stealthy five-legged shooter that ambushes Eric from behind on the ridge"
+              ]
+            },
+            {
+              "left": "Alien Base",
+              "right": "Final stronghold Eric and Jesse defeat to reach the room with three portals",
+              "rightVariants": [
+                "Final stronghold Eric and Jesse defeat to reach the room with three portals",
+                "End-of-level fortress containing the REPLAY, HOME, and LEVEL 2 doorways",
+                "Enemy headquarters cleared by Eric's blaster and Jesse's willy-nilly grenades",
+                "Target at the end of Level 1 where the glowing exit portals are housed"
+              ]
+            },
+            {
+              "left": "Level 2",
+              "right": "The next stage set in Hawaii with jet packs that Jesse regrets entering",
+              "rightVariants": [
+                "The next stage set in Hawaii with jet packs that Jesse regrets entering",
+                "Portal destination Eric convinces Jesse to enter instead of going HOME",
+                "Hawaii mission with jet packs that Jesse calls the worst decision of his life",
+                "The third glowing portal in the alien base that leads to the next stage"
+              ]
+            }
+          ],
+          "hint": "Review the two types of aliens in Chapter 3 and the two end-of-chapter locations in Chapter 4.",
+          "pageTitle": "Chapters 3 & 4 — Pages 18, 21, 30 & 31",
+          "pageExcerpt": "\"creatures with six nimble insect legs... a jet-black creature that looked a little more alien than praying mantis with five legs and one long blaster arm... 'We’ve got an alien base to defeat'... Inside, we found a room with three glowing portals. One said 'REPLAY,' another said 'HOME,' and the last said 'LEVEL 2.' ... 'The next one is in Hawaii... They have jet packs.'\"",
+          "word": "JETPACKS",
+          "clue": "Flying gear in Hawaii that convinces Jesse to play one more level"
+        }
+      ],
+      "readerHtml": "<h2>CHAPTER 3: Blast Blast Squawk!</h2>\n<p><strong>[Page 15]</strong> I did the thing you’re supposed to do when a man-eating praying mantis starts charging at you: I screamed a squeaky scream. “AHHHHHHH!” The praying mantis did not slow down. I tried adding running to the mix. “AHHH...” <em>THUD.</em> “AHHH...” <em>THUD.</em> “AHHH...” <em>THUD.</em></p>\n<p>Running over snow-covered rocks with a blaster strapped to your arm is harder than it looks. With the creature almost on top of me, I pulled out my last trick: screaming while curling into a tiny ball. But even that didn’t work because the stupid blaster kept getting in the... Oh. Wait. The blaster.</p>\n<p><strong>[Page 16]</strong> At the last second, I closed my eyes, reached up and squeezed my left hand. The blaster recoiled, and I heard a shriek. I opened my eyes to see the praying mantis disappear into a ball of light.</p>\n<p>Wow. I almost died. Inside of a video game. I imagined the funeral. “Here lies Jesse Rigsby of Middlefield, Ohio. He was tragically taken from us by a giant praying mantis while trying to save a video game world from fake aliens. He bravely led the resistance, which lasted for all of 10 seconds.”</p>\n<p>I looked around me. Snow and boulders everywhere, with a path leading deeper into the mountains ahead of me. No thanks. I turned and started walking back to find a way out of this mess. I got exactly five steps before... <em>CLUNK.</em> I hit something and fell backward into the snow. Confused, I picked myself up and tried again. <em>CLUNK.</em> I got up and inspected the spot further. It was open air, no different from anything else around me. I tried to put my fist through it. <em>CLUNK.</em></p>\n<p><strong>[Page 17]</strong> Owwwwww! I punched an invisible brick wall. I shook my hand, then tried blasting it. Nothing. Maybe full blast? I charged the blaster and shot the invisible wall from two feet away. The ball of light absorbed into the wall and disappeared. I sighed, put my hand against the wall, and started walking to find an opening.</p>\n<p>After five minutes of walking along an invisible wall in the Rocky Mountains (not exactly an activity I thought I’d be doing when I woke up), I heard a noise to my left. <em>Clickclickclick.</em> I slowly turned. Through several pine trees, I could see two praying mantises scuttling back and forth, guarding the main path. Gulp. I slowed down and crept quieter to keep from alerting the... <em>CLUNK.</em></p>\n<p>The invisible wall had jutted in with no warning, and I clunked my head against it. One of the creatures turned. I stayed very still because maybe praying mantis aliens are like T. rexes, where they can only see things that move. <em>SQUAAAAWWWWWWWWWWWWWK!</em></p>\n<p><strong>[Page 18]</strong> Nope! Bad theory. Bad, bad, bad theory. The creature that had heard me was now standing on its back legs and making a creepy squawking noise while the other one charged. I ran as fast as my little legs would take me. While climbing over boulders and dodging trees, I kept reaching back and wildly blasting at my attackers. <em>Blast-blast-blast-SQUAWK!</em></p>\n<p>It may not surprise you to learn that the creatures with six nimble insect legs were quickly gaining on the off-balance person who did not post a mile time to be proud of in gym class the previous week. <em>Blast-blast-blast-SHRIEEEEEEEEEEEK!</em> Got one! Unfortunately, I had no time to celebrate because the mantis I had vaporized was replaced with another one who’d heard his battle cry. And then another.</p>\n<p>I found the path and continued running and blasting wildly behind me, really wishing I’d brought my inhaler. But who brings an inhaler to a video game? I blamed Eric. He should have texted, “Come over. You’re not <strong>[Page 19]</strong> going to believe this. Maybe bring your inhaler.” Or perhaps, “Come over UNLESS YOU DON’T WANT TO GET CHASED BY MAN-EATING ALIENS THROUGH THE MOUNTAINS.” You know, just to give me a choice.</p>\n<p>As I ran and blasted, the terrain on either side of the path grew higher and higher until I found myself running through the bottom of a canyon. Praying mantises were now jumping into the canyon behind me, joining their brothers in a stampede of death. Suddenly, the canyon opened up into a big bowl with 50-foot walls. A dead end.</p>\n<p>I ran to the end, turned around, and started blasting. By this time, I was getting better at picking them off, but it was too late. For every alien I vaporized, three more would pour through the canyon opening. The horde got closer and closer: 30 yards away. Then 20. Then just 15 feet. I continued shooting while closing my eyes, preparing to meet my end.</p>\n<p>Then a chorus of shrieks. I opened my eyes to see the blinding light of five aliens getting vaporized at once. Before I could figure out what was happening, the wave behind them also disappeared. “Jesse!”</p>\n<p><strong>[Page 20]</strong> I looked up. Eric. Eric Conrad, looking exactly like a superhero, was blasting away from the top of the cliff. “Hey, buddy! What do you think?” “THIS IS THE WORST! GET ME OUT OF HERE!” I screamed.</p>\n<p><strong>[Page 21]</strong> “Glad you’re having fun! Try charging up to full blast!” I did what he said. It worked! I got a whole group with one blast. Eric and I worked together on clearing the entire canyon of aliens.</p>\n<p>After five minutes, the only group left was three stragglers coming in through the opening. I turned around to watch Eric line up the shot, and that’s when I saw it. Sneaking up behind Eric was a jet-black creature that looked a little more alien than praying mantis with five legs and one long blaster arm. “Eric!” He looked at me. The alien lowered its blaster. “WATCH OU...” The alien pulled the trigger, and my best friend in the whole world vaporized before my eyes.</p>\n\n<h2>CHAPTER 4: Reality Mode</h2>\n<p><strong>[Page 23]</strong> Eric had been my best friend since first grade. The first time I saw him, his parents were unloading the moving truck, while Eric ran back and forth in the front yard wearing a coonskin cap and spinning the tail with his hand. I finally went over to ask him what he was doing. He said that he was trying to fly and was “getting close.” I believed him because I was in first grade, and all first-graders believe that they’re <em>this close</em> to flying. I decided right then to stick with this strange flying child and learn his ways.</p>\n<p>And for the next six years, I did stick with him. Through everything. We never learned how to fly, but we did learn how to jump pretty high off of homemade bike ramps and start fires with magnifying glasses and scare each other during backyard sleepovers until we were afraid to go into the house to pee. And now he was gone.</p>\n<p><strong>[Page 26]</strong> “Come on,” Eric said as he started walking down the path. “Hey,” I caught up with him. “You going to explain what this is all about?” “Oh yeah!” Eric’s eyes lit up. “Isn’t this the greatest thing in the world? Can you believe it?” “No! Definitely not! Is this real?”</p>\n<p>Eric shrugged. “I think so. Earlier this afternoon, I finally beat the game. At the end of the credits, a screen came up that said I’d unlocked something called ‘Reality Mode’ and asked if I wanted to try it. When I said yes, I got sucked in like you did.”</p>\n<p><strong>[Page 26–27]</strong> “Wait,” Eric said as he dragged me into a small cave. “Watch this.” He shot a small blast into the snow to get the aliens’ attention. Soon, one came over, then two, then 50 or more. They were all trying to reach us, but they were all too big to fit into the tiny opening. Finally, Eric charged his blaster and vaporized the whole group in one shot. After the blinding light, we heard a chime and saw a mechanical part float over the snow. Eric <em>woo-hooed</em>, ran over, and clipped it onto his blaster. “Now I can launch grenades!” he shouted.</p>\n<p><em>THUNK THUNK.</em> I waited patiently while Eric shot grenades at two big trees. The grenades detonated in a flash of light, and the tops of the trees disappeared. Eric nodded approvingly. “At the end of each level, there’s a portal that takes you back to real life. I finished two levels, then decided to go back and tell you about it. I knew that nothing I <strong>[Page 28]</strong> could say would convince you to come in here because you’re such a baby...” <em>THUNK THUNK.</em> Eric took out the alien that had shot him earlier. “...so I just had to let you discover it for yourself.”</p>\n<p>“...And then this army guy starts yelling at me and making me do all this weird stuff...” “That was the tutorial,” Eric interrupted. “The tutorial. It’s there to teach you how to play the game. That sergeant’s not real—he’s like a robot that’s only programmed to do one thing.”</p>\n<p><strong>[Page 29]</strong> “Whatever. And now everything’s trying to kill us, AND I HAVE MATH HOMEWORK THAT’S DUE ON MONDAY!” ... “I’ll let you shoot a grenade.” I glared some more. Eric unclipped his grenade launcher and put it on my arm. “Try it.” I squeezed. Two grenades <em>THUNK THUNK</em>ed out of my arm and vaporized a praying mantis that I didn’t see sneaking up next to us. “Wasn’t that great?!” Eric exclaimed. It was. It was very great. “Hmf.”</p>\n<p><strong>[Page 30–31]</strong> “Come on. We’ve got an alien base to defeat,” Eric said as he ran ahead... “This is it,” Eric said, as he led me through a final door inside the alien base. Inside, we found a room with three glowing portals. One said “REPLAY,” another said “HOME,” and the last said “LEVEL 2.”</p>\n<p>“All right, I’ll let you keep going,” I said as I took a step toward the HOME portal. “Wait.” Eric grabbed me. “Don’t you want to keep going?” “No. I told you I want to go home.” “One more level.” “Nope.” “The next one is in Hawaii.” “Sorry.” “They have jet packs.” I squinted at him. “Jet paaaaaacks.” Finally, I rolled my eyes. “One more level.” “WOO-HOO!” We walked past the HOME portal into LEVEL 2. It was the worst decision of my life.</p>"
+    }
+  ]
 }

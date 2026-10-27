@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: rs-apps
+    runtime: static
+    buildCommand: echo "Static build ready"
+    staticPublishPath: .

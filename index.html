@@ -1,0 +1,1867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>R's Apps — The Colors of Space: Chapter 1</title>
+<!-- PDF.js library for client-side PDF parsing -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+  if (window.pdfjsLib) {
+    window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+  }
+</script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+
+  html, body { 
+    height: 100%;
+    height: 100dvh;
+    margin: 0;
+    padding: 0;
+    background-color: #050b14; 
+    color: #e2e8f0; 
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* Indicador de Actualización en Esquina (Visible en Acceso Privado y Pantalla Principal) */
+  .build-timestamp {
+    position: fixed;
+    bottom: 3px;
+    right: 6px;
+    font-size: 9px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    color: #94a3b8;
+    background: rgba(15, 23, 42, 0.85);
+    padding: 1px 5px;
+    border-radius: 4px;
+    border: 1px solid rgba(56, 189, 248, 0.2);
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 99999;
+  }
+
+  /* Pantalla de Contraseña (Acceso Privado) */
+  .auth-overlay {
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at top, #0f172a 0%, #050b14 75%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    z-index: 50000;
+  }
+
+  .auth-card {
+    width: 100%;
+    max-width: 360px;
+    background: #0f172a;
+    border: 1.5px solid #1e293b;
+    border-radius: 16px;
+    padding: 26px 22px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .auth-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto;
+    border-radius: 12px;
+    background: rgba(56, 189, 248, 0.12);
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+  }
+
+  .auth-title {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #f8fafc;
+    letter-spacing: 0.3px;
+  }
+
+  .auth-subtitle {
+    font-size: 0.78rem;
+    color: #94a3b8;
+    line-height: 1.4;
+  }
+
+  .auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .auth-input {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    border: 1.5px solid #334155;
+    background: #050b14;
+    color: #f8fafc;
+    outline: none;
+    transition: border-color 0.15s ease;
+  }
+
+  .auth-input:focus {
+    border-color: #38bdf8;
+  }
+
+  .auth-error {
+    display: none;
+    font-size: 0.75rem;
+    color: #fca5a5;
+    background: rgba(127, 29, 29, 0.5);
+    border: 1px solid #ef4444;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-weight: 600;
+  }
+
+  .auth-submit-btn {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: 0.88rem;
+    font-weight: 800;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);
+  }
+
+  .auth-submit-btn:hover {
+    background: linear-gradient(135deg, #0369a1 0%, #1d4ed8 100%);
+  }
+
+  /* Header Bar */ 
+  header { 
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #0f172a 0%, #050b14 100%); 
+    color: #fff; 
+    padding: 6px 12px; 
+    text-align: center; 
+    border-bottom: 1px solid #1e293b;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.5); 
+    z-index: 10;
+  }
+
+  header h1 { 
+    font-size: 0.96rem; 
+    font-weight: 800; 
+    margin-bottom: 3px; 
+    letter-spacing: 0.5px; 
+    background: linear-gradient(to right, #38bdf8, #c084fc, #34d399);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .controls-bar { 
+    display: flex; 
+    gap: 5px; 
+    justify-content: center; 
+    align-items: center; 
+    flex-wrap: wrap; 
+  }
+
+  select, button, input { 
+    padding: 4px 9px; 
+    font-size: 0.74rem; 
+    border-radius: 6px; 
+    border: 1px solid #334155; 
+    outline: none; 
+  }
+
+  select { 
+    background-color: #1e293b; 
+    color: #f1f5f9; 
+    font-weight: 600; 
+    cursor: pointer; 
+  }
+
+  button { 
+    background-color: #2563eb; 
+    color: white; 
+    border: none; 
+    font-weight: 700; 
+    cursor: pointer; 
+    transition: all 0.15s ease; 
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3); 
+  }
+
+  button:active { transform: scale(0.97); } 
+  button:disabled { opacity: 0.35; cursor: not-allowed; transform: none; }
+
+  button.secondary { background-color: #334155; color: #cbd5e1; } 
+  button.success { background-color: #059669; color: #ecfdf5; } 
+  button.danger { background-color: #dc2626; } 
+  button.purple { background-color: #7c3aed; }
+  button.cyan { background-color: #0284c7; }
+  button.amber { background-color: #d97706; }
+
+  /* Main Viewport Container */ 
+  main { 
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0; 
+    width: 100%; 
+    max-width: 640px; 
+    margin: 0 auto; 
+    padding: 6px 10px 8px 10px; 
+    gap: 6px;
+    overflow: hidden;
+  }
+
+  /* Spaceport Bart Status Card */ 
+  .avatar-card { 
+    flex-shrink: 0;
+    background: #0f172a; 
+    border-radius: 12px; 
+    padding: 6px 10px; 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    box-shadow: 0 4px 14px rgba(0,0,0,0.4); 
+    border: 1.5px solid #1e293b; 
+  }
+
+  .avatar-svg-container { 
+    width: 64px; 
+    height: 70px; 
+    flex-shrink: 0; 
+    background: radial-gradient(circle, #1e293b 30%, #020617 100%); 
+    border-radius: 12px; 
+    padding: 2px; 
+    border: 2px solid #38bdf8; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    position: relative;
+    overflow: hidden;
+  }
+
+  .avatar-info { 
+    flex: 1; 
+    min-width: 0;
+  }
+
+  .avatar-badges-row { 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    gap: 4px; 
+    margin-bottom: 2px; 
+  }
+
+  .avatar-status-title { 
+    font-size: 0.8rem; 
+    font-weight: 800; 
+    color: #38bdf8; 
+  }
+
+  .q-badge { 
+    background-color: #1e293b; 
+    color: #cbd5e1; 
+    padding: 2px 6px; 
+    border-radius: 8px; 
+    font-size: 0.68rem; 
+    font-weight: 700; 
+    border: 1px solid #334155;
+  }
+
+  .score-badge { 
+    background-color: #064e3b; 
+    color: #34d399; 
+    padding: 2px 8px; 
+    border-radius: 8px; 
+    font-size: 0.72rem; 
+    font-weight: 800; 
+    border: 1px solid #059669; 
+  }
+
+  .avatar-status-desc { 
+    font-size: 0.68rem; 
+    color: #94a3b8; 
+    margin-bottom: 4px; 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Segmented Progress Bar */
+  .progress-bar-bg { 
+    width: 100%; 
+    height: 6px; 
+    background-color: #1e293b; 
+    border-radius: 3px; 
+    overflow: hidden; 
+    display: flex;
+    gap: 1.5px;
+    padding: 0.5px;
+  }
+
+  .progress-segment {
+    flex: 1;
+    height: 100%;
+    background-color: #334155;
+    border-radius: 1px;
+    transition: background-color 0.25s ease;
+  }
+
+  .progress-segment.correct { background-color: #10b981; }
+  .progress-segment.partial { background-color: #f59e0b; }
+  .progress-segment.wrong { background-color: #ef4444; }
+
+  /* Compact Question Card */ 
+  .card { 
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0; 
+    background: #0f172a; 
+    border-radius: 14px; 
+    padding: 8px 12px; 
+    box-shadow: 0 4px 16px rgba(0,0,0,0.45); 
+    border: 1px solid #1e293b; 
+    overflow: hidden;
+  }
+
+  .question-scroll-area {
+    flex: 1;
+    min-height: 0; 
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding-right: 2px;
+    -webkit-overflow-scrolling: touch;
+    gap: 6px;
+  }
+
+  .question-text { 
+    font-size: 0.84rem; 
+    font-weight: 700; 
+    line-height: 1.35; 
+    color: #f8fafc; 
+  }
+
+  .rubric-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.67rem;
+    font-weight: 700;
+    color: #93c5fd;
+    background: #1e3a8a33;
+    border: 1px solid #1d4ed8;
+    padding: 2px 7px;
+    border-radius: 6px;
+    width: fit-content;
+  }
+
+  /* Multiple Choice & True/False */
+  .options-list { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 4px; 
+  }
+
+  .option-btn { 
+    width: 100%; 
+    text-align: left; 
+    padding: 7px 10px; 
+    background: #1e293b; 
+    border: 1.5px solid #334155; 
+    border-radius: 8px; 
+    font-size: 0.77rem; 
+    color: #cbd5e1; 
+    transition: all 0.12s ease; 
+    cursor: pointer; 
+    line-height: 1.25; 
+  }
+
+  .option-btn:hover:not(:disabled) { background-color: #334155; border-color: #64748b; }
+
+  .option-btn.selected { 
+    border-color: #38bdf8; 
+    background-color: #0369a133; 
+    color: #38bdf8; 
+    font-weight: 700; 
+  }
+
+  .option-btn.correct-highlight {
+    background-color: #064e3b !important;
+    border-color: #10b981 !important;
+    color: #6ee7b7 !important;
+    font-weight: 700;
+  }
+
+  .option-btn.wrong-highlight {
+    background-color: #7f1d1d !important;
+    border-color: #ef4444 !important;
+    color: #fca5a5 !important;
+    font-weight: 700;
+  }
+
+  /* Matching Columns Layout (Side-by-side) */
+  .match-columns-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+    margin-top: 2px;
+  }
+
+  .match-col {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .match-card-btn {
+    width: 100%;
+    text-align: left;
+    padding: 6px 8px;
+    background: #1e293b;
+    border: 1.5px solid #334155;
+    border-radius: 8px;
+    font-size: 0.72rem;
+    line-height: 1.25;
+    color: #cbd5e1;
+    cursor: pointer;
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    transition: all 0.15s ease;
+  }
+
+  .match-card-btn:hover:not(:disabled) {
+    background: #334155;
+    border-color: #64748b;
+  }
+
+  .match-card-btn.selected-side {
+    border-color: #c084fc;
+    background-color: #581c8744;
+    color: #e9d5ff;
+    font-weight: 700;
+  }
+
+  .match-card-btn.paired {
+    border-color: #10b981 !important;
+    background-color: #064e3b !important;
+    color: #6ee7b7 !important;
+    cursor: default;
+    opacity: 0.9;
+  }
+
+  /* SPELLING DECRYPTION BENCH */
+  .spelling-box {
+    background: #0b1329;
+    border: 1.5px solid #38bdf8;
+    border-radius: 10px;
+    padding: 7px 9px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.5);
+    margin-bottom: 4px;
+  }
+
+  .spelling-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.71rem;
+    font-weight: 700;
+    color: #38bdf8;
+  }
+
+  .spelling-subtext {
+    font-size: 0.67rem;
+    color: #94a3b8;
+  }
+
+  .slots-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .letter-slot {
+    width: 30px;
+    height: 36px;
+    background: #1e293b;
+    border: 2px dashed #475569;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
+    font-weight: 900;
+    color: #f8fafc;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.15s ease;
+  }
+
+  .letter-slot.filled {
+    border-style: solid;
+    border-color: #38bdf8;
+    background: #0369a133;
+    color: #bae6fd;
+  }
+
+  .letter-slot.drag-over {
+    border-color: #38bdf8;
+    background: #0284c733;
+    transform: scale(1.08);
+  }
+
+  .letter-slot.solved {
+    border-color: #10b981;
+    background: #064e3b;
+    color: #6ee7b7;
+  }
+
+  .letter-bank {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5px;
+    min-height: 38px;
+    padding: 4px;
+    background: #1e293b44;
+    border-radius: 8px;
+  }
+
+  .letter-tile {
+    width: 30px;
+    height: 36px;
+    background: linear-gradient(180deg, #334155 0%, #1e293b 100%);
+    border: 1.5px solid #475569;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
+    font-weight: 900;
+    color: #38bdf8;
+    cursor: grab;
+    user-select: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    transition: transform 0.1s, border-color 0.1s;
+  }
+
+  .letter-tile:active {
+    cursor: grabbing;
+    transform: scale(0.95);
+  }
+
+  .letter-tile:hover {
+    border-color: #38bdf8;
+  }
+
+  /* Actions Row */ 
+  .hint-container { 
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 4px; 
+  }
+
+  .actions-row {
+    display: flex;
+    gap: 6px;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .hint-btn { 
+    flex: 1;
+    font-size: 0.72rem; 
+    padding: 6px 8px; 
+    border-radius: 8px; 
+    background-color: #78350f; 
+    color: #fef08a; 
+    border: 1px solid #d97706; 
+    cursor: pointer; 
+    font-weight: 700; 
+  }
+
+  .hint-btn:hover:not(:disabled) {
+    background-color: #92400e;
+  }
+
+  .accept-btn {
+    flex: 1;
+    font-size: 0.72rem; 
+    padding: 6px 8px; 
+    border-radius: 8px; 
+    background-color: #059669; 
+    color: #ecfdf5; 
+    border: 1px solid #10b981; 
+    cursor: pointer; 
+    font-weight: 800; 
+  }
+
+  .accept-btn:hover:not(:disabled) {
+    background-color: #10b981;
+  }
+
+  .hint-box { 
+    display: none; 
+    width: 100%;
+    background-color: #451a03; 
+    border-left: 3px solid #f59e0b; 
+    padding: 5px 8px; 
+    border-radius: 4px; 
+    font-size: 0.72rem; 
+    color: #fde68a; 
+    line-height: 1.25; 
+  }
+
+  /* Navigation Footer */ 
+  .quiz-nav { 
+    flex-shrink: 0;
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    gap: 8px; 
+    padding-top: 5px; 
+    margin-top: 3px; 
+    border-top: 1px solid #1e293b; 
+  }
+
+  .quiz-nav button { 
+    min-width: 120px; 
+    padding: 7px 14px; 
+    font-size: 0.78rem; 
+    font-weight: 800; 
+    border-radius: 8px; 
+    background-color: #2563eb; 
+    color: white; 
+  }
+
+  /* Document Reader Panel */
+  .pdf-reader-card {
+    flex: 1;
+    display: none;
+    flex-direction: column;
+    min-height: 0;
+    background: #0f172a;
+    border-radius: 14px;
+    padding: 8px 12px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+    border: 1px solid #1e293b;
+    overflow: hidden;
+  }
+
+  .pdf-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #1e293b;
+    margin-bottom: 6px;
+  }
+
+  .pdf-tool-group {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .pdf-text-scroll {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 10px 14px;
+    background: #050b14;
+    border-radius: 8px;
+    border: 1px solid #1e293b;
+    color: #cbd5e1;
+    line-height: 1.65;
+    word-break: break-word;
+  }
+
+  .pdf-text-scroll h1, .pdf-text-scroll h2, .pdf-text-scroll h3 {
+    color: #38bdf8;
+    margin: 0.6em 0 0.3em 0;
+  }
+
+  .pdf-text-scroll p {
+    margin-bottom: 0.8em;
+  }
+
+  /* Animated Bart SVG Styles */
+  @keyframes walkBob {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-3px); }
+  }
+  @keyframes walkLegLeft {
+    0% { transform: rotate(-20deg); }
+    50% { transform: rotate(20deg); }
+    100% { transform: rotate(-20deg); }
+  }
+  @keyframes walkLegRight {
+    0% { transform: rotate(20deg); }
+    50% { transform: rotate(-20deg); }
+    100% { transform: rotate(20deg); }
+  }
+  @keyframes shipGlowPulse {
+    0%, 100% { opacity: 0.3; transform: scale(0.9); }
+    50% { opacity: 0.9; transform: scale(1.1); }
+  }
+
+  .walking-bart .bart-body { animation: walkBob 0.65s infinite ease-in-out; }
+  .walking-bart .leg-l { transform-origin: 45px 56px; animation: walkLegLeft 0.65s infinite ease-in-out; }
+  .walking-bart .leg-r { transform-origin: 55px 56px; animation: walkLegRight 0.65s infinite ease-in-out; }
+
+  @keyframes cheer { 
+    0% { transform: scale(1); } 
+    50% { transform: scale(1.15) translateY(-3px); } 
+    100% { transform: scale(1); } 
+  } 
+  .cheer-anim { animation: cheer 0.4s ease; }
+
+  @keyframes shakeFail { 
+    0%, 100% { transform: translateX(0); } 
+    25%, 75% { transform: translateX(-3px); } 
+    50% { transform: translateX(3px); } 
+  } 
+  .shake-anim { animation: shakeFail 0.35s ease; }
+</style>
+</head>
+<body>
+
+<!-- Etiqueta Global de Verificación de Despliegue (visible en Acceso Privado y Pantalla Principal) -->
+<div class="build-timestamp">Actualizado: 08:53 AM - 10/27/2026</div>
+
+<!-- Pantalla de Contraseña (Acceso Privado) con soporte completo para tecla Enter -->
+<div id="authOverlay" class="auth-overlay">
+  <div class="auth-card">
+    <div class="auth-icon">🔐</div>
+    <h1 class="auth-title">Acceso Privado</h1>
+    <p class="auth-subtitle">R's Apps — The Colors of Space: Chapter 1 Mission</p>
+    <form id="authForm" class="auth-form" onsubmit="handleAuthSubmit(event)">
+      <input
+        type="password"
+        id="authPasswordInput"
+        class="auth-input"
+        placeholder="Contraseña..."
+        autocomplete="current-password"
+        autofocus
+        onkeydown="handleAuthKeyDown(event)"
+      />
+      <div id="authErrorMsg" class="auth-error">Contraseña incorrecta. Intenta de nuevo.</div>
+      <button type="submit" class="auth-submit-btn">Entrar</button>
+    </form>
+    <div style="font-size: 10px; color: #64748b; font-family: monospace; margin-top: 2px;">
+      Actualizado: 08:53 AM - 10/27/2026
+    </div>
+  </div>
+</div>
+
+<header>
+  <h1>The Colors of Space: Chapter 1 Mission</h1>
+  <div class="controls-bar">
+    <button class="cyan" id="togglePdfViewBtn" onclick="toggleReaderView()">📖 Read Chapter 1 (Text/HTML)</button>
+    <button id="headerMistakesBtn" class="purple" onclick="startMistakesQuiz()" disabled>Review Missed (<span id="mistakeCountBadge">0</span>)</button>
+    <button id="headerResetBtn" class="danger" onclick="resetQuizData()">Reset</button>
+  </div>
+</header>
+
+<main>
+  <!-- Spaceport Status Banner -->
+  <div class="avatar-card">
+    <div class="avatar-svg-container walking-bart" id="bartAvatarContainer">
+      <svg width="60" height="66" viewBox="0 0 100 105" id="bartSvg">
+        <defs>
+          <linearGradient id="cloakGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#0284c7" />
+            <stop offset="100%" stop-color="#1e293b" />
+          </linearGradient>
+        </defs>
+
+        <!-- Ambient Spaceport Crystal Glow -->
+        <circle id="spaceportAura" cx="50" cy="50" r="46" fill="#38bdf8" opacity="0.15" />
+        <ellipse cx="50" cy="98" rx="26" ry="4" fill="#000000" opacity="0.5" />
+
+        <!-- Legs -->
+        <g class="leg-l">
+          <path d="M 42 55 L 48 55 L 45 84 L 38 84 Z" fill="#334155" />
+          <path d="M 36 84 L 46 84 L 47 92 L 34 92 Z" fill="#0284c7" />
+        </g>
+        <g class="leg-r">
+          <path d="M 50 55 L 56 55 L 59 84 L 53 84 Z" fill="#475569" />
+          <path d="M 51 84 L 61 84 L 65 92 L 49 92 Z" fill="#0369a1" />
+        </g>
+
+        <!-- Bart Torso & Head -->
+        <g class="bart-body">
+          <path d="M 37 34 L 61 34 L 64 57 L 35 57 Z" fill="url(#cloakGrad)" />
+          <rect x="46" y="28" width="7" height="7" fill="#ffdbac" />
+          <circle cx="49" cy="20" r="15" fill="#ffdbac" />
+
+          <!-- Bart's Red Hair -->
+          <path d="M 35 20 Q 49 2 64 18 Q 58 6 49 6 Q 38 7 35 20 Z" fill="#b91c1c" />
+
+          <!-- Dark Glasses -->
+          <g id="darkGlassesGroup">
+            <rect x="39" y="16" width="9" height="6" rx="2" fill="#0f172a" stroke="#38bdf8" stroke-width="0.8" />
+            <rect x="50" y="16" width="9" height="6" rx="2" fill="#0f172a" stroke="#38bdf8" stroke-width="0.8" />
+            <line x1="48" y1="18" x2="50" y2="18" stroke="#38bdf8" stroke-width="0.8" />
+          </g>
+
+          <!-- Mouth -->
+          <path id="bartMouth" d="M 45 27 Q 49 24 53 27" fill="none" stroke="#0f172a" stroke-width="1.6" stroke-linecap="round" />
+        </g>
+
+        <!-- Lhari Starship Pulse in Background -->
+        <g style="animation: shipGlowPulse 2.5s infinite ease-in-out;">
+          <polygon points="80,12 86,22 74,22" fill="#c084fc" opacity="0.8" />
+        </g>
+      </svg>
+    </div>
+
+    <div class="avatar-info">
+      <div class="avatar-badges-row">
+        <span class="avatar-status-title" id="bartStatusTitle">Lhari Spaceport Arrival</span>
+        <span class="q-badge" id="qProgress">Q 1/15</span>
+        <span class="score-badge" id="scoreDisplay">Score: 0/100</span>
+      </div>
+      <div class="avatar-status-desc" id="bartStatusDesc">Solve story challenge (4 pts) & decrypt keyword (1 pt) for 5 pts each!</div>
+      <div class="progress-bar-bg" id="progressBarBg"></div>
+    </div>
+  </div>
+
+  <!-- Quiz Card -->
+  <div id="quizContainer" class="card">
+    <div class="question-scroll-area" id="questionScrollArea">
+      
+      <div class="rubric-tag">
+        <span>⭐ Worth 5.0 Points:</span>
+        <span style="color:#7dd3fc;" id="rubricTaskText">Comprehension = 4.0 pts</span>
+        <span>|</span>
+        <span style="color:#38bdf8;">Spelling = 1.0 pt</span>
+      </div>
+
+      <div class="question-text" id="qText">Loading challenge...</div>
+
+      <!-- Multiple Choice / True-False List -->
+      <div class="options-list" id="optionsList"></div>
+
+      <!-- Match Columns Container -->
+      <div id="matchContainer" style="display: none;">
+        <div style="font-size: 0.68rem; color: #94a3b8; margin-bottom: 4px;">Tap an entity on the left, then tap its matching detail on the right:</div>
+        <div class="match-columns-grid">
+          <div class="match-col" id="matchColLeft"></div>
+          <div class="match-col" id="matchColRight"></div>
+        </div>
+      </div>
+
+      <!-- Keyword Spelling Decryption Bench (1 pt out of 5) -->
+      <div class="spelling-box" id="spellingBox">
+        <div class="spelling-header">
+          <span>⚡ Spaceport Terminal Cipher (1.0 pt)</span>
+          <span id="spellingStatus" style="color:#38bdf8;">Unsolved (0/1 pt)</span>
+        </div>
+        <div class="spelling-subtext" id="spellingClueText">Clue: Chapter 1 Term</div>
+        
+        <div class="slots-container" id="slotsContainer"></div>
+        <div class="letter-bank" id="letterBank"></div>
+
+        <!-- Spelling Submit & Attempts Controls -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px; gap:8px;">
+          <div style="font-size:0.7rem; font-weight:700; color:#94a3b8;" id="spellingAttemptsDisplay">
+            Attempts Left: <span id="spellingAttemptsCount" style="color:#fbbf24;">3</span>/3
+          </div>
+          <button id="spellingSubmitBtn" class="amber" style="padding:4px 10px; font-size:0.72rem; font-weight:800; border-radius:6px;" onclick="submitSpellingAttempt()">
+            ⚡ Verify Spelling (1.0 pt)
+          </button>
+        </div>
+      </div>
+
+      <!-- Hints & Submit -->
+      <div class="hint-container">
+        <div class="actions-row">
+          <button id="hintBtn" class="hint-btn" onclick="revealHint()">
+            💡 Need a Hint? (-1.0 pt)
+          </button>
+          <button id="acceptBtn" class="accept-btn" onclick="confirmAnswer()" disabled>
+            ✅ Submit Answer (+5 pts)
+          </button>
+        </div>
+        <div id="hintBox" class="hint-box"></div>
+      </div>
+    </div>
+
+    <!-- Navigation Footer -->
+    <div class="quiz-nav">
+      <div style="font-size:0.75rem; color:#94a3b8; font-weight:700;" id="ptsValueDisplay">Total Worth: 5.0 pts</div>
+      <button id="nextBtn" onclick="nextQuestion()" disabled>Next Question ➔</button>
+    </div>
+  </div>
+
+  <!-- Results Screen -->
+  <div id="resultsContainer" class="card" style="display: none; text-align: center; overflow-y: auto;">
+    <h2 style="color:#f8fafc; font-size: 1.25rem; margin-top:6px;">Spaceport Debriefing Complete! 🌌</h2>
+    <p style="font-size: 2rem; font-weight: 900; margin: 8px 0; color: #38bdf8;" id="finalScore">0 / 100</p>
+    <p style="color: #94a3b8; margin-bottom: 14px; font-size: 0.85rem; font-weight:600;" id="finalFeedback">Outstanding astrogation, cadet!</p>
+    <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
+      <button class="success" onclick="restartQuiz()">Retake Mission 🔄</button>
+      <button id="resultsMistakesBtn" class="purple" onclick="startMistakesQuiz()">Review Missed Questions</button>
+    </div>
+  </div>
+
+  <!-- Document Reader Section -->
+  <div id="readerContainer" class="pdf-reader-card">
+    <div class="pdf-toolbar">
+      <div class="pdf-tool-group">
+        <span style="font-size:0.75rem; font-weight:700; color:#38bdf8;">Chapter 1: The Colors of Space</span>
+      </div>
+
+      <div class="pdf-tool-group">
+        <span style="font-size:0.72rem; color:#94a3b8; font-weight:700;">Size:</span>
+        <button class="secondary" style="padding:2px 7px;" onclick="adjustFontSize(-2)">A−</button>
+        <span id="fontSizeDisplay" style="font-size:0.72rem; font-weight:700; color:#38bdf8; min-width:24px; text-align:center;">15px</span>
+        <button class="secondary" style="padding:2px 7px;" onclick="adjustFontSize(2)">A+</button>
+      </div>
+
+      <button class="secondary" style="padding:3px 8px; font-size:0.7rem;" onclick="toggleReaderView()">✕ Close Reader</button>
+    </div>
+
+    <div id="readerScrollArea" class="pdf-text-scroll" style="font-size:15px;">
+      <h2>CHAPTER ONE</h2>
+      <p>The Lhari spaceport didn't belong on Earth.</p>
+      <p>Bart Steele had thought that, a long time ago, when he first saw it. He had been just a kid then; twelve years old, and all excited about seeing Earth for the first time—Earth, the legendary home of mankind before the Age of Space, the planet of Bart's far-back ancestors. And the first thing he'd seen on Earth, when he got off the starship, was the Lhari spaceport.</p>
+      <p>And he'd thought, right then, <em>It doesn't belong on Earth.</em></p>
+      <p>He'd said so to his father, and his father's face had gone strange, bitter and remote.</p>
+      <p>"A lot of people would agree with you, Son," Captain Rupert Steele had said softly. "The trouble is, if the Lhari spaceport wasn't on Earth, we wouldn't be on Earth either. Remember that."</p>
+      <p>Bart remembered it, five years later, as he got off the strip of moving sidewalk. He turned to wait for Tommy Kendron, who was getting his baggage off the center strip of the moving roadway. Bart Steele and Tommy Kendron had graduated together, the day before, from the Space Academy of Earth. Now Tommy, who had been born on the ninth planet of the star Capella, was taking the Lhari starship to his faraway home, and Bart's father was coming back to Earth, on the same starship, to meet his son.</p>
+      <p><em>Five years,</em> Bart thought. <em>That's a long time. I wonder if Dad will know me?</em></p>
+      <p>"Let me give you a hand with that stuff, Tommy."</p>
+      <p>"I can manage," Tommy chuckled, hefting the plastic cases. "They don't allow you much baggage weight on the Lhari ships. Certainly not more than I can handle."</p>
+      <p>The two lads stood in front of the spaceport gate for a minute. Over the gate, which was high and pointed and made of some clear colorless material like glass, was a jagged symbol resembling a flash of lightning; the sign, in Lhari language, for the home world of the Lhari.</p>
+      <p>They walked through the pointed glass gate, and stood for a moment, by mutual consent, looking down over the vast expanse of the Lhari spaceport.</p>
+      <p>This had once been a great desert. Now it was all floored in with some strange substance that was neither glass, metal nor concrete; it looked like gleaming crystal—though it felt soft underfoot—and in the glare of the noonday sun, it gave back the glare in a million rainbow flashes. Tommy put his hands up to his eyes to shield them. "The Lhari must have funny eyes, if they can stand all this glare!"</p>
+      <p>Inside the glass gate, a man in a guard's uniform gave them each a pair of dark glasses. "Put them on now, boys. And don't look directly at the ship when it lands."</p>
+      <p>Tommy hooked the earpieces of the dark glasses over his ears, and sighed with relief. Bart frowned, but finally put them on. Bart's mother had been a Mentorian—from the planet Mentor, of the star Deneb, a hundred times brighter than the sun. Bart had her eyes. But Mentorians weren't popular on Earth, and Bart had learned to be quiet about his mother.</p>
+      <p>Through the dark lenses, the glare was only a pale gleam. Far out in the very center of the spaceport, a high, clear-glass skyscraper rose, catching the sunlight in a million colors. Around the building, small copters and robotcabs veered, discharging passengers; and the moving sidewalks were crowded with people coming and going. Here and there in the crowd, standing out because of their height and the silvery metallic cloaks they wore, were the strange tall figures of the Lhari.</p>
+      <p>Over the doors of the glass building was the inscription: <em>"HERE, BY GRACE OF THE LHARI, IS THE DOORWAY TO ALL THE STARS."</em></p>
+      <p>On the soaring staircase, Bart overheard two Lhari speaking their native tongue. They were searching for a Vegan passenger who had pried into forbidden Lhari matters concerning their star-drive monopoly.</p>
+      <p>Bart realized that once inside the spaceport boundaries, planetary law was suspended in favor of Lhari jurisdiction. When the ship touched down in blinding incandescent colors and metallic gray, Bart watched for his father, Rupert Steele. Instead, an unfamiliar chubby gray-haired Vegan grasped his wrist, called him "Son," and whispered: <em>"Go along with this or we're both dead... your life's in danger—right now!"</em></p>
+    </div>
+  </div>
+</main>
+
+<script>
+// Autenticación Acceso Privado (Soporte para Enter y Submit)
+const VALID_PASSWORDS = ['admin123', 'Mailliw1991!'];
+
+function checkStoredAuth() {
+  if (localStorage.getItem('rs_apps_auth') === 'true') {
+    const overlay = document.getElementById('authOverlay');
+    if (overlay) overlay.style.display = 'none';
+  }
+}
+
+function verifyPasswordAndUnlock() {
+  const input = document.getElementById('authPasswordInput');
+  const err = document.getElementById('authErrorMsg');
+  const val = (input ? input.value : '').trim();
+  if (VALID_PASSWORDS.includes(val)) {
+    localStorage.setItem('rs_apps_auth', 'true');
+    const overlay = document.getElementById('authOverlay');
+    if (overlay) overlay.style.display = 'none';
+    if (err) err.style.display = 'none';
+    playCorrectSound();
+  } else {
+    if (err) err.style.display = 'block';
+    playWrongSound();
+  }
+}
+
+function handleAuthSubmit(e) {
+  if (e) e.preventDefault();
+  verifyPasswordAndUnlock();
+}
+
+function handleAuthKeyDown(e) {
+  if (e.key === 'Enter' || e.key === 'NumpadEnter' || e.keyCode === 13) {
+    e.preventDefault();
+    verifyPasswordAndUnlock();
+  }
+}
+
+// Web Audio Synthesizer
+let audioCtx = null;
+function getAudioContext() {
+  if (!audioCtx) {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (AudioContextClass) audioCtx = new AudioContextClass();
+  }
+  if (audioCtx && audioCtx.state === 'suspended') {
+    audioCtx.resume().catch(() => {});
+  }
+  return audioCtx;
+}
+
+function playTone(freq, type, duration, endFreq) {
+  try {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    const now = ctx.currentTime;
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, now);
+    if (endFreq) osc.frequency.exponentialRampToValueAtTime(endFreq, now + duration);
+    gain.gain.setValueAtTime(0.15, now);
+    gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start(now);
+    osc.stop(now + duration);
+  } catch(e) {}
+}
+
+function playCorrectSound() {
+  [523.25, 659.25, 783.99, 1046.50].forEach((f, idx) => {
+    setTimeout(() => playTone(f, 'triangle', 0.22), idx * 65);
+  });
+}
+
+function playWrongSound() {
+  playTone(260, 'sawtooth', 0.35, 110);
+}
+
+function playSnapSound() {
+  playTone(600, 'sine', 0.08, 950);
+}
+
+function playHintSound() {
+  playTone(880, 'sine', 0.2, 1320);
+}
+
+['click', 'touchstart', 'pointerdown'].forEach(e => {
+  document.addEventListener(e, () => getAudioContext(), { passive: true, once: false });
+});
+
+/* 
+  15 Comprehension Challenges strictly from Chapter 1
+  Mix of Multiple Choice, True/False, and Side-by-Side Match
+*/
+const chapterOneQuestions = [
+  // 1. MC
+  {
+    type: 'mc',
+    q: "Why did Captain Rupert Steele explain to twelve-year-old Bart that Earth had to accept the Lhari spaceport?",
+    options: [
+      "Without Lhari faster-than-light warp-drive ships, humans could never reach or return to Earth across interstellar space.",
+      "The planetary coalition had surrendered in an interplanetary war against the Lhari fleet.",
+      "The United Earth Council was legally bankrupt and leased out the desert territory for revenue.",
+      "The spaceport was constructed solely to refuel robotic cargo vessels without passenger transit."
+    ],
+    correct: 0,
+    hint: "Recall Rupert Steele's words: 'If the Lhari spaceport wasn't on Earth, we wouldn't be on Earth either.'",
+    word: "WARPDRIVE",
+    clue: "The faster-than-light interstellar propulsion controlled exclusively by the Lhari"
+  },
+  // 2. TF
+  {
+    type: 'tf',
+    q: "True or False: Bart Steele required dark glasses immediately upon entering the spaceport because his eyes were far weaker than normal human eyes.",
+    options: [
+      "True",
+      "False"
+    ],
+    correct: 1,
+    hint: "Bart had natural resistance to glare because his mother came from Mentor, which orbits Deneb (a star 100 times brighter than the sun).",
+    word: "DENEB",
+    clue: "The super-bright star orbited by the planet Mentor"
+  },
+  // 3. MC
+  {
+    type: 'mc',
+    q: "What distinct physical feature immediately sets the Lhari apart from human hands?",
+    options: [
+      "Long triangular claws curved over the fingertips like a cat's",
+      "Four webbed fingers ending in suction disks",
+      "Metallic silvery scales with no knuckles or joints",
+      "Transparent fingertips capable of sensing thermal rays"
+    ],
+    correct: 0,
+    hint: "Review the anatomical description Bart gives while observing the two Lhari on the moving staircase.",
+    word: "CLAWS",
+    clue: "The sharp cat-like features curving over Lhari fingertips"
+  },
+  // 4. MATCH
+  {
+    type: 'match',
+    q: "Match each character or entity from Chapter 1 to their exact book description:",
+    pairs: [
+      { left: "Bart Steele", right: "Academy graduate waiting for his father's return" },
+      { left: "Tommy Kendron", right: "Capellan student departing on the outbound starship" },
+      { left: "Rupert Steele", right: "Owner of Vega Interplanet who sent ahead warning papers" },
+      { left: "Edmund Briscoe", right: "Chubby gray-haired stranger who grabs Bart and yells 'Son!'" }
+    ],
+    hint: "Check the roles of the two Academy boys and the two older men.",
+    word: "CAPELLA",
+    clue: "The faraway home star system of Bart's classmate Tommy Kendron"
+  },
+  // 5. MC
+  {
+    type: 'mc',
+    q: "What physiological limitation makes human Mentorians indispensable crew members aboard Lhari starships?",
+    options: [
+      "The Lhari are completely color-blind, seeing only shades of gray and requiring Mentorians to distinguish colors.",
+      "The Lhari cannot hear sound vibrations within standard atmospheric densities.",
+      "The Lhari lack the lung capacity to endure standard gravity shifts during landing.",
+      "The Lhari cannot read numerical calculations without human optical implants."
+    ],
+    correct: 0,
+    hint: "Bart explains to Tommy why the Lhari use Mentorians to tell diamonds from rubies.",
+    word: "MENTORIAN",
+    clue: "The human group who serve as mathematicians and color identifiers aboard Lhari ships"
+  },
+  // 6. TF
+  {
+    type: 'tf',
+    q: "True or False: Once a person passes beneath the lightning-flash symbol into the Lhari spaceport, they are subject strictly to Lhari jurisdiction rather than local Earth law.",
+    options: [
+      "True",
+      "False"
+    ],
+    correct: 0,
+    hint: "Review Bart's memories of Universal Law regarding treaty boundaries on alien spaceports.",
+    word: "TREATY",
+    clue: "The legal intersystem accord establishing Lhari territory on alien worlds"
+  },
+  // 7. MC
+  {
+    type: 'mc',
+    q: "What strict security procedure discourages most Mentorians from serving on Lhari starships?",
+    options: [
+      "They must undergo deep hypnotic memory suppression before and after each voyage.",
+      "They are permanently banned from communicating with their home families on Earth.",
+      "They must spend the entirety of each voyage confined to dark sensory tanks.",
+      "They are required to surrender all intellectual property rights to stellar cartography."
+    ],
+    correct: 0,
+    hint: "Think about the brainwashing Bart describes to prevent humans from discovering warp secrets.",
+    word: "HYPNOSIS",
+    clue: "The deep mental conditioning used to erase sensitive voyage memories"
+  },
+  // 8. MC
+  {
+    type: 'mc',
+    q: "What inscription is engraved over the entrance of the towering glass skyscraper at the spaceport's center?",
+    options: [
+      "\"Here, by grace of the Lhari, is the doorway to all the stars.\"",
+      "\"Through knowledge and speed, the universe belongs to the brave.\"",
+      "\"Welcome to the crossroads of Sol and the outer galactic rim.\"",
+      "\"Under treaty of the Panarch, all peaceful travelers may enter.\""
+    ],
+    correct: 0,
+    hint: "Read the exact quote over the doorway that Bart and his father saw five years earlier.",
+    word: "DOORWAY",
+    clue: "What the spaceport inscription calls the entrance to all the stars"
+  },
+  // 9. TF
+  {
+    type: 'tf',
+    q: "True or False: Before meeting the Lhari, human ships had already mastered warp-drive travel to Alpha Centauri within hours.",
+    options: [
+      "True",
+      "False"
+    ],
+    correct: 1,
+    hint: "Humanity had only sub-light ships, taking long years to reach neighboring stars before the Lhari warp-drive.",
+    word: "LIGHTSPEED",
+    clue: "The absolute velocity barrier that limited human travel before the Lhari arrival"
+  },
+  // 10. MC
+  {
+    type: 'mc',
+    q: "What visual phenomenon marks the landing of the Lhari starship on the crystal spaceport field?",
+    options: [
+      "It shifts through brilliant white-hot blue and red spectrums before cooling to metallic gray.",
+      "It descends completely invisible and becomes audible only by a heavy magnetic hum.",
+      "It discharges large billowing clouds of green condensation across the ramp.",
+      "Its hull emits flashing strobe pulses to guide automated landing clamps."
+    ],
+    correct: 0,
+    hint: "Bart observed the hull glowing from white-hot to blue and dulling down through the spectrum.",
+    word: "SPECTRUM",
+    clue: "The band of visible colors through which the starship's incandescent hull faded"
+  },
+  // 11. MATCH
+  {
+    type: 'match',
+    q: "Match each location and concept from Chapter 1 with its true detail:",
+    pairs: [
+      { left: "Spaceport Floor", right: "Crystal substance reflecting millions of rainbow glare flashes" },
+      { left: "Gate Emblem", right: "Jagged lightning flash signifying the Lhari home world" },
+      { left: "Cold Sweet", right: "Refreshing synthetic Lhari beverage sampled on the upper mezzanine" },
+      { left: "Vega Interplanet", right: "Intersystem planetary transport company owned by Rupert Steele" }
+    ],
+    hint: "Link the physical features and trade entities described in Chapter 1.",
+    word: "CRYSTAL",
+    clue: "The strange gleaming ground substance covering the vast desert spaceport"
+  },
+  // 12. MC
+  {
+    type: 'mc',
+    q: "Why do the two Lhari officers express frustration while hunting for the fugitive on the incoming ship?",
+    options: [
+      "They have only a general physical description without a name or photograph.",
+      "Their communications array was disabled by solar flares near Luna City.",
+      "The Earth police refused to grant them permission to board the vessel.",
+      "The fugitive possesses an energon-ray rifle capable of penetrating crystal shields."
+    ],
+    correct: 0,
+    hint: "The younger Lhari complained about having no name, only a vague description.",
+    word: "FUGITIVE",
+    clue: "The wanted person being tracked down by spaceport guards"
+  },
+  // 13. TF
+  {
+    type: 'tf',
+    q: "True or False: In a crisis like the Orion Spaceport disaster, human and Lhari blood plasma could be safely interchanged.",
+    options: [
+      "True",
+      "False"
+    ],
+    correct: 0,
+    hint: "Doctors found plasma interchangeable between the two species, though whole blood transfusion remained unsafe.",
+    word: "PLASMA",
+    clue: "The liquid component of blood that could be transfused between Lhari and humans"
+  },
+  // 14. MC
+  {
+    type: 'mc',
+    q: "What urgent reason does the strange fat man give Bart for clutching him and shouting 'How you've grown, Son!'?",
+    options: [
+      "Two Lhari guards are closing in, and both of their lives depend on playing along.",
+      "He wants to sneak into the luxury passenger line without paying the fare.",
+      "He is delirious from cold-sleep disorientation and mistakes Bart for his child.",
+      "He wants Bart to hold his luggage while he evades the customs inspector."
+    ],
+    correct: 0,
+    hint: "The stranger urgently whispered in Bart's ear: 'Call me Dad... if you want to live.'",
+    word: "DISGUISE",
+    clue: "The deceptive role the stranger adopted to deceive watching spaceport guards"
+  },
+  // 15. MC
+  {
+    type: 'mc',
+    q: "What does Bart suddenly realize about the fugitive the Lhari are hunting as he listens on the staircase?",
+    options: [
+      "The hunted person is an inhabitant from his own home system of Vega.",
+      "The fugitive is an escaped criminal from the asteroid penal colony.",
+      "The passenger stole a cargo container of precious Lhari crystal gemstones.",
+      "The runaway is actually an unauthorized Capellan ambassador."
+    ],
+    correct: 0,
+    hint: "The Lhari officer mentions seeking a Vegan who pried into secret Lhari matters.",
+    word: "VEGA",
+    clue: "The star system of Bart's father and the fugitive sought by the Lhari"
+  }
+];
+
+// App State
+let activeQuestions = [];
+let currentQIndex = 0;
+let userScore = 0;
+let selectedOption = null;
+let hintUsedOnCurrent = false;
+let isQuizAnswered = false;
+let mistakesPool = [];
+
+// Matching State
+let solvedPairs = [];
+let selectedLeftPair = null;
+let selectedRightPair = null;
+
+// Spelling State
+let currentTargetWord = "";
+let currentSlots = [];
+let currentBank = [];
+let isSpellingSolved = false;
+let draggedItem = null;
+let spellingAttemptsLeft = 3;
+let isSpellingLocked = false;
+
+// Document Reader State
+let isReaderVisible = false;
+let readerFontSize = 15;
+
+function shuffleArray(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function shuffleWordLetters(word) {
+  const letters = word.split('').map((char, index) => ({
+    id: `letter-${index}-${char}-${Math.random().toString(36).substr(2, 3)}`,
+    char: char.toUpperCase()
+  }));
+  let scrambled = [...letters];
+  let tries = 0;
+  while (tries < 8) {
+    for (let i = scrambled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [scrambled[i], scrambled[j]] = [scrambled[j], scrambled[i]];
+    }
+    if (scrambled.map(l => l.char).join('') !== word.toUpperCase() || word.length <= 1) break;
+    tries++;
+  }
+  return scrambled;
+}
+
+function initQuiz(questionsList) {
+  activeQuestions = questionsList.map(qObj => {
+    if (qObj.type === 'match') {
+      return { ...qObj };
+    }
+    const correctText = qObj.options[qObj.correct];
+    const shuffledOpts = qObj.type === 'tf' ? [...qObj.options] : shuffleArray(qObj.options);
+    const newCorrect = shuffledOpts.indexOf(correctText);
+    return {
+      ...qObj,
+      options: shuffledOpts,
+      correct: newCorrect
+    };
+  });
+
+  currentQIndex = 0;
+  userScore = 0;
+  renderProgressBar();
+  renderQuestion();
+}
+
+function renderProgressBar() {
+  const bg = document.getElementById('progressBarBg');
+  bg.innerHTML = '';
+  activeQuestions.forEach((_, idx) => {
+    const seg = document.createElement('div');
+    seg.className = 'progress-segment';
+    seg.id = `prog-seg-${idx}`;
+    bg.appendChild(seg);
+  });
+}
+
+function renderQuestion() {
+  if (currentQIndex >= activeQuestions.length) {
+    showResults();
+    return;
+  }
+
+  const q = activeQuestions[currentQIndex];
+  hintUsedOnCurrent = false;
+  isQuizAnswered = false;
+  selectedOption = null;
+  isSpellingSolved = false;
+  solvedPairs = [];
+  selectedLeftPair = null;
+  selectedRightPair = null;
+
+  document.getElementById('qProgress').textContent = `Q ${currentQIndex + 1}/${activeQuestions.length}`;
+  document.getElementById('scoreDisplay').textContent = `Score: ${userScore.toFixed(1)}/100`;
+  document.getElementById('qText').textContent = `${currentQIndex + 1}. ${q.q}`;
+
+  const rubricTask = document.getElementById('rubricTaskText');
+  if (q.type === 'match') rubricTask.textContent = "Match Columns = 4.0 pts";
+  else if (q.type === 'tf') rubricTask.textContent = "True / False = 4.0 pts";
+  else rubricTask.textContent = "Comprehension = 4.0 pts";
+
+  document.getElementById('ptsValueDisplay').textContent = `Total Worth: 5.0 pts (4.0 Task + 1.0 Spelling)`;
+
+  document.getElementById('hintBox').style.display = 'none';
+  document.getElementById('hintBox').textContent = '';
+  document.getElementById('hintBtn').disabled = false;
+  document.getElementById('hintBtn').textContent = "💡 Need a Hint? (-1.0 pt)";
+  document.getElementById('acceptBtn').disabled = true;
+  document.getElementById('nextBtn').disabled = true;
+
+  const optionsList = document.getElementById('optionsList');
+  const matchContainer = document.getElementById('matchContainer');
+
+  if (q.type === 'match') {
+    optionsList.style.display = 'none';
+    matchContainer.style.display = 'block';
+    renderMatchColumns(q);
+  } else {
+    matchContainer.style.display = 'none';
+    optionsList.style.display = 'flex';
+    optionsList.innerHTML = '';
+
+    q.options.forEach((optText, idx) => {
+      const btn = document.createElement('button');
+      btn.className = 'option-btn';
+      btn.textContent = optText;
+      btn.onclick = () => selectOption(idx, btn);
+      optionsList.appendChild(btn);
+    });
+  }
+
+  // Setup Word Decryption
+  currentTargetWord = q.word.toUpperCase();
+  document.getElementById('spellingClueText').textContent = `Clue: ${q.clue}`;
+  document.getElementById('spellingStatus').textContent = "Unsolved (0/1 pt)";
+  document.getElementById('spellingStatus').style.color = "#38bdf8";
+
+  spellingAttemptsLeft = 3;
+  isSpellingLocked = false;
+  document.getElementById('spellingAttemptsCount').textContent = spellingAttemptsLeft;
+  document.getElementById('spellingAttemptsCount').style.color = "#fbbf24";
+  const submitSpellingBtn = document.getElementById('spellingSubmitBtn');
+  if (submitSpellingBtn) {
+    submitSpellingBtn.disabled = false;
+    submitSpellingBtn.textContent = "⚡ Verify Spelling (1.0 pt)";
+  }
+
+  currentSlots = new Array(currentTargetWord.length).fill(null);
+  currentBank = shuffleWordLetters(currentTargetWord);
+  renderSpellingBench();
+
+  document.getElementById('questionScrollArea').scrollTop = 0;
+}
+
+function renderMatchColumns(q) {
+  const leftCol = document.getElementById('matchColLeft');
+  const rightCol = document.getElementById('matchColRight');
+  leftCol.innerHTML = '';
+  rightCol.innerHTML = '';
+
+  const leftItems = q.pairs.map((p, i) => ({ id: i, text: p.left }));
+  const rightItems = shuffleArray(q.pairs.map((p, i) => ({ id: i, text: p.right })));
+
+  leftItems.forEach(item => {
+    const btn = document.createElement('button');
+    btn.className = 'match-card-btn';
+    btn.id = `match-left-${item.id}`;
+    btn.textContent = item.text;
+    btn.onclick = () => handleMatchClick('left', item.id);
+    leftCol.appendChild(btn);
+  });
+
+  rightItems.forEach(item => {
+    const btn = document.createElement('button');
+    btn.className = 'match-card-btn';
+    btn.id = `match-right-${item.id}`;
+    btn.textContent = item.text;
+    btn.onclick = () => handleMatchClick('right', item.id);
+    rightCol.appendChild(btn);
+  });
+}
+
+function handleMatchClick(side, id) {
+  if (isQuizAnswered || solvedPairs.includes(id)) return;
+  playSnapSound();
+
+  if (side === 'left') {
+    selectedLeftPair = (selectedLeftPair === id) ? null : id;
+  } else {
+    selectedRightPair = (selectedRightPair === id) ? null : id;
+  }
+
+  document.querySelectorAll('#matchColLeft .match-card-btn').forEach(btn => {
+    const bId = parseInt(btn.id.replace('match-left-', ''));
+    if (!solvedPairs.includes(bId)) {
+      btn.classList.toggle('selected-side', selectedLeftPair === bId);
+    }
+  });
+
+  document.querySelectorAll('#matchColRight .match-card-btn').forEach(btn => {
+    const bId = parseInt(btn.id.replace('match-right-', ''));
+    if (!solvedPairs.includes(bId)) {
+      btn.classList.toggle('selected-side', selectedRightPair === bId);
+    }
+  });
+
+  if (selectedLeftPair !== null && selectedRightPair !== null) {
+    if (selectedLeftPair === selectedRightPair) {
+      solvedPairs.push(selectedLeftPair);
+      const lBtn = document.getElementById(`match-left-${selectedLeftPair}`);
+      const rBtn = document.getElementById(`match-right-${selectedRightPair}`);
+      lBtn.classList.remove('selected-side');
+      rBtn.classList.remove('selected-side');
+      lBtn.classList.add('paired');
+      rBtn.classList.add('paired');
+      playSnapSound();
+    }
+    selectedLeftPair = null;
+    selectedRightPair = null;
+    document.querySelectorAll('.match-card-btn').forEach(b => b.classList.remove('selected-side'));
+
+    const q = activeQuestions[currentQIndex];
+    if (solvedPairs.length === q.pairs.length) {
+      document.getElementById('acceptBtn').disabled = false;
+    }
+  }
+}
+
+function renderSpellingBench() {
+  const slotsContainer = document.getElementById('slotsContainer');
+  const letterBank = document.getElementById('letterBank');
+  slotsContainer.innerHTML = '';
+  letterBank.innerHTML = '';
+
+  currentSlots.forEach((letterObj, idx) => {
+    const slot = document.createElement('div');
+    slot.className = `letter-slot ${letterObj ? 'filled' : ''} ${isSpellingSolved ? 'solved' : ''}`;
+    slot.textContent = letterObj ? letterObj.char : '';
+
+    slot.ondragover = (e) => {
+      e.preventDefault();
+      if (!isQuizAnswered && !isSpellingSolved && !isSpellingLocked) slot.classList.add('drag-over');
+    };
+    slot.ondragleave = () => slot.classList.remove('drag-over');
+    slot.ondrop = (e) => {
+      e.preventDefault();
+      slot.classList.remove('drag-over');
+      handleDropOnSlot(idx);
+    };
+
+    slot.onclick = () => handleSlotClick(idx);
+
+    if (letterObj && !isQuizAnswered && !isSpellingSolved && !isSpellingLocked) {
+      slot.draggable = true;
+      slot.ondragstart = () => {
+        draggedItem = { source: 'slot', index: idx, letter: letterObj };
+        playSnapSound();
+      };
+    }
+
+    slotsContainer.appendChild(slot);
+  });
+
+  currentBank.forEach((letterObj, bIdx) => {
+    const tile = document.createElement('div');
+    tile.className = 'letter-tile';
+    tile.textContent = letterObj.char;
+
+    if (!isQuizAnswered && !isSpellingSolved && !isSpellingLocked) {
+      tile.draggable = true;
+      tile.ondragstart = () => {
+        draggedItem = { source: 'bank', index: bIdx, letter: letterObj };
+        playSnapSound();
+      };
+      tile.onclick = () => handleBankClick(bIdx);
+    }
+
+    letterBank.appendChild(tile);
+  });
+}
+
+function handleDropOnSlot(slotIdx) {
+  if (!draggedItem || isQuizAnswered || isSpellingSolved || isSpellingLocked) return;
+  const { source, index, letter } = draggedItem;
+  playSnapSound();
+
+  const occupant = currentSlots[slotIdx];
+  if (source === 'bank') {
+    currentBank.splice(index, 1);
+    if (occupant) currentBank.push(occupant);
+    currentSlots[slotIdx] = letter;
+  } else if (source === 'slot') {
+    currentSlots[index] = occupant;
+    currentSlots[slotIdx] = letter;
+  }
+
+  draggedItem = null;
+  renderSpellingBench();
+}
+
+function handleBankClick(bIdx) {
+  if (isQuizAnswered || isSpellingSolved || isSpellingLocked) return;
+  const emptyIdx = currentSlots.findIndex(s => s === null);
+  if (emptyIdx === -1) return;
+
+  playSnapSound();
+  const letter = currentBank.splice(bIdx, 1)[0];
+  currentSlots[emptyIdx] = letter;
+  renderSpellingBench();
+}
+
+function handleSlotClick(slotIdx) {
+  if (isQuizAnswered || isSpellingSolved || isSpellingLocked) return;
+  const letter = currentSlots[slotIdx];
+  if (!letter) return;
+
+  playSnapSound();
+  currentSlots[slotIdx] = null;
+  currentBank.push(letter);
+  renderSpellingBench();
+}
+
+function submitSpellingAttempt() {
+  if (isQuizAnswered || isSpellingSolved || isSpellingLocked) return;
+
+  const isFull = currentSlots.every(s => s !== null);
+  if (!isFull) {
+    document.getElementById('spellingStatus').textContent = "⚠️ Fill all slots first!";
+    document.getElementById('spellingStatus').style.color = "#f59e0b";
+    playWrongSound();
+    return;
+  }
+
+  const builtWord = currentSlots.map(s => s.char).join('');
+  const statusEl = document.getElementById('spellingStatus');
+  const attemptsCountEl = document.getElementById('spellingAttemptsCount');
+  const submitBtn = document.getElementById('spellingSubmitBtn');
+
+  if (builtWord === currentTargetWord) {
+    isSpellingSolved = true;
+    statusEl.textContent = "✓ Solved (+1.0 pt earned!)";
+    statusEl.style.color = "#10b981";
+    submitBtn.disabled = true;
+    submitBtn.textContent = "✓ Verified (1.0 pt)";
+    playCorrectSound();
+    renderSpellingBench();
+  } else {
+    spellingAttemptsLeft--;
+    attemptsCountEl.textContent = spellingAttemptsLeft;
+    playWrongSound();
+
+    if (spellingAttemptsLeft > 0) {
+      statusEl.textContent = `✗ Incorrect sequence! (${spellingAttemptsLeft} attempt${spellingAttemptsLeft === 1 ? '' : 's'} remaining)`;
+      statusEl.style.color = "#ef4444";
+      if (spellingAttemptsLeft === 1) {
+        attemptsCountEl.style.color = "#ef4444";
+      }
+    } else {
+      isSpellingLocked = true;
+      attemptsCountEl.style.color = "#ef4444";
+      statusEl.textContent = `🔒 Out of attempts! Word was: ${currentTargetWord}`;
+      statusEl.style.color = "#ef4444";
+      submitBtn.disabled = true;
+      submitBtn.textContent = "🔒 Locked (0/1 pt)";
+      renderSpellingBench();
+    }
+  }
+}
+
+function selectOption(idx, btnElement) {
+  if (isQuizAnswered) return;
+  selectedOption = idx;
+  document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+  btnElement.classList.add('selected');
+  document.getElementById('acceptBtn').disabled = false;
+}
+
+function revealHint() {
+  if (hintUsedOnCurrent || isQuizAnswered) return;
+  hintUsedOnCurrent = true;
+  playHintSound();
+  const q = activeQuestions[currentQIndex];
+  const box = document.getElementById('hintBox');
+  box.textContent = `Hint: ${q.hint}`;
+  box.style.display = 'block';
+
+  document.getElementById('hintBtn').disabled = true;
+  document.getElementById('hintBtn').textContent = "💡 Hint Active (-1.0 pt)";
+  document.getElementById('ptsValueDisplay').textContent = "Total Worth: 4.0 pts (3.0 Task + 1.0 Spelling)";
+}
+
+function confirmAnswer() {
+  if (isQuizAnswered) return;
+  const q = activeQuestions[currentQIndex];
+  if (q.type !== 'match' && selectedOption === null) return;
+  isQuizAnswered = true;
+
+  document.getElementById('acceptBtn').disabled = true;
+  document.getElementById('hintBtn').disabled = true;
+
+  const baseTaskPts = hintUsedOnCurrent ? 3.0 : 4.0;
+  let isTaskCorrect = false;
+
+  if (q.type === 'match') {
+    isTaskCorrect = (solvedPairs.length === q.pairs.length);
+  } else {
+    const btns = document.querySelectorAll('.option-btn');
+    btns.forEach(b => b.disabled = true);
+    isTaskCorrect = (selectedOption === q.correct);
+
+    if (isTaskCorrect) {
+      btns[selectedOption].classList.add('correct-highlight');
+    } else {
+      btns[selectedOption].classList.add('wrong-highlight');
+      btns[q.correct].classList.add('correct-highlight');
+    }
+  }
+
+  const taskEarned = isTaskCorrect ? baseTaskPts : 0;
+  const isSpellCorrect = isSpellingSolved;
+  const spellEarned = isSpellCorrect ? 1.0 : 0;
+
+  const totalEarned = taskEarned + spellEarned;
+  userScore += totalEarned;
+
+  const submitSpellingBtn = document.getElementById('spellingSubmitBtn');
+  if (submitSpellingBtn) submitSpellingBtn.disabled = true;
+
+  const seg = document.getElementById(`prog-seg-${currentQIndex}`);
+  if (seg) {
+    if (totalEarned >= 4.0) seg.classList.add('correct');
+    else if (totalEarned > 0) seg.classList.add('partial');
+    else seg.classList.add('wrong');
+  }
+
+  if (totalEarned >= 4.0) {
+    playCorrectSound();
+    mistakesPool = mistakesPool.filter(m => m.q !== q.q);
+  } else {
+    playWrongSound();
+    if (!mistakesPool.some(m => m.q === q.q)) {
+      mistakesPool.push(q);
+    }
+  }
+
+  updateMistakeBadge();
+  document.getElementById('scoreDisplay').textContent = `Score: ${userScore.toFixed(1)}/100`;
+  updateBartAvatar(userScore, totalEarned >= 4.0);
+  document.getElementById('nextBtn').disabled = false;
+}
+
+function nextQuestion() {
+  currentQIndex++;
+  if (currentQIndex < activeQuestions.length) {
+    renderQuestion();
+  } else {
+    showResults();
+  }
+}
+
+function updateBartAvatar(score, justAnsweredCorrect) {
+  const container = document.getElementById('bartAvatarContainer');
+  const aura = document.getElementById('spaceportAura');
+  const mouth = document.getElementById('bartMouth');
+  const title = document.getElementById('bartStatusTitle');
+  const desc = document.getElementById('bartStatusDesc');
+
+  container.classList.remove('cheer-anim', 'shake-anim');
+  void container.offsetWidth;
+  if (justAnsweredCorrect) container.classList.add('cheer-anim');
+  else container.classList.add('shake-anim');
+
+  const pct = Math.min(100, Math.round(score));
+  if (pct >= 70) {
+    aura.setAttribute('fill', '#10b981');
+    title.textContent = "Warp-Drive Astrogator! 🚀";
+    desc.textContent = "Bart successfully navigates the Lhari spaceport mystery!";
+    if (mouth) mouth.setAttribute('d', 'M 44 25 Q 49 31 54 25');
+  } else if (pct >= 40) {
+    aura.setAttribute('fill', '#38bdf8');
+    title.textContent = "Space Academy Graduate 🌟";
+    desc.textContent = "Analyzing alien technology and Mentorian communications...";
+    if (mouth) mouth.setAttribute('d', 'M 44 26 Q 49 26 54 26');
+  } else {
+    aura.setAttribute('fill', '#f59e0b');
+    title.textContent = "Lhari Spaceport Arrival";
+    desc.textContent = "Solve challenges to uncover Captain Rupert Steele's trail!";
+    if (mouth) mouth.setAttribute('d', 'M 44 27 Q 49 23 54 27');
+  }
+}
+
+function updateMistakeBadge() {
+  document.getElementById('mistakeCountBadge').textContent = mistakesPool.length;
+  document.getElementById('headerMistakesBtn').disabled = mistakesPool.length === 0;
+  const resBtn = document.getElementById('resultsMistakesBtn');
+  if (resBtn) resBtn.disabled = mistakesPool.length === 0;
+}
+
+function showResults() {
+  document.getElementById('quizContainer').style.display = 'none';
+  document.getElementById('resultsContainer').style.display = 'block';
+
+  const finalScoreVal = Math.round(userScore);
+  document.getElementById('finalScore').textContent = `${finalScoreVal} / 100 Points`;
+
+  const feedback = document.getElementById('finalFeedback');
+  if (finalScoreVal >= 85) {
+    feedback.textContent = "🌟 First-Class Astrogator! You mastered all aspects of Chapter 1!";
+  } else if (finalScoreVal >= 60) {
+    feedback.textContent = "👍 Well done! Review the missed questions to prepare for Chapter 2!";
+  } else {
+    feedback.textContent = "📖 Keep studying the Lhari spaceport lore and try again, cadet!";
+  }
+}
+
+function restartQuiz() {
+  document.getElementById('resultsContainer').style.display = 'none';
+  document.getElementById('quizContainer').style.display = 'flex';
+  initQuiz(chapterOneQuestions);
+}
+
+function startMistakesQuiz() {
+  if (mistakesPool.length === 0) return;
+  document.getElementById('resultsContainer').style.display = 'none';
+  document.getElementById('quizContainer').style.display = 'flex';
+  initQuiz([...mistakesPool]);
+}
+
+function resetQuizData() {
+  mistakesPool = [];
+  updateMistakeBadge();
+  restartQuiz();
+}
+
+function toggleReaderView() {
+  isReaderVisible = !isReaderVisible;
+  const reader = document.getElementById('readerContainer');
+  const quiz = document.getElementById('quizContainer');
+  const results = document.getElementById('resultsContainer');
+  const btn = document.getElementById('togglePdfViewBtn');
+
+  if (isReaderVisible) {
+    reader.style.display = 'flex';
+    quiz.style.display = 'none';
+    results.style.display = 'none';
+    btn.textContent = '🎮 Back to Mission';
+    btn.className = 'secondary';
+  } else {
+    reader.style.display = 'none';
+    quiz.style.display = 'flex';
+    btn.textContent = '📖 Read Chapter 1 (Text/HTML)';
+    btn.className = 'cyan';
+  }
+}
+
+function adjustFontSize(delta) {
+  readerFontSize = Math.min(26, Math.max(12, readerFontSize + delta));
+  const textEl = document.getElementById('readerScrollArea');
+  textEl.style.fontSize = readerFontSize + 'px';
+  document.getElementById('fontSizeDisplay').textContent = readerFontSize + 'px';
+}
+
+window.onload = function() {
+  checkStoredAuth();
+  initQuiz(chapterOneQuestions);
+  updateMistakeBadge();
+};
+</script>
+</body>
+</html>

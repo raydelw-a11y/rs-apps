@@ -1,0 +1,25 @@
+# Reglas de R's Apps (Quizzes & Readers)
+
+1. **Distribución Obligatoria de Preguntas en Todos los Quizzes:**
+   - **50% Multiple Choice (`mc`)** (ej. 10 de 20 preguntas)
+   - **25% Matching Columns (`match`)** (ej. 5 de 20 preguntas)
+   - **25% True or False (`tf`)** (ej. 5 de 20 preguntas)
+   - Cada pregunta vale **5.0 puntos** (`4.0 pts` tarea de comprensión + `1.0 pt` deletreo `Spelling`). Con 20 preguntas el total es exactamente **100 puntos**.
+
+2. **Reglas de Matching Columns (`match`):**
+   - Cada vez que el usuario comete un error al emparejar las columnas, las parejas se reinician (`solvedPairs = []`), ambas columnas se reorganizan en un orden aleatorio garantizado diferente (`shuffleDifferentOrder`), y el contenido de la columna derecha cambia su redacción (`rightVariants`).
+
+3. **Reglas de Deletreo (`Spelling`) y `Submit Answer`:**
+   - El botón `Submit Answer` permanece deshabilitado hasta que se haya respondido la pregunta principal **y** se haya resuelto correctamente el `Spelling` o agotado sus 3 intentos.
+   - Tanto la parte de comprensión como el `Spelling` cuentan para marcar la pregunta como correcta; si falla cualquiera de las dos, la pregunta pasa a `Review Missed`.
+
+4. **Reglas de `Review Missed`, `Hint` y `Reread chapter to find answer`:**
+   - `Review Missed` está bloqueado hasta que el usuario termine el quiz completo (`isQuizCompleted === true`).
+   - Debajo de `Hint (-1.0 pt)` siempre debe existir el botón `📖 Reread chapter to find answer (-1.0 pt)` que muestra el texto específico de la página del capítulo donde está la respuesta y descuenta `1.0 pt`.
+
+5. **Audio Feedback y Canciones Finales:**
+   - Al presionar `Submit Answer`, suena uno de los 3 audios TTS para respuesta correcta o 3 para incorrecta.
+   - Al terminar el quiz, suena automáticamente la canción de 30 segundos correspondiente al grado obtenido (**A**, **B**, **C** o **D y menor**) sin barra de progreso ni botones de Play/Replay.
+
+6. **Verificación de Despliegue y Acceso Privado:**
+   - Mantener siempre la pantalla de `Acceso Privado` con soporte para tecla `Enter` y la etiqueta `Actualizado: [hora] - [mes/día/año]` visible en una esquina tanto en `Acceso Privado` como en la pantalla principal.

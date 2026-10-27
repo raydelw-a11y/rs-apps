@@ -897,7 +897,7 @@
 <body>
 
 <!-- Etiqueta Global de Verificación de Despliegue (visible en Acceso Privado y Pantalla Principal) -->
-<div class="build-timestamp">Actualizado: 10:02 AM - 10/27/2026</div>
+<div class="build-timestamp">Actualizado: 10:15 AM - 10/27/2026</div>
 
 <!-- Pantalla de Contraseña (Acceso Privado) con soporte completo para tecla Enter -->
 <div id="authOverlay" class="auth-overlay">
@@ -919,7 +919,7 @@
       <button type="submit" class="auth-submit-btn">Entrar</button>
     </form>
     <div style="font-size: 10px; color: #64748b; font-family: monospace; margin-top: 2px;">
-      Actualizado: 10:02 AM - 10/27/2026
+      Actualizado: 10:15 AM - 10/27/2026
     </div>
   </div>
 </div>
@@ -989,7 +989,7 @@
     <div class="avatar-info">
       <div class="avatar-badges-row">
         <span class="avatar-status-title" id="bartStatusTitle">Lhari Spaceport Arrival</span>
-        <span class="q-badge" id="qProgress">Q 1/15</span>
+        <span class="q-badge" id="qProgress">Q 1/20</span>
         <span class="score-badge" id="scoreDisplay">Score: 0/100</span>
       </div>
       <div class="avatar-status-desc" id="bartStatusDesc">Solve story challenge (4 pts) & decrypt keyword (1 pt) for 5 pts each!</div>
@@ -1261,7 +1261,7 @@ function playFeedbackVoice(isCorrect) {
   Each includes the exact book page text (`pageTitle` and `pageExcerpt`) for the "Reread chapter to find answer" button.
 */
 const chapterOneQuestions = [
-  // 1. MC
+  // 1. MC (1/10)
   {
     type: 'mc',
     q: "Why did Captain Rupert Steele explain to twelve-year-old Bart that Earth had to accept the Lhari spaceport?",
@@ -1278,14 +1278,11 @@ const chapterOneQuestions = [
     word: "WARPDRIVE",
     clue: "The faster-than-light interstellar propulsion controlled exclusively by the Lhari"
   },
-  // 2. TF
+  // 2. TF (1/5)
   {
     type: 'tf',
     q: "True or False: Bart Steele required dark glasses immediately upon entering the spaceport because his eyes were far weaker than normal human eyes.",
-    options: [
-      "True",
-      "False"
-    ],
+    options: ["True", "False"],
     correct: 1,
     hint: "Bart had natural resistance to glare because his mother came from Mentor, which orbits Deneb (a star 100 times brighter than the sun).",
     pageTitle: "Chapter 1 — Page 6 (Inside the Glass Gate)",
@@ -1293,27 +1290,10 @@ const chapterOneQuestions = [
     word: "DENEB",
     clue: "The super-bright star orbited by the planet Mentor"
   },
-  // 3. MC
-  {
-    type: 'mc',
-    q: "What distinct physical feature immediately sets the Lhari apart from human hands?",
-    options: [
-      "Long triangular claws curved over the fingertips like a cat's",
-      "Four webbed fingers ending in suction disks",
-      "Metallic silvery scales with no knuckles or joints",
-      "Transparent fingertips capable of sensing thermal rays"
-    ],
-    correct: 0,
-    hint: "Review the anatomical description Bart gives while observing the two Lhari on the moving staircase.",
-    pageTitle: "Chapter 1 — Page 9 (Observing the Lhari)",
-    pageExcerpt: "\"Close up, the Lhari looked almost human—tall, lean, pale-skinned, with silvery-white hair. Only their hands betrayed their non-human origin: on each finger, instead of a flat human fingernail, grew a long, triangular claw that curved over the fingertip like a cat's claw, though they could not retract them.\"",
-    word: "CLAWS",
-    clue: "The sharp cat-like features curving over Lhari fingertips"
-  },
-  // 4. MATCH
+  // 3. MATCH (1/5)
   {
     type: 'match',
-    q: "Match each character or entity from Chapter 1 to their exact book description:",
+    q: "Match each character from Chapter 1 to their exact book description:",
     pairs: [
       {
         left: "Bart Steele",
@@ -1362,7 +1342,24 @@ const chapterOneQuestions = [
     word: "CAPELLA",
     clue: "The faraway home star system of Bart's classmate Tommy Kendron"
   },
-  // 5. MC
+  // 4. MC (2/10)
+  {
+    type: 'mc',
+    q: "What distinct physical feature immediately sets the Lhari apart from human hands?",
+    options: [
+      "Long triangular claws curved over the fingertips like a cat's",
+      "Four webbed fingers ending in suction disks",
+      "Metallic silvery scales with no knuckles or joints",
+      "Transparent fingertips capable of sensing thermal rays"
+    ],
+    correct: 0,
+    hint: "Review the anatomical description Bart gives while observing the two Lhari on the moving staircase.",
+    pageTitle: "Chapter 1 — Page 9 (Observing the Lhari)",
+    pageExcerpt: "\"Close up, the Lhari looked almost human—tall, lean, pale-skinned, with silvery-white hair. Only their hands betrayed their non-human origin: on each finger, instead of a flat human fingernail, grew a long, triangular claw that curved over the fingertip like a cat's claw, though they could not retract them.\"",
+    word: "CLAWS",
+    clue: "The sharp cat-like features curving over Lhari fingertips"
+  },
+  // 5. MC (3/10)
   {
     type: 'mc',
     q: "What physiological limitation makes human Mentorians indispensable crew members aboard Lhari starships?",
@@ -1379,14 +1376,11 @@ const chapterOneQuestions = [
     word: "MENTORIAN",
     clue: "The human group who serve as mathematicians and color identifiers aboard Lhari ships"
   },
-  // 6. TF
+  // 6. TF (2/5)
   {
     type: 'tf',
     q: "True or False: Once a person passes beneath the lightning-flash symbol into the Lhari spaceport, they are subject strictly to Lhari jurisdiction rather than local Earth law.",
-    options: [
-      "True",
-      "False"
-    ],
+    options: ["True", "False"],
     correct: 0,
     hint: "Review Bart's memories of Universal Law regarding treaty boundaries on alien spaceports.",
     pageTitle: "Chapter 1 — Page 10 (Spaceport Treaty & Universal Law)",
@@ -1394,76 +1388,10 @@ const chapterOneQuestions = [
     word: "TREATY",
     clue: "The legal intersystem accord establishing Lhari territory on alien worlds"
   },
-  // 7. MC
-  {
-    type: 'mc',
-    q: "What strict security procedure discourages most Mentorians from serving on Lhari starships?",
-    options: [
-      "They must undergo deep hypnotic memory suppression before and after each voyage.",
-      "They are permanently banned from communicating with their home families on Earth.",
-      "They must spend the entirety of each voyage confined to dark sensory tanks.",
-      "They are required to surrender all intellectual property rights to stellar cartography."
-    ],
-    correct: 0,
-    hint: "Think about the brainwashing Bart describes to prevent humans from discovering warp secrets.",
-    pageTitle: "Chapter 1 — Page 8 (Lhari Security & Hypnosis)",
-    pageExcerpt: "\"To guard their monopoly on the faster-than-light star-drive, the Lhari subjected every Mentorian crew member to deep hypnotic conditioning and memory suppression before and after every voyage, erasing any conscious recollection of the drive rooms—a mental tampering that most humans resented and feared.\"",
-    word: "HYPNOSIS",
-    clue: "The deep mental conditioning used to erase sensitive voyage memories"
-  },
-  // 8. MC
-  {
-    type: 'mc',
-    q: "What inscription is engraved over the entrance of the towering glass skyscraper at the spaceport's center?",
-    options: [
-      "\"Here, by grace of the Lhari, is the doorway to all the stars.\"",
-      "\"Through knowledge and speed, the universe belongs to the brave.\"",
-      "\"Welcome to the crossroads of Sol and the outer galactic rim.\"",
-      "\"Under treaty of the Panarch, all peaceful travelers may enter.\""
-    ],
-    correct: 0,
-    hint: "Read the exact quote over the doorway that Bart and his father saw five years earlier.",
-    pageTitle: "Chapter 1 — Page 7 (The Skyscraper Inscription)",
-    pageExcerpt: "\"Far out in the very center of the spaceport, a high, clear-glass skyscraper rose, catching the sunlight in a million colors... Over the doors of the glass building was carved the arrogant inscription in Universal letters: 'HERE, BY GRACE OF THE LHARI, IS THE DOORWAY TO ALL THE STARS.'\"",
-    word: "DOORWAY",
-    clue: "What the spaceport inscription calls the entrance to all the stars"
-  },
-  // 9. TF
-  {
-    type: 'tf',
-    q: "True or False: Before meeting the Lhari, human ships had already mastered warp-drive travel to Alpha Centauri within hours.",
-    options: [
-      "True",
-      "False"
-    ],
-    correct: 1,
-    hint: "Humanity had only sub-light ships, taking long years to reach neighboring stars before the Lhari warp-drive.",
-    pageTitle: "Chapter 1 — Page 7 (Before the Lhari Warp-Drive)",
-    pageExcerpt: "\"Before mankind encountered the Lhari, human spaceships could never exceed the speed of light. Generation ships and cold-sleep vessels took years and decades just to crawl between neighboring stars like Alpha Centauri, Vega, and Deneb. Only the Lhari possessed the secret of faster-than-light warp-drive.\"",
-    word: "LIGHTSPEED",
-    clue: "The absolute velocity barrier that limited human travel before the Lhari arrival"
-  },
-  // 10. MC
-  {
-    type: 'mc',
-    q: "What visual phenomenon marks the landing of the Lhari starship on the crystal spaceport field?",
-    options: [
-      "It shifts through brilliant white-hot blue and red spectrums before cooling to metallic gray.",
-      "It descends completely invisible and becomes audible only by a heavy magnetic hum.",
-      "It discharges large billowing clouds of green condensation across the ramp.",
-      "Its hull emits flashing strobe pulses to guide automated landing clamps."
-    ],
-    correct: 0,
-    hint: "Bart observed the hull glowing from white-hot to blue and dulling down through the spectrum.",
-    pageTitle: "Chapter 1 — Page 12 (The Starship Landing)",
-    pageExcerpt: "\"The Lhari starship dropped silently into the landing cradle. As it emerged from hyperspace transition, its hull blazed with blinding incandescent light—shifting from dazzling white-hot through violet, blue, green, yellow, and fiery red across the visible spectrum until it finally faded into dull metallic gray.\"",
-    word: "SPECTRUM",
-    clue: "The band of visible colors through which the starship's incandescent hull faded"
-  },
-  // 11. MATCH
+  // 7. MATCH (2/5)
   {
     type: 'match',
-    q: "Match each location and concept from Chapter 1 with its true detail:",
+    q: "Match each spaceport feature or entity from Chapter 1 with its true detail:",
     pairs: [
       {
         left: "Spaceport Floor",
@@ -1512,7 +1440,122 @@ const chapterOneQuestions = [
     word: "CRYSTAL",
     clue: "The strange gleaming ground substance covering the vast desert spaceport"
   },
-  // 12. MC
+  // 8. MC (4/10)
+  {
+    type: 'mc',
+    q: "What strict security procedure discourages most Mentorians from serving on Lhari starships?",
+    options: [
+      "They must undergo deep hypnotic memory suppression before and after each voyage.",
+      "They are permanently banned from communicating with their home families on Earth.",
+      "They must spend the entirety of each voyage confined to dark sensory tanks.",
+      "They are required to surrender all intellectual property rights to stellar cartography."
+    ],
+    correct: 0,
+    hint: "Think about the brainwashing Bart describes to prevent humans from discovering warp secrets.",
+    pageTitle: "Chapter 1 — Page 8 (Lhari Security & Hypnosis)",
+    pageExcerpt: "\"To guard their monopoly on the faster-than-light star-drive, the Lhari subjected every Mentorian crew member to deep hypnotic conditioning and memory suppression before and after every voyage, erasing any conscious recollection of the drive rooms—a mental tampering that most humans resented and feared.\"",
+    word: "HYPNOSIS",
+    clue: "The deep mental conditioning used to erase sensitive voyage memories"
+  },
+  // 9. MC (5/10)
+  {
+    type: 'mc',
+    q: "What inscription is engraved over the entrance of the towering glass skyscraper at the spaceport's center?",
+    options: [
+      "\"Here, by grace of the Lhari, is the doorway to all the stars.\"",
+      "\"Through knowledge and speed, the universe belongs to the brave.\"",
+      "\"Welcome to the crossroads of Sol and the outer galactic rim.\"",
+      "\"Under treaty of the Panarch, all peaceful travelers may enter.\""
+    ],
+    correct: 0,
+    hint: "Read the exact quote over the doorway that Bart and his father saw five years earlier.",
+    pageTitle: "Chapter 1 — Page 7 (The Skyscraper Inscription)",
+    pageExcerpt: "\"Far out in the very center of the spaceport, a high, clear-glass skyscraper rose, catching the sunlight in a million colors... Over the doors of the glass building was carved the arrogant inscription in Universal letters: 'HERE, BY GRACE OF THE LHARI, IS THE DOORWAY TO ALL THE STARS.'\"",
+    word: "DOORWAY",
+    clue: "What the spaceport inscription calls the entrance to all the stars"
+  },
+  // 10. TF (3/5)
+  {
+    type: 'tf',
+    q: "True or False: Before meeting the Lhari, human ships had already mastered warp-drive travel to Alpha Centauri within hours.",
+    options: ["True", "False"],
+    correct: 1,
+    hint: "Humanity had only sub-light ships, taking long years to reach neighboring stars before the Lhari warp-drive.",
+    pageTitle: "Chapter 1 — Page 7 (Before the Lhari Warp-Drive)",
+    pageExcerpt: "\"Before mankind encountered the Lhari, human spaceships could never exceed the speed of light. Generation ships and cold-sleep vessels took years and decades just to crawl between neighboring stars like Alpha Centauri, Vega, and Deneb. Only the Lhari possessed the secret of faster-than-light warp-drive.\"",
+    word: "LIGHTSPEED",
+    clue: "The absolute velocity barrier that limited human travel before the Lhari arrival"
+  },
+  // 11. MATCH (3/5)
+  {
+    type: 'match',
+    q: "Match each star system or world mentioned in Chapter 1 with its significance:",
+    pairs: [
+      {
+        left: "Earth",
+        right: "Legendary ancestral homeworld of mankind and site of the Space Academy",
+        rightVariants: [
+          "Legendary ancestral homeworld of mankind and site of the Space Academy",
+          "Ancient birth planet of Bart's far-back human ancestors",
+          "World where Bart and Tommy graduated the day before",
+          "Planet hosting the desert Lhari spaceport Bart first saw at twelve"
+        ]
+      },
+      {
+        left: "Mentor (Deneb)",
+        right: "Blazing star system 100 times brighter than Sol where Bart's mother was born",
+        rightVariants: [
+          "Blazing star system 100 times brighter than Sol where Bart's mother was born",
+          "Homeworld of the human mathematicians and color-readers hired by the Lhari",
+          "Super-bright Denebian planet whose inhabitants have glare-resistant eyes",
+          "World of Bart's mother that he learned to keep quiet about on Earth"
+        ]
+      },
+      {
+        left: "Capella IX",
+        right: "Distant ninth planet where Tommy Kendron was born and is returning",
+        rightVariants: [
+          "Distant ninth planet where Tommy Kendron was born and is returning",
+          "Faraway star system destination of Bart's graduating classmate",
+          "Homeworld to which Tommy is traveling aboard the Lhari starship",
+          "Outer planetary colony in the Capellan system where Tommy grew up"
+        ]
+      },
+      {
+        left: "Vega",
+        right: "Home star system of Captain Rupert Steele and the hunted passenger",
+        rightVariants: [
+          "Home star system of Captain Rupert Steele and the hunted passenger",
+          "System headquarters of the Steele family's interplanetary shipping line",
+          "Star system from which the fugitive sought by Lhari guards originates",
+          "Homeworld system of both Bart's father and the gray-haired stranger"
+        ]
+      }
+    ],
+    hint: "Connect Earth, Mentor, Capella, and Vega to the characters associated with them.",
+    pageTitle: "Chapter 1 — Pages 5–10 (Worlds & Star Systems)",
+    pageExcerpt: "\"Earth was the legendary home of mankind before the Age of Space, where Bart and Tommy graduated from the Space Academy. Tommy had been born on the ninth planet of Capella. Bart's mother came from Mentor, of the star Deneb, a hundred times brighter than the sun. And Bart's father, Rupert Steele, operated Vega Interplanet from the Vega system—the same system as the fugitive hunted by the Lhari.\"",
+    word: "ANCESTORS",
+    clue: "Bart's far-back human forebears who originally came from Earth"
+  },
+  // 12. MC (6/10)
+  {
+    type: 'mc',
+    q: "What visual phenomenon marks the landing of the Lhari starship on the crystal spaceport field?",
+    options: [
+      "It shifts through brilliant white-hot blue and red spectrums before cooling to metallic gray.",
+      "It descends completely invisible and becomes audible only by a heavy magnetic hum.",
+      "It discharges large billowing clouds of green condensation across the ramp.",
+      "Its hull emits flashing strobe pulses to guide automated landing clamps."
+    ],
+    correct: 0,
+    hint: "Bart observed the hull glowing from white-hot to blue and dulling down through the spectrum.",
+    pageTitle: "Chapter 1 — Page 12 (The Starship Landing)",
+    pageExcerpt: "\"The Lhari starship dropped silently into the landing cradle. As it emerged from hyperspace transition, its hull blazed with blinding incandescent light—shifting from dazzling white-hot through violet, blue, green, yellow, and fiery red across the visible spectrum until it finally faded into dull metallic gray.\"",
+    word: "SPECTRUM",
+    clue: "The band of visible colors through which the starship's incandescent hull faded"
+  },
+  // 13. MC (7/10)
   {
     type: 'mc',
     q: "Why do the two Lhari officers express frustration while hunting for the fugitive on the incoming ship?",
@@ -1529,14 +1572,11 @@ const chapterOneQuestions = [
     word: "FUGITIVE",
     clue: "The wanted person being tracked down by spaceport guards"
   },
-  // 13. TF
+  // 14. TF (4/5)
   {
     type: 'tf',
     q: "True or False: In a crisis like the Orion Spaceport disaster, human and Lhari blood plasma could be safely interchanged.",
-    options: [
-      "True",
-      "False"
-    ],
+    options: ["True", "False"],
     correct: 0,
     hint: "Doctors found plasma interchangeable between the two species, though whole blood transfusion remained unsafe.",
     pageTitle: "Chapter 1 — Page 9 (Human and Lhari Biology)",
@@ -1544,7 +1584,59 @@ const chapterOneQuestions = [
     word: "PLASMA",
     clue: "The liquid component of blood that could be transfused between Lhari and humans"
   },
-  // 14. MC
+  // 15. MATCH (4/5)
+  {
+    type: 'match',
+    q: "Match each Lhari characteristic or secret with its accurate description from Chapter 1:",
+    pairs: [
+      {
+        left: "Lhari Vision",
+        right: "Total color-blindness perceiving only shades of black, white, and gray",
+        rightVariants: [
+          "Total color-blindness perceiving only shades of black, white, and gray",
+          "Optical limitation preventing them from telling rubies from diamonds",
+          "Monochrome sight that requires Mentorian crewmen to read color instruments",
+          "Eyesight adapted to intense glare but unable to see the color spectrum"
+        ]
+      },
+      {
+        left: "Lhari Hands",
+        right: "Fingers tipped with non-retractable curved triangular claws",
+        rightVariants: [
+          "Fingers tipped with non-retractable curved triangular claws",
+          "Cat-like pointed claws growing over the ends of their fingertips",
+          "The main anatomical feature that betrays their non-human origin",
+          "Sharp triangular talons in place of flat human fingernails"
+        ]
+      },
+      {
+        left: "Lhari Cloaks",
+        right: "Silvery metallic garments worn by the tall aliens in the crowd",
+        rightVariants: [
+          "Silvery metallic garments worn by the tall aliens in the crowd",
+          "Gleaming silver robes that make the tall Lhari stand out at the port",
+          "Metallic outer attire draped over the shoulders of Lhari officers",
+          "Distinctive silver-gray apparel worn by the masters of the spaceport"
+        ]
+      },
+      {
+        left: "Star-Drive Monopoly",
+        right: "Exclusive faster-than-light secret protected by hypnotic memory erasure",
+        rightVariants: [
+          "Exclusive faster-than-light secret protected by hypnotic memory erasure",
+          "Interstellar propulsion guarded fiercely against Vegan espionage",
+          "Warp technology that keeps humanity dependent on Lhari starships",
+          "Forbidden drive secret that the hunted Vegan passenger pried into"
+        ]
+      }
+    ],
+    hint: "Review how Bart describes the Lhari's eyes, hands, clothing, and star-drive secret.",
+    pageTitle: "Chapter 1 — Pages 7–10 (Lhari Traits & Secrets)",
+    pageExcerpt: "\"Here and there in the crowd, standing out because of their height and the silvery metallic cloaks they wore, were the strange tall figures of the Lhari. Their hands had long triangular claws curving over the fingertips. Completely color-blind, they relied on Mentorians aboard their ships while guarding their star-drive monopoly with hypnotic memory suppression.\"",
+    word: "MONOPOLY",
+    clue: "Exclusive control over interstellar star-drive travel held by the Lhari"
+  },
+  // 16. MC (8/10)
   {
     type: 'mc',
     q: "What urgent reason does the strange fat man give Bart for clutching him and shouting 'How you've grown, Son!'?",
@@ -1561,7 +1653,19 @@ const chapterOneQuestions = [
     word: "DISGUISE",
     clue: "The deceptive role the stranger adopted to deceive watching spaceport guards"
   },
-  // 15. MC
+  // 17. TF (5/5)
+  {
+    type: 'tf',
+    q: "True or False: Tommy Kendron needed Bart's help carrying his heavy metal trunks because the Lhari allowed unlimited baggage weight on their starships.",
+    options: ["True", "False"],
+    correct: 1,
+    hint: "Recall what Tommy chuckled when hefting his light plastic cases at the moving sidewalk.",
+    pageTitle: "Chapter 1 — Page 6 (Baggage Weight on Lhari Ships)",
+    pageExcerpt: "\"'Let me give you a hand with that stuff, Tommy.' 'I can manage,' Tommy chuckled, hefting the plastic cases. 'They don't allow you much baggage weight on the Lhari ships. Certainly not more than I can handle.'\"",
+    word: "BAGGAGE",
+    clue: "The personal luggage cases restricted in weight aboard Lhari starships"
+  },
+  // 18. MC (9/10)
   {
     type: 'mc',
     q: "What does Bart suddenly realize about the fugitive the Lhari are hunting as he listens on the staircase?",
@@ -1577,6 +1681,75 @@ const chapterOneQuestions = [
     pageExcerpt: "\"Bart stiffened as he translated the Lhari words in his mind. The officers were talking about a passenger aboard the incoming ship—a man from Vega, Bart's own home star system, who had been prying into forbidden matters concerning the Lhari star-drive!\"",
     word: "VEGA",
     clue: "The star system of Bart's father and the fugitive sought by the Lhari"
+  },
+  // 19. MATCH (5/5)
+  {
+    type: 'match',
+    q: "Match each spaceport object or place in Chapter 1 with its function in the story:",
+    pairs: [
+      {
+        left: "Moving Sidewalk",
+        right: "Automated roadway strip transporting passengers and baggage to the gate",
+        rightVariants: [
+          "Automated roadway strip transporting passengers and baggage to the gate",
+          "Conveyor road where Bart steps off and waits for Tommy's luggage",
+          "Crowded transit strip carrying travelers across the spaceport",
+          "Mechanized walkway with a center baggage strip outside the gate"
+        ]
+      },
+      {
+        left: "Dark Glasses",
+        right: "Protective lenses issued by the guard against blinding spaceport glare",
+        rightVariants: [
+          "Protective lenses issued by the guard against blinding spaceport glare",
+          "Tinted eyewear that Tommy hooks over his ears with a sigh of relief",
+          "Glare shields handed to the boys just inside the pointed glass gate",
+          "Shaded spectacles meant to protect human eyes when the ship lands"
+        ]
+      },
+      {
+        left: "Glass Skyscraper",
+        right: "Towering central building where copters and robotcabs discharge passengers",
+        rightVariants: [
+          "Towering central building where copters and robotcabs discharge passengers",
+          "High clear-glass tower rising at the very center of the spaceport",
+          "Central terminal building catching the sunlight in a million colors",
+          "Main spaceport structure housing the soaring staircase and mezzanine"
+        ]
+      },
+      {
+        left: "Robotcabs & Copters",
+        right: "Small vehicles veering around the central tower to drop off travelers",
+        rightVariants: [
+          "Small vehicles veering around the central tower to drop off travelers",
+          "Automated air and ground craft ferrying passengers inside the port",
+          "Busy transport craft circling the high clear-glass skyscraper",
+          "Local spaceport vehicles discharging travelers near the moving sidewalks"
+        ]
+      }
+    ],
+    hint: "Match the transport and protective items Bart and Tommy encounter entering the port.",
+    pageTitle: "Chapter 1 — Pages 5–7 (Entering the Spaceport)",
+    pageExcerpt: "\"Bart got off the strip of moving sidewalk and waited for Tommy to get his baggage off the center strip. Inside the glass gate, a guard gave them each a pair of dark glasses. Far out in the center of the spaceport, a high clear-glass skyscraper rose, while small copters and robotcabs veered around it, discharging passengers.\"",
+    word: "ROBOTCABS",
+    clue: "Automated vehicles veering around the central glass skyscraper"
+  },
+  // 20. MC (10/10)
+  {
+    type: 'mc',
+    q: "Why had Bart learned to keep quiet on Earth about his mother's Mentorian heritage?",
+    options: [
+      "Mentorians were unpopular on Earth because they crewed for the resented Lhari.",
+      "Mentorians were outlawed from entering the Space Academy of Earth.",
+      "Earth citizens believed Mentorians possessed telepathic mind-control powers.",
+      "The Lhari treaty forbade anyone of Denebian descent from visiting Earth."
+    ],
+    correct: 0,
+    hint: "Think about how Earthmen viewed the only humans who worked aboard Lhari ships.",
+    pageTitle: "Chapter 1 — Page 6 (Bart's Mentorian Heritage)",
+    pageExcerpt: "\"Bart's mother had been a Mentorian—from the planet Mentor, of the star Deneb, a hundred times brighter than the sun. Bart had her eyes. But Mentorians weren't popular on Earth, because they were the only humans who worked aboard the Lhari starships, and Bart had learned to be quiet about his mother.\"",
+    word: "HERITAGE",
+    clue: "Bart's family background from his Mentorian mother"
   }
 ];
 

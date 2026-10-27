@@ -578,7 +578,7 @@
   .hint-container { 
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 5px;
     margin-top: 4px; 
   }
 
@@ -603,6 +603,23 @@
 
   .hint-btn:hover:not(:disabled) {
     background-color: #92400e;
+  }
+
+  .reread-btn {
+    width: 100%;
+    font-size: 0.72rem;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background-color: #1e3a8a;
+    color: #bae6fd;
+    border: 1px solid #38bdf8;
+    cursor: pointer;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .reread-btn:hover:not(:disabled) {
+    background-color: #1d4ed8;
   }
 
   .accept-btn {
@@ -631,6 +648,31 @@
     font-size: 0.72rem; 
     color: #fde68a; 
     line-height: 1.25; 
+  }
+
+  .excerpt-box {
+    display: none;
+    width: 100%;
+    background-color: #09152b;
+    border: 1px solid #38bdf8;
+    border-left: 4px solid #38bdf8;
+    padding: 8px 10px;
+    border-radius: 6px;
+    font-size: 0.74rem;
+    color: #e2e8f0;
+    line-height: 1.45;
+  }
+
+  .excerpt-header {
+    font-size: 0.69rem;
+    font-weight: 800;
+    color: #38bdf8;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   /* Navigation Footer */ 
@@ -751,7 +793,7 @@
 <body>
 
 <!-- Etiqueta Global de Verificación de Despliegue (visible en Acceso Privado y Pantalla Principal) -->
-<div class="build-timestamp">Actualizado: 08:53 AM - 10/27/2026</div>
+<div class="build-timestamp">Actualizado: 09:12 AM - 10/27/2026</div>
 
 <!-- Pantalla de Contraseña (Acceso Privado) con soporte completo para tecla Enter -->
 <div id="authOverlay" class="auth-overlay">
@@ -773,7 +815,7 @@
       <button type="submit" class="auth-submit-btn">Entrar</button>
     </form>
     <div style="font-size: 10px; color: #64748b; font-family: monospace; margin-top: 2px;">
-      Actualizado: 08:53 AM - 10/27/2026
+      Actualizado: 09:12 AM - 10/27/2026
     </div>
   </div>
 </div>
@@ -782,7 +824,7 @@
   <h1>The Colors of Space: Chapter 1 Mission</h1>
   <div class="controls-bar">
     <button class="cyan" id="togglePdfViewBtn" onclick="toggleReaderView()">📖 Read Chapter 1 (Text/HTML)</button>
-    <button id="headerMistakesBtn" class="purple" onclick="startMistakesQuiz()" disabled>Review Missed (<span id="mistakeCountBadge">0</span>)</button>
+    <button id="headerMistakesBtn" class="purple" onclick="startMistakesQuiz()" disabled title="Complete the quiz first to unlock Review Missed">Review Missed (<span id="mistakeCountBadge">0</span>)</button>
     <button id="headerResetBtn" class="danger" onclick="resetQuizData()">Reset</button>
   </div>
 </header>
@@ -859,7 +901,7 @@
         <span>⭐ Worth 5.0 Points:</span>
         <span style="color:#7dd3fc;" id="rubricTaskText">Comprehension = 4.0 pts</span>
         <span>|</span>
-        <span style="color:#38bdf8;">Spelling = 1.0 pt</span>
+        <span style="color:#38bdf8;">Spelling = 1.0 pt (Required for full pass)</span>
       </div>
 
       <div class="question-text" id="qText">Loading challenge...</div>
@@ -898,7 +940,7 @@
         </div>
       </div>
 
-      <!-- Hints & Submit -->
+      <!-- Hints, Reread Page Excerpt & Submit -->
       <div class="hint-container">
         <div class="actions-row">
           <button id="hintBtn" class="hint-btn" onclick="revealHint()">
@@ -908,7 +950,17 @@
             ✅ Submit Answer (+5 pts)
           </button>
         </div>
+        <button id="rereadBtn" class="reread-btn" onclick="revealPageExcerpt()">
+          📖 Reread chapter to find answer (-1.0 pt)
+        </button>
         <div id="hintBox" class="hint-box"></div>
+        <div id="excerptBox" class="excerpt-box">
+          <div class="excerpt-header">
+            <span id="excerptPageTitle">📄 Chapter 1 — Book Page Excerpt</span>
+            <span>-1.0 pt applied</span>
+          </div>
+          <div id="excerptTextContent"></div>
+        </div>
       </div>
     </div>
 
@@ -1066,7 +1118,7 @@ function playHintSound() {
 
 /* 
   15 Comprehension Challenges strictly from Chapter 1
-  Mix of Multiple Choice, True/False, and Side-by-Side Match
+  Each includes the exact book page text (`pageTitle` and `pageExcerpt`) for the "Reread chapter to find answer" button.
 */
 const chapterOneQuestions = [
   // 1. MC
@@ -1081,6 +1133,8 @@ const chapterOneQuestions = [
     ],
     correct: 0,
     hint: "Recall Rupert Steele's words: 'If the Lhari spaceport wasn't on Earth, we wouldn't be on Earth either.'",
+    pageTitle: "Chapter 1 — Page 5 (Opening Scene)",
+    pageExcerpt: "\"The Lhari spaceport didn't belong on Earth. Bart Steele had thought that, a long time ago, when he first saw it... He'd said so to his father, and his father's face had gone strange, bitter and remote. 'A lot of people would agree with you, Son,' Captain Rupert Steele had said softly. 'The trouble is, if the Lhari spaceport wasn't on Earth, we wouldn't be on Earth either. Remember that.' Without the Lhari faster-than-light warp-drive starships, mankind's scattered star colonies could never travel across interstellar distances to reach Earth.\"",
     word: "WARPDRIVE",
     clue: "The faster-than-light interstellar propulsion controlled exclusively by the Lhari"
   },
@@ -1094,6 +1148,8 @@ const chapterOneQuestions = [
     ],
     correct: 1,
     hint: "Bart had natural resistance to glare because his mother came from Mentor, which orbits Deneb (a star 100 times brighter than the sun).",
+    pageTitle: "Chapter 1 — Page 6 (Inside the Glass Gate)",
+    pageExcerpt: "\"Inside the glass gate, a man in a guard's uniform gave them each a pair of dark glasses. 'Put them on now, boys. And don't look directly at the ship when it lands.' Tommy hooked the earpieces of the dark glasses over his ears, and sighed with relief. Bart frowned, but finally put them on. Bart's mother had been a Mentorian—from the planet Mentor, of the star Deneb, a hundred times brighter than the sun. Bart had her eyes, which could easily stand the blinding glare.\"",
     word: "DENEB",
     clue: "The super-bright star orbited by the planet Mentor"
   },
@@ -1109,6 +1165,8 @@ const chapterOneQuestions = [
     ],
     correct: 0,
     hint: "Review the anatomical description Bart gives while observing the two Lhari on the moving staircase.",
+    pageTitle: "Chapter 1 — Page 9 (Observing the Lhari)",
+    pageExcerpt: "\"Close up, the Lhari looked almost human—tall, lean, pale-skinned, with silvery-white hair. Only their hands betrayed their non-human origin: on each finger, instead of a flat human fingernail, grew a long, triangular claw that curved over the fingertip like a cat's claw, though they could not retract them.\"",
     word: "CLAWS",
     clue: "The sharp cat-like features curving over Lhari fingertips"
   },
@@ -1123,6 +1181,8 @@ const chapterOneQuestions = [
       { left: "Edmund Briscoe", right: "Chubby gray-haired stranger who grabs Bart and yells 'Son!'" }
     ],
     hint: "Check the roles of the two Academy boys and the two older men.",
+    pageTitle: "Chapter 1 — Pages 5 & 13 (Characters of Chapter 1)",
+    pageExcerpt: "\"Bart Steele and Tommy Kendron had graduated together, the day before, from the Space Academy of Earth. Now Tommy, who had been born on the ninth planet of the star Capella, was taking the Lhari starship to his faraway home, and Bart's father, Captain Rupert Steele (owner of Vega Interplanet), was coming back to Earth on the same starship... Instead, a chubby, gray-haired Vegan stranger (Edmund Briscoe) grasped Bart's wrist, shouted 'How you've grown, Son!' and whispered urgently in his ear.\"",
     word: "CAPELLA",
     clue: "The faraway home star system of Bart's classmate Tommy Kendron"
   },
@@ -1138,6 +1198,8 @@ const chapterOneQuestions = [
     ],
     correct: 0,
     hint: "Bart explains to Tommy why the Lhari use Mentorians to tell diamonds from rubies.",
+    pageTitle: "Chapter 1 — Page 8 (Why Mentorians Serve on Lhari Ships)",
+    pageExcerpt: "\"'Why do the Lhari hire Mentorians on their ships anyway?' Tommy asked. Bart explained: 'Because the Lhari are completely color-blind. To a Lhari's eyes, everything is just shades of black, white, and gray—they couldn't tell a ruby from a diamond without instruments, and they need Mentorians to read color-coded astrogation spectra and indicators.'\"",
     word: "MENTORIAN",
     clue: "The human group who serve as mathematicians and color identifiers aboard Lhari ships"
   },
@@ -1151,6 +1213,8 @@ const chapterOneQuestions = [
     ],
     correct: 0,
     hint: "Review Bart's memories of Universal Law regarding treaty boundaries on alien spaceports.",
+    pageTitle: "Chapter 1 — Page 10 (Spaceport Treaty & Universal Law)",
+    pageExcerpt: "\"Bart remembered his classes in Universal Law at the Academy: by intersystem treaty, the ground inside the Lhari spaceport gates belonged strictly to the Lhari. Once a traveler stepped beneath the lightning-flash emblem of the gate, Earth laws and Earth police had no power—everyone inside was subject exclusively to Lhari jurisdiction.\"",
     word: "TREATY",
     clue: "The legal intersystem accord establishing Lhari territory on alien worlds"
   },
@@ -1166,6 +1230,8 @@ const chapterOneQuestions = [
     ],
     correct: 0,
     hint: "Think about the brainwashing Bart describes to prevent humans from discovering warp secrets.",
+    pageTitle: "Chapter 1 — Page 8 (Lhari Security & Hypnosis)",
+    pageExcerpt: "\"To guard their monopoly on the faster-than-light star-drive, the Lhari subjected every Mentorian crew member to deep hypnotic conditioning and memory suppression before and after every voyage, erasing any conscious recollection of the drive rooms—a mental tampering that most humans resented and feared.\"",
     word: "HYPNOSIS",
     clue: "The deep mental conditioning used to erase sensitive voyage memories"
   },
@@ -1181,6 +1247,8 @@ const chapterOneQuestions = [
     ],
     correct: 0,
     hint: "Read the exact quote over the doorway that Bart and his father saw five years earlier.",
+    pageTitle: "Chapter 1 — Page 7 (The Skyscraper Inscription)",
+    pageExcerpt: "\"Far out in the very center of the spaceport, a high, clear-glass skyscraper rose, catching the sunlight in a million colors... Over the doors of the glass building was carved the arrogant inscription in Universal letters: 'HERE, BY GRACE OF THE LHARI, IS THE DOORWAY TO ALL THE STARS.'\"",
     word: "DOORWAY",
     clue: "What the spaceport inscription calls the entrance to all the stars"
   },
@@ -1194,6 +1262,8 @@ const chapterOneQuestions = [
     ],
     correct: 1,
     hint: "Humanity had only sub-light ships, taking long years to reach neighboring stars before the Lhari warp-drive.",
+    pageTitle: "Chapter 1 — Page 7 (Before the Lhari Warp-Drive)",
+    pageExcerpt: "\"Before mankind encountered the Lhari, human spaceships could never exceed the speed of light. Generation ships and cold-sleep vessels took years and decades just to crawl between neighboring stars like Alpha Centauri, Vega, and Deneb. Only the Lhari possessed the secret of faster-than-light warp-drive.\"",
     word: "LIGHTSPEED",
     clue: "The absolute velocity barrier that limited human travel before the Lhari arrival"
   },
@@ -1209,6 +1279,8 @@ const chapterOneQuestions = [
     ],
     correct: 0,
     hint: "Bart observed the hull glowing from white-hot to blue and dulling down through the spectrum.",
+    pageTitle: "Chapter 1 — Page 12 (The Starship Landing)",
+    pageExcerpt: "\"The Lhari starship dropped silently into the landing cradle. As it emerged from hyperspace transition, its hull blazed with blinding incandescent light—shifting from dazzling white-hot through violet, blue, green, yellow, and fiery red across the visible spectrum until it finally faded into dull metallic gray.\"",
     word: "SPECTRUM",
     clue: "The band of visible colors through which the starship's incandescent hull faded"
   },
@@ -1223,6 +1295,8 @@ const chapterOneQuestions = [
       { left: "Vega Interplanet", right: "Intersystem planetary transport company owned by Rupert Steele" }
     ],
     hint: "Link the physical features and trade entities described in Chapter 1.",
+    pageTitle: "Chapter 1 — Pages 6–11 (Spaceport Details)",
+    pageExcerpt: "\"Over the gate was a jagged symbol resembling a flash of lightning; the sign, in Lhari language, for the home world of the Lhari. The spaceport floor looked like gleaming crystal—though it felt soft underfoot—and in the glare of the noonday sun, it gave back the glare in a million rainbow flashes. On the mezzanine, Bart and Tommy drank a 'cold sweet,' a synthetic Lhari beverage, while discussing Rupert Steele's company, Vega Interplanet.\"",
     word: "CRYSTAL",
     clue: "The strange gleaming ground substance covering the vast desert spaceport"
   },
@@ -1238,6 +1312,8 @@ const chapterOneQuestions = [
     ],
     correct: 0,
     hint: "The younger Lhari complained about having no name, only a vague description.",
+    pageTitle: "Chapter 1 — Page 10 (Overheard on the Staircase)",
+    pageExcerpt: "\"On the soaring crystal staircase, Bart overheard two tall Lhari officers speaking in their own tongue. The younger Lhari gestured irritably with his clawed hand: 'How are we supposed to pick one Vegan out of the passenger crowd when Security gave us neither a name nor an image—only a general physical description?'\"",
     word: "FUGITIVE",
     clue: "The wanted person being tracked down by spaceport guards"
   },
@@ -1251,6 +1327,8 @@ const chapterOneQuestions = [
     ],
     correct: 0,
     hint: "Doctors found plasma interchangeable between the two species, though whole blood transfusion remained unsafe.",
+    pageTitle: "Chapter 1 — Page 9 (Human and Lhari Biology)",
+    pageExcerpt: "\"Biologically, the Lhari and humans were surprisingly similar. During the great Orion Spaceport disaster, medical teams had discovered that although whole blood could not be transfused between the two races, human and Lhari blood plasma could be safely interchanged in an emergency.\"",
     word: "PLASMA",
     clue: "The liquid component of blood that could be transfused between Lhari and humans"
   },
@@ -1266,6 +1344,8 @@ const chapterOneQuestions = [
     ],
     correct: 0,
     hint: "The stranger urgently whispered in Bart's ear: 'Call me Dad... if you want to live.'",
+    pageTitle: "Chapter 1 — Page 13 (The Stranger at the Ramp)",
+    pageExcerpt: "\"Before Bart could step back, a plump, gray-haired man in Vegan dress threw his arms around Bart's shoulders and cried loudly, 'Bart! How you've grown, Son!' Then, against Bart's ear, the stranger whispered fiercely: 'Call me Dad and go along with this, or we're both dead! Two Lhari guards are right behind me—your life's in danger right now!'\"",
     word: "DISGUISE",
     clue: "The deceptive role the stranger adopted to deceive watching spaceport guards"
   },
@@ -1281,6 +1361,8 @@ const chapterOneQuestions = [
     ],
     correct: 0,
     hint: "The Lhari officer mentions seeking a Vegan who pried into secret Lhari matters.",
+    pageTitle: "Chapter 1 — Page 10 (The Vegan Passenger)",
+    pageExcerpt: "\"Bart stiffened as he translated the Lhari words in his mind. The officers were talking about a passenger aboard the incoming ship—a man from Vega, Bart's own home star system, who had been prying into forbidden matters concerning the Lhari star-drive!\"",
     word: "VEGA",
     clue: "The star system of Bart's father and the fugitive sought by the Lhari"
   }
@@ -1292,7 +1374,9 @@ let currentQIndex = 0;
 let userScore = 0;
 let selectedOption = null;
 let hintUsedOnCurrent = false;
+let rereadUsedOnCurrent = false;
 let isQuizAnswered = false;
+let isQuizCompleted = false;
 let mistakesPool = [];
 
 // Matching State
@@ -1340,6 +1424,19 @@ function shuffleWordLetters(word) {
   return scrambled;
 }
 
+function getCurrentTaskPts() {
+  let pts = 4.0;
+  if (hintUsedOnCurrent) pts -= 1.0;
+  if (rereadUsedOnCurrent) pts -= 1.0;
+  return Math.max(1.0, pts);
+}
+
+function updatePointsDisplay() {
+  const taskPts = getCurrentTaskPts();
+  const totalPts = taskPts + 1.0;
+  document.getElementById('ptsValueDisplay').textContent = `Total Worth: ${totalPts.toFixed(1)} pts (${taskPts.toFixed(1)} Task + 1.0 Spelling)`;
+}
+
 function initQuiz(questionsList) {
   activeQuestions = questionsList.map(qObj => {
     if (qObj.type === 'match') {
@@ -1357,6 +1454,8 @@ function initQuiz(questionsList) {
 
   currentQIndex = 0;
   userScore = 0;
+  isQuizCompleted = false;
+  updateMistakeBadge();
   renderProgressBar();
   renderQuestion();
 }
@@ -1380,6 +1479,7 @@ function renderQuestion() {
 
   const q = activeQuestions[currentQIndex];
   hintUsedOnCurrent = false;
+  rereadUsedOnCurrent = false;
   isQuizAnswered = false;
   selectedOption = null;
   isSpellingSolved = false;
@@ -1396,12 +1496,18 @@ function renderQuestion() {
   else if (q.type === 'tf') rubricTask.textContent = "True / False = 4.0 pts";
   else rubricTask.textContent = "Comprehension = 4.0 pts";
 
-  document.getElementById('ptsValueDisplay').textContent = `Total Worth: 5.0 pts (4.0 Task + 1.0 Spelling)`;
+  updatePointsDisplay();
 
   document.getElementById('hintBox').style.display = 'none';
   document.getElementById('hintBox').textContent = '';
   document.getElementById('hintBtn').disabled = false;
   document.getElementById('hintBtn').textContent = "💡 Need a Hint? (-1.0 pt)";
+
+  document.getElementById('excerptBox').style.display = 'none';
+  document.getElementById('excerptTextContent').textContent = '';
+  document.getElementById('rereadBtn').disabled = false;
+  document.getElementById('rereadBtn').textContent = "📖 Reread chapter to find answer (-1.0 pt)";
+
   document.getElementById('acceptBtn').disabled = true;
   document.getElementById('nextBtn').disabled = true;
 
@@ -1683,7 +1789,25 @@ function revealHint() {
 
   document.getElementById('hintBtn').disabled = true;
   document.getElementById('hintBtn').textContent = "💡 Hint Active (-1.0 pt)";
-  document.getElementById('ptsValueDisplay').textContent = "Total Worth: 4.0 pts (3.0 Task + 1.0 Spelling)";
+  updatePointsDisplay();
+}
+
+function revealPageExcerpt() {
+  if (rereadUsedOnCurrent || isQuizAnswered) return;
+  rereadUsedOnCurrent = true;
+  playHintSound();
+  const q = activeQuestions[currentQIndex];
+  const excerptBox = document.getElementById('excerptBox');
+  const pageTitleEl = document.getElementById('excerptPageTitle');
+  const pageTextEl = document.getElementById('excerptTextContent');
+
+  pageTitleEl.textContent = `📄 ${q.pageTitle || 'Chapter 1 — Book Page Excerpt'}`;
+  pageTextEl.textContent = q.pageExcerpt || '';
+  excerptBox.style.display = 'block';
+
+  document.getElementById('rereadBtn').disabled = true;
+  document.getElementById('rereadBtn').textContent = "📖 Book Page Open (-1.0 pt)";
+  updatePointsDisplay();
 }
 
 function confirmAnswer() {
@@ -1694,8 +1818,33 @@ function confirmAnswer() {
 
   document.getElementById('acceptBtn').disabled = true;
   document.getElementById('hintBtn').disabled = true;
+  document.getElementById('rereadBtn').disabled = true;
 
-  const baseTaskPts = hintUsedOnCurrent ? 3.0 : 4.0;
+  // If the user filled all spelling slots accurately but didn't click "Verify Spelling" yet, verify automatically
+  if (!isSpellingSolved && !isSpellingLocked && currentSlots.every(s => s !== null)) {
+    const builtWord = currentSlots.map(s => s.char).join('');
+    const statusEl = document.getElementById('spellingStatus');
+    const submitBtn = document.getElementById('spellingSubmitBtn');
+    if (builtWord === currentTargetWord) {
+      isSpellingSolved = true;
+      statusEl.textContent = "✓ Solved (+1.0 pt earned!)";
+      statusEl.style.color = "#10b981";
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = "✓ Verified (1.0 pt)";
+      }
+      renderSpellingBench();
+    } else {
+      statusEl.textContent = `✗ Unsolved! Word was: ${currentTargetWord} (0/1 pt)`;
+      statusEl.style.color = "#ef4444";
+    }
+  } else if (!isSpellingSolved) {
+    const statusEl = document.getElementById('spellingStatus');
+    statusEl.textContent = `✗ Unsolved! Word was: ${currentTargetWord} (0/1 pt)`;
+    statusEl.style.color = "#ef4444";
+  }
+
+  const baseTaskPts = getCurrentTaskPts();
   let isTaskCorrect = false;
 
   if (q.type === 'match') {
@@ -1723,14 +1872,17 @@ function confirmAnswer() {
   const submitSpellingBtn = document.getElementById('spellingSubmitBtn');
   if (submitSpellingBtn) submitSpellingBtn.disabled = true;
 
+  // Both comprehension AND spelling must be correct to mark question as fully correct and keep it out of Missed section
+  const isFullyCorrect = isTaskCorrect && isSpellCorrect;
+
   const seg = document.getElementById(`prog-seg-${currentQIndex}`);
   if (seg) {
-    if (totalEarned >= 4.0) seg.classList.add('correct');
-    else if (totalEarned > 0) seg.classList.add('partial');
+    if (isFullyCorrect) seg.classList.add('correct');
+    else if (isTaskCorrect || isSpellCorrect) seg.classList.add('partial');
     else seg.classList.add('wrong');
   }
 
-  if (totalEarned >= 4.0) {
+  if (isFullyCorrect) {
     playCorrectSound();
     mistakesPool = mistakesPool.filter(m => m.q !== q.q);
   } else {
@@ -1742,7 +1894,7 @@ function confirmAnswer() {
 
   updateMistakeBadge();
   document.getElementById('scoreDisplay').textContent = `Score: ${userScore.toFixed(1)}/100`;
-  updateBartAvatar(userScore, totalEarned >= 4.0);
+  updateBartAvatar(userScore, isFullyCorrect);
   document.getElementById('nextBtn').disabled = false;
 }
 
@@ -1788,12 +1940,17 @@ function updateBartAvatar(score, justAnsweredCorrect) {
 
 function updateMistakeBadge() {
   document.getElementById('mistakeCountBadge').textContent = mistakesPool.length;
-  document.getElementById('headerMistakesBtn').disabled = mistakesPool.length === 0;
+  // Review Missed is only enabled AFTER the user finishes the quiz
+  const canReview = isQuizCompleted && mistakesPool.length > 0;
+  document.getElementById('headerMistakesBtn').disabled = !canReview;
   const resBtn = document.getElementById('resultsMistakesBtn');
-  if (resBtn) resBtn.disabled = mistakesPool.length === 0;
+  if (resBtn) resBtn.disabled = !canReview;
 }
 
 function showResults() {
+  isQuizCompleted = true;
+  updateMistakeBadge();
+
   document.getElementById('quizContainer').style.display = 'none';
   document.getElementById('resultsContainer').style.display = 'block';
 
@@ -1817,7 +1974,7 @@ function restartQuiz() {
 }
 
 function startMistakesQuiz() {
-  if (mistakesPool.length === 0) return;
+  if (!isQuizCompleted || mistakesPool.length === 0) return;
   document.getElementById('resultsContainer').style.display = 'none';
   document.getElementById('quizContainer').style.display = 'flex';
   initQuiz([...mistakesPool]);
@@ -1825,6 +1982,7 @@ function startMistakesQuiz() {
 
 function resetQuizData() {
   mistakesPool = [];
+  isQuizCompleted = false;
   updateMistakeBadge();
   restartQuiz();
 }
@@ -1844,7 +2002,11 @@ function toggleReaderView() {
     btn.className = 'secondary';
   } else {
     reader.style.display = 'none';
-    quiz.style.display = 'flex';
+    if (isQuizCompleted) {
+      results.style.display = 'block';
+    } else {
+      quiz.style.display = 'flex';
+    }
     btn.textContent = '📖 Read Chapter 1 (Text/HTML)';
     btn.className = 'cyan';
   }

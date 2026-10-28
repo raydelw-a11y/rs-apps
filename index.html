@@ -1379,7 +1379,7 @@
 <body>
 
 <!-- Etiqueta Global de Verificación de Despliegue (visible en Acceso Privado y Pantalla Principal) -->
-<div class="build-timestamp">Actualizado: 7:15 PM - 10/28/2026</div>
+<div class="build-timestamp">Actualizado: 7:20 PM - 10/28/2026</div>
 
 <!-- Pantalla de Usuario y Contraseña (Acceso Privado: R / D) con soporte completo para tecla Enter -->
 <div id="authOverlay" class="auth-overlay">
@@ -1419,7 +1419,7 @@
       <button type="submit" class="auth-submit-btn">Entrar</button>
     </form>
     <div style="font-size: 10px; color: #64748b; font-family: monospace; margin-top: 2px;">
-      Actualizado: 7:15 PM - 10/28/2026
+      Actualizado: 7:20 PM - 10/28/2026
     </div>
   </div>
 </div>
@@ -3337,8 +3337,6 @@ function handleMatchClick(side, id) {
   if (selectedLeftPair !== null && selectedRightPair !== null) {
     const lBtn = document.getElementById(`match-left-${selectedLeftPair}`);
     const rBtn = document.getElementById(`match-right-${selectedRightPair}`);
-    const hintBtnEl = document.getElementById('hintBtn');
-    if (hintBtnEl) hintBtnEl.disabled = true;
 
     if (selectedLeftPair === selectedRightPair && selectedRightPair >= 0) {
       solvedPairs.push(selectedLeftPair);
@@ -3562,8 +3560,6 @@ function selectOption(idx, btnElement) {
   selectedOption = idx;
   document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
   btnElement.classList.add('selected');
-  const hintBtnEl = document.getElementById('hintBtn');
-  if (hintBtnEl) hintBtnEl.disabled = true;
   updateSubmitButtonState();
 }
 
@@ -3577,7 +3573,7 @@ function sanitizeHintNoPageRef(rawHint) {
 }
 
 function revealHint() {
-  if (hintUsedOnCurrent || isQuizAnswered || selectedOption !== null || solvedPairs.length > 0) return;
+  if (hintUsedOnCurrent) return;
   hintUsedOnCurrent = true;
   playHintSound();
   const q = activeQuestions[currentQIndex];
@@ -3588,7 +3584,9 @@ function revealHint() {
 
   document.getElementById('hintBtn').disabled = true;
   document.getElementById('hintBtn').textContent = "💡 Hint Active (-1.0 pt)";
-  updatePointsDisplay();
+  if (!isQuizAnswered) {
+    updatePointsDisplay();
+  }
 }
 
 function revealPageExcerpt() {
@@ -3623,7 +3621,6 @@ function confirmAnswer() {
   isQuizAnswered = true;
 
   document.getElementById('acceptBtn').disabled = true;
-  document.getElementById('hintBtn').disabled = true;
   document.getElementById('rereadBtn').disabled = true;
 
   const baseTaskPts = getCurrentTaskPts();

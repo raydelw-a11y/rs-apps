@@ -26,7 +26,7 @@
 
 4. **Reglas de `Review Missed`, `Hint` y `Reread chapter to find answer`:**
    - `Review Missed` está bloqueado hasta que el usuario termine el quiz completo (`isQuizCompleted === true`).
-   - El botón `Hint` se deshabilita inmediatamente en cuanto la pregunta superior es respondida (ya sea correcta o incorrectamente).
+   - El botón `Hint` permanece disponible durante todo el tiempo de cada pregunta.
    - En los quizzes de `R`, los `Hints` dan pistas reales sobre la historia/comprensión y **nunca** dicen `"read page #"`, `"check page #"` ni `"look on page #"`.
    - Debajo de `Hint (-1.0 pt)` siempre debe existir el botón `📖 Reread chapter to find answer (-1.0 pt)` que muestra el texto específico de la página del capítulo donde está la respuesta y descuenta `1.0 pt`.
 

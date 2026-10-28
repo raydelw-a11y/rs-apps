@@ -1144,7 +1144,7 @@
 <body>
 
 <!-- Etiqueta Global de Verificación de Despliegue (visible en Acceso Privado y Pantalla Principal) -->
-<div class="build-timestamp">Actualizado: 11:38 AM - 10/28/2026</div>
+<div class="build-timestamp">Actualizado: 12:00 PM - 10/28/2026</div>
 
 <!-- Pantalla de Usuario y Contraseña (Acceso Privado: R / D) con soporte completo para tecla Enter -->
 <div id="authOverlay" class="auth-overlay">
@@ -1174,7 +1174,7 @@
       <button type="submit" class="auth-submit-btn">Entrar</button>
     </form>
     <div style="font-size: 10px; color: #64748b; font-family: monospace; margin-top: 2px;">
-      Actualizado: 11:38 AM - 10/28/2026
+      Actualizado: 12:00 PM - 10/28/2026
     </div>
   </div>
 </div>
@@ -4748,16 +4748,34 @@ function getFilteredQuestionsForActiveQuiz() {
   return baseList;
 }
 
+function closeReaderIfOpen() {
+  if (isReaderVisible) {
+    isReaderVisible = false;
+    const reader = document.getElementById('readerContainer');
+    if (reader) reader.style.display = 'none';
+    const btn = document.getElementById('togglePdfViewBtn');
+    if (btn) {
+      btn.textContent = '📖 Read Material (Text/HTML)';
+      btn.className = 'cyan';
+    }
+  }
+}
+
 function setRQuizTypeFilter(filterType) {
+  const wasReaderOpen = isReaderVisible;
+  closeReaderIfOpen();
+  if (currentRTypeFilter === filterType && wasReaderOpen && !isQuizCompleted) {
+    document.getElementById('quizContainer').style.display = 'flex';
+    playSnapSound();
+    return;
+  }
   currentRTypeFilter = filterType || 'mc';
   mistakesPool = [];
   isQuizCompleted = false;
   updateMistakeBadge();
   stopGradeSong(false);
   document.getElementById('resultsContainer').style.display = 'none';
-  if (!isReaderVisible) {
-    document.getElementById('quizContainer').style.display = 'flex';
-  }
+  document.getElementById('quizContainer').style.display = 'flex';
   initQuiz(getFilteredQuestionsForActiveQuiz());
   renderQuizTypeButtons();
   playSnapSound();
@@ -4788,7 +4806,16 @@ function renderQuizTypeButtons() {
         btn.className = 'quiz-type-btn' + (isAct ? ' active' : '');
         btn.textContent = `${icon} ${labelText}`;
         btn.onclick = async () => {
-          if (activeQuizId === q.id && !isQuizCompleted) return;
+          if (isReaderVisible) {
+            closeReaderIfOpen();
+            if (activeQuizId === q.id && !isQuizCompleted) {
+              document.getElementById('quizContainer').style.display = 'flex';
+              playSnapSound();
+              return;
+            }
+          } else if (activeQuizId === q.id && !isQuizCompleted) {
+            return;
+          }
           activateQuizById(q.id, true);
           playSnapSound();
           try { await syncQuizzesLibraryToCloud(); } catch (e) {}
@@ -4872,6 +4899,7 @@ function activateQuizById(quizId, userInitiated = false) {
   currentActiveQuiz = target;
   currentRTypeFilter = 'mc';
   if (userInitiated) {
+    closeReaderIfOpen();
     localStorage.setItem('rs_apps_user_selected_quiz', 'true');
   }
   saveLocalQuizzes();

@@ -151,7 +151,7 @@
     flex-shrink: 0;
     background: linear-gradient(135deg, #0f172a 0%, #050b14 100%); 
     color: #fff; 
-    padding: 6px 12px; 
+    padding: 0.6rem 0.85rem; 
     text-align: center; 
     border-bottom: 1px solid #1e293b;
     box-shadow: 0 2px 10px rgba(0,0,0,0.5); 
@@ -159,10 +159,10 @@
   }
 
   header h1 { 
-    font-size: 0.96rem; 
+    font-size: 1.22rem; 
     font-weight: 800; 
-    margin-bottom: 3px; 
-    letter-spacing: 0.5px; 
+    margin-bottom: 0.25rem; 
+    letter-spacing: 0.4px; 
     background: linear-gradient(to right, #38bdf8, #c084fc, #34d399);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -170,7 +170,7 @@
 
   .controls-bar { 
     display: flex; 
-    gap: 5px; 
+    gap: 0.45rem; 
     justify-content: center; 
     align-items: center; 
     flex-wrap: wrap; 
@@ -180,16 +180,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 6px;
+    gap: 0.5rem;
     flex-wrap: wrap;
-    margin: 4px 0 6px 0;
+    margin: 0.35rem 0 0.45rem 0;
   }
 
   .quiz-type-btn {
-    padding: 5px 12px;
-    font-size: 0.75rem;
+    padding: 0.55rem 1rem;
+    font-size: 0.94rem;
     font-weight: 800;
-    border-radius: 8px;
+    border-radius: 0.6rem;
     background: rgba(30, 41, 59, 0.92);
     color: #cbd5e1;
     border: 1.5px solid #475569;
@@ -197,7 +197,7 @@
     transition: all 0.15s ease;
     display: inline-flex;
     align-items: center;
-    gap: 5px;
+    gap: 0.35rem;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
   }
 
@@ -215,9 +215,9 @@
   }
 
   select, button, input { 
-    padding: 4px 9px; 
-    font-size: 0.74rem; 
-    border-radius: 6px; 
+    padding: 0.45rem 0.78rem; 
+    font-size: 0.88rem; 
+    border-radius: 0.5rem; 
     border: 1px solid #334155; 
     outline: none; 
   }
@@ -256,32 +256,38 @@
     flex-direction: column;
     min-height: 0; 
     width: 100%; 
-    max-width: 640px; 
+    max-width: 100%; 
     margin: 0 auto; 
-    padding: 6px 10px 8px 10px; 
-    gap: 6px;
+    padding: 0.55rem 0.7rem 0.65rem 0.7rem; 
+    gap: 0.55rem;
     overflow: hidden;
+  }
+
+  @media (min-width: 1100px) and (hover: hover) and (pointer: fine) {
+    main {
+      max-width: 960px;
+    }
   }
 
   /* Spaceport Bart Status Card */ 
   .avatar-card { 
     flex-shrink: 0;
     background: #0f172a; 
-    border-radius: 12px; 
-    padding: 6px 10px; 
+    border-radius: 0.85rem; 
+    padding: 0.6rem 0.85rem; 
     display: flex; 
     align-items: center; 
-    gap: 10px; 
+    gap: 0.75rem; 
     box-shadow: 0 4px 14px rgba(0,0,0,0.4); 
     border: 1.5px solid #1e293b; 
   }
 
   .avatar-svg-container { 
-    width: 64px; 
-    height: 70px; 
+    width: 4rem; 
+    height: 4.35rem; 
     flex-shrink: 0; 
     background: radial-gradient(circle, #1e293b 30%, #020617 100%); 
-    border-radius: 12px; 
+    border-radius: 0.75rem; 
     padding: 2px; 
     border: 2px solid #38bdf8; 
     display: flex; 
@@ -300,12 +306,12 @@
     display: flex; 
     align-items: center; 
     justify-content: space-between; 
-    gap: 4px; 
-    margin-bottom: 2px; 
+    gap: 0.4rem; 
+    margin-bottom: 0.2rem; 
   }
 
   .avatar-status-title { 
-    font-size: 0.8rem; 
+    font-size: 1.02rem; 
     font-weight: 800; 
     color: #38bdf8; 
   }
@@ -313,9 +319,9 @@
   .q-badge { 
     background-color: #1e293b; 
     color: #cbd5e1; 
-    padding: 2px 6px; 
-    border-radius: 8px; 
-    font-size: 0.68rem; 
+    padding: 0.2rem 0.55rem; 
+    border-radius: 0.5rem; 
+    font-size: 0.86rem; 
     font-weight: 700; 
     border: 1px solid #334155;
   }
@@ -323,17 +329,17 @@
   .score-badge { 
     background-color: #064e3b; 
     color: #34d399; 
-    padding: 2px 8px; 
-    border-radius: 8px; 
-    font-size: 0.72rem; 
+    padding: 0.2rem 0.65rem; 
+    border-radius: 0.5rem; 
+    font-size: 0.9rem; 
     font-weight: 800; 
     border: 1px solid #059669; 
   }
 
   .avatar-status-desc { 
-    font-size: 0.68rem; 
+    font-size: 0.85rem; 
     color: #94a3b8; 
-    margin-bottom: 4px; 
+    margin-bottom: 0.3rem; 
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -342,13 +348,13 @@
   /* Segmented Progress Bar */
   .progress-bar-bg { 
     width: 100%; 
-    height: 6px; 
+    height: 0.5rem; 
     background-color: #1e293b; 
-    border-radius: 3px; 
+    border-radius: 0.25rem; 
     overflow: hidden; 
     display: flex;
-    gap: 1.5px;
-    padding: 0.5px;
+    gap: 2px;
+    padding: 1px;
   }
 
   .progress-segment {
@@ -363,15 +369,15 @@
   .progress-segment.partial { background-color: #f59e0b; }
   .progress-segment.wrong { background-color: #ef4444; }
 
-  /* Compact Question Card */ 
+  /* Question Card */ 
   .card { 
     flex: 1;
     display: flex;
     flex-direction: column;
     min-height: 0; 
     background: #0f172a; 
-    border-radius: 14px; 
-    padding: 8px 12px; 
+    border-radius: 0.95rem; 
+    padding: 0.95rem 1.05rem; 
     box-shadow: 0 4px 16px rgba(0,0,0,0.45); 
     border: 1px solid #1e293b; 
     overflow: hidden;
@@ -385,27 +391,28 @@
     overflow-y: auto;
     padding-right: 2px;
     -webkit-overflow-scrolling: touch;
-    gap: 6px;
+    gap: 0.65rem;
   }
 
   .question-text { 
-    font-size: 0.84rem; 
-    font-weight: 700; 
-    line-height: 1.35; 
+    font-size: 1.2rem; 
+    font-weight: 800; 
+    line-height: 1.4; 
     color: #f8fafc; 
+    margin: 0.15rem 0;
   }
 
   .rubric-tag {
     display: inline-flex;
     align-items: center;
-    gap: 5px;
-    font-size: 0.67rem;
+    gap: 0.35rem;
+    font-size: 0.85rem;
     font-weight: 700;
     color: #93c5fd;
     background: #1e3a8a33;
     border: 1px solid #1d4ed8;
-    padding: 2px 7px;
-    border-radius: 6px;
+    padding: 0.25rem 0.65rem;
+    border-radius: 0.45rem;
     width: fit-content;
   }
 
@@ -413,21 +420,22 @@
   .options-list { 
     display: flex; 
     flex-direction: column; 
-    gap: 4px; 
+    gap: 0.6rem; 
   }
 
   .option-btn { 
     width: 100%; 
     text-align: left; 
-    padding: 7px 10px; 
+    padding: 0.85rem 1rem; 
     background: #1e293b; 
-    border: 1.5px solid #334155; 
-    border-radius: 8px; 
-    font-size: 0.77rem; 
-    color: #cbd5e1; 
+    border: 2px solid #334155; 
+    border-radius: 0.7rem; 
+    font-size: 1.04rem; 
+    font-weight: 600;
+    color: #e2e8f0; 
     transition: all 0.12s ease; 
     cursor: pointer; 
-    line-height: 1.25; 
+    line-height: 1.35; 
   }
 
   .option-btn:hover:not(:disabled) { background-color: #334155; border-color: #64748b; }
@@ -457,28 +465,28 @@
   .match-columns-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 6px;
-    margin-top: 2px;
+    gap: 0.5rem;
+    margin-top: 0.15rem;
   }
 
   .match-col {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 0.45rem;
   }
 
   .match-card-btn {
     width: 100%;
     text-align: left;
-    padding: 6px 8px;
+    padding: 0.6rem 0.75rem;
     background: #1e293b;
     border: 1.5px solid #334155;
-    border-radius: 8px;
-    font-size: 0.72rem;
-    line-height: 1.25;
+    border-radius: 0.6rem;
+    font-size: 0.92rem;
+    line-height: 1.3;
     color: #cbd5e1;
     cursor: pointer;
-    min-height: 52px;
+    min-height: 3.6rem;
     display: flex;
     align-items: center;
     transition: all 0.15s ease;
@@ -515,26 +523,26 @@
   .spelling-box {
     background: #0b1329;
     border: 1.5px solid #38bdf8;
-    border-radius: 10px;
-    padding: 7px 9px;
+    border-radius: 0.75rem;
+    padding: 0.6rem 0.75rem;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 0.4rem;
     box-shadow: inset 0 2px 6px rgba(0,0,0,0.5);
-    margin-bottom: 4px;
+    margin-bottom: 0.3rem;
   }
 
   .spelling-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.71rem;
+    font-size: 0.88rem;
     font-weight: 700;
     color: #38bdf8;
   }
 
   .spelling-subtext {
-    font-size: 0.67rem;
+    font-size: 0.82rem;
     color: #94a3b8;
   }
 
@@ -542,19 +550,19 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 4px;
+    gap: 0.3rem;
   }
 
   .letter-slot {
-    width: 30px;
-    height: 36px;
+    width: 2.2rem;
+    height: 2.6rem;
     background: #1e293b;
     border: 2px dashed #475569;
-    border-radius: 6px;
+    border-radius: 0.45rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.05rem;
+    font-size: 1.15rem;
     font-weight: 900;
     color: #f8fafc;
     cursor: pointer;
@@ -585,23 +593,23 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 5px;
-    min-height: 38px;
-    padding: 4px;
+    gap: 0.35rem;
+    min-height: 2.7rem;
+    padding: 0.3rem;
     background: #1e293b44;
-    border-radius: 8px;
+    border-radius: 0.55rem;
   }
 
   .letter-tile {
-    width: 30px;
-    height: 36px;
+    width: 2.2rem;
+    height: 2.6rem;
     background: linear-gradient(180deg, #334155 0%, #1e293b 100%);
     border: 1.5px solid #475569;
-    border-radius: 6px;
+    border-radius: 0.45rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.05rem;
+    font-size: 1.15rem;
     font-weight: 900;
     color: #38bdf8;
     cursor: grab;
@@ -623,25 +631,25 @@
   .hint-container { 
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    margin-top: 4px; 
+    gap: 0.5rem;
+    margin-top: 0.35rem; 
   }
 
   .actions-row {
     display: flex;
-    gap: 6px;
+    gap: 0.55rem;
     align-items: stretch;
     width: 100%;
   }
 
   .hint-btn { 
     flex: 1;
-    font-size: 0.72rem; 
-    padding: 6px 8px; 
-    border-radius: 8px; 
+    font-size: 0.94rem; 
+    padding: 0.7rem 0.85rem; 
+    border-radius: 0.65rem; 
     background-color: #78350f; 
     color: #fef08a; 
-    border: 1px solid #d97706; 
+    border: 1.5px solid #d97706; 
     cursor: pointer; 
     font-weight: 700; 
   }
@@ -652,12 +660,12 @@
 
   .reread-btn {
     width: 100%;
-    font-size: 0.72rem;
-    padding: 6px 10px;
-    border-radius: 8px;
+    font-size: 0.94rem;
+    padding: 0.7rem 0.9rem;
+    border-radius: 0.65rem;
     background-color: #1e3a8a;
     color: #bae6fd;
-    border: 1px solid #38bdf8;
+    border: 1.5px solid #38bdf8;
     cursor: pointer;
     font-weight: 700;
     text-align: center;
@@ -669,12 +677,12 @@
 
   .accept-btn {
     flex: 1;
-    font-size: 0.72rem; 
-    padding: 6px 8px; 
-    border-radius: 8px; 
+    font-size: 0.94rem; 
+    padding: 0.7rem 0.85rem; 
+    border-radius: 0.65rem; 
     background-color: #059669; 
     color: #ecfdf5; 
-    border: 1px solid #10b981; 
+    border: 1.5px solid #10b981; 
     cursor: pointer; 
     font-weight: 800; 
   }
@@ -687,12 +695,12 @@
     display: none; 
     width: 100%;
     background-color: #451a03; 
-    border-left: 3px solid #f59e0b; 
-    padding: 5px 8px; 
-    border-radius: 4px; 
-    font-size: 0.72rem; 
+    border-left: 4px solid #f59e0b; 
+    padding: 0.65rem 0.85rem; 
+    border-radius: 0.45rem; 
+    font-size: 0.94rem; 
     color: #fde68a; 
-    line-height: 1.25; 
+    line-height: 1.4; 
   }
 
   .excerpt-box {
@@ -701,20 +709,20 @@
     background-color: #09152b;
     border: 1px solid #38bdf8;
     border-left: 4px solid #38bdf8;
-    padding: 8px 10px;
-    border-radius: 6px;
-    font-size: 0.74rem;
+    padding: 0.75rem 0.95rem;
+    border-radius: 0.5rem;
+    font-size: 0.95rem;
     color: #e2e8f0;
-    line-height: 1.45;
+    line-height: 1.5;
   }
 
   .excerpt-header {
-    font-size: 0.69rem;
+    font-size: 0.85rem;
     font-weight: 800;
     color: #38bdf8;
     text-transform: uppercase;
     letter-spacing: 0.4px;
-    margin-bottom: 4px;
+    margin-bottom: 0.35rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -726,18 +734,18 @@
     display: flex; 
     justify-content: space-between; 
     align-items: center; 
-    gap: 8px; 
-    padding-top: 5px; 
-    margin-top: 3px; 
+    gap: 0.6rem; 
+    padding-top: 0.55rem; 
+    margin-top: 0.3rem; 
     border-top: 1px solid #1e293b; 
   }
 
   .quiz-nav button { 
-    min-width: 120px; 
-    padding: 7px 14px; 
-    font-size: 0.78rem; 
+    min-width: 9rem; 
+    padding: 0.7rem 1.2rem; 
+    font-size: 0.98rem; 
     font-weight: 800; 
-    border-radius: 8px; 
+    border-radius: 0.65rem; 
     background-color: #2563eb; 
     color: white; 
   }
@@ -749,8 +757,8 @@
     flex-direction: column;
     min-height: 0;
     background: #0f172a;
-    border-radius: 14px;
-    padding: 8px 12px;
+    border-radius: 0.95rem;
+    padding: 0.85rem 1.05rem;
     box-shadow: 0 4px 14px rgba(0,0,0,0.4);
     border: 1px solid #1e293b;
     overflow: hidden;
@@ -1144,7 +1152,7 @@
 <body>
 
 <!-- Etiqueta Global de Verificación de Despliegue (visible en Acceso Privado y Pantalla Principal) -->
-<div class="build-timestamp">Actualizado: 12:00 PM - 10/28/2026</div>
+<div class="build-timestamp">Actualizado: 12:35 PM - 10/28/2026</div>
 
 <!-- Pantalla de Usuario y Contraseña (Acceso Privado: R / D) con soporte completo para tecla Enter -->
 <div id="authOverlay" class="auth-overlay">
@@ -1174,7 +1182,7 @@
       <button type="submit" class="auth-submit-btn">Entrar</button>
     </form>
     <div style="font-size: 10px; color: #64748b; font-family: monospace; margin-top: 2px;">
-      Actualizado: 12:00 PM - 10/28/2026
+      Actualizado: 12:35 PM - 10/28/2026
     </div>
   </div>
 </div>
@@ -1450,14 +1458,14 @@
       <div class="options-list" id="optionsList"></div>
 
       <!-- Fill in the Blank Container (for D's Instance Section 2) -->
-      <div id="fibContainer" style="display: none; background: rgba(15, 23, 42, 0.85); border: 1.5px solid rgba(56, 189, 248, 0.45); border-radius: 12px; padding: 14px; margin-bottom: 6px;">
-        <div id="fibBlankPromptText" style="font-size: 0.9rem; font-weight: 700; color: #e2e8f0; margin-bottom: 10px; line-height: 1.45;"></div>
-        <label style="font-size: 0.72rem; font-weight: 800; color: #38bdf8; display: block; margin-bottom: 6px;">✍️ Type your answer to fill in the blank:</label>
+      <div id="fibContainer" style="display: none; background: rgba(15, 23, 42, 0.85); border: 2px solid rgba(56, 189, 248, 0.45); border-radius: 0.85rem; padding: 1rem; margin-bottom: 0.45rem;">
+        <div id="fibBlankPromptText" style="font-size: 1.12rem; font-weight: 700; color: #e2e8f0; margin-bottom: 0.7rem; line-height: 1.45;"></div>
+        <label style="font-size: 0.92rem; font-weight: 800; color: #38bdf8; display: block; margin-bottom: 0.45rem;">✍️ Type your answer to fill in the blank:</label>
         <input
           type="text"
           id="fibInput"
           class="studio-input"
-          style="font-size: 0.95rem; padding: 11px 14px; font-weight: 700; border-width: 2px;"
+          style="font-size: 1.15rem; padding: 0.85rem 1rem; font-weight: 700; border-width: 2px; border-radius: 0.65rem;"
           placeholder="Write your answer here..."
           autocomplete="off"
           autocorrect="off"
@@ -1465,14 +1473,14 @@
           oninput="handleFibInput()"
           onkeydown="handleFibKeyDown(event)"
         />
-        <div id="fibFeedbackBox" style="display: none; margin-top: 10px; padding: 9px 12px; border-radius: 8px; font-size: 0.82rem; font-weight: 800;"></div>
+        <div id="fibFeedbackBox" style="display: none; margin-top: 0.7rem; padding: 0.7rem 0.9rem; border-radius: 0.6rem; font-size: 1.02rem; font-weight: 800;"></div>
       </div>
 
       <!-- Match Columns Container -->
       <div id="matchContainer" style="display: none;">
-        <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; margin-bottom: 4px;">
-          <span style="font-size: 0.68rem; color: #94a3b8;">Tap left, then tap its match on the right:</span>
-          <span id="matchStatusBanner" style="font-size: 0.67rem; font-weight: 700; color: #f87171; display: none;">🔄 Mismatch! Columns reshuffled & reworded!</span>
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:0.4rem; margin-bottom: 0.35rem;">
+          <span style="font-size: 0.85rem; color: #94a3b8;">Tap left, then tap its match on the right:</span>
+          <span id="matchStatusBanner" style="font-size: 0.84rem; font-weight: 700; color: #f87171; display: none;">🔄 Mismatch! Columns reshuffled & reworded!</span>
         </div>
         <div class="match-columns-grid">
           <div class="match-col" id="matchColLeft"></div>
@@ -1492,11 +1500,11 @@
         <div class="letter-bank" id="letterBank"></div>
 
         <!-- Spelling Submit & Attempts Controls -->
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:4px; gap:8px;">
-          <div style="font-size:0.7rem; font-weight:700; color:#94a3b8;" id="spellingAttemptsDisplay">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.35rem; gap:0.5rem;">
+          <div style="font-size:0.86rem; font-weight:700; color:#94a3b8;" id="spellingAttemptsDisplay">
             Attempts Left: <span id="spellingAttemptsCount" style="color:#fbbf24;">3</span>/3
           </div>
-          <button id="spellingSubmitBtn" class="amber" style="padding:4px 10px; font-size:0.72rem; font-weight:800; border-radius:6px;" onclick="submitSpellingAttempt()">
+          <button id="spellingSubmitBtn" class="amber" style="padding:0.45rem 0.85rem; font-size:0.88rem; font-weight:800; border-radius:0.5rem;" onclick="submitSpellingAttempt()">
             ⚡ Verify Spelling (1.0 pt)
           </button>
         </div>
@@ -1528,43 +1536,43 @@
 
     <!-- Navigation Footer -->
     <div class="quiz-nav">
-      <div style="font-size:0.75rem; color:#94a3b8; font-weight:700;" id="ptsValueDisplay">Total Worth: 5.0 pts</div>
+      <div style="font-size:0.94rem; color:#94a3b8; font-weight:700;" id="ptsValueDisplay">Total Worth: 5.0 pts</div>
       <button id="nextBtn" onclick="nextQuestion()" disabled>Next Question ➔</button>
     </div>
   </div>
 
   <!-- Results Screen -->
   <div id="resultsContainer" class="card" style="display: none; text-align: center; overflow-y: auto;">
-    <h2 style="color:#f8fafc; font-size: 1.15rem; margin-top:4px;">Spaceport Debriefing Complete! 🌌</h2>
+    <h2 style="color:#f8fafc; font-size: 1.35rem; margin-top:0.4rem;">Quiz Complete! 🌌</h2>
     <div id="gradeBadgeCircle" class="grade-badge-circle">A</div>
-    <p style="font-size: 1.55rem; font-weight: 900; margin: 4px 0 2px 0; color: #38bdf8;" id="finalScore">100% (75 / 75 pts)</p>
-    <p style="color: #94a3b8; margin-bottom: 14px; font-size: 0.8rem; font-weight:600;" id="finalFeedback">Outstanding astrogation, cadet!</p>
+    <p style="font-size: 1.75rem; font-weight: 900; margin: 0.4rem 0 0.25rem 0; color: #38bdf8;" id="finalScore">100% (75 / 75 pts)</p>
+    <p style="color: #94a3b8; margin-bottom: 1rem; font-size: 0.98rem; font-weight:600;" id="finalFeedback">Outstanding work!</p>
 
-    <div style="display:flex; gap:8px; justify-content:center; flex-wrap:wrap;">
-      <button class="success" onclick="restartQuiz()">Retake Mission 🔄</button>
-      <button id="resultsMistakesBtn" class="purple" onclick="startMistakesQuiz()">Review Missed Questions</button>
+    <div style="display:flex; gap:0.65rem; justify-content:center; flex-wrap:wrap;">
+      <button class="success" style="padding: 0.7rem 1.2rem; font-size: 0.98rem;" onclick="restartQuiz()">Retake Quiz 🔄</button>
+      <button id="resultsMistakesBtn" class="purple" style="padding: 0.7rem 1.2rem; font-size: 0.98rem;" onclick="startMistakesQuiz()">Review Missed Questions</button>
     </div>
-    <div id="resultsQuizTypeSwitchBar" class="quiz-type-bar" style="margin-top: 10px;"></div>
+    <div id="resultsQuizTypeSwitchBar" class="quiz-type-bar" style="margin-top: 0.85rem;"></div>
   </div>
 
   <!-- Document Reader Section -->
   <div id="readerContainer" class="pdf-reader-card">
     <div class="pdf-toolbar">
       <div class="pdf-tool-group">
-        <span id="readerToolbarTitle" style="font-size:0.75rem; font-weight:700; color:#38bdf8;">Chapter 1: The Colors of Space</span>
+        <span id="readerToolbarTitle" style="font-size:0.95rem; font-weight:700; color:#38bdf8;">Chapter 1: The Colors of Space</span>
       </div>
 
       <div class="pdf-tool-group">
-        <span style="font-size:0.72rem; color:#94a3b8; font-weight:700;">Size:</span>
-        <button class="secondary" style="padding:2px 7px;" onclick="adjustFontSize(-2)">A−</button>
-        <span id="fontSizeDisplay" style="font-size:0.72rem; font-weight:700; color:#38bdf8; min-width:24px; text-align:center;">15px</span>
-        <button class="secondary" style="padding:2px 7px;" onclick="adjustFontSize(2)">A+</button>
+        <span style="font-size:0.88rem; color:#94a3b8; font-weight:700;">Size:</span>
+        <button class="secondary" style="padding:0.35rem 0.65rem; font-size:0.88rem;" onclick="adjustFontSize(-2)">A−</button>
+        <span id="fontSizeDisplay" style="font-size:0.88rem; font-weight:700; color:#38bdf8; min-width:2.2rem; text-align:center;">18px</span>
+        <button class="secondary" style="padding:0.35rem 0.65rem; font-size:0.88rem;" onclick="adjustFontSize(2)">A+</button>
       </div>
 
-      <button class="secondary" style="padding:3px 8px; font-size:0.7rem;" onclick="toggleReaderView()">✕ Close Reader</button>
+      <button class="secondary" style="padding:0.4rem 0.85rem; font-size:0.88rem;" onclick="toggleReaderView()">✕ Close Reader</button>
     </div>
 
-    <div id="readerScrollArea" class="pdf-text-scroll" style="font-size:15px;">
+    <div id="readerScrollArea" class="pdf-text-scroll" style="font-size:18px;">
       <h2>CHAPTER ONE</h2>
       <p>The Lhari spaceport didn't belong on Earth.</p>
       <p>Bart Steele had thought that, a long time ago, when he first saw it. He had been just a kid then; twelve years old, and all excited about seeing Earth for the first time—Earth, the legendary home of mankind before the Age of Space, the planet of Bart's far-back ancestors. And the first thing he'd seen on Earth, when he got off the starship, was the Lhari spaceport.</p>
@@ -3134,6 +3142,26 @@ function updateBartAvatar(score, justAnsweredCorrect) {
   else container.classList.add('shake-anim');
 
   const pct = Math.min(100, Math.round(score));
+  if (currentInstance === 'D') {
+    if (pct >= 70) {
+      aura.setAttribute('fill', '#10b981');
+      title.textContent = "🎓 Learning Site — Top Scholar! 🌟";
+      desc.textContent = "Excellent accuracy! Keep going to complete the 5 questions!";
+      if (mouth) mouth.setAttribute('d', 'M 44 25 Q 49 31 54 25');
+    } else if (pct >= 40) {
+      aura.setAttribute('fill', '#38bdf8');
+      title.textContent = "🎓 Learning Site — Good Progress! 👍";
+      desc.textContent = "Nice work! Answer all 5 questions to advance!";
+      if (mouth) mouth.setAttribute('d', 'M 44 26 Q 49 26 54 26');
+    } else {
+      aura.setAttribute('fill', '#f59e0b');
+      title.textContent = "🎓 Learning Site — 5-Question Quiz";
+      desc.textContent = "Use Hint or Reread study sheet if you need help!";
+      if (mouth) mouth.setAttribute('d', 'M 44 27 Q 49 23 54 27');
+    }
+    return;
+  }
+
   if (pct >= 70) {
     aura.setAttribute('fill', '#10b981');
     title.textContent = "Warp-Drive Astrogator! 🚀";
@@ -5735,7 +5763,28 @@ Return ONLY valid JSON matching this structure:
   }
 }
 
+function applyResponsiveViewportScale() {
+  try {
+    const vw = window.innerWidth || document.documentElement.clientWidth || 390;
+    const vh = window.innerHeight || document.documentElement.clientHeight || 800;
+    const isPortraitOrTouch = (vh > vw) || ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    if (isPortraitOrTouch && vw > 620) {
+      // Mobile browser in "Desktop site" mode (e.g., 980px viewport on a phone) — scale rem up so it fills the screen with large text
+      const scaledPx = Math.max(20, Math.min(44, Math.round(vw / 23.5)));
+      document.documentElement.style.fontSize = scaledPx + 'px';
+    } else if (vw <= 620) {
+      document.documentElement.style.fontSize = '17.5px';
+    } else {
+      document.documentElement.style.fontSize = '17px';
+    }
+  } catch (e) {}
+}
+
+window.addEventListener('resize', applyResponsiveViewportScale);
+window.addEventListener('orientationchange', () => setTimeout(applyResponsiveViewportScale, 100));
+
 window.onload = function() {
+  applyResponsiveViewportScale();
   const readerArea = document.getElementById('readerScrollArea');
   if (readerArea) defaultChapter1ReaderHtml = readerArea.innerHTML;
   checkUrlHashSetup();

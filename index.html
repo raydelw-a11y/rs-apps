@@ -1159,7 +1159,7 @@
 <body>
 
 <!-- Etiqueta Global de Verificación de Despliegue (visible en Acceso Privado y Pantalla Principal) -->
-<div class="build-timestamp">Actualizado: 12:40 PM - 10/28/2026</div>
+<div class="build-timestamp">Actualizado: 12:42 PM - 10/28/2026</div>
 
 <!-- Pantalla de Usuario y Contraseña (Acceso Privado: R / D) con soporte completo para tecla Enter -->
 <div id="authOverlay" class="auth-overlay">
@@ -1167,13 +1167,18 @@
     <div class="auth-icon">🔐</div>
     <h1 class="auth-title">Acceso Privado</h1>
     <p class="auth-subtitle">Learning Site</p>
-    <form id="authForm" class="auth-form" onsubmit="handleAuthSubmit(event)">
+    <form id="authForm" class="auth-form" autocomplete="off" onsubmit="handleAuthSubmit(event)">
       <input
         type="text"
         id="authUserInput"
         class="auth-input"
         placeholder="Usuario..."
-        autocomplete="username"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="none"
+        spellcheck="false"
+        aria-autocomplete="none"
+        data-form-type="other"
         autofocus
         onkeydown="handleAuthKeyDown(event)"
       />
@@ -1182,14 +1187,19 @@
         id="authPasswordInput"
         class="auth-input"
         placeholder="Contraseña..."
-        autocomplete="current-password"
+        autocomplete="new-password"
+        autocorrect="off"
+        autocapitalize="none"
+        spellcheck="false"
+        aria-autocomplete="none"
+        data-form-type="other"
         onkeydown="handleAuthKeyDown(event)"
       />
       <div id="authErrorMsg" class="auth-error">Usuario o contraseña incorrectos. Intenta de nuevo.</div>
       <button type="submit" class="auth-submit-btn">Entrar</button>
     </form>
     <div style="font-size: 10px; color: #64748b; font-family: monospace; margin-top: 2px;">
-      Actualizado: 12:40 PM - 10/28/2026
+      Actualizado: 12:42 PM - 10/28/2026
     </div>
   </div>
 </div>
@@ -1200,13 +1210,17 @@
     <div class="auth-icon">🔄</div>
     <h1 class="auth-title">Confirm Reset</h1>
     <p class="auth-subtitle">Enter administrator password to reset quiz progress:</p>
-    <form id="resetAuthForm" class="auth-form" onsubmit="handleResetAuthSubmit(event)">
+    <form id="resetAuthForm" class="auth-form" autocomplete="off" onsubmit="handleResetAuthSubmit(event)">
       <input
         type="password"
         id="resetPasswordInput"
         class="auth-input"
         placeholder="Password..."
-        autocomplete="off"
+        autocomplete="new-password"
+        autocorrect="off"
+        autocapitalize="none"
+        spellcheck="false"
+        aria-autocomplete="none"
         onkeydown="handleResetAuthKeyDown(event)"
       />
       <div id="resetErrorMsg" class="auth-error">Incorrect password. Try again.</div>
@@ -1224,13 +1238,17 @@
     <div class="auth-icon">✨</div>
     <h1 class="auth-title">AI Quiz Studio</h1>
     <p class="auth-subtitle">Ingresa la contraseña de administrador para crear o gestionar quizzes:</p>
-    <form id="studioAuthForm" class="auth-form" onsubmit="handleStudioAuthSubmit(event)">
+    <form id="studioAuthForm" class="auth-form" autocomplete="off" onsubmit="handleStudioAuthSubmit(event)">
       <input
         type="password"
         id="studioPasswordInput"
         class="auth-input"
         placeholder="Contraseña de administrador..."
-        autocomplete="off"
+        autocomplete="new-password"
+        autocorrect="off"
+        autocapitalize="none"
+        spellcheck="false"
+        aria-autocomplete="none"
         onkeydown="handleStudioAuthKeyDown(event)"
       />
       <div id="studioErrorMsg" class="auth-error">Contraseña incorrecta. Intenta de nuevo.</div>
@@ -1476,7 +1494,13 @@
           placeholder="Write your answer here..."
           autocomplete="off"
           autocorrect="off"
+          autocapitalize="none"
           spellcheck="false"
+          aria-autocomplete="none"
+          data-form-type="other"
+          data-lpignore="true"
+          data-1p-ignore="true"
+          data-gramm="false"
           oninput="handleFibInput()"
           onkeydown="handleFibKeyDown(event)"
         />
@@ -2651,6 +2675,11 @@ function renderQuestion() {
       if (fibInput) {
         fibInput.value = '';
         fibInput.disabled = false;
+        fibInput.setAttribute('name', 'fib_no_suggest_' + Date.now() + '_' + currentQIndex);
+        fibInput.setAttribute('autocomplete', 'off');
+        fibInput.setAttribute('autocorrect', 'off');
+        fibInput.setAttribute('autocapitalize', 'none');
+        fibInput.setAttribute('spellcheck', 'false');
         fibInput.style.borderColor = 'rgba(56, 189, 248, 0.45)';
         fibInput.style.background = 'rgba(2, 6, 23, 0.85)';
         setTimeout(() => fibInput.focus(), 60);
@@ -5795,8 +5824,30 @@ function applyResponsiveViewportScale() {
 window.addEventListener('resize', applyResponsiveViewportScale);
 window.addEventListener('orientationchange', () => setTimeout(applyResponsiveViewportScale, 100));
 
+function disableAllKeyboardSuggestions() {
+  try {
+    document.querySelectorAll('form').forEach(f => {
+      f.setAttribute('autocomplete', 'off');
+    });
+    document.querySelectorAll('input, textarea').forEach((el, idx) => {
+      if (el.type === 'file') return;
+      el.setAttribute('autocomplete', el.type === 'password' ? 'new-password' : 'off');
+      el.setAttribute('autocorrect', 'off');
+      el.setAttribute('autocapitalize', 'none');
+      el.setAttribute('spellcheck', 'false');
+      el.setAttribute('aria-autocomplete', 'none');
+      el.setAttribute('data-form-type', 'other');
+      el.setAttribute('data-lpignore', 'true');
+      el.setAttribute('data-1p-ignore', 'true');
+      el.setAttribute('data-gramm', 'false');
+      el.setAttribute('name', 'no_suggest_' + idx + '_' + Date.now());
+    });
+  } catch (e) {}
+}
+
 window.onload = function() {
   applyResponsiveViewportScale();
+  disableAllKeyboardSuggestions();
   const readerArea = document.getElementById('readerScrollArea');
   if (readerArea) defaultChapter1ReaderHtml = readerArea.innerHTML;
   checkUrlHashSetup();

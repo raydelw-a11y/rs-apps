@@ -563,14 +563,16 @@
   .speak-word-btn {
     display: inline-flex;
     align-items: center;
-    gap: 0.32rem;
-    padding: 0.28rem 0.65rem;
-    font-size: 0.84rem;
-    font-weight: 800;
+    justify-content: center;
+    width: 2.15rem;
+    height: 2.15rem;
+    padding: 0;
+    font-size: 1.1rem;
+    line-height: 1;
     color: #f8fafc;
     background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
     border: 1.5px solid #38bdf8;
-    border-radius: 0.5rem;
+    border-radius: 0.55rem;
     cursor: pointer;
     box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35);
     transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.15s ease;
@@ -1375,7 +1377,7 @@
 <body>
 
 <!-- Etiqueta Global de Verificación de Despliegue (visible en Acceso Privado y Pantalla Principal) -->
-<div class="build-timestamp">Actualizado: 7:00 PM - 10/28/2026</div>
+<div class="build-timestamp">Actualizado: 7:05 PM - 10/28/2026</div>
 
 <!-- Pantalla de Usuario y Contraseña (Acceso Privado: R / D) con soporte completo para tecla Enter -->
 <div id="authOverlay" class="auth-overlay">
@@ -1415,7 +1417,7 @@
       <button type="submit" class="auth-submit-btn">Entrar</button>
     </form>
     <div style="font-size: 10px; color: #64748b; font-family: monospace; margin-top: 2px;">
-      Actualizado: 7:00 PM - 10/28/2026
+      Actualizado: 7:05 PM - 10/28/2026
     </div>
   </div>
 </div>
@@ -1743,9 +1745,7 @@
         </div>
         <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem;">
           <div class="spelling-subtext" id="spellingClueText" style="flex:1;">Clue: Chapter 1 Term</div>
-          <button type="button" id="speakSpellingWordBtn" class="speak-word-btn" onclick="speakCurrentSpellingWord()" title="Tap to hear the spelling word" aria-label="Hear spelling word">
-            🔊 Hear Word
-          </button>
+          <button type="button" id="speakSpellingWordBtn" class="speak-word-btn" onclick="speakCurrentSpellingWord()" title="Tap to hear the spelling word" aria-label="Hear spelling word">🔊</button>
         </div>
         
         <div class="slots-container" id="slotsContainer"></div>
@@ -1848,7 +1848,7 @@
   </div>
 </main>
 
-<script src="audio-data.js"></script>
+<script src="audio-data.js?v=10281905"></script>
 <script>
 // Autenticación Acceso Privado: R (Baerga), D (Lesish) y admin (Santana) con soporte para Enter
 let currentInstance = 'R'; // 'R' or 'D'
@@ -2032,26 +2032,51 @@ function speakCurrentSpellingWord() {
   const btn = document.getElementById('speakSpellingWordBtn');
   if (btn) btn.classList.add('speaking');
 
-  try {
-    if (currentVoiceAudio) {
-      currentVoiceAudio.pause();
-      currentVoiceAudio.currentTime = 0;
-    }
-  } catch (e) {}
+  const clearBtnState = () => {
+    if (btn) btn.classList.remove('speaking');
+  };
 
   const rawUpper = String(currentTargetWord).trim().toUpperCase();
-  const spokenWord = SPELLING_WORD_PRONUNCIATION[rawUpper] || rawUpper.toLowerCase();
+  const embeddedMap = window.SPELLING_WORDS_AUDIO || {};
 
+  // 1. Primary: play embedded high-clarity MP3 audio via HTML5 <audio> (works 100% on iPad/iPhone even with silent switch on)
+  if (embeddedMap[rawUpper]) {
+    try {
+      const audioEl = getSharedMediaAudio();
+      audioEl.pause();
+      audioEl.src = embeddedMap[rawUpper];
+      audioEl.currentTime = 0;
+      audioEl.volume = 1.0;
+      audioEl.onended = clearBtnState;
+      audioEl.onerror = clearBtnState;
+      setTimeout(clearBtnState, 1600);
+      const p = audioEl.play();
+      if (p && typeof p.catch === 'function') {
+        p.catch(() => {
+          speakWithWebSpeechFallback(rawUpper, clearBtnState);
+        });
+      }
+      return;
+    } catch (e) {}
+  }
+
+  speakWithWebSpeechFallback(rawUpper, clearBtnState);
+}
+
+function speakWithWebSpeechFallback(rawUpper, clearBtnState) {
+  const spokenWord = SPELLING_WORD_PRONUNCIATION[rawUpper] || rawUpper.toLowerCase();
   if ('speechSynthesis' in window && typeof SpeechSynthesisUtterance !== 'undefined') {
     try {
-      window.speechSynthesis.cancel();
+      if (window.speechSynthesis.speaking || window.speechSynthesis.pending) {
+        window.speechSynthesis.cancel();
+      }
       if (typeof window.speechSynthesis.resume === 'function') {
         window.speechSynthesis.resume();
       }
       const utter = new SpeechSynthesisUtterance(spokenWord);
       activeSpellingUtterance = utter;
       utter.lang = 'en-US';
-      utter.rate = 0.84;
+      utter.rate = 0.85;
       utter.pitch = 1.0;
       utter.volume = 1.0;
 
@@ -2063,9 +2088,6 @@ function speakCurrentSpellingWord() {
         if (preferred) utter.voice = preferred;
       }
 
-      const clearBtnState = () => {
-        if (btn) btn.classList.remove('speaking');
-      };
       utter.onend = clearBtnState;
       utter.onerror = clearBtnState;
       setTimeout(clearBtnState, 1800);
@@ -2073,11 +2095,11 @@ function speakCurrentSpellingWord() {
       window.speechSynthesis.speak(utter);
       return;
     } catch (e) {
-      if (btn) btn.classList.remove('speaking');
+      clearBtnState();
     }
   }
   playSnapSound();
-  if (btn) setTimeout(() => btn.classList.remove('speaking'), 400);
+  setTimeout(clearBtnState, 400);
 }
 
 function playTone(freq, type, duration, endFreq) {

@@ -176,6 +176,44 @@
     flex-wrap: wrap; 
   }
 
+  .quiz-type-bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin: 4px 0 6px 0;
+  }
+
+  .quiz-type-btn {
+    padding: 5px 12px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    border-radius: 8px;
+    background: rgba(30, 41, 59, 0.92);
+    color: #cbd5e1;
+    border: 1.5px solid #475569;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.35);
+  }
+
+  .quiz-type-btn:hover {
+    border-color: #38bdf8;
+    color: #f8fafc;
+    background: rgba(15, 23, 42, 0.98);
+  }
+
+  .quiz-type-btn.active {
+    background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+    color: #ffffff;
+    border-color: #38bdf8;
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.45);
+  }
+
   select, button, input { 
     padding: 4px 9px; 
     font-size: 0.74rem; 
@@ -1106,7 +1144,7 @@
 <body>
 
 <!-- Etiqueta Global de Verificación de Despliegue (visible en Acceso Privado y Pantalla Principal) -->
-<div class="build-timestamp">Actualizado: 10:44 AM - 10/28/2026</div>
+<div class="build-timestamp">Actualizado: 11:12 AM - 10/28/2026</div>
 
 <!-- Pantalla de Usuario y Contraseña (Acceso Privado: R / D) con soporte completo para tecla Enter -->
 <div id="authOverlay" class="auth-overlay">
@@ -1136,7 +1174,7 @@
       <button type="submit" class="auth-submit-btn">Entrar</button>
     </form>
     <div style="font-size: 10px; color: #64748b; font-family: monospace; margin-top: 2px;">
-      Actualizado: 10:44 AM - 10/28/2026
+      Actualizado: 11:12 AM - 10/28/2026
     </div>
   </div>
 </div>
@@ -1306,12 +1344,14 @@
 </div>
 
 <header>
-  <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap; min-width:0;">
+  <div style="display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap; min-width:0;">
     <h1 id="headerQuizTitle" style="margin:0;">The Colors of Space: Chapter 1 Mission</h1>
     <select id="headerQuizSelect" onchange="handleHeaderQuizSelectChange(event)" title="Seleccionar Quiz de la Biblioteca en GitHub" style="background:#0f172a; color:#38bdf8; border:1px solid rgba(56,189,248,0.45); border-radius:7px; padding:3px 8px; font-size:0.72rem; font-weight:700; max-width:230px; outline:none; cursor:pointer;">
       <option value="default_ch1">📚 The Colors of Space: Ch. 1</option>
     </select>
   </div>
+  <!-- Barra de Botones para cada Tipo de Quiz -->
+  <div id="quizTypeButtonsBar" class="quiz-type-bar"></div>
   <div class="controls-bar">
     <button class="secondary" id="headerUserSwitchBtn" onclick="switchUserPrompt()" title="Cambiar de usuario">👤 User: R (Switch)</button>
     <button class="cyan" id="togglePdfViewBtn" onclick="toggleReaderView()">📖 Read Material (Text/HTML)</button>
@@ -1496,6 +1536,7 @@
       <button class="success" onclick="restartQuiz()">Retake Mission 🔄</button>
       <button id="resultsMistakesBtn" class="purple" onclick="startMistakesQuiz()">Review Missed Questions</button>
     </div>
+    <div id="resultsQuizTypeSwitchBar" class="quiz-type-bar" style="margin-top: 10px;"></div>
   </div>
 
   <!-- Document Reader Section -->
@@ -3490,10 +3531,7 @@ function restartQuiz() {
   stopGradeSong(false);
   document.getElementById('resultsContainer').style.display = 'none';
   document.getElementById('quizContainer').style.display = 'flex';
-  const activeQList = (currentActiveQuiz && currentActiveQuiz.questions && currentActiveQuiz.questions.length > 0)
-    ? currentActiveQuiz.questions
-    : chapterOneQuestions;
-  initQuiz(activeQList);
+  initQuiz(getFilteredQuestionsForActiveQuiz());
 }
 
 function startMistakesQuiz() {
@@ -4555,6 +4593,109 @@ async function manualSyncWithGitHub() {
   }
 }
 
+let currentRTypeFilter = 'all'; // 'all' | 'mc' | 'match' | 'tf'
+
+function getFilteredQuestionsForActiveQuiz() {
+  const baseList = (currentActiveQuiz && Array.isArray(currentActiveQuiz.questions) && currentActiveQuiz.questions.length > 0)
+    ? currentActiveQuiz.questions
+    : chapterOneQuestions;
+  if (currentInstance === 'R' && currentRTypeFilter !== 'all') {
+    const filtered = baseList.filter(q => q.type === currentRTypeFilter);
+    if (filtered.length > 0) return filtered;
+  }
+  return baseList;
+}
+
+function setRQuizTypeFilter(filterType) {
+  currentRTypeFilter = filterType || 'all';
+  mistakesPool = [];
+  isQuizCompleted = false;
+  updateMistakeBadge();
+  stopGradeSong(false);
+  document.getElementById('resultsContainer').style.display = 'none';
+  if (!isReaderVisible) {
+    document.getElementById('quizContainer').style.display = 'flex';
+  }
+  initQuiz(getFilteredQuestionsForActiveQuiz());
+  renderQuizTypeButtons();
+  playSnapSound();
+}
+
+function renderQuizTypeButtons() {
+  const bar = document.getElementById('quizTypeButtonsBar');
+  const resultsBar = document.getElementById('resultsQuizTypeSwitchBar');
+  if (bar) bar.innerHTML = '';
+  if (resultsBar) resultsBar.innerHTML = '';
+
+  if (currentInstance === 'D') {
+    const all = getAllQuizzes();
+    all.forEach(q => {
+      const isAct = (q.id === activeQuizId);
+      const isFib = q.quizMode === 'fib' || (q.questions && q.questions[0] && q.questions[0].type === 'fib');
+      const icon = isAct ? '✅' : (isFib ? '✍️' : '☑️');
+      let labelText = q.title;
+      if (q.id === 'd_history_trivia_mc') {
+        labelText = `Multiple Choice Quiz (${q.questions.length} Qs)`;
+      } else if (q.id === 'd_history_trivia_fib') {
+        labelText = `Fill in the Blank Quiz (${q.questions.length} Qs)`;
+      }
+
+      if (bar) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'quiz-type-btn' + (isAct ? ' active' : '');
+        btn.textContent = `${icon} ${labelText}`;
+        btn.onclick = async () => {
+          if (activeQuizId === q.id && !isQuizCompleted) return;
+          activateQuizById(q.id, true);
+          playSnapSound();
+          try { await syncQuizzesLibraryToCloud(); } catch (e) {}
+        };
+        bar.appendChild(btn);
+      }
+
+      if (resultsBar && !isAct) {
+        const switchBtn = document.createElement('button');
+        switchBtn.type = 'button';
+        switchBtn.className = 'quiz-type-btn active';
+        switchBtn.textContent = `${isFib ? '✍️' : '☑️'} Go to ${labelText} ➔`;
+        switchBtn.onclick = async () => {
+          activateQuizById(q.id, true);
+          playSnapSound();
+          try { await syncQuizzesLibraryToCloud(); } catch (e) {}
+        };
+        resultsBar.appendChild(switchBtn);
+      }
+    });
+  } else {
+    const baseList = (currentActiveQuiz && Array.isArray(currentActiveQuiz.questions) && currentActiveQuiz.questions.length > 0)
+      ? currentActiveQuiz.questions
+      : chapterOneQuestions;
+    const mcCount = baseList.filter(q => q.type === 'mc').length;
+    const matchCount = baseList.filter(q => q.type === 'match').length;
+    const tfCount = baseList.filter(q => q.type === 'tf').length;
+
+    const rTypes = [
+      { key: 'all', icon: '📋', label: `Full Quiz (${baseList.length} Qs)` },
+      { key: 'mc', icon: '☑️', label: `Multiple Choice (${mcCount} Qs)` },
+      { key: 'match', icon: '🔗', label: `Matching Columns (${matchCount} Qs)` },
+      { key: 'tf', icon: '⚖️', label: `True or False (${tfCount} Qs)` }
+    ];
+
+    rTypes.forEach(t => {
+      const isAct = (currentRTypeFilter === t.key);
+      if (bar) {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'quiz-type-btn' + (isAct ? ' active' : '');
+        btn.textContent = `${isAct ? '✅' : t.icon} ${t.label}`;
+        btn.onclick = () => setRQuizTypeFilter(t.key);
+        bar.appendChild(btn);
+      }
+    });
+  }
+}
+
 function renderHeaderQuizSelector() {
   const sel = document.getElementById('headerQuizSelect');
   if (!sel) return;
@@ -4567,6 +4708,7 @@ function renderHeaderQuizSelector() {
     if (q.id === activeQuizId) opt.selected = true;
     sel.appendChild(opt);
   });
+  renderQuizTypeButtons();
 }
 
 async function handleHeaderQuizSelectChange(event) {
@@ -4582,6 +4724,7 @@ function activateQuizById(quizId, userInitiated = false) {
   const target = all.find(q => q.id === quizId) || all[0];
   activeQuizId = target.id;
   currentActiveQuiz = target;
+  currentRTypeFilter = 'all';
   if (userInitiated) {
     localStorage.setItem('rs_apps_user_selected_quiz', 'true');
   }
@@ -4608,7 +4751,7 @@ function activateQuizById(quizId, userInitiated = false) {
   if (!isReaderVisible) {
     document.getElementById('quizContainer').style.display = 'flex';
   }
-  initQuiz(target.questions);
+  initQuiz(getFilteredQuestionsForActiveQuiz());
   renderHeaderQuizSelector();
   renderQuizLibraryList();
 }
@@ -4701,7 +4844,8 @@ function renderQuizLibraryList() {
     const metaSpan = document.createElement('span');
     metaSpan.style.fontSize = '0.66rem';
     metaSpan.style.color = '#94a3b8';
-    metaSpan.textContent = `${q.questions.length} preguntas (${q.questions.length * 5} pts) · ${q.isDefault ? 'Integrado' : (q.createdAt || 'Personalizado')}`;
+    const totalPts = q.questions.reduce((s, item) => s + (isQuestionNoSpelling(item) ? (item.basePts || 20) : 5), 0);
+    metaSpan.textContent = `${q.questions.length} preguntas (${totalPts} pts) · ${q.isDefault ? 'Integrado' : (q.createdAt || 'Personalizado')}`;
 
     infoDiv.appendChild(titleSpan);
     infoDiv.appendChild(metaSpan);

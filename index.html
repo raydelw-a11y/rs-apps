@@ -1379,7 +1379,7 @@
 <body>
 
 <!-- Etiqueta Global de Verificación de Despliegue (visible en Acceso Privado y Pantalla Principal) -->
-<div class="build-timestamp">Actualizado: 7:11 PM - 10/28/2026</div>
+<div class="build-timestamp">Actualizado: 7:15 PM - 10/28/2026</div>
 
 <!-- Pantalla de Usuario y Contraseña (Acceso Privado: R / D) con soporte completo para tecla Enter -->
 <div id="authOverlay" class="auth-overlay">
@@ -1419,7 +1419,7 @@
       <button type="submit" class="auth-submit-btn">Entrar</button>
     </form>
     <div style="font-size: 10px; color: #64748b; font-family: monospace; margin-top: 2px;">
-      Actualizado: 7:11 PM - 10/28/2026
+      Actualizado: 7:15 PM - 10/28/2026
     </div>
   </div>
 </div>
@@ -2009,6 +2009,9 @@ function handleAuthKeyDown(e) {
 // Web Audio Synthesizer
 let audioCtx = null;
 function getAudioContext() {
+  if (typeof navigator !== 'undefined' && navigator.audioSession) {
+    try { navigator.audioSession.type = 'playback'; } catch (e) {}
+  }
   if (!audioCtx) {
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
     if (AudioContextClass) audioCtx = new AudioContextClass();
@@ -2104,6 +2107,104 @@ function speakWithWebSpeechFallback(rawUpper, clearBtnState) {
   setTimeout(clearBtnState, 400);
 }
 
+const sfxWavCache = {};
+
+function buildSfxWavUrl(kind) {
+  if (sfxWavCache[kind]) return sfxWavCache[kind];
+  const sr = 22050;
+  let dur = 0.09;
+  if (kind === 'correct') dur = 0.42;
+  else if (kind === 'wrong') dur = 0.34;
+  else if (kind === 'hint') dur = 0.22;
+
+  const totalSamples = Math.floor(sr * dur);
+  const samples = new Float32Array(totalSamples);
+  let phase = 0;
+
+  if (kind === 'snap') {
+    for (let i = 0; i < totalSamples; i++) {
+      const t = i / sr;
+      const freq = 600 * Math.pow(950 / 600, t / dur);
+      const env = 0.38 * Math.exp(-t / 0.028);
+      samples[i] = Math.sin(phase * 6.2831853) * env;
+      phase += freq / sr;
+    }
+  } else if (kind === 'hint') {
+    for (let i = 0; i < totalSamples; i++) {
+      const t = i / sr;
+      const freq = 880 * Math.pow(1320 / 880, t / dur);
+      const env = 0.36 * Math.exp(-t / 0.075);
+      samples[i] = Math.sin(phase * 6.2831853) * env;
+      phase += freq / sr;
+    }
+  } else if (kind === 'wrong') {
+    for (let i = 0; i < totalSamples; i++) {
+      const t = i / sr;
+      const freq = 260 * Math.pow(110 / 260, t / dur);
+      const env = 0.38 * Math.exp(-t / 0.14);
+      const p = phase - Math.floor(phase);
+      samples[i] = (2 * p - 1) * env;
+      phase += freq / sr;
+    }
+  } else if (kind === 'correct') {
+    const notes = [523.25, 659.25, 783.99, 1046.50];
+    notes.forEach((f, idx) => {
+      const startIdx = Math.floor(idx * 0.065 * sr);
+      const noteLen = Math.floor(0.20 * sr);
+      let ph = 0;
+      for (let j = 0; j < noteLen && (startIdx + j) < totalSamples; j++) {
+        const dt = j / sr;
+        const env = 0.32 * Math.exp(-dt / 0.075);
+        const p = ph - Math.floor(ph);
+        const tri = 1 - 4 * Math.abs(Math.round(p - 0.25) - (p - 0.25));
+        samples[startIdx + j] += tri * env;
+        ph += f / sr;
+      }
+    });
+  }
+
+  const wavBytes = new ArrayBuffer(44 + totalSamples * 2);
+  const view = new DataView(wavBytes);
+  const writeStr = (off, s) => { for (let i = 0; i < s.length; i++) view.setUint8(off + i, s.charCodeAt(i)); };
+  writeStr(0, 'RIFF');
+  view.setUint32(4, 36 + totalSamples * 2, true);
+  writeStr(8, 'WAVE');
+  writeStr(12, 'fmt ');
+  view.setUint32(16, 16, true);
+  view.setUint16(20, 1, true);
+  view.setUint16(22, 1, true);
+  view.setUint32(24, sr, true);
+  view.setUint32(28, sr * 2, true);
+  view.setUint16(32, 2, true);
+  view.setUint16(34, 16, true);
+  writeStr(36, 'data');
+  view.setUint32(40, totalSamples * 2, true);
+
+  let offset = 44;
+  for (let i = 0; i < totalSamples; i++) {
+    const s = Math.max(-1, Math.min(1, samples[i]));
+    view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+    offset += 2;
+  }
+
+  const url = URL.createObjectURL(new Blob([wavBytes], { type: 'audio/wav' }));
+  sfxWavCache[kind] = url;
+  return url;
+}
+
+function playSfxViaMediaAudio(kind) {
+  try {
+    if (typeof songIsPlaying !== 'undefined' && songIsPlaying) return;
+    const audioEl = getSharedMediaAudio();
+    const url = buildSfxWavUrl(kind);
+    audioEl.pause();
+    audioEl.src = url;
+    audioEl.currentTime = 0;
+    audioEl.volume = 0.9;
+    audioEl.play().catch(() => {});
+  } catch (e) {}
+}
+
 function playTone(freq, type, duration, endFreq) {
   try {
     const ctx = getAudioContext();
@@ -2123,21 +2224,25 @@ function playTone(freq, type, duration, endFreq) {
   } catch(e) {}
 }
 
-function playCorrectSound() {
+function playCorrectSound(skipMediaAudio) {
+  if (!skipMediaAudio) playSfxViaMediaAudio('correct');
   [523.25, 659.25, 783.99, 1046.50].forEach((f, idx) => {
     setTimeout(() => playTone(f, 'triangle', 0.22), idx * 65);
   });
 }
 
-function playWrongSound() {
+function playWrongSound(skipMediaAudio) {
+  if (!skipMediaAudio) playSfxViaMediaAudio('wrong');
   playTone(260, 'sawtooth', 0.35, 110);
 }
 
-function playSnapSound() {
+function playSnapSound(skipMediaAudio) {
+  if (!skipMediaAudio) playSfxViaMediaAudio('snap');
   playTone(600, 'sine', 0.08, 950);
 }
 
-function playHintSound() {
+function playHintSound(skipMediaAudio) {
+  if (!skipMediaAudio) playSfxViaMediaAudio('hint');
   playTone(880, 'sine', 0.2, 1320);
 }
 
@@ -3453,6 +3558,7 @@ function submitSpellingAttempt() {
 
 function selectOption(idx, btnElement) {
   if (isQuizAnswered) return;
+  playSnapSound();
   selectedOption = idx;
   document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
   btnElement.classList.add('selected');
@@ -3581,11 +3687,11 @@ function confirmAnswer() {
 
   const mistakeKey = `${q.type}_${q.q}`;
   if (isFullyCorrect) {
-    playCorrectSound();
+    playCorrectSound(true);
     playFeedbackVoice(true);
     mistakesPool = mistakesPool.filter(m => `${m.type}_${m.q}` !== mistakeKey);
   } else {
-    playWrongSound();
+    playWrongSound(true);
     playFeedbackVoice(false);
     if (!mistakesPool.some(m => `${m.type}_${m.q}` === mistakeKey)) {
       mistakesPool.push(q);
@@ -3632,6 +3738,7 @@ function nextQuestion() {
   }
   currentQIndex++;
   if (currentQIndex < activeQuestions.length) {
+    playSnapSound();
     renderQuestion();
   } else if (typeof isCurrentQuizMultipleChoiceInD === 'function' && isCurrentQuizMultipleChoiceInD()) {
     jumpToFillInTheBlankQuiz();

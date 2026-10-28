@@ -1,6 +1,11 @@
-# Reglas de R's Apps (Quizzes & Readers)
+# Reglas de R & D's Apps (Quizzes & Readers)
 
-1. **Distribución Obligatoria de Preguntas en Todos los Quizzes:**
+0. **Dos Instancias con Usuario y Contraseña Inicial (`R` y `D`):**
+   - **Instancia `R`**: Usuario **`R`**, Contraseña **`Baerga`**. Contiene los quizzes de lectura de R (20 preguntas: 50% Multiple Choice, 25% Matching Columns, 25% True/False + Spelling Cipher).
+   - **Instancia `D`**: Usuario **`D`**, Contraseña **`Lesish`**. Contiene quizzes basados en **5 preguntas** divididos en dos secciones: **Sección 1: Multiple Choice (5 preguntas)** y **Sección 2: Fill in the Blank (5 preguntas)** (10 ítems en total = 100 puntos).
+   - El botón `👤 User: R/D (Switch)` en el encabezado permite cambiar de usuario/instancia en cualquier momento.
+
+1. **Distribución Obligatoria de Preguntas en los Quizzes de `R`:**
    - **50% Multiple Choice (`mc`)** (ej. 10 de 20 preguntas)
    - **25% Matching Columns (`match`)** (ej. 5 de 20 preguntas)
    - **25% True or False (`tf`)** (ej. 5 de 20 preguntas)

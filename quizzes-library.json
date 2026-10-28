@@ -1,7 +1,199 @@
 {
   "activeQuizId": "trapped_videogame_ch3_4",
-  "updatedAt": "2026-10-27T22:45:04.754688+00:00",
+  "updatedAt": "2026-10-28T14:33:38.734742+00:00",
   "quizzes": [
+    {
+      "id": "d_history_trivia_quiz_1",
+      "instance": "D",
+      "title": "D's Quiz 1: U.S. History & Trivia (5 Qs: MC + Fill in the Blank)",
+      "createdAt": "Oct 28, 2026",
+      "isDefault": true,
+      "questions": [
+        {
+          "type": "mc",
+          "section": 1,
+          "sectionTitle": "Section 1 of 2: Multiple Choice",
+          "noSpelling": true,
+          "basePts": 10.0,
+          "q": "What is the oldest University in the United States?",
+          "options": [
+            "Harvard",
+            "Yale",
+            "Princeton",
+            "Columbia"
+          ],
+          "correct": 0,
+          "hint": "Founded in 1636 in Cambridge, Massachusetts—it starts with the letter H.",
+          "pageTitle": "Study Sheet — Question #1",
+          "pageExcerpt": "\"1. What is the oldest University in the United State — Harvard\""
+        },
+        {
+          "type": "mc",
+          "section": 1,
+          "sectionTitle": "Section 1 of 2: Multiple Choice",
+          "noSpelling": true,
+          "basePts": 10.0,
+          "q": "Which US athlete has won the most Olympic gold medals ever?",
+          "options": [
+            "Michael Phelps",
+            "Usain Bolt",
+            "Carl Lewis",
+            "Simone Biles"
+          ],
+          "correct": 0,
+          "hint": "He is a legendary American Olympic swimmer who won 23 Olympic gold medals.",
+          "pageTitle": "Study Sheet — Question #2",
+          "pageExcerpt": "\"2. Which US athlete has won the most Olympic gold medals ever? — Michael Phelps\""
+        },
+        {
+          "type": "mc",
+          "section": 1,
+          "sectionTitle": "Section 1 of 2: Multiple Choice",
+          "noSpelling": true,
+          "basePts": 10.0,
+          "q": "Which US president issued the Emancipation Proclamation?",
+          "options": [
+            "Abraham Lincoln",
+            "George Washington",
+            "Thomas Jefferson",
+            "Franklin D. Roosevelt"
+          ],
+          "correct": 0,
+          "hint": "He was the 16th President of the United States during the Civil War.",
+          "pageTitle": "Study Sheet — Question #3",
+          "pageExcerpt": "\"3. Which US president issued the Emancipation Proclamation? — Abraham Lincoln\""
+        },
+        {
+          "type": "mc",
+          "section": 1,
+          "sectionTitle": "Section 1 of 2: Multiple Choice",
+          "noSpelling": true,
+          "basePts": 10.0,
+          "q": "The Tet Offensive was a turning point in which war?",
+          "options": [
+            "The Vietnam War",
+            "World War II",
+            "The Korean War",
+            "World War I"
+          ],
+          "correct": 0,
+          "hint": "This conflict took place in Southeast Asia during the 1960s and 1970s.",
+          "pageTitle": "Study Sheet — Question #4",
+          "pageExcerpt": "\"4. The Tet Offensive was a turning point in which war? — The Vietnam War.\""
+        },
+        {
+          "type": "mc",
+          "section": 1,
+          "sectionTitle": "Section 1 of 2: Multiple Choice",
+          "noSpelling": true,
+          "basePts": 10.0,
+          "q": "What happened on October 28, 1929, also known as Black Monday?",
+          "options": [
+            "Start of the Great Depression.",
+            "End of the American Civil War.",
+            "Signing of the Declaration of Independence.",
+            "First Moon Landing by Apollo 11."
+          ],
+          "correct": 0,
+          "hint": "The stock market crash on this date triggered a severe worldwide economic crisis in the 1930s.",
+          "pageTitle": "Study Sheet — Question #5",
+          "pageExcerpt": "\"5. What happened on October 28, 1929, also known as Black Monday? — Start of the Great Depression.\""
+        },
+        {
+          "type": "fib",
+          "section": 2,
+          "sectionTitle": "Section 2 of 2: Fill in the Blank",
+          "noSpelling": true,
+          "basePts": 10.0,
+          "q": "What is the oldest University in the United States?",
+          "blankPrompt": "________ is the oldest University in the United States.",
+          "answer": "Harvard",
+          "acceptedAnswers": [
+            "harvard",
+            "harvard university"
+          ],
+          "hint": "One word starting with 'H' (7 letters: H _ _ _ _ _ _).",
+          "pageTitle": "Study Sheet — Question #1",
+          "pageExcerpt": "\"1. What is the oldest University in the United State — Harvard\""
+        },
+        {
+          "type": "fib",
+          "section": 2,
+          "sectionTitle": "Section 2 of 2: Fill in the Blank",
+          "noSpelling": true,
+          "basePts": 10.0,
+          "q": "Which US athlete has won the most Olympic gold medals ever?",
+          "blankPrompt": "________ ________ is the US athlete who has won the most Olympic gold medals ever.",
+          "answer": "Michael Phelps",
+          "acceptedAnswers": [
+            "michael phelps",
+            "phelps"
+          ],
+          "hint": "First and last name of the Olympic swimmer: M _ _ _ _ _ _   P _ _ _ _ _.",
+          "pageTitle": "Study Sheet — Question #2",
+          "pageExcerpt": "\"2. Which US athlete has won the most Olympic gold medals ever? — Michael Phelps\""
+        },
+        {
+          "type": "fib",
+          "section": 2,
+          "sectionTitle": "Section 2 of 2: Fill in the Blank",
+          "noSpelling": true,
+          "basePts": 10.0,
+          "q": "Which US president issued the Emancipation Proclamation?",
+          "blankPrompt": "President ________ ________ issued the Emancipation Proclamation.",
+          "answer": "Abraham Lincoln",
+          "acceptedAnswers": [
+            "abraham lincoln",
+            "lincoln",
+            "president abraham lincoln",
+            "president lincoln",
+            "abe lincoln"
+          ],
+          "hint": "First and last name of the 16th US President: A _ _ _ _ _ _   L _ _ _ _ _ _.",
+          "pageTitle": "Study Sheet — Question #3",
+          "pageExcerpt": "\"3. Which US president issued the Emancipation Proclamation? — Abraham Lincoln\""
+        },
+        {
+          "type": "fib",
+          "section": 2,
+          "sectionTitle": "Section 2 of 2: Fill in the Blank",
+          "noSpelling": true,
+          "basePts": 10.0,
+          "q": "The Tet Offensive was a turning point in which war?",
+          "blankPrompt": "The Tet Offensive was a turning point in ________.",
+          "answer": "The Vietnam War",
+          "acceptedAnswers": [
+            "the vietnam war",
+            "vietnam war",
+            "vietnam"
+          ],
+          "hint": "Three words from your notebook: The V _ _ _ _ _ _ War.",
+          "pageTitle": "Study Sheet — Question #4",
+          "pageExcerpt": "\"4. The Tet Offensive was a turning point in which war? — The Vietnam War.\""
+        },
+        {
+          "type": "fib",
+          "section": 2,
+          "sectionTitle": "Section 2 of 2: Fill in the Blank",
+          "noSpelling": true,
+          "basePts": 10.0,
+          "q": "What happened on October 28, 1929, also known as Black Monday?",
+          "blankPrompt": "October 28, 1929 (Black Monday) was the ________.",
+          "answer": "Start of the Great Depression",
+          "acceptedAnswers": [
+            "start of the great depression",
+            "the start of the great depression",
+            "start of great depression",
+            "the great depression",
+            "great depression"
+          ],
+          "hint": "Five words from your notebook: Start of the G _ _ _ _   D _ _ _ _ _ _ _ _ _.",
+          "pageTitle": "Study Sheet — Question #5",
+          "pageExcerpt": "\"5. What happened on October 28, 1929, also known as Black Monday? — Start of the Great Depression.\""
+        }
+      ],
+      "readerHtml": "<h2>D's Study Sheet — 5 Core Questions & Answers</h2>\n<p>Review all 5 questions carefully before taking <strong>Section 1 (Multiple Choice)</strong> and <strong>Section 2 (Fill in the Blank)</strong>:</p>\n<hr style=\"border-color: rgba(56,189,248,0.25); margin: 10px 0;\" />\n<p><strong>1. What is the oldest University in the United States?</strong><br/>\n✅ Answer: <strong>Harvard</strong></p>\n<p><strong>2. Which US athlete has won the most Olympic gold medals ever?</strong><br/>\n✅ Answer: <strong>Michael Phelps</strong></p>\n<p><strong>3. Which US president issued the Emancipation Proclamation?</strong><br/>\n✅ Answer: <strong>Abraham Lincoln</strong></p>\n<p><strong>4. The Tet Offensive was a turning point in which war?</strong><br/>\n✅ Answer: <strong>The Vietnam War.</strong></p>\n<p><strong>5. What happened on October 28, 1929, also known as Black Monday?</strong><br/>\n✅ Answer: <strong>Start of the Great Depression.</strong></p>"
+    },
     {
       "id": "trapped_videogame_ch3_4",
       "title": "Trapped in a Video Game: Chapters 3 & 4",
@@ -493,7 +685,10 @@
           "clue": "Flying gear in Hawaii that convinces Jesse to play one more level"
         }
       ],
-      "readerHtml": "<h2>CHAPTER 3: Blast Blast Squawk!</h2>\n<p><strong>[Page 15]</strong> I did the thing you’re supposed to do when a man-eating praying mantis starts charging at you: I screamed a squeaky scream. “AHHHHHHH!” The praying mantis did not slow down. I tried adding running to the mix. “AHHH...” <em>THUD.</em> “AHHH...” <em>THUD.</em> “AHHH...” <em>THUD.</em></p>\n<p>Running over snow-covered rocks with a blaster strapped to your arm is harder than it looks. With the creature almost on top of me, I pulled out my last trick: screaming while curling into a tiny ball. But even that didn’t work because the stupid blaster kept getting in the... Oh. Wait. The blaster.</p>\n<p><strong>[Page 16]</strong> At the last second, I closed my eyes, reached up and squeezed my left hand. The blaster recoiled, and I heard a shriek. I opened my eyes to see the praying mantis disappear into a ball of light.</p>\n<p>Wow. I almost died. Inside of a video game. I imagined the funeral. “Here lies Jesse Rigsby of Middlefield, Ohio. He was tragically taken from us by a giant praying mantis while trying to save a video game world from fake aliens. He bravely led the resistance, which lasted for all of 10 seconds.”</p>\n<p>I looked around me. Snow and boulders everywhere, with a path leading deeper into the mountains ahead of me. No thanks. I turned and started walking back to find a way out of this mess. I got exactly five steps before... <em>CLUNK.</em> I hit something and fell backward into the snow. Confused, I picked myself up and tried again. <em>CLUNK.</em> I got up and inspected the spot further. It was open air, no different from anything else around me. I tried to put my fist through it. <em>CLUNK.</em></p>\n<p><strong>[Page 17]</strong> Owwwwww! I punched an invisible brick wall. I shook my hand, then tried blasting it. Nothing. Maybe full blast? I charged the blaster and shot the invisible wall from two feet away. The ball of light absorbed into the wall and disappeared. I sighed, put my hand against the wall, and started walking to find an opening.</p>\n<p>After five minutes of walking along an invisible wall in the Rocky Mountains (not exactly an activity I thought I’d be doing when I woke up), I heard a noise to my left. <em>Clickclickclick.</em> I slowly turned. Through several pine trees, I could see two praying mantises scuttling back and forth, guarding the main path. Gulp. I slowed down and crept quieter to keep from alerting the... <em>CLUNK.</em></p>\n<p>The invisible wall had jutted in with no warning, and I clunked my head against it. One of the creatures turned. I stayed very still because maybe praying mantis aliens are like T. rexes, where they can only see things that move. <em>SQUAAAAWWWWWWWWWWWWWK!</em></p>\n<p><strong>[Page 18]</strong> Nope! Bad theory. Bad, bad, bad theory. The creature that had heard me was now standing on its back legs and making a creepy squawking noise while the other one charged. I ran as fast as my little legs would take me. While climbing over boulders and dodging trees, I kept reaching back and wildly blasting at my attackers. <em>Blast-blast-blast-SQUAWK!</em></p>\n<p>It may not surprise you to learn that the creatures with six nimble insect legs were quickly gaining on the off-balance person who did not post a mile time to be proud of in gym class the previous week. <em>Blast-blast-blast-SHRIEEEEEEEEEEEK!</em> Got one! Unfortunately, I had no time to celebrate because the mantis I had vaporized was replaced with another one who’d heard his battle cry. And then another.</p>\n<p>I found the path and continued running and blasting wildly behind me, really wishing I’d brought my inhaler. But who brings an inhaler to a video game? I blamed Eric. He should have texted, “Come over. You’re not <strong>[Page 19]</strong> going to believe this. Maybe bring your inhaler.” Or perhaps, “Come over UNLESS YOU DON’T WANT TO GET CHASED BY MAN-EATING ALIENS THROUGH THE MOUNTAINS.” You know, just to give me a choice.</p>\n<p>As I ran and blasted, the terrain on either side of the path grew higher and higher until I found myself running through the bottom of a canyon. Praying mantises were now jumping into the canyon behind me, joining their brothers in a stampede of death. Suddenly, the canyon opened up into a big bowl with 50-foot walls. A dead end.</p>\n<p>I ran to the end, turned around, and started blasting. By this time, I was getting better at picking them off, but it was too late. For every alien I vaporized, three more would pour through the canyon opening. The horde got closer and closer: 30 yards away. Then 20. Then just 15 feet. I continued shooting while closing my eyes, preparing to meet my end.</p>\n<p>Then a chorus of shrieks. I opened my eyes to see the blinding light of five aliens getting vaporized at once. Before I could figure out what was happening, the wave behind them also disappeared. “Jesse!”</p>\n<p><strong>[Page 20]</strong> I looked up. Eric. Eric Conrad, looking exactly like a superhero, was blasting away from the top of the cliff. “Hey, buddy! What do you think?” “THIS IS THE WORST! GET ME OUT OF HERE!” I screamed.</p>\n<p><strong>[Page 21]</strong> “Glad you’re having fun! Try charging up to full blast!” I did what he said. It worked! I got a whole group with one blast. Eric and I worked together on clearing the entire canyon of aliens.</p>\n<p>After five minutes, the only group left was three stragglers coming in through the opening. I turned around to watch Eric line up the shot, and that’s when I saw it. Sneaking up behind Eric was a jet-black creature that looked a little more alien than praying mantis with five legs and one long blaster arm. “Eric!” He looked at me. The alien lowered its blaster. “WATCH OU...” The alien pulled the trigger, and my best friend in the whole world vaporized before my eyes.</p>\n\n<h2>CHAPTER 4: Reality Mode</h2>\n<p><strong>[Page 23]</strong> Eric had been my best friend since first grade. The first time I saw him, his parents were unloading the moving truck, while Eric ran back and forth in the front yard wearing a coonskin cap and spinning the tail with his hand. I finally went over to ask him what he was doing. He said that he was trying to fly and was “getting close.” I believed him because I was in first grade, and all first-graders believe that they’re <em>this close</em> to flying. I decided right then to stick with this strange flying child and learn his ways.</p>\n<p>And for the next six years, I did stick with him. Through everything. We never learned how to fly, but we did learn how to jump pretty high off of homemade bike ramps and start fires with magnifying glasses and scare each other during backyard sleepovers until we were afraid to go into the house to pee. And now he was gone.</p>\n<p><strong>[Page 26]</strong> “Come on,” Eric said as he started walking down the path. “Hey,” I caught up with him. “You going to explain what this is all about?” “Oh yeah!” Eric’s eyes lit up. “Isn’t this the greatest thing in the world? Can you believe it?” “No! Definitely not! Is this real?”</p>\n<p>Eric shrugged. “I think so. Earlier this afternoon, I finally beat the game. At the end of the credits, a screen came up that said I’d unlocked something called ‘Reality Mode’ and asked if I wanted to try it. When I said yes, I got sucked in like you did.”</p>\n<p><strong>[Page 26–27]</strong> “Wait,” Eric said as he dragged me into a small cave. “Watch this.” He shot a small blast into the snow to get the aliens’ attention. Soon, one came over, then two, then 50 or more. They were all trying to reach us, but they were all too big to fit into the tiny opening. Finally, Eric charged his blaster and vaporized the whole group in one shot. After the blinding light, we heard a chime and saw a mechanical part float over the snow. Eric <em>woo-hooed</em>, ran over, and clipped it onto his blaster. “Now I can launch grenades!” he shouted.</p>\n<p><em>THUNK THUNK.</em> I waited patiently while Eric shot grenades at two big trees. The grenades detonated in a flash of light, and the tops of the trees disappeared. Eric nodded approvingly. “At the end of each level, there’s a portal that takes you back to real life. I finished two levels, then decided to go back and tell you about it. I knew that nothing I <strong>[Page 28]</strong> could say would convince you to come in here because you’re such a baby...” <em>THUNK THUNK.</em> Eric took out the alien that had shot him earlier. “...so I just had to let you discover it for yourself.”</p>\n<p>“...And then this army guy starts yelling at me and making me do all this weird stuff...” “That was the tutorial,” Eric interrupted. “The tutorial. It’s there to teach you how to play the game. That sergeant’s not real—he’s like a robot that’s only programmed to do one thing.”</p>\n<p><strong>[Page 29]</strong> “Whatever. And now everything’s trying to kill us, AND I HAVE MATH HOMEWORK THAT’S DUE ON MONDAY!” ... “I’ll let you shoot a grenade.” I glared some more. Eric unclipped his grenade launcher and put it on my arm. “Try it.” I squeezed. Two grenades <em>THUNK THUNK</em>ed out of my arm and vaporized a praying mantis that I didn’t see sneaking up next to us. “Wasn’t that great?!” Eric exclaimed. It was. It was very great. “Hmf.”</p>\n<p><strong>[Page 30–31]</strong> “Come on. We’ve got an alien base to defeat,” Eric said as he ran ahead... “This is it,” Eric said, as he led me through a final door inside the alien base. Inside, we found a room with three glowing portals. One said “REPLAY,” another said “HOME,” and the last said “LEVEL 2.”</p>\n<p>“All right, I’ll let you keep going,” I said as I took a step toward the HOME portal. “Wait.” Eric grabbed me. “Don’t you want to keep going?” “No. I told you I want to go home.” “One more level.” “Nope.” “The next one is in Hawaii.” “Sorry.” “They have jet packs.” I squinted at him. “Jet paaaaaacks.” Finally, I rolled my eyes. “One more level.” “WOO-HOO!” We walked past the HOME portal into LEVEL 2. It was the worst decision of my life.</p>"
+      "readerHtml": "<h2>CHAPTER 3: Blast Blast Squawk!</h2>\n<p><strong>[Page 15]</strong> I did the thing you’re supposed to do when a man-eating praying mantis starts charging at you: I screamed a squeaky scream. “AHHHHHHH!” The praying mantis did not slow down. I tried adding running to the mix. “AHHH...” <em>THUD.</em> “AHHH...” <em>THUD.</em> “AHHH...” <em>THUD.</em></p>\n<p>Running over snow-covered rocks with a blaster strapped to your arm is harder than it looks. With the creature almost on top of me, I pulled out my last trick: screaming while curling into a tiny ball. But even that didn’t work because the stupid blaster kept getting in the... Oh. Wait. The blaster.</p>\n<p><strong>[Page 16]</strong> At the last second, I closed my eyes, reached up and squeezed my left hand. The blaster recoiled, and I heard a shriek. I opened my eyes to see the praying mantis disappear into a ball of light.</p>\n<p>Wow. I almost died. Inside of a video game. I imagined the funeral. “Here lies Jesse Rigsby of Middlefield, Ohio. He was tragically taken from us by a giant praying mantis while trying to save a video game world from fake aliens. He bravely led the resistance, which lasted for all of 10 seconds.”</p>\n<p>I looked around me. Snow and boulders everywhere, with a path leading deeper into the mountains ahead of me. No thanks. I turned and started walking back to find a way out of this mess. I got exactly five steps before... <em>CLUNK.</em> I hit something and fell backward into the snow. Confused, I picked myself up and tried again. <em>CLUNK.</em> I got up and inspected the spot further. It was open air, no different from anything else around me. I tried to put my fist through it. <em>CLUNK.</em></p>\n<p><strong>[Page 17]</strong> Owwwwww! I punched an invisible brick wall. I shook my hand, then tried blasting it. Nothing. Maybe full blast? I charged the blaster and shot the invisible wall from two feet away. The ball of light absorbed into the wall and disappeared. I sighed, put my hand against the wall, and started walking to find an opening.</p>\n<p>After five minutes of walking along an invisible wall in the Rocky Mountains (not exactly an activity I thought I’d be doing when I woke up), I heard a noise to my left. <em>Clickclickclick.</em> I slowly turned. Through several pine trees, I could see two praying mantises scuttling back and forth, guarding the main path. Gulp. I slowed down and crept quieter to keep from alerting the... <em>CLUNK.</em></p>\n<p>The invisible wall had jutted in with no warning, and I clunked my head against it. One of the creatures turned. I stayed very still because maybe praying mantis aliens are like T. rexes, where they can only see things that move. <em>SQUAAAAWWWWWWWWWWWWWK!</em></p>\n<p><strong>[Page 18]</strong> Nope! Bad theory. Bad, bad, bad theory. The creature that had heard me was now standing on its back legs and making a creepy squawking noise while the other one charged. I ran as fast as my little legs would take me. While climbing over boulders and dodging trees, I kept reaching back and wildly blasting at my attackers. <em>Blast-blast-blast-SQUAWK!</em></p>\n<p>It may not surprise you to learn that the creatures with six nimble insect legs were quickly gaining on the off-balance person who did not post a mile time to be proud of in gym class the previous week. <em>Blast-blast-blast-SHRIEEEEEEEEEEEK!</em> Got one! Unfortunately, I had no time to celebrate because the mantis I had vaporized was replaced with another one who’d heard his battle cry. And then another.</p>\n<p>I found the path and continued running and blasting wildly behind me, really wishing I’d brought my inhaler. But who brings an inhaler to a video game? I blamed Eric. He should have texted, “Come over. You’re not <strong>[Page 19]</strong> going to believe this. Maybe bring your inhaler.” Or perhaps, “Come over UNLESS YOU DON’T WANT TO GET CHASED BY MAN-EATING ALIENS THROUGH THE MOUNTAINS.” You know, just to give me a choice.</p>\n<p>As I ran and blasted, the terrain on either side of the path grew higher and higher until I found myself running through the bottom of a canyon. Praying mantises were now jumping into the canyon behind me, joining their brothers in a stampede of death. Suddenly, the canyon opened up into a big bowl with 50-foot walls. A dead end.</p>\n<p>I ran to the end, turned around, and started blasting. By this time, I was getting better at picking them off, but it was too late. For every alien I vaporized, three more would pour through the canyon opening. The horde got closer and closer: 30 yards away. Then 20. Then just 15 feet. I continued shooting while closing my eyes, preparing to meet my end.</p>\n<p>Then a chorus of shrieks. I opened my eyes to see the blinding light of five aliens getting vaporized at once. Before I could figure out what was happening, the wave behind them also disappeared. “Jesse!”</p>\n<p><strong>[Page 20]</strong> I looked up. Eric. Eric Conrad, looking exactly like a superhero, was blasting away from the top of the cliff. “Hey, buddy! What do you think?” “THIS IS THE WORST! GET ME OUT OF HERE!” I screamed.</p>\n<p><strong>[Page 21]</strong> “Glad you’re having fun! Try charging up to full blast!” I did what he said. It worked! I got a whole group with one blast. Eric and I worked together on clearing the entire canyon of aliens.</p>\n<p>After five minutes, the only group left was three stragglers coming in through the opening. I turned around to watch Eric line up the shot, and that’s when I saw it. Sneaking up behind Eric was a jet-black creature that looked a little more alien than praying mantis with five legs and one long blaster arm. “Eric!” He looked at me. The alien lowered its blaster. “WATCH OU...” The alien pulled the trigger, and my best friend in the whole world vaporized before my eyes.</p>\n\n<h2>CHAPTER 4: Reality Mode</h2>\n<p><strong>[Page 23]</strong> Eric had been my best friend since first grade. The first time I saw him, his parents were unloading the moving truck, while Eric ran back and forth in the front yard wearing a coonskin cap and spinning the tail with his hand. I finally went over to ask him what he was doing. He said that he was trying to fly and was “getting close.” I believed him because I was in first grade, and all first-graders believe that they’re <em>this close</em> to flying. I decided right then to stick with this strange flying child and learn his ways.</p>\n<p>And for the next six years, I did stick with him. Through everything. We never learned how to fly, but we did learn how to jump pretty high off of homemade bike ramps and start fires with magnifying glasses and scare each other during backyard sleepovers until we were afraid to go into the house to pee. And now he was gone.</p>\n<p><strong>[Page 26]</strong> “Come on,” Eric said as he started walking down the path. “Hey,” I caught up with him. “You going to explain what this is all about?” “Oh yeah!” Eric’s eyes lit up. “Isn’t this the greatest thing in the world? Can you believe it?” “No! Definitely not! Is this real?”</p>\n<p>Eric shrugged. “I think so. Earlier this afternoon, I finally beat the game. At the end of the credits, a screen came up that said I’d unlocked something called ‘Reality Mode’ and asked if I wanted to try it. When I said yes, I got sucked in like you did.”</p>\n<p><strong>[Page 26–27]</strong> “Wait,” Eric said as he dragged me into a small cave. “Watch this.” He shot a small blast into the snow to get the aliens’ attention. Soon, one came over, then two, then 50 or more. They were all trying to reach us, but they were all too big to fit into the tiny opening. Finally, Eric charged his blaster and vaporized the whole group in one shot. After the blinding light, we heard a chime and saw a mechanical part float over the snow. Eric <em>woo-hooed</em>, ran over, and clipped it onto his blaster. “Now I can launch grenades!” he shouted.</p>\n<p><em>THUNK THUNK.</em> I waited patiently while Eric shot grenades at two big trees. The grenades detonated in a flash of light, and the tops of the trees disappeared. Eric nodded approvingly. “At the end of each level, there’s a portal that takes you back to real life. I finished two levels, then decided to go back and tell you about it. I knew that nothing I <strong>[Page 28]</strong> could say would convince you to come in here because you’re such a baby...” <em>THUNK THUNK.</em> Eric took out the alien that had shot him earlier. “...so I just had to let you discover it for yourself.”</p>\n<p>“...And then this army guy starts yelling at me and making me do all this weird stuff...” “That was the tutorial,” Eric interrupted. “The tutorial. It’s there to teach you how to play the game. That sergeant’s not real—he’s like a robot that’s only programmed to do one thing.”</p>\n<p><strong>[Page 29]</strong> “Whatever. And now everything’s trying to kill us, AND I HAVE MATH HOMEWORK THAT’S DUE ON MONDAY!” ... “I’ll let you shoot a grenade.” I glared some more. Eric unclipped his grenade launcher and put it on my arm. “Try it.” I squeezed. Two grenades <em>THUNK THUNK</em>ed out of my arm and vaporized a praying mantis that I didn’t see sneaking up next to us. “Wasn’t that great?!” Eric exclaimed. It was. It was very great. “Hmf.”</p>\n<p><strong>[Page 30–31]</strong> “Come on. We’ve got an alien base to defeat,” Eric said as he ran ahead... “This is it,” Eric said, as he led me through a final door inside the alien base. Inside, we found a room with three glowing portals. One said “REPLAY,” another said “HOME,” and the last said “LEVEL 2.”</p>\n<p>“All right, I’ll let you keep going,” I said as I took a step toward the HOME portal. “Wait.” Eric grabbed me. “Don’t you want to keep going?” “No. I told you I want to go home.” “One more level.” “Nope.” “The next one is in Hawaii.” “Sorry.” “They have jet packs.” I squinted at him. “Jet paaaaaacks.” Finally, I rolled my eyes. “One more level.” “WOO-HOO!” We walked past the HOME portal into LEVEL 2. It was the worst decision of my life.</p>",
+      "instance": "R"
     }
-  ]
+  ],
+  "activeQuizIdR": "trapped_videogame_ch3_4",
+  "activeQuizIdD": "d_history_trivia_quiz_1"
 }

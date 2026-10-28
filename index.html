@@ -603,6 +603,14 @@
     color: #6ee7b7;
   }
 
+  .letter-slot.revealed-word {
+    border-style: solid;
+    border-color: #f59e0b;
+    background: #451a03;
+    color: #fde047;
+    cursor: default;
+  }
+
   .letter-bank {
     display: flex;
     flex-wrap: wrap;
@@ -1337,7 +1345,7 @@
 <body>
 
 <!-- Etiqueta Global de Verificación de Despliegue (visible en Acceso Privado y Pantalla Principal) -->
-<div class="build-timestamp">Actualizado: 6:21 PM - 10/28/2026</div>
+<div class="build-timestamp">Actualizado: 6:49 PM - 10/28/2026</div>
 
 <!-- Pantalla de Usuario y Contraseña (Acceso Privado: R / D) con soporte completo para tecla Enter -->
 <div id="authOverlay" class="auth-overlay">
@@ -1377,7 +1385,7 @@
       <button type="submit" class="auth-submit-btn">Entrar</button>
     </form>
     <div style="font-size: 10px; color: #64748b; font-family: monospace; margin-top: 2px;">
-      Actualizado: 6:21 PM - 10/28/2026
+      Actualizado: 6:49 PM - 10/28/2026
     </div>
   </div>
 </div>
@@ -2126,7 +2134,13 @@ const chapterOneQuestions = [
         ]
       }
     ],
-    hint: "Check the roles of the two Academy boys and the two older men.",
+    distractorVariants: [
+      "Lhari fleet commander who issues the spaceport dark glasses",
+      "Earth customs inspector who weighs passenger baggage at the gate",
+      "Mentorian ambassador stationed inside the glass skyscraper",
+      "Robotic pilot operating the moving sidewalk baggage strip"
+    ],
+    hint: "Think about the roles of the two Academy graduates and the two older men at the spaceport.",
     pageTitle: "Chapter 1 — Pages 5 & 13 (Characters of Chapter 1)",
     pageExcerpt: "\"Bart Steele and Tommy Kendron had graduated together, the day before, from the Space Academy of Earth. Now Tommy, who had been born on the ninth planet of the star Capella, was taking the Lhari starship to his faraway home, and Bart's father, Captain Rupert Steele (owner of Vega Interplanet), was coming back to Earth on the same starship... Instead, a chubby, gray-haired Vegan stranger (Edmund Briscoe) grasped Bart's wrist, shouted 'How you've grown, Son!' and whispered urgently in his ear.\"",
     word: "CAPELLA",
@@ -2223,6 +2237,12 @@ const chapterOneQuestions = [
           "Vegan interplanetary freight and passenger firm run by Captain Steele"
         ]
       }
+    ],
+    distractorVariants: [
+      "Underground subway tunnel connecting Earth's Space Academy to the desert",
+      "Military training simulator used by cadets on Capella IX",
+      "Automated cargo barge orbiting the bright star Deneb",
+      "Planetary defense shield surrounding the United Earth Council"
     ],
     hint: "Link the physical features and trade entities described in Chapter 1.",
     pageTitle: "Chapter 1 — Pages 6–11 (Spaceport Details)",
@@ -2322,6 +2342,12 @@ const chapterOneQuestions = [
         ]
       }
     ],
+    distractorVariants: [
+      "Uncharted asteroid belt where the Lhari first built their warp-drive",
+      "Frozen outer moon used as a customs checkpoint for Earth cargo",
+      "Twin-sunned desert planet where robotic cabs are manufactured",
+      "Forbidden nebula guarded by automated Lhari patrol cruisers"
+    ],
     hint: "Connect Earth, Mentor, Capella, and Vega to the characters associated with them.",
     pageTitle: "Chapter 1 — Pages 5–10 (Worlds & Star Systems)",
     pageExcerpt: "\"Earth was the legendary home of mankind before the Age of Space, where Bart and Tommy graduated from the Space Academy. Tommy had been born on the ninth planet of Capella. Bart's mother came from Mentor, of the star Deneb, a hundred times brighter than the sun. And Bart's father, Rupert Steele, operated Vega Interplanet from the Vega system—the same system as the fugitive hunted by the Lhari.\"",
@@ -2420,7 +2446,13 @@ const chapterOneQuestions = [
         ]
       }
     ],
-    hint: "Review how Bart describes the Lhari's eyes, hands, clothing, and star-drive secret.",
+    distractorVariants: [
+      "Telepathic communication network linking all Lhari officers across space",
+      "Gravity-reversal boots allowing Lhari guards to float down staircases",
+      "Synthetic crystal armor that turns Lhari soldiers invisible at night",
+      "Sub-light solar sails used by early Earth explorers before the Age of Space"
+    ],
+    hint: "Think about how Bart describes the Lhari's eyes, hands, clothing, and star-drive secret.",
     pageTitle: "Chapter 1 — Pages 7–10 (Lhari Traits & Secrets)",
     pageExcerpt: "\"Here and there in the crowd, standing out because of their height and the silvery metallic cloaks they wore, were the strange tall figures of the Lhari. Their hands had long triangular claws curving over the fingertips. Completely color-blind, they relied on Mentorians aboard their ships while guarding their star-drive monopoly with hypnotic memory suppression.\"",
     word: "MONOPOLY",
@@ -2517,6 +2549,12 @@ const chapterOneQuestions = [
           "Local spaceport vehicles discharging travelers near the moving sidewalks"
         ]
       }
+    ],
+    distractorVariants: [
+      "Heavy metal cargo trunks allowed without weight limits on Lhari ships",
+      "Hypnotic memory chambers installed at the entrance of the glass gate",
+      "Underground customs vaults where Earth police inspect alien passports",
+      "Laser security turrets mounted atop the pointed lightning-flash arch"
     ],
     hint: "Match the transport and protective items Bart and Tommy encounter entering the port.",
     pageTitle: "Chapter 1 — Pages 5–7 (Entering the Spaceport)",
@@ -2913,6 +2951,20 @@ function renderQuestion() {
   }
 }
 
+let matchDistractorVariantIdx = 0;
+
+function getMatchDistractorVariants(q) {
+  if (q && Array.isArray(q.distractorVariants) && q.distractorVariants.length > 0) {
+    return q.distractorVariants;
+  }
+  return [
+    "Unrelated decoy option that does not match any item on the left column",
+    "Extra distractor detail not connected to any of the four items on the left",
+    "Unused story detail included as an extra non-matching choice on the right",
+    "Decoy description that does not correspond to any left-side term"
+  ];
+}
+
 function renderMatchColumns(q, isReshuffle = false) {
   const leftCol = document.getElementById('matchColLeft');
   const rightCol = document.getElementById('matchColRight');
@@ -2920,58 +2972,106 @@ function renderMatchColumns(q, isReshuffle = false) {
   rightCol.innerHTML = '';
 
   const banner = document.getElementById('matchStatusBanner');
-  if (!isReshuffle) {
+  const dVariants = getMatchDistractorVariants(q);
+
+  if (!isReshuffle || prevLeftOrderIds.length !== q.pairs.length || prevRightOrderIds.length !== q.pairs.length + 1) {
     matchVariantIndices = q.pairs.map(() => 0);
-    prevLeftOrderIds = [];
-    prevRightOrderIds = [];
+    matchDistractorVariantIdx = 0;
+    prevLeftOrderIds = q.pairs.map((_, i) => i);
+    const initialRightIds = [...q.pairs.map((_, i) => i), -1];
+    prevRightOrderIds = shuffleDifferentOrder(initialRightIds.map(id => ({ id })), []).map(x => x.id);
     isMatchBusy = false;
     if (banner) banner.style.display = 'none';
   } else {
-    // Advance EVERY right-column item to the next wording variant (guaranteed new wording)
+    // Advance ONLY unsolved right-column items to the next wording variant (already-solved pairs keep their exact wording)
     matchVariantIndices = q.pairs.map((p, i) => {
+      if (solvedPairs.includes(i)) return matchVariantIndices[i] || 0;
       const variants = p.rightVariants || [p.right];
       if (variants.length <= 1) return 0;
       const prevIdx = matchVariantIndices[i] || 0;
       return (prevIdx + 1) % variants.length;
     });
-    if (banner) banner.style.display = 'inline';
+    matchDistractorVariantIdx = (matchDistractorVariantIdx + 1) % dVariants.length;
+
+    // Reorganize ONLY unsolved positions in Left column (already-solved options stay in place)
+    const unsolvedLeftPos = [];
+    const unsolvedLeftObjs = [];
+    prevLeftOrderIds.forEach((id, pos) => {
+      if (!solvedPairs.includes(id)) {
+        unsolvedLeftPos.push(pos);
+        unsolvedLeftObjs.push({ id });
+      }
+    });
+    if (unsolvedLeftObjs.length > 1) {
+      const shuffledLeft = shuffleDifferentOrder(unsolvedLeftObjs, unsolvedLeftObjs.map(x => x.id));
+      unsolvedLeftPos.forEach((pos, idx) => {
+        prevLeftOrderIds[pos] = shuffledLeft[idx].id;
+      });
+    }
+
+    // Reorganize ONLY unsolved positions in Right column (already-solved options stay in place)
+    const unsolvedRightPos = [];
+    const unsolvedRightObjs = [];
+    prevRightOrderIds.forEach((id, pos) => {
+      if (!solvedPairs.includes(id)) {
+        unsolvedRightPos.push(pos);
+        unsolvedRightObjs.push({ id });
+      }
+    });
+    if (unsolvedRightObjs.length > 1) {
+      const shuffledRight = shuffleDifferentOrder(unsolvedRightObjs, unsolvedRightObjs.map(x => x.id));
+      unsolvedRightPos.forEach((pos, idx) => {
+        prevRightOrderIds[pos] = shuffledRight[idx].id;
+      });
+    }
+
+    if (banner) {
+      banner.textContent = "🔄 Mismatch! Unsolved options reshuffled & reworded!";
+      banner.style.display = 'inline';
+    }
   }
 
-  // Reorganize both Left and Right columns into a guaranteed different random order
-  const rawLeft = q.pairs.map((p, i) => ({ id: i, text: p.left }));
-  const rawRight = q.pairs.map((p, i) => {
-    const variants = p.rightVariants || [p.right];
-    const vIdx = matchVariantIndices[i] || 0;
-    return { id: i, text: variants[vIdx] };
-  });
+  const allSolved = (solvedPairs.length === q.pairs.length);
 
-  const leftItems = isReshuffle ? shuffleDifferentOrder(rawLeft, prevLeftOrderIds) : rawLeft;
-  const rightItems = shuffleDifferentOrder(rawRight, prevRightOrderIds);
-
-  prevLeftOrderIds = leftItems.map(it => it.id);
-  prevRightOrderIds = rightItems.map(it => it.id);
-
-  leftItems.forEach(item => {
+  prevLeftOrderIds.forEach(id => {
+    const p = q.pairs[id];
     const btn = document.createElement('button');
-    btn.className = 'match-card-btn' + (solvedPairs.includes(item.id) ? ' paired' : '');
-    btn.id = `match-left-${item.id}`;
-    btn.textContent = item.text;
-    btn.onclick = () => handleMatchClick('left', item.id);
+    btn.className = 'match-card-btn' + (solvedPairs.includes(id) ? ' paired' : '');
+    btn.id = `match-left-${id}`;
+    btn.textContent = p.left;
+    btn.onclick = () => handleMatchClick('left', id);
     leftCol.appendChild(btn);
   });
 
-  rightItems.forEach(item => {
+  prevRightOrderIds.forEach(id => {
+    let text = '';
+    if (id === -1) {
+      text = dVariants[matchDistractorVariantIdx % dVariants.length];
+    } else {
+      const p = q.pairs[id];
+      const variants = p.rightVariants || [p.right];
+      const vIdx = matchVariantIndices[id] || 0;
+      text = variants[vIdx % variants.length];
+    }
+    const isPaired = id >= 0 && solvedPairs.includes(id);
     const btn = document.createElement('button');
-    btn.className = 'match-card-btn' + (solvedPairs.includes(item.id) ? ' paired' : '');
-    btn.id = `match-right-${item.id}`;
-    btn.textContent = item.text;
-    btn.onclick = () => handleMatchClick('right', item.id);
+    btn.className = 'match-card-btn' + (isPaired ? ' paired' : '');
+    btn.id = `match-right-${id}`;
+    btn.textContent = text;
+    if (id === -1 && allSolved) {
+      btn.disabled = true;
+      btn.style.opacity = '0.42';
+      btn.style.cursor = 'default';
+    }
+    btn.onclick = () => handleMatchClick('right', id);
     rightCol.appendChild(btn);
   });
 }
 
 function handleMatchClick(side, id) {
-  if (isQuizAnswered || isMatchBusy || solvedPairs.includes(id)) return;
+  const qCurr = activeQuestions[currentQIndex];
+  if (isQuizAnswered || isMatchBusy || (id >= 0 && solvedPairs.includes(id))) return;
+  if (qCurr && qCurr.type === 'match' && solvedPairs.length === qCurr.pairs.length) return;
   playSnapSound();
 
   const banner = document.getElementById('matchStatusBanner');
@@ -2984,15 +3084,15 @@ function handleMatchClick(side, id) {
   }
 
   document.querySelectorAll('#matchColLeft .match-card-btn').forEach(btn => {
-    const bId = parseInt(btn.id.replace('match-left-', ''));
+    const bId = parseInt(btn.id.replace('match-left-', ''), 10);
     if (!solvedPairs.includes(bId)) {
       btn.classList.toggle('selected-side', selectedLeftPair === bId);
     }
   });
 
   document.querySelectorAll('#matchColRight .match-card-btn').forEach(btn => {
-    const bId = parseInt(btn.id.replace('match-right-', ''));
-    if (!solvedPairs.includes(bId)) {
+    const bId = parseInt(btn.id.replace('match-right-', ''), 10);
+    if (!(bId >= 0 && solvedPairs.includes(bId))) {
       btn.classList.toggle('selected-side', selectedRightPair === bId);
     }
   });
@@ -3001,7 +3101,7 @@ function handleMatchClick(side, id) {
     const lBtn = document.getElementById(`match-left-${selectedLeftPair}`);
     const rBtn = document.getElementById(`match-right-${selectedRightPair}`);
 
-    if (selectedLeftPair === selectedRightPair) {
+    if (selectedLeftPair === selectedRightPair && selectedRightPair >= 0) {
       solvedPairs.push(selectedLeftPair);
       if (lBtn) {
         lBtn.classList.remove('selected-side');
@@ -3011,12 +3111,20 @@ function handleMatchClick(side, id) {
         rBtn.classList.remove('selected-side');
         rBtn.classList.add('paired');
       }
+      if (qCurr && solvedPairs.length === qCurr.pairs.length) {
+        const extraBtn = document.getElementById('match-right--1');
+        if (extraBtn) {
+          extraBtn.disabled = true;
+          extraBtn.style.opacity = '0.42';
+          extraBtn.style.cursor = 'default';
+        }
+      }
       playSnapSound();
       selectedLeftPair = null;
       selectedRightPair = null;
       updateSubmitButtonState();
     } else {
-      // Mismatch! Flash red + shake, reset pairs, reorganize both columns & change right-column wording
+      // Mismatch! Flash red + shake, keep already-solved pairs intact, reorganize & reword only unsolved options
       isMatchBusy = true;
       playWrongSound();
       if (lBtn) {
@@ -3029,7 +3137,6 @@ function handleMatchClick(side, id) {
       }
       selectedLeftPair = null;
       selectedRightPair = null;
-      solvedPairs = [];
       updateSubmitButtonState();
 
       setTimeout(() => {
@@ -3049,9 +3156,19 @@ function renderSpellingBench() {
   slotsContainer.innerHTML = '';
   letterBank.innerHTML = '';
 
+  const isRevealedAfterFail = isSpellingLocked && !isSpellingSolved;
+
   currentSlots.forEach((letterObj, idx) => {
     const slot = document.createElement('div');
-    slot.className = `letter-slot ${letterObj ? 'filled' : ''} ${isSpellingSolved ? 'solved' : ''}`;
+    let stateClasses = '';
+    if (isSpellingSolved) {
+      stateClasses = 'filled solved';
+    } else if (isRevealedAfterFail) {
+      stateClasses = 'revealed-word';
+    } else if (letterObj) {
+      stateClasses = 'filled';
+    }
+    slot.className = `letter-slot ${stateClasses}`;
     slot.textContent = letterObj ? letterObj.char : '';
 
     slot.ondragover = (e) => {
@@ -3077,6 +3194,14 @@ function renderSpellingBench() {
 
     slotsContainer.appendChild(slot);
   });
+
+  if (isRevealedAfterFail) {
+    const revealBanner = document.createElement('div');
+    revealBanner.style.cssText = 'font-size: 0.96rem; font-weight: 800; color: #fde047; display: flex; align-items: center; justify-content: center; width: 100%; padding: 0.15rem 0.4rem;';
+    revealBanner.innerHTML = `✅ Right Spelling: <span style="margin-left: 0.45rem; color: #38bdf8; letter-spacing: 1.5px; font-size: 1.08rem; font-weight: 900;">${currentTargetWord}</span>`;
+    letterBank.appendChild(revealBanner);
+    return;
+  }
 
   currentBank.forEach((letterObj, bIdx) => {
     const tile = document.createElement('div');
@@ -3176,10 +3301,16 @@ function submitSpellingAttempt() {
     } else {
       isSpellingLocked = true;
       attemptsCountEl.style.color = "#ef4444";
-      statusEl.textContent = `🔒 Out of attempts! Word was: ${currentTargetWord}`;
+      // Populate slots with the exact right spelling so the user sees it immediately after using all 3 chances
+      currentSlots = currentTargetWord.split('').map((ch, idx) => ({
+        id: `revealed-${idx}-${ch}`,
+        char: ch.toUpperCase()
+      }));
+      currentBank = [];
+      statusEl.innerHTML = `🔒 0/3 Attempts — Right Spelling: <strong style="color:#fde047; letter-spacing:1px;">${currentTargetWord}</strong>`;
       statusEl.style.color = "#ef4444";
       submitBtn.disabled = true;
-      submitBtn.textContent = "🔒 Locked (0/1 pt)";
+      submitBtn.textContent = `🔒 Right Spelling: ${currentTargetWord}`;
       renderSpellingBench();
       updateSubmitButtonState();
     }
@@ -3194,13 +3325,23 @@ function selectOption(idx, btnElement) {
   updateSubmitButtonState();
 }
 
+function sanitizeHintNoPageRef(rawHint) {
+  if (!rawHint) return '';
+  return String(rawHint)
+    .replace(/\b(on|at the (very )?top of|in the \w+ paragraph on|check|look (at|on)|review|read)\s+pages?\s+\d+([–\-]\d+)?\s*:?\s*/gi, '')
+    .replace(/\s*\b(on|at)\s+pages?\s+\d+([–\-]\d+)?\b/gi, '')
+    .replace(/^[,\s]+/, '')
+    .replace(/^([a-z])/, (_, c) => c.toUpperCase());
+}
+
 function revealHint() {
   if (hintUsedOnCurrent || isQuizAnswered) return;
   hintUsedOnCurrent = true;
   playHintSound();
   const q = activeQuestions[currentQIndex];
   const box = document.getElementById('hintBox');
-  box.textContent = `Hint: ${q.hint}`;
+  const cleanHint = currentInstance === 'R' ? sanitizeHintNoPageRef(q.hint) : q.hint;
+  box.textContent = `Hint: ${cleanHint}`;
   box.style.display = 'block';
 
   document.getElementById('hintBtn').disabled = true;
@@ -4072,7 +4213,7 @@ const BUILT_IN_CH3_4_QUIZ = {
         "False"
       ],
       "correct": 1,
-      "hint": "Check what happens to the ball of light when it hits the invisible brick wall on page 17.",
+      "hint": "Think about what happens to the ball of light when it hits the invisible brick wall.",
       "pageTitle": "Chapter 3 — Page 17 (The Invisible Wall)",
       "pageExcerpt": "\"Owwwwww! I punched an invisible brick wall. I shook my hand, then tried blasting it. Nothing. Maybe full blast? I charged the blaster and shot the invisible wall from two feet away. The ball of light absorbed into the wall and disappeared.\"",
       "word": "INVISIBLE",
@@ -4123,7 +4264,13 @@ const BUILT_IN_CH3_4_QUIZ = {
           ]
         }
       ],
-      "hint": "Review pages 16–19: Jesse's imagined funeral, the boundary he hits, his dinosaur comparison, and the dead end.",
+      "distractorVariants": [
+        "Secret underground tunnel Jesse digs in the snow to escape the mountains",
+        "Flying hoverboard Jesse finds hidden behind the pine trees",
+        "Friendly alien guide who hands Jesse a map of Middlefield, Ohio",
+        "Force-field shield that bounces praying mantises back over the cliff"
+      ],
+      "hint": "Recall Jesse's imagined funeral, the unseen boundary he hits, his dinosaur comparison, and the 50-foot dead end.",
       "pageTitle": "Chapter 3 — Pages 16–19 (Mountain Chase)",
       "pageExcerpt": "\"Here lies Jesse Rigsby of Middlefield, Ohio... After five minutes of walking along an invisible wall in the Rocky Mountains... I stayed very still because maybe praying mantis aliens are like T. rexes, where they can only see things that move... Suddenly, the canyon opened up into a big bowl with 50-foot walls. A dead end.\"",
       "word": "CANYON",
@@ -4131,7 +4278,7 @@ const BUILT_IN_CH3_4_QUIZ = {
     },
     {
       "type": "mc",
-      "q": "While running from the six-legged praying mantises on Page 18, what item does Jesse really wish he had brought with him—and blames Eric for not mentioning in his text?",
+      "q": "While running from the six-legged praying mantises, what item does Jesse really wish he had brought with him—and blames Eric for not mentioning in his text?",
       "options": [
         "His inhaler",
         "His magnifying glass",
@@ -4139,7 +4286,7 @@ const BUILT_IN_CH3_4_QUIZ = {
         "His math homework"
       ],
       "correct": 0,
-      "hint": "Jesse jokes about who would ever think to bring this medical item to a video game.",
+      "hint": "Jesse jokes about who would ever think to bring this breathing item to a video game.",
       "pageTitle": "Chapter 3 — Pages 18–19 (Running Out of Breath)",
       "pageExcerpt": "\"I found the path and continued running and blasting wildly behind me, really wishing I’d brought my inhaler. But who brings an inhaler to a video game? I blamed Eric. He should have texted, 'Come over. You’re not going to believe this. Maybe bring your inhaler.'\"",
       "word": "INHALER",
@@ -4155,7 +4302,7 @@ const BUILT_IN_CH3_4_QUIZ = {
         "\"Hide inside the pine trees until they pass!\""
       ],
       "correct": 0,
-      "hint": "Look at the top of page 21 right after Eric appears on the cliff like a superhero.",
+      "hint": "Think about how Jesse changes his blaster shot from single blasts to a more powerful shot.",
       "pageTitle": "Chapter 3 — Page 21 (Clearing the Canyon)",
       "pageExcerpt": "\"'Glad you’re having fun! Try charging up to full blast!' I did what he said. It worked! I got a whole group with one blast. Eric and I worked together on clearing the entire canyon of aliens.\"",
       "word": "VAPORIZE",
@@ -4169,7 +4316,7 @@ const BUILT_IN_CH3_4_QUIZ = {
         "False"
       ],
       "correct": 1,
-      "hint": "Read carefully how Jesse describes the creature's color, legs, and arm on page 21.",
+      "hint": "Remember how Jesse describes the sneaky creature's color, number of legs, and weapon arm.",
       "pageTitle": "Chapter 3 — Page 21 (The Ambush on the Cliff)",
       "pageExcerpt": "\"Sneaking up behind Eric was a jet-black creature that looked a little more alien than praying mantis with five legs and one long blaster arm. 'Eric!' He looked at me. The alien lowered its blaster... The alien pulled the trigger, and my best friend in the whole world vaporized before my eyes.\"",
       "word": "STRAGGLER",
@@ -4177,7 +4324,7 @@ const BUILT_IN_CH3_4_QUIZ = {
     },
     {
       "type": "match",
-      "q": "Match each detail from Jesse's memories of Eric in Chapter 4 (Page 23) with what happened:",
+      "q": "Match each detail from Jesse's memories of his friendship with Eric in Chapter 4 with what happened:",
       "pairs": [
         {
           "left": "First Grade",
@@ -4220,7 +4367,13 @@ const BUILT_IN_CH3_4_QUIZ = {
           ]
         }
       ],
-      "hint": "Check page 23 where Jesse recalls meeting Eric in first grade and their six years of friendship.",
+      "distractorVariants": [
+        "Summer space camp where Eric and Jesse built a working video game console",
+        "Treehouse laboratory where the boys invented a real jet pack in third grade",
+        "School science fair project that accidentally opened a portal in Ohio",
+        "Skateboard half-pipe the boys built inside Eric's basement"
+      ],
+      "hint": "Recall how Jesse met Eric when the moving truck arrived and the adventures they had over six years of friendship.",
       "pageTitle": "Chapter 4 — Page 23 (Reality Mode — Best Friends)",
       "pageExcerpt": "\"Eric had been my best friend since first grade. The first time I saw him, his parents were unloading the moving truck, while Eric ran back and forth in the front yard wearing a coonskin cap and spinning the tail with his hand... We never learned how to fly, but we did learn how to jump pretty high off of homemade bike ramps and start fires with magnifying glasses and scare each other during backyard sleepovers...\"",
       "word": "COONSKIN",
@@ -4228,7 +4381,7 @@ const BUILT_IN_CH3_4_QUIZ = {
     },
     {
       "type": "mc",
-      "q": "According to Eric on Page 26, how did he unlock 'Reality Mode' and get sucked into the video game?",
+      "q": "According to Eric in Chapter 4, how did he unlock 'Reality Mode' and get sucked into the video game?",
       "options": [
         "He finally beat the game earlier that afternoon, and a screen at the end of the credits asked if he wanted to try 'Reality Mode'.",
         "He entered a secret cheat code he found printed inside the game manual.",
@@ -4236,7 +4389,7 @@ const BUILT_IN_CH3_4_QUIZ = {
         "He downloaded an experimental update from the alien base portal."
       ],
       "correct": 0,
-      "hint": "Eric explains what happened at the end of the game's credits earlier that afternoon.",
+      "hint": "Eric explains what popped up on the screen at the end of the game's credits after he beat it.",
       "pageTitle": "Chapter 4 — Page 26 (Unlocking Reality Mode)",
       "pageExcerpt": "\"Eric shrugged. 'I think so. Earlier this afternoon, I finally beat the game. At the end of the credits, a screen came up that said I’d unlocked something called \"Reality Mode\" and asked if I wanted to try it. When I said yes, I got sucked in like you did.'\"",
       "word": "CREDITS",
@@ -4244,7 +4397,7 @@ const BUILT_IN_CH3_4_QUIZ = {
     },
     {
       "type": "mc",
-      "q": "How does Eric earn the mechanical grenade-launcher attachment on Pages 26–27?",
+      "q": "How does Eric earn the mechanical grenade-launcher attachment in Chapter 4?",
       "options": [
         "He lures 50+ aliens to a tiny cave opening they can't fit through and vaporizes the whole group in one charged shot.",
         "He finds it inside a locked supply crate next to the HOME portal.",
@@ -4266,7 +4419,7 @@ const BUILT_IN_CH3_4_QUIZ = {
         "False"
       ],
       "correct": 1,
-      "hint": "Check what Eric says on page 27 about what appears at the end of each level.",
+      "hint": "Think about what Eric says appears at the end of each level that lets players return to real life.",
       "pageTitle": "Chapter 4 — Page 27 (Portals at the End of Each Level)",
       "pageExcerpt": "\"'Oh, we’re not stuck,' Eric said as he started walking... 'At the end of each level, there’s a portal that takes you back to real life. I finished two levels, then decided to go back and tell you about it.'\"",
       "word": "PORTAL",
@@ -4317,7 +4470,13 @@ const BUILT_IN_CH3_4_QUIZ = {
           ]
         }
       ],
-      "hint": "Review pages 26–28: Reality Mode, the cave strategy, the floating mechanical part, and the yelling army guy.",
+      "distractorVariants": [
+        "Invisibility cloak earned by running five miles without an inhaler",
+        "Laser sword hidden inside the glowing REPLAY portal room",
+        "Medical kit dropped by a helicopter at the bottom of the canyon",
+        "Pause button on Jesse's sleeve that freezes all aliens for ten seconds"
+      ],
+      "hint": "Think about how players enter the game, the cave trick, the floating blaster upgrade, and the yelling tutorial instructor.",
       "pageTitle": "Chapter 4 — Pages 26–28 (Game Mechanics Explained)",
       "pageExcerpt": "\"A screen came up that said I’d unlocked something called 'Reality Mode'... They were all too big to fit into the tiny opening... we heard a chime and saw a mechanical part float over the snow... 'The tutorial. It’s there to teach you how to play the game. That sergeant’s not real—he’s like a robot that’s only programmed to do one thing.'\"",
       "word": "TUTORIAL",
@@ -4333,7 +4492,7 @@ const BUILT_IN_CH3_4_QUIZ = {
         "He needed Jesse's help finishing their Monday math homework first."
       ],
       "correct": 0,
-      "hint": "Look at the top of page 28 where Eric finishes his sentence while taking out the alien that shot him earlier.",
+      "hint": "Eric jokes that Jesse would never have believed or agreed to enter if he had simply told him about it.",
       "pageTitle": "Chapter 4 — Pages 27–28 (Why Eric Tricked Jesse)",
       "pageExcerpt": "\"'I finished two levels, then decided to go back and tell you about it. I knew that nothing I could say would convince you to come in here because you’re such a baby...' THUNK THUNK. Eric took out the alien that had shot him earlier. '...so I just had to let you discover it for yourself.'\"",
       "word": "CONVINCE",
@@ -4341,7 +4500,7 @@ const BUILT_IN_CH3_4_QUIZ = {
     },
     {
       "type": "mc",
-      "q": "On Page 28, when Jesse complains about 'this army guy' who yelled at him and made him do weird stuff after he threw up, what does Eric tell him that was?",
+      "q": "When Jesse complains about 'this army guy' who yelled at him and made him do weird stuff after he threw up, what does Eric tell him that was?",
       "options": [
         "The tutorial, featuring a sergeant who is like a robot programmed to teach how to play.",
         "A secret boss battle that only triggers when a player throws up.",
@@ -4349,7 +4508,7 @@ const BUILT_IN_CH3_4_QUIZ = {
         "A glitch caused by the invisible brick wall in the Rocky Mountains."
       ],
       "correct": 0,
-      "hint": "Eric interrupts Jesse and explains the purpose of the sergeant.",
+      "hint": "Eric interrupts Jesse and explains the purpose of the programmed drill sergeant at the start of a game.",
       "pageTitle": "Chapter 4 — Page 28 (The Tutorial Sergeant)",
       "pageExcerpt": "\"'...And then this army guy starts yelling at me and making me do all this weird stuff...' 'That was the tutorial,' Eric interrupted... 'The tutorial. It’s there to teach you how to play the game. That sergeant’s not real—he’s like a robot that’s only programmed to do one thing.'\"",
       "word": "SERGEANT",
@@ -4363,15 +4522,15 @@ const BUILT_IN_CH3_4_QUIZ = {
         "False"
       ],
       "correct": 1,
-      "hint": "Check Jesse's reaction on pages 29–30 after he vaporizes a sneaking mantis with two grenades.",
+      "hint": "Remember what Jesse thinks after vaporizing a sneaking mantis with two grenades ('It was. It was very great.') and how he launches grenades willy-nilly.",
       "pageTitle": "Chapter 4 — Pages 29–30 (Trying the Grenade Launcher)",
       "pageExcerpt": "\"I squeezed. Two grenades THUNK THUNKed out of my arm and vaporized a praying mantis that I didn’t see sneaking up next to us. 'Wasn’t that great?!' Eric exclaimed. It was. It was very great. 'Hmf.' ... Eric blasted and whooped his way through the rest of the level, and I launched grenades willy-nilly.\"",
       "word": "HOMEWORK",
-      "clue": "Math assignment due on Monday that Jesse yells about on page 29"
+      "clue": "Math assignment due on Monday that Jesse yells about while being chased"
     },
     {
       "type": "mc",
-      "q": "Alongside 'REAL ALIENS ARE TRYING TO EAT ME!', what real-world responsibility does Jesse shout about on Page 29?",
+      "q": "Alongside 'REAL ALIENS ARE TRYING TO EAT ME!', what real-world responsibility does Jesse shout about in Chapter 4?",
       "options": [
         "\"AND I HAVE MATH HOMEWORK THAT'S DUE ON MONDAY!\"",
         "\"AND I HAVE TO IMPROVE MY GYM CLASS MILE TIME!\"",
@@ -4379,7 +4538,7 @@ const BUILT_IN_CH3_4_QUIZ = {
         "\"AND I LEFT MY BICYCLE ON THE HOMEMADE RAMP!\""
       ],
       "correct": 0,
-      "hint": "Jesse yells this in all caps at the very top of page 29.",
+      "hint": "Think about the school assignment Jesse is worried about finishing for Monday.",
       "pageTitle": "Chapter 4 — Page 29 (Math Homework Due Monday)",
       "pageExcerpt": "\"'Whatever. And now everything’s trying to kill us, AND I HAVE MATH HOMEWORK THAT’S DUE ON MONDAY!'\"",
       "word": "MONDAY",
@@ -4430,6 +4589,12 @@ const BUILT_IN_CH3_4_QUIZ = {
           ]
         }
       ],
+      "distractorVariants": [
+        "Roaring engine sound of a Hawaiian jet pack taking off inside the cave",
+        " Sirens blaring from the Middlefield police cars outside Eric's house",
+        " Loud bell ringing when Monday math homework is submitted",
+        " Rumble of the moving truck backing into Eric's front yard"
+      ],
       "hint": "Recall the sounds of the invisible wall, the patrolling insects in the pines, the alien alarm cry, and the grenade launcher.",
       "pageTitle": "Chapters 3 & 4 — Pages 16–18 & 27–29 (Sound Effects)",
       "pageExcerpt": "\"I got exactly five steps before... CLUNK... I heard a noise to my left. Clickclickclick. Through several pine trees, I could see two praying mantises... SQUAAAAWWWWWWWWWWWWWK!... Two grenades THUNK THUNKed out of my arm and vaporized a praying mantis.\"",
@@ -4438,7 +4603,7 @@ const BUILT_IN_CH3_4_QUIZ = {
     },
     {
       "type": "mc",
-      "q": "When Eric and Jesse enter the final door inside the alien base on Page 30, what are the exact labels on the three glowing portals?",
+      "q": "When Eric and Jesse enter the final door inside the alien base, what are the exact labels on the three glowing portals?",
       "options": [
         "\"REPLAY,\" \"HOME,\" and \"LEVEL 2\"",
         "\"START,\" \"PAUSE,\" and \"QUIT GAME\"",
@@ -4446,7 +4611,7 @@ const BUILT_IN_CH3_4_QUIZ = {
         "\"TUTORIAL,\" \"REALITY MODE,\" and \"CREDITS\""
       ],
       "correct": 0,
-      "hint": "Check the second paragraph on page 30 inside the alien base.",
+      "hint": "One portal lets you play the stage again, one sends you back to real life, and one advances to the next stage.",
       "pageTitle": "Chapter 4 — Page 30 (The Three Glowing Portals)",
       "pageExcerpt": "\"'This is it,' Eric said, as he led me through a final door inside the alien base. Inside, we found a room with three glowing portals. One said 'REPLAY,' another said 'HOME,' and the last said 'LEVEL 2.'\"",
       "word": "REPLAY",
@@ -4460,7 +4625,7 @@ const BUILT_IN_CH3_4_QUIZ = {
         "False"
       ],
       "correct": 1,
-      "hint": "Look at page 31 to see what Jesse decides after Eric says 'Jet paaaaaacks.'",
+      "hint": "Remember what Jesse decides after Eric mentions 'Jet paaaaaacks' and what Jesse calls 'the worst decision of my life.'",
       "pageTitle": "Chapter 4 — Page 31 (The Worst Decision)",
       "pageExcerpt": "\"We stared at each other some more, Eric nodding and me squinting. Finally, I rolled my eyes. 'One more level.' 'WOO-HOO!' We walked past the HOME portal into LEVEL 2. It was the worst decision of my life.\"",
       "word": "DECISION",
@@ -4468,7 +4633,7 @@ const BUILT_IN_CH3_4_QUIZ = {
     },
     {
       "type": "mc",
-      "q": "What two details about Level 2 does Eric use on Pages 30–31 to finally tempt Jesse into walking past the HOME portal?",
+      "q": "What two details about Level 2 does Eric use to finally tempt Jesse into walking past the HOME portal?",
       "options": [
         "It takes place in Hawaii and they have jet packs.",
         "It takes place in Middlefield, Ohio and gives them giant robots.",
@@ -4476,7 +4641,7 @@ const BUILT_IN_CH3_4_QUIZ = {
         "It lets them fly with coonskin caps and ride motorcycles."
       ],
       "correct": 0,
-      "hint": "First Eric mentions the tropical location, and then he mentions the flying gear.",
+      "hint": "First Eric mentions a tropical island state, and then he mentions flying gear.",
       "pageTitle": "Chapter 4 — Pages 30–31 (Hawaii & Jet Packs)",
       "pageExcerpt": "\"'One more level.' 'Nope.' 'The next one is in Hawaii.' 'Sorry.' 'They have jet packs.' I squinted at him. 'Jet paaaaaacks.' ... Finally, I rolled my eyes. 'One more level.'\"",
       "word": "HAWAII",
@@ -4502,7 +4667,7 @@ const BUILT_IN_CH3_4_QUIZ = {
           "rightVariants": [
             "Alien with five legs and one long blaster arm that sneaks up behind Eric",
             "Dark five-legged enemy on the cliff that vaporizes Eric at the end of Chapter 3",
-            "Armed black alien thatEric later takes out with two grenades on Page 28",
+            "Armed black alien that Eric later takes out with two grenades",
             "Stealthy five-legged shooter that ambushes Eric from behind on the ridge"
           ]
         },
@@ -4527,7 +4692,13 @@ const BUILT_IN_CH3_4_QUIZ = {
           ]
         }
       ],
-      "hint": "Review the two types of aliens in Chapter 3 and the two end-of-chapter locations in Chapter 4.",
+      "distractorVariants": [
+        "Underwater submarine base guarded by giant robotic sharks",
+        "Peaceful trading post where players buy extra lives with gold coins",
+        "Eight-winged dragon boss that breathes fire over Middlefield, Ohio",
+        "Desert spaceport where Lhari starships land in blinding rainbow colors"
+      ],
+      "hint": "Think about the two types of alien enemies in Chapter 3 and the two end-of-chapter destinations in Chapter 4.",
       "pageTitle": "Chapters 3 & 4 — Pages 18, 21, 30 & 31",
       "pageExcerpt": "\"creatures with six nimble insect legs... a jet-black creature that looked a little more alien than praying mantis with five legs and one long blaster arm... 'We’ve got an alien base to defeat'... Inside, we found a room with three glowing portals. One said 'REPLAY,' another said 'HOME,' and the last said 'LEVEL 2.' ... 'The next one is in Hawaii... They have jet packs.'\"",
       "word": "JETPACKS",
@@ -5668,7 +5839,7 @@ function normalizeGeneratedQuestions(rawQuestions) {
     const base = {
       type,
       q: String(q.q || `Question ${idx + 1}`),
-      hint: String(q.hint || 'Review the key details in the reading material.'),
+      hint: sanitizeHintNoPageRef(q.hint || 'Think about the key events and character actions in this part of the story.'),
       pageTitle: String(q.pageTitle || `Section / Page Reference #${idx + 1}`),
       pageExcerpt: String(q.pageExcerpt || 'Refer to the chapter text for the exact passage supporting this answer.'),
       word: cleanWord,
@@ -5695,6 +5866,19 @@ function normalizeGeneratedQuestions(rawQuestions) {
           rightVariants: variants.slice(0, 4)
         };
       });
+      let dVars = Array.isArray(q.distractorVariants) ? q.distractorVariants.map(v => String(v)).filter(Boolean) : [];
+      if (dVars.length === 0) {
+        dVars = [
+          'An unrelated event or detail that does not match any of the items on the left',
+          'A secondary background detail that does not correspond to any left-hand option',
+          'An extra distractor statement that is not paired with any item on the left column',
+          'A different story action that does not belong to any of the four items on the left'
+        ];
+      }
+      while (dVars.length < 4) {
+        dVars.push(`${dVars[0]} (alt #${dVars.length + 1})`);
+      }
+      base.distractorVariants = dVars.slice(0, 4);
     } else if (type === 'tf') {
       base.options = ['True', 'False'];
       base.correct = (Number(q.correct) === 1 || String(q.correct).toLowerCase() === 'false') ? 1 : 0;
@@ -5828,12 +6012,13 @@ STRICT RULES FOR EACH QUESTION TYPE:
      - "left": short term, character, place, or concept (2-5 words)
      - "right": primary matching definition/description
      - "rightVariants": array of 4 DIFFERENT wordings/paraphrases of that exact right-column definition (so when a student makes a mistake, the right column dynamically changes its wording!).
+   - "distractorVariants": array of 4 DIFFERENT wordings of 1 extra decoy right-column option that does NOT match any of the 4 left-column items (so the right column has 5 options total for 4 left items).
 3. "tf" (True or False):
    - "q": start with "True or False: ..." (or "Verdadero o Falso: ..." if Spanish)
    - "options": ["True", "False"]
    - "correct": 0 if True, 1 if False.
 4. EVERY question MUST also include:
-   - "hint": helpful clue without giving away the answer directly.
+   - "hint": helpful comprehension clue about the story events or characters without giving away the answer directly. NEVER mention page numbers or say "read page #", "check page #", or "on page #" in the hint!
    - "pageTitle": specific chapter/page/section reference (e.g., "Chapter 2 — Page 16 (The Starship Landing)").
    - "pageExcerpt": a faithful 2-4 sentence verbatim quote or detailed excerpt from the source material that contains the answer (used by the "📖 Reread chapter to find answer" button).
    - "word": a single UPPERCASE letters-only vocabulary/key word (4 to 10 letters, A-Z only, no spaces or hyphens) from the material for the Spelling Cipher.

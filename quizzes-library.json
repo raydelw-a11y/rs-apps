@@ -1,6 +1,6 @@
 {
   "activeQuizId": "trapped_videogame_ch3_4",
-  "updatedAt": "2026-10-28T14:43:22.008680+00:00",
+  "updatedAt": "2026-10-28T22:49:14.451Z",
   "quizzes": [
     {
       "id": "d_history_trivia_mc",
@@ -14,7 +14,7 @@
           "type": "mc",
           "sectionTitle": "Multiple Choice (20.0 pts)",
           "noSpelling": true,
-          "basePts": 20.0,
+          "basePts": 20,
           "q": "What is the oldest University in the United States?",
           "options": [
             "Harvard",
@@ -31,7 +31,7 @@
           "type": "mc",
           "sectionTitle": "Multiple Choice (20.0 pts)",
           "noSpelling": true,
-          "basePts": 20.0,
+          "basePts": 20,
           "q": "Which US athlete has won the most Olympic gold medals ever?",
           "options": [
             "Michael Phelps",
@@ -48,7 +48,7 @@
           "type": "mc",
           "sectionTitle": "Multiple Choice (20.0 pts)",
           "noSpelling": true,
-          "basePts": 20.0,
+          "basePts": 20,
           "q": "Which US president issued the Emancipation Proclamation?",
           "options": [
             "Abraham Lincoln",
@@ -65,7 +65,7 @@
           "type": "mc",
           "sectionTitle": "Multiple Choice (20.0 pts)",
           "noSpelling": true,
-          "basePts": 20.0,
+          "basePts": 20,
           "q": "The Tet Offensive was a turning point in which war?",
           "options": [
             "The Vietnam War",
@@ -82,7 +82,7 @@
           "type": "mc",
           "sectionTitle": "Multiple Choice (20.0 pts)",
           "noSpelling": true,
-          "basePts": 20.0,
+          "basePts": 20,
           "q": "What happened on October 28, 1929, also known as Black Monday?",
           "options": [
             "Start of the Great Depression.",
@@ -110,7 +110,7 @@
           "type": "fib",
           "sectionTitle": "Fill in the Blank (20.0 pts)",
           "noSpelling": true,
-          "basePts": 20.0,
+          "basePts": 20,
           "q": "What is the oldest University in the United States?",
           "blankPrompt": "________ is the oldest University in the United States.",
           "answer": "Harvard",
@@ -126,7 +126,7 @@
           "type": "fib",
           "sectionTitle": "Fill in the Blank (20.0 pts)",
           "noSpelling": true,
-          "basePts": 20.0,
+          "basePts": 20,
           "q": "Which US athlete has won the most Olympic gold medals ever?",
           "blankPrompt": "________ ________ is the US athlete who has won the most Olympic gold medals ever.",
           "answer": "Michael Phelps",
@@ -142,7 +142,7 @@
           "type": "fib",
           "sectionTitle": "Fill in the Blank (20.0 pts)",
           "noSpelling": true,
-          "basePts": 20.0,
+          "basePts": 20,
           "q": "Which US president issued the Emancipation Proclamation?",
           "blankPrompt": "President ________ ________ issued the Emancipation Proclamation.",
           "answer": "Abraham Lincoln",
@@ -161,7 +161,7 @@
           "type": "fib",
           "sectionTitle": "Fill in the Blank (20.0 pts)",
           "noSpelling": true,
-          "basePts": 20.0,
+          "basePts": 20,
           "q": "The Tet Offensive was a turning point in which war?",
           "blankPrompt": "The Tet Offensive was a turning point in ________.",
           "answer": "The Vietnam War",
@@ -178,7 +178,7 @@
           "type": "fib",
           "sectionTitle": "Fill in the Blank (20.0 pts)",
           "noSpelling": true,
-          "basePts": 20.0,
+          "basePts": 20,
           "q": "What happened on October 28, 1929, also known as Black Monday?",
           "blankPrompt": "October 28, 1929 (Black Monday) was the ________.",
           "answer": "Start of the Great Depression",
@@ -225,7 +225,7 @@
             "False"
           ],
           "correct": 1,
-          "hint": "Check what happens to the ball of light when it hits the invisible brick wall on page 17.",
+          "hint": "Think about what happens to the ball of light when it hits the invisible brick wall.",
           "pageTitle": "Chapter 3 — Page 17 (The Invisible Wall)",
           "pageExcerpt": "\"Owwwwww! I punched an invisible brick wall. I shook my hand, then tried blasting it. Nothing. Maybe full blast? I charged the blaster and shot the invisible wall from two feet away. The ball of light absorbed into the wall and disappeared.\"",
           "word": "INVISIBLE",
@@ -276,7 +276,13 @@
               ]
             }
           ],
-          "hint": "Review pages 16–19: Jesse's imagined funeral, the boundary he hits, his dinosaur comparison, and the dead end.",
+          "distractorVariants": [
+            "Secret underground tunnel Jesse digs in the snow to escape the mountains",
+            "Flying hoverboard Jesse finds hidden behind the pine trees",
+            "Friendly alien guide who hands Jesse a map of Middlefield, Ohio",
+            "Force-field shield that bounces praying mantises back over the cliff"
+          ],
+          "hint": "Recall Jesse's imagined funeral, the unseen boundary he hits, his dinosaur comparison, and the 50-foot dead end.",
           "pageTitle": "Chapter 3 — Pages 16–19 (Mountain Chase)",
           "pageExcerpt": "\"Here lies Jesse Rigsby of Middlefield, Ohio... After five minutes of walking along an invisible wall in the Rocky Mountains... I stayed very still because maybe praying mantis aliens are like T. rexes, where they can only see things that move... Suddenly, the canyon opened up into a big bowl with 50-foot walls. A dead end.\"",
           "word": "CANYON",
@@ -284,7 +290,7 @@
         },
         {
           "type": "mc",
-          "q": "While running from the six-legged praying mantises on Page 18, what item does Jesse really wish he had brought with him—and blames Eric for not mentioning in his text?",
+          "q": "While running from the six-legged praying mantises, what item does Jesse really wish he had brought with him—and blames Eric for not mentioning in his text?",
           "options": [
             "His inhaler",
             "His magnifying glass",
@@ -292,7 +298,7 @@
             "His math homework"
           ],
           "correct": 0,
-          "hint": "Jesse jokes about who would ever think to bring this medical item to a video game.",
+          "hint": "Jesse jokes about who would ever think to bring this breathing item to a video game.",
           "pageTitle": "Chapter 3 — Pages 18–19 (Running Out of Breath)",
           "pageExcerpt": "\"I found the path and continued running and blasting wildly behind me, really wishing I’d brought my inhaler. But who brings an inhaler to a video game? I blamed Eric. He should have texted, 'Come over. You’re not going to believe this. Maybe bring your inhaler.'\"",
           "word": "INHALER",
@@ -308,7 +314,7 @@
             "\"Hide inside the pine trees until they pass!\""
           ],
           "correct": 0,
-          "hint": "Look at the top of page 21 right after Eric appears on the cliff like a superhero.",
+          "hint": "Think about how Jesse changes his blaster shot from single blasts to a more powerful shot.",
           "pageTitle": "Chapter 3 — Page 21 (Clearing the Canyon)",
           "pageExcerpt": "\"'Glad you’re having fun! Try charging up to full blast!' I did what he said. It worked! I got a whole group with one blast. Eric and I worked together on clearing the entire canyon of aliens.\"",
           "word": "VAPORIZE",
@@ -322,7 +328,7 @@
             "False"
           ],
           "correct": 1,
-          "hint": "Read carefully how Jesse describes the creature's color, legs, and arm on page 21.",
+          "hint": "Remember how Jesse describes the sneaky creature's color, number of legs, and weapon arm.",
           "pageTitle": "Chapter 3 — Page 21 (The Ambush on the Cliff)",
           "pageExcerpt": "\"Sneaking up behind Eric was a jet-black creature that looked a little more alien than praying mantis with five legs and one long blaster arm. 'Eric!' He looked at me. The alien lowered its blaster... The alien pulled the trigger, and my best friend in the whole world vaporized before my eyes.\"",
           "word": "STRAGGLER",
@@ -330,7 +336,7 @@
         },
         {
           "type": "match",
-          "q": "Match each detail from Jesse's memories of Eric in Chapter 4 (Page 23) with what happened:",
+          "q": "Match each detail from Jesse's memories of his friendship with Eric in Chapter 4 with what happened:",
           "pairs": [
             {
               "left": "First Grade",
@@ -373,7 +379,13 @@
               ]
             }
           ],
-          "hint": "Check page 23 where Jesse recalls meeting Eric in first grade and their six years of friendship.",
+          "distractorVariants": [
+            "Summer space camp where Eric and Jesse built a working video game console",
+            "Treehouse laboratory where the boys invented a real jet pack in third grade",
+            "School science fair project that accidentally opened a portal in Ohio",
+            "Skateboard half-pipe the boys built inside Eric's basement"
+          ],
+          "hint": "Recall how Jesse met Eric when the moving truck arrived and the adventures they had over six years of friendship.",
           "pageTitle": "Chapter 4 — Page 23 (Reality Mode — Best Friends)",
           "pageExcerpt": "\"Eric had been my best friend since first grade. The first time I saw him, his parents were unloading the moving truck, while Eric ran back and forth in the front yard wearing a coonskin cap and spinning the tail with his hand... We never learned how to fly, but we did learn how to jump pretty high off of homemade bike ramps and start fires with magnifying glasses and scare each other during backyard sleepovers...\"",
           "word": "COONSKIN",
@@ -381,7 +393,7 @@
         },
         {
           "type": "mc",
-          "q": "According to Eric on Page 26, how did he unlock 'Reality Mode' and get sucked into the video game?",
+          "q": "According to Eric in Chapter 4, how did he unlock 'Reality Mode' and get sucked into the video game?",
           "options": [
             "He finally beat the game earlier that afternoon, and a screen at the end of the credits asked if he wanted to try 'Reality Mode'.",
             "He entered a secret cheat code he found printed inside the game manual.",
@@ -389,7 +401,7 @@
             "He downloaded an experimental update from the alien base portal."
           ],
           "correct": 0,
-          "hint": "Eric explains what happened at the end of the game's credits earlier that afternoon.",
+          "hint": "Eric explains what popped up on the screen at the end of the game's credits after he beat it.",
           "pageTitle": "Chapter 4 — Page 26 (Unlocking Reality Mode)",
           "pageExcerpt": "\"Eric shrugged. 'I think so. Earlier this afternoon, I finally beat the game. At the end of the credits, a screen came up that said I’d unlocked something called \"Reality Mode\" and asked if I wanted to try it. When I said yes, I got sucked in like you did.'\"",
           "word": "CREDITS",
@@ -397,7 +409,7 @@
         },
         {
           "type": "mc",
-          "q": "How does Eric earn the mechanical grenade-launcher attachment on Pages 26–27?",
+          "q": "How does Eric earn the mechanical grenade-launcher attachment in Chapter 4?",
           "options": [
             "He lures 50+ aliens to a tiny cave opening they can't fit through and vaporizes the whole group in one charged shot.",
             "He finds it inside a locked supply crate next to the HOME portal.",
@@ -419,7 +431,7 @@
             "False"
           ],
           "correct": 1,
-          "hint": "Check what Eric says on page 27 about what appears at the end of each level.",
+          "hint": "Think about what Eric says appears at the end of each level that lets players return to real life.",
           "pageTitle": "Chapter 4 — Page 27 (Portals at the End of Each Level)",
           "pageExcerpt": "\"'Oh, we’re not stuck,' Eric said as he started walking... 'At the end of each level, there’s a portal that takes you back to real life. I finished two levels, then decided to go back and tell you about it.'\"",
           "word": "PORTAL",
@@ -470,7 +482,13 @@
               ]
             }
           ],
-          "hint": "Review pages 26–28: Reality Mode, the cave strategy, the floating mechanical part, and the yelling army guy.",
+          "distractorVariants": [
+            "Invisibility cloak earned by running five miles without an inhaler",
+            "Laser sword hidden inside the glowing REPLAY portal room",
+            "Medical kit dropped by a helicopter at the bottom of the canyon",
+            "Pause button on Jesse's sleeve that freezes all aliens for ten seconds"
+          ],
+          "hint": "Think about how players enter the game, the cave trick, the floating blaster upgrade, and the yelling tutorial instructor.",
           "pageTitle": "Chapter 4 — Pages 26–28 (Game Mechanics Explained)",
           "pageExcerpt": "\"A screen came up that said I’d unlocked something called 'Reality Mode'... They were all too big to fit into the tiny opening... we heard a chime and saw a mechanical part float over the snow... 'The tutorial. It’s there to teach you how to play the game. That sergeant’s not real—he’s like a robot that’s only programmed to do one thing.'\"",
           "word": "TUTORIAL",
@@ -486,7 +504,7 @@
             "He needed Jesse's help finishing their Monday math homework first."
           ],
           "correct": 0,
-          "hint": "Look at the top of page 28 where Eric finishes his sentence while taking out the alien that shot him earlier.",
+          "hint": "Eric jokes that Jesse would never have believed or agreed to enter if he had simply told him about it.",
           "pageTitle": "Chapter 4 — Pages 27–28 (Why Eric Tricked Jesse)",
           "pageExcerpt": "\"'I finished two levels, then decided to go back and tell you about it. I knew that nothing I could say would convince you to come in here because you’re such a baby...' THUNK THUNK. Eric took out the alien that had shot him earlier. '...so I just had to let you discover it for yourself.'\"",
           "word": "CONVINCE",
@@ -494,7 +512,7 @@
         },
         {
           "type": "mc",
-          "q": "On Page 28, when Jesse complains about 'this army guy' who yelled at him and made him do weird stuff after he threw up, what does Eric tell him that was?",
+          "q": "When Jesse complains about 'this army guy' who yelled at him and made him do weird stuff after he threw up, what does Eric tell him that was?",
           "options": [
             "The tutorial, featuring a sergeant who is like a robot programmed to teach how to play.",
             "A secret boss battle that only triggers when a player throws up.",
@@ -502,7 +520,7 @@
             "A glitch caused by the invisible brick wall in the Rocky Mountains."
           ],
           "correct": 0,
-          "hint": "Eric interrupts Jesse and explains the purpose of the sergeant.",
+          "hint": "Eric interrupts Jesse and explains the purpose of the programmed drill sergeant at the start of a game.",
           "pageTitle": "Chapter 4 — Page 28 (The Tutorial Sergeant)",
           "pageExcerpt": "\"'...And then this army guy starts yelling at me and making me do all this weird stuff...' 'That was the tutorial,' Eric interrupted... 'The tutorial. It’s there to teach you how to play the game. That sergeant’s not real—he’s like a robot that’s only programmed to do one thing.'\"",
           "word": "SERGEANT",
@@ -516,15 +534,15 @@
             "False"
           ],
           "correct": 1,
-          "hint": "Check Jesse's reaction on pages 29–30 after he vaporizes a sneaking mantis with two grenades.",
+          "hint": "Remember what Jesse thinks after vaporizing a sneaking mantis with two grenades ('It was. It was very great.') and how he launches grenades willy-nilly.",
           "pageTitle": "Chapter 4 — Pages 29–30 (Trying the Grenade Launcher)",
           "pageExcerpt": "\"I squeezed. Two grenades THUNK THUNKed out of my arm and vaporized a praying mantis that I didn’t see sneaking up next to us. 'Wasn’t that great?!' Eric exclaimed. It was. It was very great. 'Hmf.' ... Eric blasted and whooped his way through the rest of the level, and I launched grenades willy-nilly.\"",
           "word": "HOMEWORK",
-          "clue": "Math assignment due on Monday that Jesse yells about on page 29"
+          "clue": "Math assignment due on Monday that Jesse yells about while being chased"
         },
         {
           "type": "mc",
-          "q": "Alongside 'REAL ALIENS ARE TRYING TO EAT ME!', what real-world responsibility does Jesse shout about on Page 29?",
+          "q": "Alongside 'REAL ALIENS ARE TRYING TO EAT ME!', what real-world responsibility does Jesse shout about in Chapter 4?",
           "options": [
             "\"AND I HAVE MATH HOMEWORK THAT'S DUE ON MONDAY!\"",
             "\"AND I HAVE TO IMPROVE MY GYM CLASS MILE TIME!\"",
@@ -532,7 +550,7 @@
             "\"AND I LEFT MY BICYCLE ON THE HOMEMADE RAMP!\""
           ],
           "correct": 0,
-          "hint": "Jesse yells this in all caps at the very top of page 29.",
+          "hint": "Think about the school assignment Jesse is worried about finishing for Monday.",
           "pageTitle": "Chapter 4 — Page 29 (Math Homework Due Monday)",
           "pageExcerpt": "\"'Whatever. And now everything’s trying to kill us, AND I HAVE MATH HOMEWORK THAT’S DUE ON MONDAY!'\"",
           "word": "MONDAY",
@@ -583,6 +601,12 @@
               ]
             }
           ],
+          "distractorVariants": [
+            "Roaring engine sound of a Hawaiian jet pack taking off inside the cave",
+            " Sirens blaring from the Middlefield police cars outside Eric's house",
+            " Loud bell ringing when Monday math homework is submitted",
+            " Rumble of the moving truck backing into Eric's front yard"
+          ],
           "hint": "Recall the sounds of the invisible wall, the patrolling insects in the pines, the alien alarm cry, and the grenade launcher.",
           "pageTitle": "Chapters 3 & 4 — Pages 16–18 & 27–29 (Sound Effects)",
           "pageExcerpt": "\"I got exactly five steps before... CLUNK... I heard a noise to my left. Clickclickclick. Through several pine trees, I could see two praying mantises... SQUAAAAWWWWWWWWWWWWWK!... Two grenades THUNK THUNKed out of my arm and vaporized a praying mantis.\"",
@@ -591,7 +615,7 @@
         },
         {
           "type": "mc",
-          "q": "When Eric and Jesse enter the final door inside the alien base on Page 30, what are the exact labels on the three glowing portals?",
+          "q": "When Eric and Jesse enter the final door inside the alien base, what are the exact labels on the three glowing portals?",
           "options": [
             "\"REPLAY,\" \"HOME,\" and \"LEVEL 2\"",
             "\"START,\" \"PAUSE,\" and \"QUIT GAME\"",
@@ -599,7 +623,7 @@
             "\"TUTORIAL,\" \"REALITY MODE,\" and \"CREDITS\""
           ],
           "correct": 0,
-          "hint": "Check the second paragraph on page 30 inside the alien base.",
+          "hint": "One portal lets you play the stage again, one sends you back to real life, and one advances to the next stage.",
           "pageTitle": "Chapter 4 — Page 30 (The Three Glowing Portals)",
           "pageExcerpt": "\"'This is it,' Eric said, as he led me through a final door inside the alien base. Inside, we found a room with three glowing portals. One said 'REPLAY,' another said 'HOME,' and the last said 'LEVEL 2.'\"",
           "word": "REPLAY",
@@ -613,7 +637,7 @@
             "False"
           ],
           "correct": 1,
-          "hint": "Look at page 31 to see what Jesse decides after Eric says 'Jet paaaaaacks.'",
+          "hint": "Remember what Jesse decides after Eric mentions 'Jet paaaaaacks' and what Jesse calls 'the worst decision of my life.'",
           "pageTitle": "Chapter 4 — Page 31 (The Worst Decision)",
           "pageExcerpt": "\"We stared at each other some more, Eric nodding and me squinting. Finally, I rolled my eyes. 'One more level.' 'WOO-HOO!' We walked past the HOME portal into LEVEL 2. It was the worst decision of my life.\"",
           "word": "DECISION",
@@ -621,7 +645,7 @@
         },
         {
           "type": "mc",
-          "q": "What two details about Level 2 does Eric use on Pages 30–31 to finally tempt Jesse into walking past the HOME portal?",
+          "q": "What two details about Level 2 does Eric use to finally tempt Jesse into walking past the HOME portal?",
           "options": [
             "It takes place in Hawaii and they have jet packs.",
             "It takes place in Middlefield, Ohio and gives them giant robots.",
@@ -629,7 +653,7 @@
             "It lets them fly with coonskin caps and ride motorcycles."
           ],
           "correct": 0,
-          "hint": "First Eric mentions the tropical location, and then he mentions the flying gear.",
+          "hint": "First Eric mentions a tropical island state, and then he mentions flying gear.",
           "pageTitle": "Chapter 4 — Pages 30–31 (Hawaii & Jet Packs)",
           "pageExcerpt": "\"'One more level.' 'Nope.' 'The next one is in Hawaii.' 'Sorry.' 'They have jet packs.' I squinted at him. 'Jet paaaaaacks.' ... Finally, I rolled my eyes. 'One more level.'\"",
           "word": "HAWAII",
@@ -655,7 +679,7 @@
               "rightVariants": [
                 "Alien with five legs and one long blaster arm that sneaks up behind Eric",
                 "Dark five-legged enemy on the cliff that vaporizes Eric at the end of Chapter 3",
-                "Armed black alien thatEric later takes out with two grenades on Page 28",
+                "Armed black alien that Eric later takes out with two grenades",
                 "Stealthy five-legged shooter that ambushes Eric from behind on the ridge"
               ]
             },
@@ -680,7 +704,13 @@
               ]
             }
           ],
-          "hint": "Review the two types of aliens in Chapter 3 and the two end-of-chapter locations in Chapter 4.",
+          "distractorVariants": [
+            "Underwater submarine base guarded by giant robotic sharks",
+            "Peaceful trading post where players buy extra lives with gold coins",
+            "Eight-winged dragon boss that breathes fire over Middlefield, Ohio",
+            "Desert spaceport where Lhari starships land in blinding rainbow colors"
+          ],
+          "hint": "Think about the two types of alien enemies in Chapter 3 and the two end-of-chapter destinations in Chapter 4.",
           "pageTitle": "Chapters 3 & 4 — Pages 18, 21, 30 & 31",
           "pageExcerpt": "\"creatures with six nimble insect legs... a jet-black creature that looked a little more alien than praying mantis with five legs and one long blaster arm... 'We’ve got an alien base to defeat'... Inside, we found a room with three glowing portals. One said 'REPLAY,' another said 'HOME,' and the last said 'LEVEL 2.' ... 'The next one is in Hawaii... They have jet packs.'\"",
           "word": "JETPACKS",

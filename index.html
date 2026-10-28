@@ -750,6 +750,13 @@
     color: white; 
   }
 
+  .quiz-nav button:disabled {
+    display: none;
+    background-color: #1e293b;
+    color: #64748b;
+    pointer-events: none;
+  }
+
   /* Document Reader Panel */
   .pdf-reader-card {
     flex: 1;
@@ -1152,7 +1159,7 @@
 <body>
 
 <!-- Etiqueta Global de Verificación de Despliegue (visible en Acceso Privado y Pantalla Principal) -->
-<div class="build-timestamp">Actualizado: 12:35 PM - 10/28/2026</div>
+<div class="build-timestamp">Actualizado: 12:40 PM - 10/28/2026</div>
 
 <!-- Pantalla de Usuario y Contraseña (Acceso Privado: R / D) con soporte completo para tecla Enter -->
 <div id="authOverlay" class="auth-overlay">
@@ -1182,7 +1189,7 @@
       <button type="submit" class="auth-submit-btn">Entrar</button>
     </form>
     <div style="font-size: 10px; color: #64748b; font-family: monospace; margin-top: 2px;">
-      Actualizado: 12:35 PM - 10/28/2026
+      Actualizado: 12:40 PM - 10/28/2026
     </div>
   </div>
 </div>
@@ -2615,6 +2622,7 @@ function renderQuestion() {
   const nextBtnEl = document.getElementById('nextBtn');
   if (nextBtnEl) {
     nextBtnEl.disabled = true;
+    nextBtnEl.style.display = 'none';
     if (typeof isCurrentQuizMultipleChoiceInD === 'function' && isCurrentQuizMultipleChoiceInD() && currentQIndex === activeQuestions.length - 1) {
       nextBtnEl.textContent = 'Next: Fill in the Blank ➔';
     } else {
@@ -3102,7 +3110,10 @@ function confirmAnswer() {
   document.getElementById('scoreDisplay').textContent = `Score: ${userScore.toFixed(1)}/${maxPts}`;
   updateBartAvatar((userScore / maxPts) * 100, isFullyCorrect);
   const nextBtnEl = document.getElementById('nextBtn');
-  if (nextBtnEl) nextBtnEl.disabled = false;
+  if (nextBtnEl) {
+    nextBtnEl.disabled = false;
+    nextBtnEl.style.display = 'inline-block';
+  }
 
   if (typeof isCurrentQuizMultipleChoiceInD === 'function' && isCurrentQuizMultipleChoiceInD() && currentQIndex === activeQuestions.length - 1) {
     if (nextBtnEl) nextBtnEl.textContent = '⏭️ Jumping to Fill in the Blank...';
@@ -3115,6 +3126,7 @@ function confirmAnswer() {
 }
 
 function nextQuestion() {
+  if (!isQuizAnswered) return;
   if (autoJumpTimer) {
     clearTimeout(autoJumpTimer);
     autoJumpTimer = null;

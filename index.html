@@ -560,6 +560,36 @@
     color: #94a3b8;
   }
 
+  .speak-word-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.32rem;
+    padding: 0.28rem 0.65rem;
+    font-size: 0.84rem;
+    font-weight: 800;
+    color: #f8fafc;
+    background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+    border: 1.5px solid #38bdf8;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35);
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.15s ease;
+    flex-shrink: 0;
+  }
+
+  .speak-word-btn:hover {
+    background: linear-gradient(135deg, #0369a1 0%, #1d4ed8 100%);
+    transform: translateY(-1px);
+  }
+
+  .speak-word-btn:active,
+  .speak-word-btn.speaking {
+    transform: scale(0.96);
+    background: linear-gradient(135deg, #059669 0%, #10b981 100%);
+    border-color: #6ee7b7;
+    box-shadow: 0 0 12px rgba(16, 185, 129, 0.55);
+  }
+
   .slots-container {
     display: flex;
     flex-wrap: wrap;
@@ -1345,7 +1375,7 @@
 <body>
 
 <!-- Etiqueta Global de Verificación de Despliegue (visible en Acceso Privado y Pantalla Principal) -->
-<div class="build-timestamp">Actualizado: 6:49 PM - 10/28/2026</div>
+<div class="build-timestamp">Actualizado: 7:00 PM - 10/28/2026</div>
 
 <!-- Pantalla de Usuario y Contraseña (Acceso Privado: R / D) con soporte completo para tecla Enter -->
 <div id="authOverlay" class="auth-overlay">
@@ -1385,7 +1415,7 @@
       <button type="submit" class="auth-submit-btn">Entrar</button>
     </form>
     <div style="font-size: 10px; color: #64748b; font-family: monospace; margin-top: 2px;">
-      Actualizado: 6:49 PM - 10/28/2026
+      Actualizado: 7:00 PM - 10/28/2026
     </div>
   </div>
 </div>
@@ -1711,7 +1741,12 @@
           <span>⚡ Spaceport Terminal Cipher (1.0 pt)</span>
           <span id="spellingStatus" style="color:#38bdf8;">Unsolved (0/1 pt)</span>
         </div>
-        <div class="spelling-subtext" id="spellingClueText">Clue: Chapter 1 Term</div>
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem;">
+          <div class="spelling-subtext" id="spellingClueText" style="flex:1;">Clue: Chapter 1 Term</div>
+          <button type="button" id="speakSpellingWordBtn" class="speak-word-btn" onclick="speakCurrentSpellingWord()" title="Tap to hear the spelling word" aria-label="Hear spelling word">
+            🔊 Hear Word
+          </button>
+        </div>
         
         <div class="slots-container" id="slotsContainer"></div>
         <div class="letter-bank" id="letterBank"></div>
@@ -1976,10 +2011,73 @@ function getAudioContext() {
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
     if (AudioContextClass) audioCtx = new AudioContextClass();
   }
-  if (audioCtx && audioCtx.state === 'suspended') {
-    audioCtx.resume().catch(() => {});
+  if (audioCtx && audioCtx.state !== 'running') {
+    try { audioCtx.resume().catch(() => {}); } catch (e) {}
   }
   return audioCtx;
+}
+
+const SPELLING_WORD_PRONUNCIATION = {
+  WARPDRIVE: 'warp drive',
+  LIGHTSPEED: 'light speed',
+  ROBOTCABS: 'robot cabs',
+  COONSKIN: 'coon skin',
+  AI: 'A. I.'
+};
+
+let activeSpellingUtterance = null;
+
+function speakCurrentSpellingWord() {
+  if (!currentTargetWord) return;
+  const btn = document.getElementById('speakSpellingWordBtn');
+  if (btn) btn.classList.add('speaking');
+
+  try {
+    if (currentVoiceAudio) {
+      currentVoiceAudio.pause();
+      currentVoiceAudio.currentTime = 0;
+    }
+  } catch (e) {}
+
+  const rawUpper = String(currentTargetWord).trim().toUpperCase();
+  const spokenWord = SPELLING_WORD_PRONUNCIATION[rawUpper] || rawUpper.toLowerCase();
+
+  if ('speechSynthesis' in window && typeof SpeechSynthesisUtterance !== 'undefined') {
+    try {
+      window.speechSynthesis.cancel();
+      if (typeof window.speechSynthesis.resume === 'function') {
+        window.speechSynthesis.resume();
+      }
+      const utter = new SpeechSynthesisUtterance(spokenWord);
+      activeSpellingUtterance = utter;
+      utter.lang = 'en-US';
+      utter.rate = 0.84;
+      utter.pitch = 1.0;
+      utter.volume = 1.0;
+
+      const voices = window.speechSynthesis.getVoices ? window.speechSynthesis.getVoices() : [];
+      if (voices && voices.length > 0) {
+        const preferred = voices.find(v => /en[-_]US/i.test(v.lang) && /(Samantha|Ava|Allison|Alex|Google US English|Natural)/i.test(v.name))
+          || voices.find(v => /en[-_]US/i.test(v.lang))
+          || voices.find(v => /^en/i.test(v.lang));
+        if (preferred) utter.voice = preferred;
+      }
+
+      const clearBtnState = () => {
+        if (btn) btn.classList.remove('speaking');
+      };
+      utter.onend = clearBtnState;
+      utter.onerror = clearBtnState;
+      setTimeout(clearBtnState, 1800);
+
+      window.speechSynthesis.speak(utter);
+      return;
+    } catch (e) {
+      if (btn) btn.classList.remove('speaking');
+    }
+  }
+  playSnapSound();
+  if (btn) setTimeout(() => btn.classList.remove('speaking'), 400);
 }
 
 function playTone(freq, type, duration, endFreq) {
@@ -2025,12 +2123,19 @@ let lastCorrectVoiceIdx = -1;
 let lastWrongVoiceIdx = -1;
 let currentVoiceAudio = null;
 
+function getSharedMediaAudio() {
+  if (!currentVoiceAudio) {
+    currentVoiceAudio = new Audio();
+    currentVoiceAudio.playsInline = true;
+    currentVoiceAudio.preload = 'auto';
+  }
+  return currentVoiceAudio;
+}
+
 function playFeedbackVoice(isCorrect) {
   try {
-    if (currentVoiceAudio) {
-      currentVoiceAudio.pause();
-      currentVoiceAudio.currentTime = 0;
-    }
+    const audioEl = getSharedMediaAudio();
+    audioEl.pause();
     const rawPool = isCorrect ? TTS_FEEDBACK_AUDIO.correct : TTS_FEEDBACK_AUDIO.wrong;
     if (!rawPool || rawPool.length === 0) return;
     const pool = (isCorrect && currentInstance === 'D' && rawPool.length > 2) ? rawPool.slice(0, 2) : rawPool;
@@ -2043,9 +2148,10 @@ function playFeedbackVoice(isCorrect) {
     if (isCorrect) lastCorrectVoiceIdx = idx;
     else lastWrongVoiceIdx = idx;
 
-    currentVoiceAudio = new Audio(pool[idx]);
-    currentVoiceAudio.volume = 1.0;
-    currentVoiceAudio.play().catch(() => {});
+    audioEl.src = pool[idx];
+    audioEl.currentTime = 0;
+    audioEl.volume = 1.0;
+    audioEl.play().catch(() => {});
   } catch (e) {}
 }
 
@@ -2865,6 +2971,8 @@ function renderQuestion() {
     nextBtnEl.style.display = 'none';
     if (typeof isCurrentQuizMultipleChoiceInD === 'function' && isCurrentQuizMultipleChoiceInD() && currentQIndex === activeQuestions.length - 1) {
       nextBtnEl.textContent = 'Next: Fill in the Blank ➔';
+    } else if (currentQIndex === activeQuestions.length - 1) {
+      nextBtnEl.textContent = '🏆 Finish Quiz ➔';
     } else {
       nextBtnEl.textContent = 'Next Question ➔';
     }
@@ -3100,6 +3208,8 @@ function handleMatchClick(side, id) {
   if (selectedLeftPair !== null && selectedRightPair !== null) {
     const lBtn = document.getElementById(`match-left-${selectedLeftPair}`);
     const rBtn = document.getElementById(`match-right-${selectedRightPair}`);
+    const hintBtnEl = document.getElementById('hintBtn');
+    if (hintBtnEl) hintBtnEl.disabled = true;
 
     if (selectedLeftPair === selectedRightPair && selectedRightPair >= 0) {
       solvedPairs.push(selectedLeftPair);
@@ -3322,6 +3432,8 @@ function selectOption(idx, btnElement) {
   selectedOption = idx;
   document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
   btnElement.classList.add('selected');
+  const hintBtnEl = document.getElementById('hintBtn');
+  if (hintBtnEl) hintBtnEl.disabled = true;
   updateSubmitButtonState();
 }
 
@@ -3335,7 +3447,7 @@ function sanitizeHintNoPageRef(rawHint) {
 }
 
 function revealHint() {
-  if (hintUsedOnCurrent || isQuizAnswered) return;
+  if (hintUsedOnCurrent || isQuizAnswered || selectedOption !== null || solvedPairs.length > 0) return;
   hintUsedOnCurrent = true;
   playHintSound();
   const q = activeQuestions[currentQIndex];
@@ -3473,6 +3585,18 @@ function confirmAnswer() {
       autoJumpTimer = null;
       jumpToFillInTheBlankQuiz();
     }, 1500);
+  } else if (currentQIndex === activeQuestions.length - 1) {
+    if (nextBtnEl) nextBtnEl.textContent = '🏆 Finish Quiz ➔';
+    const pctNow = Math.min(100, Math.round((userScore / maxPts) * 100));
+    const expectedGrade = pctNow >= 90 ? 'A' : (pctNow >= 80 ? 'B' : (pctNow >= 70 ? 'C' : 'D'));
+    try { buildGradeSongWavUrl(expectedGrade); } catch (e) {}
+    if (autoJumpTimer) clearTimeout(autoJumpTimer);
+    autoJumpTimer = setTimeout(() => {
+      autoJumpTimer = null;
+      if (!isQuizCompleted && currentQIndex === activeQuestions.length - 1 && isQuizAnswered) {
+        showResults();
+      }
+    }, 1700);
   }
 }
 
@@ -3850,6 +3974,149 @@ function updateSongTimerUI() {
   if (fillEl) fillEl.style.width = `${Math.min(100, (songElapsedSeconds / 30) * 100)}%`;
 }
 
+const gradeSongWavCache = {};
+
+function oscWaveSample(phase, type) {
+  const p = phase - Math.floor(phase);
+  if (type === 'sine') return Math.sin(p * 6.2831853);
+  if (type === 'triangle') return 1 - 4 * Math.abs(Math.round(p - 0.25) - (p - 0.25));
+  if (type === 'square') return p < 0.5 ? 0.68 : -0.68;
+  return (2 * p - 1) * 0.72;
+}
+
+function buildGradeSongWavUrl(grade) {
+  if (gradeSongWavCache[grade]) return gradeSongWavCache[grade];
+  const cfg = GRADE_SONGS[grade] || GRADE_SONGS.A;
+  const sr = 22050;
+  const dur = 30;
+  const totalSamples = sr * dur;
+  const mix = new Float32Array(totalSamples);
+  const stepDur = (60 / cfg.bpm) / 2;
+
+  function addNote(freq, type, startTime, noteDur, vol) {
+    const startIdx = Math.floor(startTime * sr);
+    const endIdx = Math.min(totalSamples, Math.floor((startTime + noteDur) * sr));
+    if (startIdx >= totalSamples || endIdx <= startIdx) return;
+    const attackSamples = Math.max(1, Math.floor(0.015 * sr));
+    const totalNoteSamples = endIdx - startIdx;
+    let phase = 0;
+    const phaseInc = freq / sr;
+    for (let i = startIdx; i < endIdx; i++) {
+      const rel = i - startIdx;
+      const env = rel < attackSamples
+        ? (rel / attackSamples)
+        : Math.exp(-3.1 * (rel - attackSamples) / totalNoteSamples);
+      mix[i] += oscWaveSample(phase, type) * vol * env;
+      phase += phaseInc;
+    }
+  }
+
+  function addKick(startTime) {
+    const startIdx = Math.floor(startTime * sr);
+    const endIdx = Math.min(totalSamples, Math.floor((startTime + 0.16) * sr));
+    let phase = 0;
+    for (let i = startIdx; i < endIdx; i++) {
+      const dt = (i - startIdx) / sr;
+      const freq = 135 * Math.pow(36 / 135, dt / 0.14);
+      const env = 0.46 * Math.exp(-dt / 0.045);
+      mix[i] += Math.sin(phase * 6.2831853) * env;
+      phase += freq / sr;
+    }
+  }
+
+  function addSnare(startTime, soft) {
+    const startIdx = Math.floor(startTime * sr);
+    const endIdx = Math.min(totalSamples, Math.floor((startTime + 0.11) * sr));
+    const vol = soft ? 0.14 : 0.25;
+    for (let i = startIdx; i < endIdx; i++) {
+      const dt = (i - startIdx) / sr;
+      const env = vol * Math.exp(-dt / 0.032);
+      mix[i] += (Math.random() * 2 - 1) * env;
+    }
+  }
+
+  function addHiHat(startTime) {
+    const startIdx = Math.floor(startTime * sr);
+    const endIdx = Math.min(totalSamples, Math.floor((startTime + 0.04) * sr));
+    let prev = 0;
+    for (let i = startIdx; i < endIdx; i++) {
+      const dt = (i - startIdx) / sr;
+      const env = 0.075 * Math.exp(-dt / 0.01);
+      const n = Math.random() * 2 - 1;
+      const hp = n - prev;
+      prev = n;
+      mix[i] += hp * env;
+    }
+  }
+
+  let step = 0;
+  for (let t = 0; t < dur; t += stepDur, step++) {
+    const barIdx = Math.floor(step / 8) % cfg.chords.length;
+    const stepInBar = step % 8;
+    const chord = cfg.chords[barIdx];
+    const bassRoot = cfg.bass[barIdx];
+
+    if (stepInBar === 0 || stepInBar === 4) {
+      addKick(t);
+    } else if (cfg.drumIntensity >= 2 && stepInBar === 3 && barIdx % 2 === 1) {
+      addKick(t);
+    }
+    if (stepInBar === 2 || stepInBar === 6) {
+      addSnare(t, cfg.drumIntensity === 1);
+    }
+    if (cfg.drumIntensity >= 2 || stepInBar % 2 === 0) {
+      addHiHat(t);
+    }
+
+    const bassFreq = (stepInBar % 2 === 1 && cfg.drumIntensity >= 2) ? bassRoot * 2 : bassRoot;
+    addNote(bassFreq, cfg.bassWave, t, stepDur * 0.85, 0.17);
+
+    if (stepInBar === 0) {
+      chord.forEach(noteFreq => {
+        addNote(noteFreq, 'sine', t, stepDur * 7.6, 0.075);
+      });
+    }
+
+    const arpNote = chord[step % chord.length] * (stepInBar >= 4 ? 2 : 1);
+    addNote(arpNote, 'triangle', t, stepDur * 0.7, 0.07);
+
+    const melNote = cfg.melody[step % cfg.melody.length];
+    if (melNote > 0) {
+      const octaveMult = (t >= 14 && t <= 27 && step % 4 === 0) ? 2.0 : 1.0;
+      addNote(melNote * octaveMult, cfg.leadWave, t, stepDur * 1.4, 0.17);
+    }
+  }
+
+  const wavBytes = new ArrayBuffer(44 + totalSamples * 2);
+  const view = new DataView(wavBytes);
+  const writeStr = (off, s) => { for (let i = 0; i < s.length; i++) view.setUint8(off + i, s.charCodeAt(i)); };
+  writeStr(0, 'RIFF');
+  view.setUint32(4, 36 + totalSamples * 2, true);
+  writeStr(8, 'WAVE');
+  writeStr(12, 'fmt ');
+  view.setUint32(16, 16, true);
+  view.setUint16(20, 1, true);
+  view.setUint16(22, 1, true);
+  view.setUint32(24, sr, true);
+  view.setUint32(28, sr * 2, true);
+  view.setUint16(32, 2, true);
+  view.setUint16(34, 16, true);
+  writeStr(36, 'data');
+  view.setUint32(40, totalSamples * 2, true);
+
+  let offset = 44;
+  for (let i = 0; i < totalSamples; i++) {
+    let s = Math.max(-1, Math.min(1, mix[i]));
+    view.setInt16(offset, s < 0 ? s * 0x8000 : s * 0x7FFF, true);
+    offset += 2;
+  }
+
+  const blob = new Blob([wavBytes], { type: 'audio/wav' });
+  const url = URL.createObjectURL(blob);
+  gradeSongWavCache[grade] = url;
+  return url;
+}
+
 function startGradeSong(grade, withVoiceAnnouncement) {
   stopGradeSong();
   currentSongGrade = grade;
@@ -3861,32 +4128,9 @@ function startGradeSong(grade, withVoiceAnnouncement) {
     titleEl.style.color = cfg.color;
   }
 
-  const ctx = getAudioContext();
-  if (!ctx) return;
-
-  songMasterGain = ctx.createGain();
-  // Duck music volume slightly during the first 4 seconds if voice announcement plays
-  songMasterGain.gain.setValueAtTime(withVoiceAnnouncement ? 0.25 : 0.75, ctx.currentTime);
-  if (withVoiceAnnouncement) {
-    songMasterGain.gain.linearRampToValueAtTime(0.80, ctx.currentTime + 4.5);
-  }
-  songMasterGain.connect(ctx.destination);
-
-  if (withVoiceAnnouncement && GRADE_TTS_AUDIO[grade]) {
-    try {
-      if (currentVoiceAudio) {
-        currentVoiceAudio.pause();
-      }
-      currentVoiceAudio = new Audio(GRADE_TTS_AUDIO[grade]);
-      currentVoiceAudio.volume = 1.0;
-      currentVoiceAudio.play().catch(() => {});
-    } catch (e) {}
-  }
-
   songElapsedSeconds = 0;
   songStepIndex = 0;
   songIsPlaying = true;
-  songNextNoteTime = ctx.currentTime + 0.05;
 
   const eq = document.getElementById('songEqBars');
   if (eq) eq.classList.add('playing');
@@ -3894,7 +4138,33 @@ function startGradeSong(grade, withVoiceAnnouncement) {
   if (btn) btn.textContent = '⏸️ Pause Song';
 
   updateSongTimerUI();
-  runSongScheduler();
+
+  const startWebAudioFallback = () => {
+    const ctx = getAudioContext();
+    if (!ctx) return;
+    songMasterGain = ctx.createGain();
+    songMasterGain.gain.setValueAtTime(0.80, ctx.currentTime);
+    songMasterGain.connect(ctx.destination);
+    songNextNoteTime = ctx.currentTime + 0.05;
+    runSongScheduler();
+  };
+
+  try {
+    const wavUrl = buildGradeSongWavUrl(grade);
+    const audioEl = getSharedMediaAudio();
+    audioEl.pause();
+    audioEl.src = wavUrl;
+    audioEl.currentTime = 0;
+    audioEl.volume = 0.95;
+    const playPromise = audioEl.play();
+    if (playPromise && typeof playPromise.catch === 'function') {
+      playPromise.catch(() => {
+        startWebAudioFallback();
+      });
+    }
+  } catch (e) {
+    startWebAudioFallback();
+  }
 
   songTimerInterval = setInterval(() => {
     if (!songIsPlaying) return;
@@ -3916,6 +4186,12 @@ function stopGradeSong(finishedNaturally) {
     clearInterval(songTimerInterval);
     songTimerInterval = null;
   }
+  try {
+    if (currentVoiceAudio && currentVoiceAudio.src && currentVoiceAudio.src.startsWith('blob:')) {
+      currentVoiceAudio.pause();
+      currentVoiceAudio.currentTime = 0;
+    }
+  } catch (e) {}
   const eq = document.getElementById('songEqBars');
   if (eq) eq.classList.remove('playing');
   const btn = document.getElementById('songPlayPauseBtn');

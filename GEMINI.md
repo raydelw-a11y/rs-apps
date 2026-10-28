@@ -19,12 +19,14 @@
    - Cuando el usuario comete un error al emparejar las columnas, las parejas ya respondidas correctamente **NO se reinician, NO se reorganizan de posición y NO cambian su redacción** (`solvedPairs` se mantiene intacto); únicamente se reorganizan y cambian de redacción (`rightVariants` / `distractorVariants`) las opciones que aún no han sido respondidas correctamente.
 
 3. **Reglas de Deletreo (`Spelling`) y `Submit Answer`:**
+   - En el área de `Spelling` para el usuario `R`, existe un botón con icono de bocina (`🔊 Hear Word`) que pronuncia la palabra en voz alta al hacer clic o tocarlo.
    - El botón `Submit Answer` permanece deshabilitado hasta que se haya respondido la pregunta principal **y** se haya resuelto correctamente el `Spelling` o agotado sus 3 intentos.
    - Si el usuario agota sus 3 oportunidades en `Spelling` y aún no acierta, se muestra automáticamente la **ortografía correcta (`Right Spelling`)** tanto en las casillas de letras como en el mensaje de estado.
    - Tanto la parte de comprensión como el `Spelling` cuentan para marcar la pregunta como correcta; si falla cualquiera de las dos, la pregunta pasa a `Review Missed`.
 
 4. **Reglas de `Review Missed`, `Hint` y `Reread chapter to find answer`:**
    - `Review Missed` está bloqueado hasta que el usuario termine el quiz completo (`isQuizCompleted === true`).
+   - El botón `Hint` se deshabilita inmediatamente en cuanto la pregunta superior es respondida (ya sea correcta o incorrectamente).
    - En los quizzes de `R`, los `Hints` dan pistas reales sobre la historia/comprensión y **nunca** dicen `"read page #"`, `"check page #"` ni `"look on page #"`.
    - Debajo de `Hint (-1.0 pt)` siempre debe existir el botón `📖 Reread chapter to find answer (-1.0 pt)` que muestra el texto específico de la página del capítulo donde está la respuesta y descuenta `1.0 pt`.
 

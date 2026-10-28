@@ -1,20 +1,20 @@
 {
   "activeQuizId": "trapped_videogame_ch3_4",
-  "updatedAt": "2026-10-28T14:33:38.734742+00:00",
+  "updatedAt": "2026-10-28T14:43:22.008680+00:00",
   "quizzes": [
     {
-      "id": "d_history_trivia_quiz_1",
+      "id": "d_history_trivia_mc",
       "instance": "D",
-      "title": "D's Quiz 1: U.S. History & Trivia (5 Qs: MC + Fill in the Blank)",
+      "quizMode": "mc",
+      "title": "U.S. History & Trivia — Multiple Choice (5 Qs)",
       "createdAt": "Oct 28, 2026",
       "isDefault": true,
       "questions": [
         {
           "type": "mc",
-          "section": 1,
-          "sectionTitle": "Section 1 of 2: Multiple Choice",
+          "sectionTitle": "Multiple Choice (20.0 pts)",
           "noSpelling": true,
-          "basePts": 10.0,
+          "basePts": 20.0,
           "q": "What is the oldest University in the United States?",
           "options": [
             "Harvard",
@@ -29,10 +29,9 @@
         },
         {
           "type": "mc",
-          "section": 1,
-          "sectionTitle": "Section 1 of 2: Multiple Choice",
+          "sectionTitle": "Multiple Choice (20.0 pts)",
           "noSpelling": true,
-          "basePts": 10.0,
+          "basePts": 20.0,
           "q": "Which US athlete has won the most Olympic gold medals ever?",
           "options": [
             "Michael Phelps",
@@ -47,10 +46,9 @@
         },
         {
           "type": "mc",
-          "section": 1,
-          "sectionTitle": "Section 1 of 2: Multiple Choice",
+          "sectionTitle": "Multiple Choice (20.0 pts)",
           "noSpelling": true,
-          "basePts": 10.0,
+          "basePts": 20.0,
           "q": "Which US president issued the Emancipation Proclamation?",
           "options": [
             "Abraham Lincoln",
@@ -65,10 +63,9 @@
         },
         {
           "type": "mc",
-          "section": 1,
-          "sectionTitle": "Section 1 of 2: Multiple Choice",
+          "sectionTitle": "Multiple Choice (20.0 pts)",
           "noSpelling": true,
-          "basePts": 10.0,
+          "basePts": 20.0,
           "q": "The Tet Offensive was a turning point in which war?",
           "options": [
             "The Vietnam War",
@@ -83,10 +80,9 @@
         },
         {
           "type": "mc",
-          "section": 1,
-          "sectionTitle": "Section 1 of 2: Multiple Choice",
+          "sectionTitle": "Multiple Choice (20.0 pts)",
           "noSpelling": true,
-          "basePts": 10.0,
+          "basePts": 20.0,
           "q": "What happened on October 28, 1929, also known as Black Monday?",
           "options": [
             "Start of the Great Depression.",
@@ -98,13 +94,23 @@
           "hint": "The stock market crash on this date triggered a severe worldwide economic crisis in the 1930s.",
           "pageTitle": "Study Sheet — Question #5",
           "pageExcerpt": "\"5. What happened on October 28, 1929, also known as Black Monday? — Start of the Great Depression.\""
-        },
+        }
+      ],
+      "readerHtml": "<h2>D's Study Sheet — 5 Core Questions & Answers</h2>\n<p>Review all 5 questions carefully before taking <strong>Section 1 (Multiple Choice)</strong> and <strong>Section 2 (Fill in the Blank)</strong>:</p>\n<hr style=\"border-color: rgba(56,189,248,0.25); margin: 10px 0;\" />\n<p><strong>1. What is the oldest University in the United States?</strong><br/>\n✅ Answer: <strong>Harvard</strong></p>\n<p><strong>2. Which US athlete has won the most Olympic gold medals ever?</strong><br/>\n✅ Answer: <strong>Michael Phelps</strong></p>\n<p><strong>3. Which US president issued the Emancipation Proclamation?</strong><br/>\n✅ Answer: <strong>Abraham Lincoln</strong></p>\n<p><strong>4. The Tet Offensive was a turning point in which war?</strong><br/>\n✅ Answer: <strong>The Vietnam War.</strong></p>\n<p><strong>5. What happened on October 28, 1929, also known as Black Monday?</strong><br/>\n✅ Answer: <strong>Start of the Great Depression.</strong></p>"
+    },
+    {
+      "id": "d_history_trivia_fib",
+      "instance": "D",
+      "quizMode": "fib",
+      "title": "U.S. History & Trivia — Fill in the Blank (5 Qs)",
+      "createdAt": "Oct 28, 2026",
+      "isDefault": true,
+      "questions": [
         {
           "type": "fib",
-          "section": 2,
-          "sectionTitle": "Section 2 of 2: Fill in the Blank",
+          "sectionTitle": "Fill in the Blank (20.0 pts)",
           "noSpelling": true,
-          "basePts": 10.0,
+          "basePts": 20.0,
           "q": "What is the oldest University in the United States?",
           "blankPrompt": "________ is the oldest University in the United States.",
           "answer": "Harvard",
@@ -118,10 +124,9 @@
         },
         {
           "type": "fib",
-          "section": 2,
-          "sectionTitle": "Section 2 of 2: Fill in the Blank",
+          "sectionTitle": "Fill in the Blank (20.0 pts)",
           "noSpelling": true,
-          "basePts": 10.0,
+          "basePts": 20.0,
           "q": "Which US athlete has won the most Olympic gold medals ever?",
           "blankPrompt": "________ ________ is the US athlete who has won the most Olympic gold medals ever.",
           "answer": "Michael Phelps",
@@ -135,10 +140,9 @@
         },
         {
           "type": "fib",
-          "section": 2,
-          "sectionTitle": "Section 2 of 2: Fill in the Blank",
+          "sectionTitle": "Fill in the Blank (20.0 pts)",
           "noSpelling": true,
-          "basePts": 10.0,
+          "basePts": 20.0,
           "q": "Which US president issued the Emancipation Proclamation?",
           "blankPrompt": "President ________ ________ issued the Emancipation Proclamation.",
           "answer": "Abraham Lincoln",
@@ -155,10 +159,9 @@
         },
         {
           "type": "fib",
-          "section": 2,
-          "sectionTitle": "Section 2 of 2: Fill in the Blank",
+          "sectionTitle": "Fill in the Blank (20.0 pts)",
           "noSpelling": true,
-          "basePts": 10.0,
+          "basePts": 20.0,
           "q": "The Tet Offensive was a turning point in which war?",
           "blankPrompt": "The Tet Offensive was a turning point in ________.",
           "answer": "The Vietnam War",
@@ -173,10 +176,9 @@
         },
         {
           "type": "fib",
-          "section": 2,
-          "sectionTitle": "Section 2 of 2: Fill in the Blank",
+          "sectionTitle": "Fill in the Blank (20.0 pts)",
           "noSpelling": true,
-          "basePts": 10.0,
+          "basePts": 20.0,
           "q": "What happened on October 28, 1929, also known as Black Monday?",
           "blankPrompt": "October 28, 1929 (Black Monday) was the ________.",
           "answer": "Start of the Great Depression",
@@ -690,5 +692,5 @@
     }
   ],
   "activeQuizIdR": "trapped_videogame_ch3_4",
-  "activeQuizIdD": "d_history_trivia_quiz_1"
+  "activeQuizIdD": "d_history_trivia_mc"
 }

@@ -1,8 +1,9 @@
-# Reglas de R & D's Apps (Quizzes & Readers)
+# Reglas de Learning Site (Quizzes & Readers)
 
-0. **Dos Instancias con Usuario y Contraseña Inicial (`R` y `D`):**
+0. **Dos Instancias con Usuario y Contraseña Inicial (`R` y `D`) y Nombre de la App (`Learning Site`):**
+   - La aplicación se llama **`Learning Site`**. En la pantalla de `Acceso Privado`, el campo de usuario dice únicamente `Usuario...` (sin mencionar `R` ni `D`).
    - **Instancia `R`**: Usuario **`R`**, Contraseña **`Baerga`**. Contiene los quizzes de lectura de R (20 preguntas: 50% Multiple Choice, 25% Matching Columns, 25% True/False + Spelling Cipher).
-   - **Instancia `D`**: Usuario **`D`**, Contraseña **`Lesish`**. Contiene quizzes basados en **5 preguntas** divididos en dos secciones: **Sección 1: Multiple Choice (5 preguntas)** y **Sección 2: Fill in the Blank (5 preguntas)** (10 ítems en total = 100 puntos).
+   - **Instancia `D`**: Usuario **`D`**, Contraseña **`Lesish`**. Contiene quizzes de **5 preguntas** separados: un quiz independiente para **Multiple Choice (5 preguntas)** y otro quiz independiente para **Fill in the Blank (5 preguntas)** (20.0 puntos por pregunta = 100 puntos cada quiz).
    - El botón `👤 User: R/D (Switch)` en el encabezado permite cambiar de usuario/instancia en cualquier momento.
 
 1. **Distribución Obligatoria de Preguntas en los Quizzes de `R`:**

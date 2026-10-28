@@ -1144,7 +1144,7 @@
 <body>
 
 <!-- Etiqueta Global de Verificación de Despliegue (visible en Acceso Privado y Pantalla Principal) -->
-<div class="build-timestamp">Actualizado: 11:12 AM - 10/28/2026</div>
+<div class="build-timestamp">Actualizado: 11:38 AM - 10/28/2026</div>
 
 <!-- Pantalla de Usuario y Contraseña (Acceso Privado: R / D) con soporte completo para tecla Enter -->
 <div id="authOverlay" class="auth-overlay">
@@ -1174,7 +1174,7 @@
       <button type="submit" class="auth-submit-btn">Entrar</button>
     </form>
     <div style="font-size: 10px; color: #64748b; font-family: monospace; margin-top: 2px;">
-      Actualizado: 11:12 AM - 10/28/2026
+      Actualizado: 11:38 AM - 10/28/2026
     </div>
   </div>
 </div>
@@ -1260,7 +1260,7 @@
       <div class="studio-section">
         <div class="studio-section-title">
           <span>🤖 Crear Nuevo Quiz Analizando Imágenes, Documentos o Texto</span>
-          <span style="font-size: 0.68rem; color: #38bdf8; font-weight: 700;">50% MC · 25% Match · 25% T/F + Spelling</span>
+          <span style="font-size: 0.68rem; color: #38bdf8; font-weight: 700;">Exclusivo cuenta Admin</span>
         </div>
 
         <div class="studio-grid-2">
@@ -1268,9 +1268,16 @@
             <label class="studio-label">Título del Quiz (opcional — la IA lo sugiere si se deja vacío)</label>
             <input type="text" id="studioQuizTitle" class="studio-input" placeholder="Ej: The Colors of Space: Chapter 2" />
           </div>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px;">
             <div>
-              <label class="studio-label">Total de Preguntas</label>
+              <label class="studio-label">Destino Usuario</label>
+              <select id="studioTargetInstanceSelect" class="studio-select" onchange="handleStudioTargetInstanceChange(event)">
+                <option value="R">Usuario R (20 Qs)</option>
+                <option value="D">Usuario D (5 MC + 5 FIB)</option>
+              </select>
+            </div>
+            <div>
+              <label class="studio-label">Total de Preguntas (R)</label>
               <select id="studioQuestionCount" class="studio-select">
                 <option value="20" selected>20 (10 MC, 5 Match, 5 T/F)</option>
                 <option value="16">16 (8 MC, 4 Match, 4 T/F)</option>
@@ -1354,8 +1361,9 @@
   <div id="quizTypeButtonsBar" class="quiz-type-bar"></div>
   <div class="controls-bar">
     <button class="secondary" id="headerUserSwitchBtn" onclick="switchUserPrompt()" title="Cambiar de usuario">👤 User: R (Switch)</button>
+    <button class="secondary" id="adminInstanceToggleBtn" onclick="toggleAdminTargetInstance()" style="display: none; background: #1e293b; border: 1px solid #38bdf8; color: #38bdf8;" title="Cambiar vista entre R y D">🔀 Vista: R (Cambiar a D)</button>
     <button class="cyan" id="togglePdfViewBtn" onclick="toggleReaderView()">📖 Read Material (Text/HTML)</button>
-    <button id="headerStudioBtn" class="amber" onclick="openAiStudioPrompt()">✨ Crear / Quizzes (IA)</button>
+    <button id="headerStudioBtn" class="amber" style="display: none;" onclick="openAiStudioPrompt()">✨ Crear / Quizzes (IA)</button>
     <button id="headerMistakesBtn" class="purple" onclick="startMistakesQuiz()" disabled title="Complete the quiz first to unlock Review Missed">Review Missed (<span id="mistakeCountBadge">0</span>)</button>
     <button id="headerResetBtn" class="danger" onclick="resetQuizData()">Reset</button>
   </div>
@@ -1582,13 +1590,22 @@
 
 <script src="audio-data.js"></script>
 <script>
-// Autenticación Acceso Privado por Instancia: R (Baerga) y D (Lesish) con soporte para Enter
+// Autenticación Acceso Privado: R (Baerga), D (Lesish) y admin (Santana) con soporte para Enter
 let currentInstance = 'R'; // 'R' or 'D'
+let currentUserRole = 'R'; // 'R', 'D', or 'ADMIN'
 
 function checkStoredAuth() {
   const savedProfile = localStorage.getItem('rs_apps_user_profile_v1');
   if (savedProfile === 'R' || savedProfile === 'D') {
+    currentUserRole = savedProfile;
     currentInstance = savedProfile;
+    const overlay = document.getElementById('authOverlay');
+    if (overlay) overlay.style.display = 'none';
+    updateInstanceUI();
+    return true;
+  } else if (savedProfile === 'ADMIN') {
+    currentUserRole = 'ADMIN';
+    currentInstance = localStorage.getItem('rs_apps_admin_target_instance') === 'D' ? 'D' : 'R';
     const overlay = document.getElementById('authOverlay');
     if (overlay) overlay.style.display = 'none';
     updateInstanceUI();
@@ -1603,23 +1620,31 @@ function verifyPasswordAndUnlock() {
   const userInput = document.getElementById('authUserInput');
   const passInput = document.getElementById('authPasswordInput');
   const err = document.getElementById('authErrorMsg');
-  const uVal = (userInput ? userInput.value : '').trim().toUpperCase();
+  const uRaw = (userInput ? userInput.value : '').trim();
+  const uVal = uRaw.toUpperCase();
   const pVal = (passInput ? passInput.value : '').trim();
 
-  let matchedInstance = null;
+  let matchedRole = null;
+  let targetInst = null;
   if (uVal === 'R' && (pVal === 'Baerga' || pVal.toLowerCase() === 'baerga')) {
-    matchedInstance = 'R';
+    matchedRole = 'R';
+    targetInst = 'R';
   } else if (uVal === 'D' && (pVal === 'Lesish' || pVal.toLowerCase() === 'lesish')) {
-    matchedInstance = 'D';
+    matchedRole = 'D';
+    targetInst = 'D';
+  } else if (uRaw.toLowerCase() === 'admin' && (pVal === 'Santana' || pVal.toLowerCase() === 'santana')) {
+    matchedRole = 'ADMIN';
+    targetInst = localStorage.getItem('rs_apps_admin_target_instance') === 'D' ? 'D' : 'R';
   }
 
-  if (matchedInstance) {
-    localStorage.setItem('rs_apps_user_profile_v1', matchedInstance);
+  if (matchedRole) {
+    currentUserRole = matchedRole;
+    localStorage.setItem('rs_apps_user_profile_v1', matchedRole);
     const overlay = document.getElementById('authOverlay');
     if (overlay) overlay.style.display = 'none';
     if (err) err.style.display = 'none';
     playCorrectSound();
-    switchAppInstance(matchedInstance);
+    switchAppInstance(targetInst);
   } else {
     if (err) err.style.display = 'block';
     playWrongSound();
@@ -1627,6 +1652,10 @@ function verifyPasswordAndUnlock() {
 }
 
 function switchUserPrompt() {
+  if (typeof autoJumpTimer !== 'undefined' && autoJumpTimer) {
+    clearTimeout(autoJumpTimer);
+    autoJumpTimer = null;
+  }
   stopGradeSong(false);
   localStorage.removeItem('rs_apps_user_profile_v1');
   const userInput = document.getElementById('authUserInput');
@@ -1642,17 +1671,49 @@ function switchUserPrompt() {
   }
 }
 
+function toggleAdminTargetInstance() {
+  if (currentUserRole !== 'ADMIN') return;
+  const nextInst = currentInstance === 'D' ? 'R' : 'D';
+  localStorage.setItem('rs_apps_admin_target_instance', nextInst);
+  playSnapSound();
+  switchAppInstance(nextInst);
+}
+
+function handleStudioTargetInstanceChange(e) {
+  if (currentUserRole !== 'ADMIN') return;
+  const nextInst = e.target.value === 'D' ? 'D' : 'R';
+  localStorage.setItem('rs_apps_admin_target_instance', nextInst);
+  switchAppInstance(nextInst);
+}
+
 function updateInstanceUI() {
   const switchBtn = document.getElementById('headerUserSwitchBtn');
   if (switchBtn) {
-    switchBtn.textContent = `👤 User: ${currentInstance} (Switch)`;
+    const labelUser = currentUserRole === 'ADMIN' ? 'admin' : currentInstance;
+    switchBtn.textContent = `👤 User: ${labelUser} (Switch)`;
   }
-  const avatarSvg = document.getElementById('bartAvatarContainer');
+  const studioBtn = document.getElementById('headerStudioBtn');
+  if (studioBtn) {
+    studioBtn.style.display = (currentUserRole === 'ADMIN') ? 'inline-block' : 'none';
+  }
+  const adminToggleBtn = document.getElementById('adminInstanceToggleBtn');
+  if (adminToggleBtn) {
+    if (currentUserRole === 'ADMIN') {
+      adminToggleBtn.style.display = 'inline-block';
+      adminToggleBtn.textContent = `🔀 Vista: ${currentInstance} (Cambiar a ${currentInstance === 'D' ? 'R' : 'D'})`;
+    } else {
+      adminToggleBtn.style.display = 'none';
+    }
+  }
+  const studioInstSelect = document.getElementById('studioTargetInstanceSelect');
+  if (studioInstSelect) {
+    studioInstSelect.value = currentInstance;
+  }
   const statusTitle = document.getElementById('bartStatusTitle');
   const statusDesc = document.getElementById('bartStatusDesc');
   if (currentInstance === 'D') {
     if (statusTitle) statusTitle.textContent = "🎓 Learning Site — 5-Question Quizzes";
-    if (statusDesc) statusDesc.textContent = "Select Multiple Choice Quiz (5 Qs = 100 pts) or Fill in the Blank Quiz (5 Qs = 100 pts) above!";
+    if (statusDesc) statusDesc.textContent = "Multiple Choice (5 Qs) jumps automatically to Fill in the Blank (5 Qs) when finished!";
   } else {
     if (statusTitle) statusTitle.textContent = "🚀 Learning Site — Reading Mission";
     if (statusDesc) statusDesc.textContent = "Solve story challenge (4 pts) & decrypt keyword (1 pt) for 5 pts each!";
@@ -2543,7 +2604,15 @@ function renderQuestion() {
     : "📖 Reread chapter to find answer (-1.0 pt)";
 
   document.getElementById('acceptBtn').disabled = true;
-  document.getElementById('nextBtn').disabled = true;
+  const nextBtnEl = document.getElementById('nextBtn');
+  if (nextBtnEl) {
+    nextBtnEl.disabled = true;
+    if (typeof isCurrentQuizMultipleChoiceInD === 'function' && isCurrentQuizMultipleChoiceInD() && currentQIndex === activeQuestions.length - 1) {
+      nextBtnEl.textContent = 'Next: Fill in the Blank ➔';
+    } else {
+      nextBtnEl.textContent = 'Next Question ➔';
+    }
+  }
 
   const optionsList = document.getElementById('optionsList');
   const matchContainer = document.getElementById('matchContainer');
@@ -3024,13 +3093,29 @@ function confirmAnswer() {
   const maxPts = getMaxPossibleQuizPoints();
   document.getElementById('scoreDisplay').textContent = `Score: ${userScore.toFixed(1)}/${maxPts}`;
   updateBartAvatar((userScore / maxPts) * 100, isFullyCorrect);
-  document.getElementById('nextBtn').disabled = false;
+  const nextBtnEl = document.getElementById('nextBtn');
+  if (nextBtnEl) nextBtnEl.disabled = false;
+
+  if (typeof isCurrentQuizMultipleChoiceInD === 'function' && isCurrentQuizMultipleChoiceInD() && currentQIndex === activeQuestions.length - 1) {
+    if (nextBtnEl) nextBtnEl.textContent = '⏭️ Jumping to Fill in the Blank...';
+    if (autoJumpTimer) clearTimeout(autoJumpTimer);
+    autoJumpTimer = setTimeout(() => {
+      autoJumpTimer = null;
+      jumpToFillInTheBlankQuiz();
+    }, 1500);
+  }
 }
 
 function nextQuestion() {
+  if (autoJumpTimer) {
+    clearTimeout(autoJumpTimer);
+    autoJumpTimer = null;
+  }
   currentQIndex++;
   if (currentQIndex < activeQuestions.length) {
     renderQuestion();
+  } else if (typeof isCurrentQuizMultipleChoiceInD === 'function' && isCurrentQuizMultipleChoiceInD()) {
+    jumpToFillInTheBlankQuiz();
   } else {
     showResults();
   }
@@ -3563,7 +3648,7 @@ function executeConfirmedReset() {
   const input = document.getElementById('resetPasswordInput');
   const err = document.getElementById('resetErrorMsg');
   const val = (input ? input.value : '').trim();
-  if (val === 'admin123') {
+  if (val === 'admin123' || val.toLowerCase() === 'santana') {
     closeResetModal();
     mistakesPool = [];
     isQuizCompleted = false;
@@ -4393,9 +4478,20 @@ const BUILT_IN_D_QUIZ_FIB = {
   ],
   "readerHtml": "<h2>D's Study Sheet — 5 Core Questions & Answers</h2>\n<p>Review all 5 questions carefully before taking <strong>Section 1 (Multiple Choice)</strong> and <strong>Section 2 (Fill in the Blank)</strong>:</p>\n<hr style=\"border-color: rgba(56,189,248,0.25); margin: 10px 0;\" />\n<p><strong>1. What is the oldest University in the United States?</strong><br/>\n✅ Answer: <strong>Harvard</strong></p>\n<p><strong>2. Which US athlete has won the most Olympic gold medals ever?</strong><br/>\n✅ Answer: <strong>Michael Phelps</strong></p>\n<p><strong>3. Which US president issued the Emancipation Proclamation?</strong><br/>\n✅ Answer: <strong>Abraham Lincoln</strong></p>\n<p><strong>4. The Tet Offensive was a turning point in which war?</strong><br/>\n✅ Answer: <strong>The Vietnam War.</strong></p>\n<p><strong>5. What happened on October 28, 1929, also known as Black Monday?</strong><br/>\n✅ Answer: <strong>Start of the Great Depression.</strong></p>"
 };
+function isCombinedDQuiz(q) {
+  if (!q) return false;
+  if (q.id === 'd_history_trivia_quiz1') return true;
+  if (q.instance === 'D' && Array.isArray(q.questions)) {
+    const hasMc = q.questions.some(item => item && item.type === 'mc');
+    const hasFib = q.questions.some(item => item && item.type === 'fib');
+    if (hasMc && hasFib) return true;
+  }
+  return false;
+}
+
 function getAllQuizzes() {
   if (currentInstance === 'D') {
-    const extraD = customQuizzes.filter(q => q && q.instance === 'D' && !['d_history_trivia_mc', 'd_history_trivia_mc', 'd_history_trivia_fib'].includes(q.id));
+    const extraD = customQuizzes.filter(q => q && q.instance === 'D' && !['d_history_trivia_mc', 'd_history_trivia_fib', 'd_history_trivia_quiz1'].includes(q.id) && !isCombinedDQuiz(q));
     return [BUILT_IN_D_QUIZ_MC, BUILT_IN_D_QUIZ_FIB, ...extraD];
   }
   const defaultQuiz = {
@@ -4416,15 +4512,22 @@ function loadLocalQuizzes() {
     const raw = localStorage.getItem('rs_apps_custom_quizzes_v1');
     if (raw) {
       const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed)) customQuizzes = parsed;
+      if (Array.isArray(parsed)) {
+        customQuizzes = parsed.filter(q => !isCombinedDQuiz(q));
+      }
     }
     const savedActive = localStorage.getItem('rs_apps_active_quiz_id_v2');
-    if (savedActive) activeQuizId = savedActive;
+    if (savedActive && savedActive !== 'd_history_trivia_quiz1') activeQuizId = savedActive;
+    const savedActiveD = localStorage.getItem('rs_apps_active_quiz_id_D');
+    if (savedActiveD === 'd_history_trivia_quiz1') {
+      localStorage.setItem('rs_apps_active_quiz_id_D', 'd_history_trivia_mc');
+    }
   } catch (e) {}
 }
 
 function saveLocalQuizzes() {
   try {
+    customQuizzes = customQuizzes.filter(q => !isCombinedDQuiz(q));
     localStorage.setItem('rs_apps_custom_quizzes_v1', JSON.stringify(customQuizzes));
     if (currentInstance === 'D') {
       localStorage.setItem('rs_apps_active_quiz_id_D', activeQuizId);
@@ -4473,13 +4576,13 @@ async function fetchCloudQuizzesLibrary() {
       const byId = new Map();
       // Remote GitHub quizzes take priority so updates/creations from any device or Mac appear everywhere
       data.quizzes.forEach(q => {
-        if (q && q.id && Array.isArray(q.questions) && q.questions.length > 0) {
+        if (q && q.id && !isCombinedDQuiz(q) && Array.isArray(q.questions) && q.questions.length > 0) {
           byId.set(q.id, q);
         }
       });
       // Also preserve any unsynced local quizzes
       customQuizzes.forEach(q => {
-        if (q && q.id && !byId.has(q.id)) {
+        if (q && q.id && !isCombinedDQuiz(q) && !byId.has(q.id)) {
           byId.set(q.id, q);
         }
       });
@@ -4538,10 +4641,10 @@ async function syncQuizzesLibraryToCloud(deletedQuizId = null) {
   // Merge local customQuizzes + remoteQuizzes so quizzes created on Mac or other devices are never lost
   const mergedMap = new Map();
   remoteQuizzes.forEach(q => {
-    if (q && q.id && q.id !== deletedQuizId) mergedMap.set(q.id, q);
+    if (q && q.id && q.id !== deletedQuizId && !isCombinedDQuiz(q)) mergedMap.set(q.id, q);
   });
   customQuizzes.forEach(q => {
-    if (q && q.id && q.id !== deletedQuizId) mergedMap.set(q.id, q);
+    if (q && q.id && q.id !== deletedQuizId && !isCombinedDQuiz(q)) mergedMap.set(q.id, q);
   });
   customQuizzes = Array.from(mergedMap.values());
 
@@ -4593,13 +4696,52 @@ async function manualSyncWithGitHub() {
   }
 }
 
-let currentRTypeFilter = 'all'; // 'all' | 'mc' | 'match' | 'tf'
+let autoJumpTimer = null;
+let currentRTypeFilter = 'mc'; // 'mc' | 'match' | 'tf'
+
+function isCurrentQuizMultipleChoiceInD() {
+  if (currentInstance !== 'D') return false;
+  if (!currentActiveQuiz) return false;
+  if (currentActiveQuiz.quizMode === 'mc' || activeQuizId === 'd_history_trivia_mc' || String(activeQuizId).includes('_mc')) {
+    return true;
+  }
+  return Array.isArray(currentActiveQuiz.questions) && currentActiveQuiz.questions.length > 0 && currentActiveQuiz.questions.every(q => q.type === 'mc');
+}
+
+function getNextFillInTheBlankQuizForD() {
+  const all = getAllQuizzes();
+  if (activeQuizId === 'd_history_trivia_mc') {
+    const builtInFib = all.find(q => q.id === 'd_history_trivia_fib');
+    if (builtInFib) return builtInFib;
+  }
+  if (String(activeQuizId).startsWith('quiz_d_mc_')) {
+    const suffix = String(activeQuizId).replace('quiz_d_mc_', '');
+    const matchingFib = all.find(q => q.id === 'quiz_d_fib_' + suffix);
+    if (matchingFib) return matchingFib;
+  }
+  return all.find(q => q.quizMode === 'fib' || q.id === 'd_history_trivia_fib' || (q.questions && q.questions[0] && q.questions[0].type === 'fib')) || null;
+}
+
+function jumpToFillInTheBlankQuiz() {
+  if (autoJumpTimer) {
+    clearTimeout(autoJumpTimer);
+    autoJumpTimer = null;
+  }
+  const fibQuiz = getNextFillInTheBlankQuizForD();
+  if (fibQuiz) {
+    activateQuizById(fibQuiz.id, true);
+    playSnapSound();
+    try { syncQuizzesLibraryToCloud(); } catch (e) {}
+  } else {
+    showResults();
+  }
+}
 
 function getFilteredQuestionsForActiveQuiz() {
   const baseList = (currentActiveQuiz && Array.isArray(currentActiveQuiz.questions) && currentActiveQuiz.questions.length > 0)
     ? currentActiveQuiz.questions
     : chapterOneQuestions;
-  if (currentInstance === 'R' && currentRTypeFilter !== 'all') {
+  if (currentInstance === 'R' && currentRTypeFilter && currentRTypeFilter !== 'all') {
     const filtered = baseList.filter(q => q.type === currentRTypeFilter);
     if (filtered.length > 0) return filtered;
   }
@@ -4607,7 +4749,7 @@ function getFilteredQuestionsForActiveQuiz() {
 }
 
 function setRQuizTypeFilter(filterType) {
-  currentRTypeFilter = filterType || 'all';
+  currentRTypeFilter = filterType || 'mc';
   mistakesPool = [];
   isQuizCompleted = false;
   updateMistakeBadge();
@@ -4676,7 +4818,6 @@ function renderQuizTypeButtons() {
     const tfCount = baseList.filter(q => q.type === 'tf').length;
 
     const rTypes = [
-      { key: 'all', icon: '📋', label: `Full Quiz (${baseList.length} Qs)` },
       { key: 'mc', icon: '☑️', label: `Multiple Choice (${mcCount} Qs)` },
       { key: 'match', icon: '🔗', label: `Matching Columns (${matchCount} Qs)` },
       { key: 'tf', icon: '⚖️', label: `True or False (${tfCount} Qs)` }
@@ -4708,6 +4849,7 @@ function renderHeaderQuizSelector() {
     if (q.id === activeQuizId) opt.selected = true;
     sel.appendChild(opt);
   });
+  sel.style.display = (currentInstance === 'D' && all.length <= 2) ? 'none' : 'inline-block';
   renderQuizTypeButtons();
 }
 
@@ -4720,11 +4862,15 @@ async function handleHeaderQuizSelectChange(event) {
 }
 
 function activateQuizById(quizId, userInitiated = false) {
+  if (autoJumpTimer) {
+    clearTimeout(autoJumpTimer);
+    autoJumpTimer = null;
+  }
   const all = getAllQuizzes();
   const target = all.find(q => q.id === quizId) || all[0];
   activeQuizId = target.id;
   currentActiveQuiz = target;
-  currentRTypeFilter = 'all';
+  currentRTypeFilter = 'mc';
   if (userInitiated) {
     localStorage.setItem('rs_apps_user_selected_quiz', 'true');
   }
@@ -4757,7 +4903,7 @@ function activateQuizById(quizId, userInitiated = false) {
 }
 
 function openAiStudioPrompt() {
-  if (unlockedAdminPassword === 'admin123') {
+  if (currentUserRole === 'ADMIN' || unlockedAdminPassword === 'Santana') {
     openAiStudioModal();
     return;
   }
@@ -4781,8 +4927,8 @@ function verifyStudioAuth() {
   const input = document.getElementById('studioPasswordInput');
   const err = document.getElementById('studioErrorMsg');
   const val = (input ? input.value : '').trim();
-  if (val === 'admin123') {
-    unlockedAdminPassword = val;
+  if (val.toLowerCase() === 'santana' || val === 'admin123') {
+    unlockedAdminPassword = 'Santana';
     closeStudioAuthModal();
     playCorrectSound();
     openAiStudioModal();

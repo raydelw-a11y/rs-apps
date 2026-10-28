@@ -1,10 +1,11 @@
 # Reglas de Learning Site (Quizzes & Readers)
 
-0. **Dos Instancias con Usuario y Contraseña Inicial (`R` y `D`) y Nombre de la App (`Learning Site`):**
+0. **Cuentas de Usuario (`R`, `D` y `admin`) y Nombre de la App (`Learning Site`):**
    - La aplicación se llama **`Learning Site`**. En la pantalla de `Acceso Privado`, el campo de usuario dice únicamente `Usuario...` (sin mencionar `R` ni `D`).
-   - **Instancia `R`**: Usuario **`R`**, Contraseña **`Baerga`**. Contiene los quizzes de lectura de R (20 preguntas: 50% Multiple Choice, 25% Matching Columns, 25% True/False + Spelling Cipher).
-   - **Instancia `D`**: Usuario **`D`**, Contraseña **`Lesish`**. Contiene quizzes de **5 preguntas** separados: un quiz independiente para **Multiple Choice (5 preguntas)** y otro quiz independiente para **Fill in the Blank (5 preguntas)** (20.0 puntos por pregunta = 100 puntos cada quiz).
-   - El botón `👤 User: R/D (Switch)` en el encabezado permite cambiar de usuario/instancia en cualquier momento.
+   - **Instancia `R`**: Usuario **`R`**, Contraseña **`Baerga`**. Contiene los quizzes de lectura de R (50% Multiple Choice, 25% Matching Columns, 25% True/False + Spelling Cipher).
+   - **Instancia `D`**: Usuario **`D`**, Contraseña **`Lesish`**. Contiene dos botones de quizzes de **5 preguntas** separados: **`☑️ Multiple Choice Quiz (5 Qs)`** y **`✍️ Fill in the Blank Quiz (5 Qs)`** (`20.0 pts` por pregunta = `100 pts` cada quiz, sin quiz combinado). Al terminar `Multiple Choice`, salta automáticamente a `Fill in the Blank`.
+   - **Cuenta `admin`**: Usuario **`admin`**, Contraseña **`Santana`**. Es la **única cuenta** donde está visible y habilitada la función de creación de quizzes con IA (`✨ Crear / Quizzes (IA)`), permitiendo crear y gestionar quizzes tanto para `R` como para `D`.
+   - El botón `👤 User: ... (Switch)` en el encabezado permite cambiar de usuario en cualquier momento.
 
 1. **Distribución Obligatoria de Preguntas en los Quizzes de `R`:**
    - **50% Multiple Choice (`mc`)** (ej. 10 de 20 preguntas)

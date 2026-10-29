@@ -1,6 +1,6 @@
 {
-  "activeQuizId": "trapped_videogame_ch3_4",
-  "updatedAt": "2026-10-28T22:49:14.451Z",
+  "activeQuizId": "trapped_videogame_ch5_6",
+  "updatedAt": "2026-10-29T22:03:11.491Z",
   "quizzes": [
     {
       "id": "d_history_trivia_mc",
@@ -195,6 +195,530 @@
         }
       ],
       "readerHtml": "<h2>D's Study Sheet — 5 Core Questions & Answers</h2>\n<p>Review all 5 questions carefully before taking <strong>Section 1 (Multiple Choice)</strong> and <strong>Section 2 (Fill in the Blank)</strong>:</p>\n<hr style=\"border-color: rgba(56,189,248,0.25); margin: 10px 0;\" />\n<p><strong>1. What is the oldest University in the United States?</strong><br/>\n✅ Answer: <strong>Harvard</strong></p>\n<p><strong>2. Which US athlete has won the most Olympic gold medals ever?</strong><br/>\n✅ Answer: <strong>Michael Phelps</strong></p>\n<p><strong>3. Which US president issued the Emancipation Proclamation?</strong><br/>\n✅ Answer: <strong>Abraham Lincoln</strong></p>\n<p><strong>4. The Tet Offensive was a turning point in which war?</strong><br/>\n✅ Answer: <strong>The Vietnam War.</strong></p>\n<p><strong>5. What happened on October 28, 1929, also known as Black Monday?</strong><br/>\n✅ Answer: <strong>Start of the Great Depression.</strong></p>"
+    },
+    {
+      "id": "trapped_videogame_ch5_6",
+      "instance": "R",
+      "title": "Trapped in a Video Game: Chapters 5 & 6",
+      "createdAt": "Oct 29, 2026",
+      "questions": [
+        {
+          "type": "mc",
+          "q": "At the beginning of Chapter 5, where does Eric lead Jesse right outside the portal to strap into a spinning jet pack?",
+          "options": [
+            "At the top of a waterfall that is at least 200 feet down",
+            "Inside a secret submarine docked at Pearl Harbor",
+            "At the bottom of a dark canyon surrounded by pine trees",
+            "On the roof of a two-story house with a big attic"
+          ],
+          "correct": 0,
+          "hint": "Jesse looks over the edge and sees a huge drop down toward a roaring river below.",
+          "pageTitle": "Chapter 5 — Page 33 (Jet Pack Joyride)",
+          "pageExcerpt": "\"This is something I learned firsthand when Eric led me to a spinning jet pack at the top of a waterfall right outside the portal. 'Go ahead! Strap in!' ... I looked over the edge. The bottom of the waterfall was at least 200 feet down.\"",
+          "word": "WATERFALL",
+          "clue": "A steep 200-foot drop of rushing water where Jesse first straps on a jet pack"
+        },
+        {
+          "type": "tf",
+          "q": "True or False: Before pushing Jesse off the waterfall, Eric clearly explains what starts blinking and what happens if Jesse doesn't land in time.",
+          "options": [
+            "True",
+            "False"
+          ],
+          "correct": 1,
+          "hint": "Remember how Jesse asks, 'Wait, when what starts blinking?' right as Eric shoves him over the edge.",
+          "pageTitle": "Chapter 5 — Pages 33–34 (The Blinking Warning)",
+          "pageExcerpt": "\"'Just press the button in your right hand to blast off and remember to land when it starts blinking.' 'Wait, when what starts blinking?' 'Exactly! Now go!' With that, Eric pushed me off the edge of the waterfall.\"",
+          "word": "BLINKING",
+          "clue": "Flashing on and off as a warning that the jet pack is about to disappear"
+        },
+        {
+          "type": "mc",
+          "q": "While falling off the waterfall, what real-life memory from last year does Jesse recall about Eric and the rec center pool?",
+          "options": [
+            "Eric pushed him off the big diving board, Jesse landed on his stomach, and the lifeguard kicked Eric out of the pool.",
+            "Eric dared him to swim across the deep end underwater while wearing a coonskin cap.",
+            "They built a homemade bike ramp next to the pool and rode their bicycles into the water.",
+            "Eric hid Jesse's inhaler inside a locker until the lifeguard found it."
+          ],
+          "correct": 0,
+          "hint": "Jesse changed his mind at the top of the high diving board, so Eric 'helped' by shoving him off.",
+          "pageTitle": "Chapter 5 — Page 34 (The Rec Center Pool Memory)",
+          "pageExcerpt": "\"I’ve only tried the big diving board at the rec center pool once. Last year, Eric finally got me to climb to the top. At the top, I told him I changed my mind about jumping, so he 'helped' by pushing me off. I landed on my stomach and got a red mark that lasted the whole day. The lifeguard kicked Eric out of the pool, and I punched him in the stomach as hard as I could to show him what my landing felt like...\"",
+          "word": "LIFEGUARD",
+          "clue": "The pool safety worker who kicked Eric out after he pushed Jesse off the diving board"
+        },
+        {
+          "type": "match",
+          "q": "Match each event from Jesse's first jet pack flight in Chapter 5 with what happens in the story:",
+          "pairs": [
+            {
+              "left": "Right-Hand Button",
+              "right": "Control Jesse presses just in time to make the jet pack roar to life",
+              "rightVariants": [
+                "Control Jesse presses just in time to make the jet pack roar to life",
+                "Trigger in Jesse's right hand that stops his fall with a loud WHOOOOOOOSH!",
+                "Button Eric told Jesse to press to blast off while falling",
+                "Switch that suspends Jesse in midair above the rushing river"
+              ]
+            },
+            {
+              "left": "Untied Balloon",
+              "right": "What Jesse compares himself to while spinning wildly for 30 seconds",
+              "rightVariants": [
+                "What Jesse compares himself to while spinning wildly for 30 seconds",
+                "Deflating object Jesse imitates before he finally gets the hang of flying",
+                "Wildly spinning thing losing all its air that leaves Jesse close to upchucking",
+                "Comparison Jesse uses for his out-of-control 30-second flight"
+              ]
+            },
+            {
+              "left": "Volcano Mouth",
+              "right": "Pit of boiling lava Jesse falls toward from 500 feet in the air",
+              "rightVariants": [
+                "Pit of boiling lava Jesse falls toward from 500 feet in the air",
+                "Fiery crater below Jesse when his jet pack starts sputtering and vanishes",
+                "Boiling lava pit where everything goes white right before Jesse hits",
+                "Dangerous volcano opening 500 feet below Jesse's disappearing jet pack"
+              ]
+            },
+            {
+              "left": "Five-Second Countdown",
+              "right": "How long it takes for another jet pack to magically reappear at the waterfall",
+              "rightVariants": [
+                "How long it takes for another jet pack to magically reappear at the waterfall",
+                "The 'five, four, three, two...' timer Eric counts before a new jet pack pops up",
+                "Wait time on top of the waterfall for a replacement jet pack to spawn",
+                "Short countdown before a fresh jet pack magically takes the old one's place"
+              ]
+            }
+          ],
+          "distractorVariants": [
+            "Parachute cord Jesse pulls to float gently onto a cruise ship",
+            "Underwater tunnel Jesse swims through to escape the boiling lava",
+            "Helicopter rescue rope lowered by the robot army sergeant",
+            "Surfboard Jesse rides down the 200-foot waterfall into the ocean"
+          ],
+          "hint": "Think about how Jesse activates the jet pack, how he spins at first, where he falls when it disappears, and how he gets a new one.",
+          "pageTitle": "Chapter 5 — Pages 33–36 (First Flight & Volcano Fall)",
+          "pageExcerpt": "\"Just press the button in your right hand to blast off... after 30 seconds of doing a perfect impression of an untied balloon losing all its air, I finally started getting the hang of it... 500 feet above a volcano, my jet pack started sputtering... 'Yeah, it’ll reappear in five, four, three, two . . .' Another jet pack magically reappeared in its place.\"",
+          "word": "VOLCANO",
+          "clue": "Mountain with a pit of boiling lava that Jesse falls toward from 500 feet up"
+        },
+        {
+          "type": "mc",
+          "q": "Why does Jesse end up falling toward a pit of boiling lava from 500 feet in the air?",
+          "options": [
+            "He is having so much fun flying around Hawaii that he forgets Eric's blinking warning, and the jet pack disappears off his back.",
+            "An eagle-size wasp shoots his fuel tank with a glowing red laser.",
+            "He crashes into an invisible brick wall hidden inside the clouds.",
+            "A giant bat grabs his jet pack and drops him into the crater."
+          ],
+          "correct": 0,
+          "hint": "Jesse is enjoying the 'best minute of my life' and forgets to watch what the jet pack is doing on his back.",
+          "pageTitle": "Chapter 5 — Pages 35–36 (500 Feet Above a Volcano)",
+          "pageExcerpt": "\"I was having so much fun flying around Hawaii by jet pack (sorry, just wanted to say it again) that I forgot about Eric’s blinking warning. Then, 500 feet above a volcano, my jet pack started sputtering. I looked back. The fuel wasn’t just running out; the jet pack itself was disappearing and reappearing on my back! I panicked and looked for a place to land, but it was too late—the jet pack disappeared for good.\"",
+          "word": "SECLUDED",
+          "clue": "Private and tucked away, like the beach where the boys find more jet packs"
+        },
+        {
+          "type": "mc",
+          "q": "What attacks Eric and Jesse after they take off from the secluded beach, and how does it hurt Jesse?",
+          "options": [
+            "Two eagle-size wasps join them in the air; one wasp's eyes glow red and it zaps Jesse with a laser.",
+            "A swarm of six-legged praying mantises leaps out of the palm trees and bites Jesse's arm.",
+            "An alien spaceship from Pearl Harbor drops a spiky sand ball on Jesse's head.",
+            "A giant shark jumps out of the ocean and chomps Jesse's left boot."
+          ],
+          "correct": 0,
+          "hint": "Eric loops high into the air to blast the first giant flying insect, while the second one's eyes start glowing red.",
+          "pageTitle": "Chapter 5 — Page 37 (Eagle-Size Wasps)",
+          "pageExcerpt": "\"When we got into the air, we were joined by two eagle-size wasps. I nervously glanced over. One of them made eye contact and glared at me... While Eric talked, the remaining wasp’s eyes started glowing red. 'Eric, what is that?' 'Quick! Pull up!' I tried, but it was too late. The wasp zapped me with a laser. 'OUCH!'\"",
+          "word": "WASPS",
+          "clue": "Eagle-size flying insects in Hawaii whose eyes glow red before shooting lasers"
+        },
+        {
+          "type": "tf",
+          "q": "True or False: After Jesse gets zapped by the wasp's laser, everything looks glowing red and pulsing until he touches a medical kit suitcase with a Red Cross symbol on a black sand beach.",
+          "options": [
+            "True",
+            "False"
+          ],
+          "correct": 0,
+          "hint": "Think about what happens the instant Jesse touches the suitcase with the Red Cross symbol on the beach.",
+          "pageTitle": "Chapter 5 — Pages 37–38 (The Medical Kit)",
+          "pageExcerpt": "\"We landed on a black sand beach. At least I think the sand was black. It was hard to tell because everything was glowing red and pulsing. 'Here you go. Try this,' Eric said as he led me to a suitcase with a Red Cross symbol on it. I reached out to grab it. The instant I touched it, it disappeared in a flash of white, and my vision cleared up. A warm tingle went through my body.\"",
+          "word": "SUITCASE",
+          "clue": "Container marked with a Red Cross symbol that serves as a medical kit"
+        },
+        {
+          "type": "match",
+          "q": "Match each location or item in Chapter 5 with what happens there:",
+          "pairs": [
+            {
+              "left": "Pearl Harbor",
+              "right": "Where the aliens launch their attacks and where the boys sink all the spaceships",
+              "rightVariants": [
+                "Where the aliens launch their attacks and where the boys sink all the spaceships",
+                "Hawaiian harbor where Eric and Jesse sink alien spaceships during the day",
+                "Base the aliens use in the level's plot to launch their attacks",
+                "Harbor location cleared out as the boys blast their way through Hawaii"
+              ]
+            },
+            {
+              "left": "Black Sand Beach",
+              "right": "Shore where Jesse lands with red pulsing vision and touches a medical kit",
+              "rightVariants": [
+                "Shore where Jesse lands with red pulsing vision and touches a medical kit",
+                "Beach where Eric leads an injured Jesse to a Red Cross suitcase",
+                "Landing spot where a flash of white and a warm tingle heal Jesse's laser wound",
+                "Dark-sanded shore where Jesse recovers after being zapped by the wasp"
+              ]
+            },
+            {
+              "left": "Sunset Cliff",
+              "right": "High overlook by the ocean where Eric points out a distant island",
+              "rightVariants": [
+                "High overlook by the ocean where Eric points out a distant island",
+                "Ocean cliff where the boys land at sunset before jumping off toward an island",
+                "Ledge overlooking the sea from which Eric leaps off with a fresh jet pack",
+                "Evening landing spot where Eric asks, 'See that island out there?'"
+              ]
+            },
+            {
+              "left": "Airplane-Size Bats",
+              "right": "Massive flying creatures that swoop over the ocean and grab the boys with claws",
+              "rightVariants": [
+                "Massive flying creatures that swoop over the ocean and grab the boys with claws",
+                "Giant screeching flyers that snatch Eric and Jesse in midair over the sea",
+                "Huge winged beasts whose talons carry the boys to the tiny island",
+                "Creatures that cast a huge shadow over the ocean and dig claws into Jesse's back"
+              ]
+            }
+          ],
+          "distractorVariants": [
+            "Snowy mountain cave where 50 praying mantises crowd outside the entrance",
+            "Subway station where robotic cabs drive players back to Middlefield, Ohio",
+            "Floating castle in the clouds where the tutorial sergeant hands out medals",
+            "Coral reef submarine where Jesse finds an underwater breathing mask"
+          ],
+          "hint": "Recall what the boys sink at the harbor, where Jesse heals, where they land at sunset, and what grabs them over the ocean.",
+          "pageTitle": "Chapter 5 — Pages 36–39 (Blasting Through Hawaii)",
+          "pageExcerpt": "\"Something really stupid about the aliens using Pearl Harbor to launch their attacks... We landed on a black sand beach... 'Medical kit. Any time you get hurt, just find one, OK?' ... At sunset, we landed on a cliff overlooking the ocean... I looked up to see a bat the size of a small airplane swoop over Eric and grab him with two massive claws.\"",
+          "word": "SUNSET",
+          "clue": "The time of evening when Eric and Jesse land on a cliff overlooking the ocean"
+        },
+        {
+          "type": "mc",
+          "q": "At the end of Chapter 5, what happens thirty seconds into Eric and Jesse's flight toward the distant island?",
+          "options": [
+            "Giant bats the size of small airplanes swoop down with a 'SCREEEEEEEECH!' and grab both boys in their claws.",
+            "Their jet packs run out of fuel and they have to swim the last two miles to shore.",
+            "A tidal wave washes them back to the top of the 200-foot waterfall.",
+            "Eagle-size wasps surround them and force them to land on a battleship."
+          ],
+          "correct": 0,
+          "hint": "A huge shadow falls over the ocean right after Jesse yells that he doesn't think they're going to make it.",
+          "pageTitle": "Chapter 5 — Page 39 (Shadow Over the Ocean)",
+          "pageExcerpt": "\"Thirty seconds into our flight, the island still seemed a couple of miles away. 'I don’t think we’re gonna make it!' I yelled ahead. Just then, a huge shadow fell over the ocean. Then—'SCREEEEEEEECH!' I looked up to see a bat the size of a small airplane swoop over Eric and grab him with two massive claws. 'Eriiiiiiiiic!' At that moment, I felt claws dig into my own back.\"",
+          "word": "TALONS",
+          "clue": "Sharp claws of the giant bats that carry Eric and Jesse to the tiny island"
+        },
+        {
+          "type": "mc",
+          "q": "At the start of Chapter 6 ('Boss Battle'), how does Jesse describe the tiny island where the giant bats dump them?",
+          "options": [
+            "Just a beach the size of a small backyard with a single palm tree in the middle",
+            "A massive volcanic crater surrounded by fifty stone statues",
+            "A snowy mountain peak with an invisible wall around the edge",
+            "A crowded harbor filled with sunken alien spaceships"
+          ],
+          "correct": 0,
+          "hint": "Think about how small the speck of land is and the single tree standing in the center of the sand.",
+          "pageTitle": "Chapter 6 — Page 41 (Boss Battle — The Tiny Island)",
+          "pageExcerpt": "\"With Eric and me in their talons, the bats flew toward the tiny island. As we got closer, the speck of land came into focus—just a beach the size of a small backyard with a single palm tree in the middle. When we reached the island, the bats dive-bombed, then—WHUMP!—dumped us onto the beach and soared off.\"",
+          "word": "BACKYARD",
+          "clue": "The small outdoor area behind a house—used to describe the size of the tiny island beach"
+        },
+        {
+          "type": "tf",
+          "q": "True or False: When the sand monster rises behind Jesse on the island, it stays tiny—no bigger than a beach ball.",
+          "options": [
+            "True",
+            "False"
+          ],
+          "correct": 1,
+          "hint": "Remember how Jesse compares the monster's growing height to one-story and two-story houses with a big attic on top.",
+          "pageTitle": "Chapter 6 — Page 42 (The Growing Sand Monster)",
+          "pageExcerpt": "\"Behind me, a monster made of sand rose from the ground. It kept growing and growing—first the size of a one-story home, then two stories, then as tall as one of those old houses with a big attic on top. Its face formed into angry eyes and massive fangs.\"",
+          "word": "FANGS",
+          "clue": "Massive sharp teeth that form on the sand monster's angry face"
+        },
+        {
+          "type": "mc",
+          "q": "When Jesse tells Eric 'You're speaking gibberish' after Eric calls the sand monster 'the boss,' how does Eric explain how to defeat it?",
+          "options": [
+            "Blast it enough times in a glowing spot on its back or belly so it disappears and the portals pop up.",
+            "Lure the sand monster into the ocean water so it dissolves into mud.",
+            "Use a jet pack to drop coconuts from the single palm tree onto its head.",
+            "Wait five minutes until the sand monster runs out of energy and falls asleep."
+          ],
+          "correct": 0,
+          "hint": "Eric points out two specific places on the monster's body that glow as weak spots.",
+          "pageTitle": "Chapter 6 — Page 43 (How to Beat the Boss)",
+          "pageExcerpt": "\"'The boss!' 'I don’t know what that means.' 'This is a video game. Every few levels end with a big boss battle.' 'You’re speaking gibberish.' Eric rolled his eyes. 'If you blast him enough times in a glowing spot on his back or belly, he’ll disappear, and the portals will pop up.'\"",
+          "word": "GIBBERISH",
+          "clue": "Nonsense or confusing talk—what Jesse says Eric is speaking when talking about a 'boss battle'"
+        },
+        {
+          "type": "match",
+          "q": "Match each detail of the Sand Monster boss battle in Chapter 6 with its description in the book:",
+          "pairs": [
+            {
+              "left": "Old House with a Big Attic",
+              "right": "How tall the sand monster grows as it rises from the beach",
+              "rightVariants": [
+                "How tall the sand monster grows as it rises from the beach",
+                "Building height Jesse compares the giant sand monster to after two stories",
+                "Size the sand boss reaches before forming angry eyes and massive fangs",
+                "Tall house comparison for the towering monster on the tiny island"
+              ]
+            },
+            {
+              "left": "Glowing Back or Belly",
+              "right": "Weak spots the boys must blast enough times to make the boss disappear",
+              "rightVariants": [
+                "Weak spots the boys must blast enough times to make the boss disappear",
+                "Shining target areas on the sand monster that unlock the exit portals",
+                "The two places Eric says to shoot repeatedly to win the boss battle",
+                "Targets on the front and rear of the monster that Eric and Jesse blast"
+              ]
+            },
+            {
+              "left": "Dinosaur Roar",
+              "right": "Sound the sand monster makes when Jesse marches in front of it",
+              "rightVariants": [
+                "Sound the sand monster makes when Jesse marches in front of it",
+                "Prehistoric bellow the boss lets out before Jesse blasts it in the mouth",
+                "Loud roar of the sand monster as Jesse taunts it to eat him",
+                "Fierce sound comparison when Jesse confronts the monster face-to-face"
+              ]
+            },
+            {
+              "left": "Spiky Sand Ball",
+              "right": "Projectile the monster throws at Jesse even though sand is supposed to be soft",
+              "rightVariants": [
+                "Projectile the monster throws at Jesse even though sand is supposed to be soft",
+                "Sharp sandy weapon Jesse dodges while complaining that video games are dumb",
+                "Thrown attack that makes Jesse ask, 'Sand is soft. How could a sand ball be spiky?'",
+                "Prickly sphere hurled by the boss during Jesse and Eric's argument"
+              ]
+            }
+          ],
+          "distractorVariants": [
+            "Freeze ray gun that turns the entire ocean into solid ice",
+            "Golden treasure chest buried underneath the single palm tree",
+            "Giant robot suit that Jesse pilots to wrestle the sand monster",
+            "Magic surfboard that slices the sand monster in half"
+          ],
+          "hint": "Think about the monster's height, its weak spots, the sound it makes when Jesse marches up to it, and what it throws at him.",
+          "pageTitle": "Chapter 6 — Pages 42–44 (Fighting the Sand Monster)",
+          "pageExcerpt": "\"then as tall as one of those old houses with a big attic on top... 'If you blast him enough times in a glowing spot on his back or belly, he’ll disappear'... I marched in front of the sand monster, and it roared like a dinosaur... I dodged a spiky sand ball that the monster threw at me.\"",
+          "word": "DINOSAUR",
+          "clue": "Prehistoric reptile that the sand monster sounds like when it roars at Jesse"
+        },
+        {
+          "type": "mc",
+          "q": "Why isn't Jesse afraid of being eaten when he marches up to the sand monster and shoots it in the mouth and belly?",
+          "options": [
+            "He yells that it won't even hurt and he'll just come right back here to do the whole thing again because it's a video game.",
+            "He is wearing an indestructible armor vest he found in the Red Cross suitcase.",
+            "He thinks the sand monster is only a harmless hologram projected by the palm tree.",
+            "He still has a jet pack strapped to his back to fly away at light speed."
+          ],
+          "correct": 0,
+          "hint": "Remember what happened earlier when Jesse fell toward the volcano lava and reappeared at the waterfall.",
+          "pageTitle": "Chapter 6 — Page 43 (Jesse Taunts the Boss)",
+          "pageExcerpt": "\"'Go ahead! Eat me! It won’t even hurt. I’ll just come right back here, and we’ll do the whole thing again because this is a video game and video games are STUPID!'\"",
+          "word": "SPIKY",
+          "clue": "Covered in sharp points—like the sand ball the monster throws at Jesse"
+        },
+        {
+          "type": "mc",
+          "q": "During their argument across the level in Chapter 6, what does Jesse yell would actually be 'fun' instead of being tricked and pushed off waterfalls?",
+          "options": [
+            "\"Having a real friend who explains things and lets me choose for myself!\"",
+            "\"Staying in Hawaii forever and flying jet packs over the volcano!\"",
+            "\"Unlocking a grenade launcher for both arms in Level 3!\"",
+            "\"Going back to the rec center pool to jump off the 15-foot diving board!\""
+          ],
+          "correct": 0,
+          "hint": "Jesse is upset that Eric keeps surprising him and making decisions for him without explaining first.",
+          "pageTitle": "Chapter 6 — Page 44 (Real Friends Argument)",
+          "pageExcerpt": "\"'What would be fun is having a real friend who explains things and lets me choose for myself!' Eric blasted the monster in the back, and it fell over again. 'What? So I’m not a real friend now!' ... 'I don’t know; real friends trust each other!'\"",
+          "word": "TWITCHING",
+          "clue": "Jerking or moving unnaturally—what the monster's head does when blasted from both sides"
+        },
+        {
+          "type": "tf",
+          "q": "True or False: When Jesse blasts the sand monster's belly at the exact same time Eric blasts its back, the monster's head twitches unnaturally and it sounds like a lawn mower trying to start ('RO-RO-RO-RO-RO').",
+          "options": [
+            "True",
+            "False"
+          ],
+          "correct": 0,
+          "hint": "Think about the funny glitchy thing that happens when both boys shoot the monster at the same time from opposite sides.",
+          "pageTitle": "Chapter 6 — Page 45 (The Glitchy Boss Roar)",
+          "pageExcerpt": "\"I blasted the monster’s belly. Unknown to me, Eric blasted its back at the same time. In slow motion, the monster looked at me, then turned around to look at Eric. Then a funny thing happened. Its head started twitching unnaturally. As the monster’s head snapped from me to Eric and back again, it started to roar. Or at least, it started trying to roar. 'RO-RO-RO-RO-RO.' It sounded like a lawn mower trying to start.\"",
+          "word": "LAWNMOWER",
+          "clue": "Yard machine for cutting grass that the glitching monster sounds like ('RO-RO-RO-RO-RO')"
+        },
+        {
+          "type": "match",
+          "q": "Match each quote from the argument and glitch scene in Chapter 6 with who says it or what causes it:",
+          "pairs": [
+            {
+              "left": "\"I don't know; real friends trust each other!\"",
+              "right": "What Jesse yells at the monster's belly hoping Eric can hear him on the other side",
+              "rightVariants": [
+                "What Jesse yells at the monster's belly hoping Eric can hear him on the other side",
+                "Jesse's shout through the giant monster when it grows too big to see Eric",
+                "Jesse's reply about trust while arguing with Eric during the boss fight",
+                "Words Jesse shouts across the monster after complaining Eric doesn't let him choose"
+              ]
+            },
+            {
+              "left": "\"Real friends know each other...\"",
+              "right": "Eric's reply that he has to push Jesse a little bit so Jesse has fun",
+              "rightVariants": [
+                "Eric's reply that he has to push Jesse a little bit so Jesse has fun",
+                "What Eric says while charging his blaster on the far side of the sand monster",
+                "Eric's explanation that Jesse never wants to make decisions for himself",
+                "Eric's comeback claiming a best friend knows when to give a little push"
+              ]
+            },
+            {
+              "left": "\"RO-RO-RO-RO-RO.\"",
+              "right": "Broken lawn-mower sound the sand monster makes when blasted on both sides at once",
+              "rightVariants": [
+                "Broken lawn-mower sound the sand monster makes when blasted on both sides at once",
+                "Glitchy roar of the boss as its head snaps back and forth between Jesse and Eric",
+                "Stuttering noise the monster makes right before the island fades away",
+                "Failed roar caused by Jesse and Eric shooting the belly and back simultaneously"
+              ]
+            },
+            {
+              "left": "\"ERROR 2302. ACTIVATE HINDENBURG PROTOCOL?\"",
+              "right": "Message typed on the wall of the bright-blue room with YES and NO choices",
+              "rightVariants": [
+                "Message typed on the wall of the bright-blue room with YES and NO choices",
+                "Strange computer prompt that appears after the sand monster and island vanish",
+                "Error screen that reappears even after Jesse walks up to the wall and touches NO",
+                "Warning text in the blue room that makes Eric's face turn kind of white"
+              ]
+            }
+          ],
+          "distractorVariants": [
+            "Message congratulating the boys for winning a million bonus points",
+            "Voice of Jesse's mom calling the boys upstairs for dinner in Ohio",
+            "Warning that their blasters have run out of ammo for the rest of the day",
+            "Countdown clock giving them ten seconds to swim back to Pearl Harbor"
+          ],
+          "hint": "Recall what Jesse and Eric yell during their friendship argument, the monster's stuttering roar, and the text typed on the bright-blue wall.",
+          "pageTitle": "Chapter 6 — Pages 44–46 (The Argument & Error 2302)",
+          "pageExcerpt": "\"'I don’t know; real friends trust each other!' ... 'Real friends know each other,' Eric said... 'RO-RO-RO-RO-RO.' It sounded like a lawn mower trying to start... On the wall, words started to appear as if they were being typed. ERROR 2302. ACTIVATE HINDENBURG PROTOCOL? - YES - NO\"",
+          "word": "PROTOCOL",
+          "clue": "An official computer procedure—like the mysterious 'Hindenburg' one in Error 2302"
+        },
+        {
+          "type": "mc",
+          "q": "When the sand monster and island disappear into a bright-blue room with 'ERROR 2302. ACTIVATE HINDENBURG PROTOCOL?', what happens when Jesse touches 'NO'?",
+          "options": [
+            "The message disappears, but after they wait a moment, the exact same error message types itself out again, forcing Eric to touch 'YES'.",
+            "A trapdoor opens in the floor and drops them back into the boiling volcano.",
+            "The robot army sergeant appears and congratulates them for beating the game.",
+            "The bright-blue room immediately teleports both boys back to Eric's bedroom."
+          ],
+          "correct": 0,
+          "hint": "Eric says 'I guess we don't have a choice' after watching what the wall does following Jesse's 'NO'.",
+          "pageTitle": "Chapter 6 — Page 46 (Touching NO then YES)",
+          "pageExcerpt": "\"I walked to the wall and touched 'NO.' The message disappeared. Eric and I looked at each other and waited for something to happen. Then the message started typing out again. ERROR 2302. ACTIVATE HINDENBURG PROTOCOL? - YES - NO 'I guess we don’t have a choice,' Eric said. He touched 'YES,' and the room faded away.\"",
+          "word": "ERROR",
+          "clue": "A computer mistake or glitch—like code 2302 on the bright-blue room's wall"
+        },
+        {
+          "type": "tf",
+          "q": "True or False: Eric knows all about the Hindenburg Protocol because he has seen Error 2302 many times before when playing the game.",
+          "options": [
+            "True",
+            "False"
+          ],
+          "correct": 1,
+          "hint": "Look at the color of Eric's face and his answer when Jesse asks what the Hindenburg Protocol is.",
+          "pageTitle": "Chapter 6 — Page 46 (Eric's White Face)",
+          "pageExcerpt": "\"'OK,' I said to Eric. 'What’s the Hindenburg Protocol?' His face was kind of white. 'I don’t know.' 'What do you mean you don’t know?' 'I mean it’s never done anything like this before.'\"",
+          "word": "PORTALS",
+          "clue": "The three glowing doorways that push up through the ground at the end of Chapter 6"
+        },
+        {
+          "type": "match",
+          "q": "Match each event at the end of Chapter 6 with what happens after Eric activates the Hindenburg Protocol:",
+          "pairs": [
+            {
+              "left": "Eric's Face",
+              "right": "Turns kind of white because the game has never done anything like this before",
+              "rightVariants": [
+                "Turns kind of white because the game has never done anything like this before",
+                "Goes pale when Jesse asks what the Hindenburg Protocol is",
+                "Shows shock when Error 2302 appears in the bright-blue room",
+                "Loses its color as Eric admits he doesn't know what the message means"
+              ]
+            },
+            {
+              "left": "Touching \"YES\"",
+              "right": "Makes the bright-blue room fade away and brings back the island with no monster",
+              "rightVariants": [
+                "Makes the bright-blue room fade away and brings back the island with no monster",
+                "Choice Eric presses when the error message types out a second time",
+                "Action that returns the boys to the beach and ocean with the sand boss gone",
+                "What Eric touches after saying, 'I guess we don't have a choice'"
+              ]
+            },
+            {
+              "left": "Two Outer Portals",
+              "right": "Glow bright blue and purple like before as they push through the ground",
+              "rightVariants": [
+                "Glow bright blue and purple like before as they push through the ground",
+                "The two side doorways that still shine with their normal bright colors",
+                "Working portals flanking the middle one that glow blue and purple",
+                "The pair of outer portals that look completely normal on the beach"
+              ]
+            },
+            {
+              "left": "Middle HOME Portal",
+              "right": "Turns dull gray and is locked with a padlock symbol so they cannot go home",
+              "rightVariants": [
+                "Turns dull gray and is locked with a padlock symbol so they cannot go home",
+                "The center doorway that stops glowing and traps Eric and Jesse inside the game",
+                "Portal Eric and Jesse walk toward before realizing it is dull gray and locked",
+                "Exit to real life that is disabled after activating the Hindenburg Protocol"
+              ]
+            }
+          ],
+          "distractorVariants": [
+            "Golden portal that teleports the boys straight to a pizza party in Ohio",
+            "Spinning jet pack that carries the sand monster up to the moon",
+            "Submarine hatch that opens underneath the palm tree on the beach",
+            "Green portal labeled LEVEL 100 that hands out free blasters"
+          ],
+          "hint": "Think about how Eric reacts to Error 2302, what happens when he touches YES, and how the three portals look on the beach.",
+          "pageTitle": "Chapter 6 — Pages 46–47 (The Locked HOME Portal)",
+          "pageExcerpt": "\"He touched 'YES,' and the room faded away. The island and ocean came back, but no more monster... Three portals started pushing through the ground in front of us... We walked toward the middle portal—the HOME one—but stopped short once it began revealing itself. Something was wrong. The two other portals glowed bright blue and purple like before, but not the middle one. The middle one was dull gray. And it was locked.\"",
+          "word": "LOCKED",
+          "clue": "Shut tight with a padlock—the state of the dull gray middle HOME portal at the end of Chapter 6"
+        }
+      ],
+      "readerHtml": "<h2>CHAPTER 5: Jet Pack Joyride</h2>\n<p><strong>[Page 33]</strong> I probably don’t need to tell you this, but jet packs are amazing. This is something I learned firsthand when Eric led me to a spinning jet pack at the top of a waterfall right outside the portal. “Go ahead! Strap in!”</p>\n<p>I strapped on the jet pack, trying hard not to act like this was the coolest moment of my life. “OK, now what?”</p>\n<p>“Jump off.”</p>\n<p>“Excuse me?”</p>\n<p>“Jump off the waterfall.”</p>\n<p>I looked over the edge. The bottom of the waterfall was at least 200 feet down.</p>\n<p>“Nope. Nopity nopity nope. Can’t I just launch from here?”</p>\n<p>“You can, but it’s more fun if you’re falling first. Just press the button in your right hand to blast off and remember to land when it starts blinking.”</p>\n<p><strong>[Page 34]</strong> “Wait, when what starts blinking?”</p>\n<p>“Exactly! Now go!” With that, Eric pushed me off the edge of the waterfall.</p>\n<p>I’ve only tried the big diving board at the rec center pool once. Last year, Eric finally got me to climb to the top. At the top, I told him I changed my mind about jumping, so he “helped” by pushing me off. I landed on my stomach and got a red mark that lasted the whole day. The lifeguard kicked Eric out of the pool, and I punched him in the stomach as hard as I could to show him what my landing felt like, but neither of those things stopped him from cackling about it for the rest of the week.</p>\n<p>Now here we were again, me falling to a watery grave and Eric laughing above. If I ever survived, I would do a lot more than punch him in the stomach. As the river rushed toward me, I tried to remember what Eric had said. <em>Do I push this button? No, maybe this . . .</em></p>\n<p>WHOOOOOOOSH!</p>\n<p>The jet pack roared to life. I stopped falling, and for half a second I found myself suspended in midair. I noticed the impossibly green rain forest around me and <strong>[Page 35]</strong> the roaring river below and the ocean in the distance and thought that nothing could be more beautiful. Then I screamed into the air like an out-of-control bottle rocket.</p>\n<p>“AHHHHHHH!”</p>\n<p>I blew past Eric giving me a thumbs-up at the top of the waterfall. “You got it!”</p>\n<p>I certainly didn’t have it. I was spinning wildly and super close to upchucking again. But after 30 seconds of doing a perfect impression of an untied balloon losing all its air, I finally started getting the hang of it. What followed was the best minute of my life as I flew around Hawaii by jet pack. <em>I flew around Hawaii by jet pack.</em> If there’s a cooler sentence in the world, I can’t think of it right now.</p>\n<p>I was having so much fun <em>flying around Hawaii by jet pack</em> (sorry, just wanted to say it again) that I forgot about Eric’s blinking warning. Then, 500 feet above a volcano, my jet pack started sputtering. I looked back. The fuel wasn’t just running out; the jet pack itself was disappearing and reappearing on my back! I panicked and looked for a place to land, but it was too late—the jet pack disappeared for good.</p>\n<p><strong>[Page 36]</strong> “Oh no! Nooooooo!” I screamed as I fell toward the mouth of the volcano. I was so mad at Eric. Falling off of the 15-foot diving board is one thing. Falling into a pit of boiling lava is quite another. But just before I hit the lava, everything went white, and I found myself standing next to Eric on top of the waterfall again.</p>\n<p>“Pretty cool, huh?”</p>\n<p>“Would it kill you to tell me what happens when the jet pack starts blinking?!”</p>\n<p>Eric laughed and strapped on the jet pack. “Come on!”</p>\n<p>“Don’t I get one?”</p>\n<p>“Yeah, it’ll reappear in five, four, three, two . . .”</p>\n<p>Another jet pack magically reappeared in its place. I strapped it on, and we started flying. In the air, Eric explained the plot of this particular level. Something really stupid about the aliens using Pearl Harbor to launch their attacks and blah, blah, blah. I couldn’t pay too much attention because <em>I was flying around Hawaii by jet pack.</em></p>\n<p>We landed on a secluded beach, found more jet packs, and took off again. When we got into the air, we were <strong>[Page 37]</strong> joined by two eagle-size wasps. I nervously glanced over. One of them made eye contact and glared at me.</p>\n<p>“What are those?” I yelled to Eric.</p>\n<p>“Oh, those are dumb. Do this,” he said as he looped high into the air, circled behind one of the wasps, and blasted it.</p>\n<p>“I don’t think I can do that.”</p>\n<p>“It’s not hard,” Eric said. “All you have to do is . . .”</p>\n<p>While Eric talked, the remaining wasp’s eyes started glowing red.</p>\n<p>“Eric, what is that?”</p>\n<p>“Quick! Pull up!”</p>\n<p>I tried, but it was too late. The wasp zapped me with a laser.</p>\n<p>“OUCH!”</p>\n<p>Eric blasted the wasp and grabbed me. “Come on.”</p>\n<p>We landed on a black sand beach. At least I think the sand was black. It was hard to tell because everything was glowing red and pulsing. “Here you go. Try this,” Eric said as he led me to a suitcase with a Red Cross symbol on it.</p>\n<p><strong>[Page 38]</strong> I reached out to grab it. The instant I touched it, it disappeared in a flash of white, and my vision cleared up. A warm tingle went through my body.</p>\n<p>“Ooh, what was that?”</p>\n<p>“Medical kit. Any time you get hurt, just find one, OK?”</p>\n<p>“K.”</p>\n<p>“You ready to keep going?”</p>\n<p>I smiled. “Let’s do this.”</p>\n<p>Eric and I spent the day blasting our way through Hawaii. We cleared out the enemy patrols on the beaches, collected new laser upgrades for our blasters, and sunk all the spaceships at Pearl Harbor. At sunset, we landed on a cliff overlooking the ocean.</p>\n<p>“See that island out there?” Eric asked.</p>\n<p>I squinted. “Yeah, I think so.”</p>\n<p>“There’s something really cool on it. You want to check it out?”</p>\n<p>“What is it?”</p>\n<p>But Eric had already strapped on a jet pack and jumped off the cliff. “You’ll see!”</p>\n<p><strong>[Page 39]</strong> I sighed, waited five seconds, and strapped on my own jet pack. “Wait up!”</p>\n<p>I pushed to catch up with him, but Eric was about 50 feet ahead of me. Thirty seconds into our flight, the island still seemed a couple of miles away. “I don’t think we’re gonna make it!” I yelled ahead.</p>\n<p>Just then, a huge shadow fell over the ocean. Then—“SCREEEEEEEECH!” I looked up to see a bat the size of a small airplane swoop over Eric and grab him with two massive claws.</p>\n<p>“Eriiiiiiiiic!”</p>\n<p>At that moment, I felt claws dig into my own back.</p>\n<hr style=\"border-color: rgba(56,189,248,0.25); margin: 18px 0;\" />\n<h2>CHAPTER 6: Boss Battle</h2>\n<p><strong>[Page 41]</strong> With Eric and me in their talons, the bats flew toward the tiny island. As we got closer, the speck of land came into focus—just a beach the size of a small backyard with a single palm tree in the middle. When we reached the island, the bats dive-bombed, then—<em>WHUMP!</em>—dumped us onto the beach and soared off.</p>\n<p>I brushed the sand out of my clothes. “Was that supposed to happen?”</p>\n<p>“Of course!”</p>\n<p>I walked toward Eric. “We have to talk.” I put my finger on his chest. “You can’t keep surprising me with . . .”</p>\n<p>My voice trailed off, because as I talked, a shadow fell over Eric. I slowly turned to see what it could be this time.</p>\n<p>A sand monster. Of course. Why not.</p>\n<p><strong>[Page 42]</strong> Behind me, a monster made of sand rose from the ground. It kept growing and growing—first the size of a one-story home, then two stories, then as tall as one of those old houses with a big attic on top. Its face formed into angry eyes and massive fangs.</p>\n<p>I jabbed my thumb toward the furious monster behind me. “Wanna tell me what this is?”</p>\n<p><strong>[Page 43]</strong> “The boss!”</p>\n<p>“I don’t know what that means.”</p>\n<p>“This is a video game. Every few levels end with a big boss battle.”</p>\n<p>“You’re speaking gibberish.”</p>\n<p>Eric rolled his eyes. “If you blast him enough times in a glowing spot on his back or belly, he’ll disappear, and the portals will pop up.”</p>\n<p>“Fine. I’ll be happy to go home where people aren’t constantly tricking me and pushing me off waterfalls!”</p>\n<p>“Fine!”</p>\n<p>“FINE!”</p>\n<p>I marched in front of the sand monster, and it roared like a dinosaur.</p>\n<p>“Ooh. Ooooooooh. I’m real scared,” I said as I blasted it in the mouth. “What are you going to do, eat me?” I charged up to full blast and shot it in the belly. It fell over shrieking, then grew bigger and angrier.</p>\n<p>“Go ahead! Eat me! It won’t even hurt. I’ll just come right back here, and we’ll do the whole thing again because this is a video game and video games are STUPID!”</p>\n<p><strong>[Page 44]</strong> “Oh, shut up!” Eric yelled from across the level.</p>\n<p>“What was that?!”</p>\n<p>“Just save it. You know you’re having fun.”</p>\n<p>“Oh, really?! You know what would be fun?” I dodged a spiky sand ball that the monster threw at me. (It’s sand, you might be saying. Sand is soft. How could a sand ball be spiky? I know, right? Video games are so dumb.) “What would be fun is having a real friend who explains things and lets me choose for myself!”</p>\n<p>Eric blasted the monster in the back, and it fell over again. “What? So I’m not a real friend now!”</p>\n<p>The monster grew so big that I couldn’t see Eric anymore, so I just started yelling at the monster’s belly, hoping Eric could hear me on the other side.</p>\n<p>“I don’t know; real friends trust each other!”</p>\n<p>I could hear Eric charging up his blaster. I charged mine, too.</p>\n<p>“Real friends know each other,” Eric said. “And this friend knows that you never want to have fun or make decisions for yourself. So sometimes he has to push you a little bit.”</p>\n<p><strong>[Page 45]</strong> “Well, maybe you don’t know me as well as you think you do!”</p>\n<p>I blasted the monster’s belly. Unknown to me, Eric blasted its back at the same time. In slow motion, the monster looked at me, then turned around to look at Eric. Then a funny thing happened. Its head started twitching unnaturally. As the monster’s head snapped from me to Eric and back again, it started to roar. Or at least, it started trying to roar.</p>\n<p>“RO-RO-RO-RO-RO.”</p>\n<p>It sounded like a lawn mower trying to start.</p>\n<p>“RO-RO-RO-RO-RO.”</p>\n<p>Suddenly, the sand monster and island disappeared. Everything faded away, and we were left in a bright-blue room. On the wall, words started to appear as if they were being typed.</p>\n<p><strong>ERROR 2302. ACTIVATE HINDENBURG PROTOCOL?</strong><br/><strong>- YES</strong><br/><strong>- NO</strong></p>\n<p><strong>[Page 46]</strong> “OK,” I said to Eric. “What’s the Hindenburg Protocol?”</p>\n<p>His face was kind of white.</p>\n<p>“I don’t know.”</p>\n<p>“What do you mean you don’t know?”</p>\n<p>“I mean it’s never done anything like this before.”</p>\n<p>“So should we pick ‘no’?”</p>\n<p>“Yeah, probably.”</p>\n<p>I walked to the wall and touched “NO.”</p>\n<p>The message disappeared. Eric and I looked at each other and waited for something to happen. Then the message started typing out again.</p>\n<p><strong>ERROR 2302. ACTIVATE HINDENBURG PROTOCOL?</strong><br/><strong>- YES</strong><br/><strong>- NO</strong></p>\n<p>“I guess we don’t have a choice,” Eric said.</p>\n<p>He touched “YES,” and the room faded away. The island and ocean came back, but no more monster.</p>\n<p><strong>[Page 47]</strong> “That was weird,” I said.</p>\n<p>“Yeah. Super weird.”</p>\n<p>Three portals started pushing through the ground in front of us.</p>\n<p>“Why don’t we both get out of here?” Eric asked.</p>\n<p>We walked toward the middle portal—the HOME one—but stopped short once it began revealing itself. Something was wrong. The two other portals glowed bright blue and purple like before, but not the middle one.</p>\n<p>The middle one was dull gray. And it was locked. <em>[Illustration: LOCKED padlock symbol on the middle portal]</em></p>"
     },
     {
       "id": "trapped_videogame_ch3_4",
@@ -721,6 +1245,6 @@
       "instance": "R"
     }
   ],
-  "activeQuizIdR": "trapped_videogame_ch3_4",
+  "activeQuizIdR": "trapped_videogame_ch5_6",
   "activeQuizIdD": "d_history_trivia_mc"
 }

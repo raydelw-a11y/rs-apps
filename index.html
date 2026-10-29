@@ -688,6 +688,21 @@
     margin-top: 0.25rem; 
   }
 
+  .submit-action-row {
+    display: flex;
+    width: 100%;
+  }
+
+  .help-actions-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.44rem;
+    width: 100%;
+    margin-top: 0.72rem;
+    padding-top: 0.56rem;
+    border-top: 1.5px dashed rgba(148, 163, 184, 0.28);
+  }
+
   .actions-row {
     display: flex;
     gap: 0.55rem;
@@ -696,7 +711,7 @@
   }
 
   .hint-btn { 
-    flex: 1;
+    width: 100%;
     font-size: 0.94rem; 
     padding: 0.7rem 0.85rem; 
     border-radius: 0.65rem; 
@@ -729,9 +744,9 @@
   }
 
   .accept-btn {
-    flex: 1;
-    font-size: 0.94rem; 
-    padding: 0.7rem 0.85rem; 
+    width: 100%;
+    font-size: 0.96rem; 
+    padding: 0.75rem 0.95rem; 
     border-radius: 0.65rem; 
     background-color: #059669; 
     color: #ecfdf5; 
@@ -1345,6 +1360,11 @@
       gap: 0.28rem;
       margin-top: 0.1rem;
     }
+    .help-actions-group {
+      gap: 0.28rem;
+      margin-top: 0.52rem;
+      padding-top: 0.42rem;
+    }
     .hint-btn, .accept-btn, .reread-btn {
       padding: 0.44rem 0.75rem;
       font-size: 0.84rem;
@@ -1379,7 +1399,7 @@
 <body>
 
 <!-- Etiqueta Global de Verificación de Despliegue (visible en Acceso Privado y Pantalla Principal) -->
-<div class="build-timestamp">Actualizado: 6:20 PM - 10/29/2026</div>
+<div class="build-timestamp">Actualizado: 6:26 PM - 10/29/2026</div>
 
 <!-- Pantalla de Usuario y Contraseña (Acceso Privado: R / D) con soporte completo para tecla Enter -->
 <div id="authOverlay" class="auth-overlay">
@@ -1419,7 +1439,7 @@
       <button type="submit" class="auth-submit-btn">Entrar</button>
     </form>
     <div style="font-size: 10px; color: #64748b; font-family: monospace; margin-top: 2px;">
-      Actualizado: 6:20 PM - 10/29/2026
+      Actualizado: 6:26 PM - 10/29/2026
     </div>
   </div>
 </div>
@@ -1766,17 +1786,19 @@
 
       <!-- Hints, Reread Page Excerpt & Submit -->
       <div class="hint-container">
-        <div class="actions-row">
-          <button id="hintBtn" class="hint-btn" onclick="revealHint()">
-            💡 Need a Hint? (-1.0 pt)
-          </button>
+        <div class="submit-action-row">
           <button id="acceptBtn" class="accept-btn" onclick="confirmAnswer()" disabled>
             ✅ Submit Answer (+5 pts)
           </button>
         </div>
-        <button id="rereadBtn" class="reread-btn" onclick="revealPageExcerpt()">
-          📖 Reread chapter to find answer (-1.0 pt)
-        </button>
+        <div class="help-actions-group">
+          <button id="hintBtn" class="hint-btn" onclick="revealHint()">
+            💡 Need a Hint? (-1.0 pt)
+          </button>
+          <button id="rereadBtn" class="reread-btn" onclick="revealPageExcerpt()">
+            📖 Reread chapter to find answer (-1.0 pt)
+          </button>
+        </div>
         <div id="hintBox" class="hint-box"></div>
         <div id="excerptBox" class="excerpt-box">
           <div class="excerpt-header">
@@ -2035,6 +2057,16 @@ const SPELLING_WORD_PRONUNCIATION = {
 };
 
 let activeSpellingUtterance = null;
+let spellingWordAudio = null;
+
+function getSpellingWordAudio() {
+  if (!spellingWordAudio) {
+    spellingWordAudio = new Audio();
+    spellingWordAudio.playsInline = true;
+    spellingWordAudio.preload = 'auto';
+  }
+  return spellingWordAudio;
+}
 
 function speakCurrentSpellingWord() {
   if (!currentTargetWord) return;
@@ -2048,10 +2080,10 @@ function speakCurrentSpellingWord() {
   const rawUpper = String(currentTargetWord).trim().toUpperCase();
   const embeddedMap = window.SPELLING_WORDS_AUDIO || {};
 
-  // 1. Primary: play embedded high-clarity MP3 audio via HTML5 <audio> (works 100% on iPad/iPhone even with silent switch on)
+  // 1. Primary: play embedded high-clarity MP3 audio via dedicated HTML5 <audio>
   if (embeddedMap[rawUpper]) {
     try {
-      const audioEl = getSharedMediaAudio();
+      const audioEl = getSpellingWordAudio();
       audioEl.pause();
       audioEl.src = embeddedMap[rawUpper];
       audioEl.currentTime = 0;
@@ -2210,11 +2242,24 @@ function getSfxAudioElement(kind) {
   return sfxAudioElements[kind];
 }
 
+function isVoiceFeedbackPlaying() {
+  if (isVoiceFeedbackActive) return true;
+  if (feedbackVoiceAudio && !feedbackVoiceAudio.paused && !feedbackVoiceAudio.ended && feedbackVoiceAudio.currentTime > 0) {
+    return true;
+  }
+  return false;
+}
+
 function playSfxViaMediaAudio(kind, fallbackFn) {
   try {
     if (typeof songIsPlaying !== 'undefined' && songIsPlaying) return;
     if (typeof navigator !== 'undefined' && navigator.audioSession) {
       try { navigator.audioSession.type = 'playback'; } catch (e) {}
+    }
+    // If TTS voice feedback is currently speaking, use Web Audio oscillator so iOS/iPadOS never pauses the voice <audio> element!
+    if (isVoiceFeedbackPlaying()) {
+      if (typeof fallbackFn === 'function') fallbackFn();
+      return;
     }
     const audioEl = getSfxAudioElement(kind);
     audioEl.currentTime = 0;
@@ -2249,17 +2294,25 @@ function playTone(freq, type, duration, endFreq) {
   } catch(e) {}
 }
 
-function playCorrectSound() {
+function playCorrectSound(skipMediaAudio) {
   const fallback = () => {
     [523.25, 659.25, 783.99, 1046.50].forEach((f, idx) => {
       setTimeout(() => playTone(f, 'triangle', 0.22), idx * 65);
     });
   };
+  if (skipMediaAudio) {
+    fallback();
+    return;
+  }
   playSfxViaMediaAudio('correct', fallback);
 }
 
-function playWrongSound() {
+function playWrongSound(skipMediaAudio) {
   const fallback = () => playTone(260, 'sawtooth', 0.35, 110);
+  if (skipMediaAudio) {
+    fallback();
+    return;
+  }
   playSfxViaMediaAudio('wrong', fallback);
 }
 
@@ -2289,6 +2342,9 @@ const TTS_FEEDBACK_AUDIO = window.TTS_FEEDBACK_AUDIO || {correct:[], wrong:[]};
 let lastCorrectVoiceIdx = -1;
 let lastWrongVoiceIdx = -1;
 let currentVoiceAudio = null;
+let feedbackVoiceAudio = null;
+let isVoiceFeedbackActive = false;
+let voiceFeedbackTimer = null;
 
 function getSharedMediaAudio() {
   if (!currentVoiceAudio) {
@@ -2299,10 +2355,18 @@ function getSharedMediaAudio() {
   return currentVoiceAudio;
 }
 
+function getFeedbackVoiceAudio() {
+  if (!feedbackVoiceAudio) {
+    feedbackVoiceAudio = new Audio();
+    feedbackVoiceAudio.playsInline = true;
+    feedbackVoiceAudio.preload = 'auto';
+  }
+  return feedbackVoiceAudio;
+}
+
 function playFeedbackVoice(isCorrect) {
   try {
-    const audioEl = getSharedMediaAudio();
-    audioEl.pause();
+    const audioEl = getFeedbackVoiceAudio();
     const rawPool = isCorrect ? TTS_FEEDBACK_AUDIO.correct : TTS_FEEDBACK_AUDIO.wrong;
     if (!rawPool || rawPool.length === 0) return;
     const pool = (isCorrect && currentInstance === 'D' && rawPool.length > 2) ? rawPool.slice(0, 2) : rawPool;
@@ -2315,11 +2379,26 @@ function playFeedbackVoice(isCorrect) {
     if (isCorrect) lastCorrectVoiceIdx = idx;
     else lastWrongVoiceIdx = idx;
 
+    if (voiceFeedbackTimer) clearTimeout(voiceFeedbackTimer);
+    isVoiceFeedbackActive = true;
+    const clearActive = () => {
+      isVoiceFeedbackActive = false;
+      if (voiceFeedbackTimer) {
+        clearTimeout(voiceFeedbackTimer);
+        voiceFeedbackTimer = null;
+      }
+    };
+    audioEl.onended = clearActive;
+    audioEl.onerror = clearActive;
+    voiceFeedbackTimer = setTimeout(clearActive, 3500);
+
     audioEl.src = pool[idx];
     audioEl.currentTime = 0;
     audioEl.volume = 1.0;
-    audioEl.play().catch(() => {});
-  } catch (e) {}
+    audioEl.play().catch(clearActive);
+  } catch (e) {
+    isVoiceFeedbackActive = false;
+  }
 }
 
 
@@ -3591,6 +3670,12 @@ function renderMatchColumns(q, isReshuffle = false) {
   }
 
   const allSolved = (solvedPairs.length === q.pairs.length);
+  if (allSolved) {
+    const hBtn = document.getElementById('hintBtn');
+    const rBtn = document.getElementById('rereadBtn');
+    if (hBtn) hBtn.disabled = true;
+    if (rBtn) rBtn.disabled = true;
+  }
 
   prevLeftOrderIds.forEach(id => {
     const p = q.pairs[id];
@@ -3680,6 +3765,10 @@ function handleMatchClick(side, id) {
           extraBtn.style.opacity = '0.42';
           extraBtn.style.cursor = 'default';
         }
+        const hBtn = document.getElementById('hintBtn');
+        const rBtn = document.getElementById('rereadBtn');
+        if (hBtn) hBtn.disabled = true;
+        if (rBtn) rBtn.disabled = true;
       }
       selectedLeftPair = null;
       selectedRightPair = null;
@@ -3909,9 +3998,10 @@ function sanitizeHintNoPageRef(rawHint) {
 
 function revealHint() {
   if (hintUsedOnCurrent) return;
+  const q = activeQuestions[currentQIndex];
+  if (q && q.type === 'match' && Array.isArray(q.pairs) && solvedPairs.length === q.pairs.length) return;
   hintUsedOnCurrent = true;
   playHintSound();
-  const q = activeQuestions[currentQIndex];
   const box = document.getElementById('hintBox');
   const cleanHint = currentInstance === 'R' ? sanitizeHintNoPageRef(q.hint) : q.hint;
   box.textContent = `Hint: ${cleanHint}`;
@@ -3927,9 +4017,10 @@ function revealHint() {
 
 function revealPageExcerpt() {
   if (rereadUsedOnCurrent || isQuizAnswered) return;
+  const q = activeQuestions[currentQIndex];
+  if (q && q.type === 'match' && Array.isArray(q.pairs) && solvedPairs.length === q.pairs.length) return;
   rereadUsedOnCurrent = true;
   playHintSound();
-  const q = activeQuestions[currentQIndex];
   const excerptBox = document.getElementById('excerptBox');
   const pageTitleEl = document.getElementById('excerptPageTitle');
   const pageTextEl = document.getElementById('excerptTextContent');
@@ -3965,6 +4056,12 @@ function confirmAnswer() {
 
   if (q.type === 'match') {
     isTaskCorrect = (solvedPairs.length === q.pairs.length);
+    if (isTaskCorrect) {
+      const hBtn = document.getElementById('hintBtn');
+      const rBtn = document.getElementById('rereadBtn');
+      if (hBtn) hBtn.disabled = true;
+      if (rBtn) rBtn.disabled = true;
+    }
   } else if (q.type === 'fib') {
     const fibInput = document.getElementById('fibInput');
     const fbBox = document.getElementById('fibFeedbackBox');
@@ -4021,11 +4118,11 @@ function confirmAnswer() {
 
   const mistakeKey = `${q.type}_${q.q}`;
   if (isFullyCorrect) {
-    playCorrectSound();
+    playCorrectSound(true);
     playFeedbackVoice(true);
     mistakesPool = mistakesPool.filter(m => `${m.type}_${m.q}` !== mistakeKey);
   } else {
-    playWrongSound();
+    playWrongSound(true);
     playFeedbackVoice(false);
     if (!mistakesPool.some(m => `${m.type}_${m.q}` === mistakeKey)) {
       mistakesPool.push(q);
